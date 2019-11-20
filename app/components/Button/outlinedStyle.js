@@ -27,7 +27,6 @@ const outlinedStyle = css`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -moz-font-feature-settings: 'liga' on;
-  display: inline-block;
   vertical-align: middle;
 
   border: 1px solid rgba(0, 0, 0, 0.15);
