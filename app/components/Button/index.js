@@ -4,52 +4,78 @@
  *
  */
 
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// eslint-disable-next-line no-unused-vars
-import { outlinedStyle, sm, tall } from './outlinedStyle';
+import * as outlinedStyle from './outlineStyle';
+import { btnBaseStyle, IconStyledButton } from './IconStyledButton';
+import * as Icons from '../../staticData/images/icons';
+import { AvtStyledImg } from '../Anchor/avatarStyle';
+import GlowStyledBtn from './GlowStyledBtn';
 
-function foregroundColor({ type, color }) {
-  return type === 'outlined' ? color : 'white';
-}
-
-function backgrounudColor({ type, color }) {
-  return type === 'outlined' ? 'white' : color;
-}
-
-function getSize({ size }) {
-  if (size === 'tall') {
-    return tall;
-  }
-  return sm;
-}
-function Button(props) {
-  const Btn = styled.button`
-    color: ${foregroundColor(props)};
-    border-color: ${foregroundColor(props)} !important;
-    background: ${backgrounudColor(props)} !important;
-    ${outlinedStyle};
-    ${getSize(props)}
+function OutlinedButton(props) {
+  const Btn = styled.button.attrs(({ onClick }) => ({ onClick }))`
+    ${outlinedStyle.base};
+    ${outlinedStyle[props.size]}
+    ${outlinedStyle[props.type]}
   `;
-
   return (
-    <Btn type="button" onClick={props.onClick}>
-      {/* {props.text} */}
+    <Btn {...props}>
       <span>{props.text}</span>
     </Btn>
   );
 }
 
-Button.propTypes = {
-  text: PropTypes.string,
-  // eslint-disable-next-line react/no-unused-prop-types
-  type: PropTypes.string,
-  // eslint-disable-next-line react/no-unused-prop-types
-  size: PropTypes.string,
-  // eslint-disable-next-line react/no-unused-prop-types
-  color: PropTypes.string,
+function IconButton(props) {
+  if (props.effect === 'glow') {
+    const Wrapper = styled.div`
+      width: 70px;
+    `;
+    return (
+      <div>
+        <Wrapper>
+          <GlowStyledBtn {...props}>{Icons[props.type]}</GlowStyledBtn>
+        </Wrapper>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <IconStyledButton {...props}>{Icons[props.type]}</IconStyledButton>
+    </div>
+  );
+}
+
+function UserButton(props) {
+  const Btn = styled.button`
+    ${btnBaseStyle};
+  `;
+  // console.log(props.size || '32px');
+  return (
+    <Btn>
+      <AvtStyledImg {...props} />
+    </Btn>
+  );
+}
+
+OutlinedButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
+  colorSet: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default memo(Button);
+IconButton.propTypes = {
+  colorSet: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  effect: PropTypes.string,
+};
+
+UserButton.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
+
+export { OutlinedButton, IconButton, UserButton };
