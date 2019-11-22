@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { addDecorator } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { OutlinedButton } from '../app/components/Button';
-import { OutlinedA } from '../app/components/Anchor';
 
 addDecorator(withInfo);
 
@@ -56,32 +55,13 @@ export const OutlinedButtons = () => {
           setBtnText2(btnText2 === 'Follow' ? 'Following' : 'Follow')
         }
       />
+      <br />
+      <OutlinedButton
+        text="Upgrade"
+        type="outlined"
+        size="tall"
+        colorSet="black"
+      />
     </div>
   );
 };
-
-export const outlinedAnchor = () => (
-  <div>
-    <h1>Try hover, click will redirect to homepage</h1>
-    <code>
-      {`OutlinedA.propTypes = {
-          text: PropTypes.string.isRequired,
-          size: PropTypes.string.isRequired,
-          colorSet: PropTypes.string,
-          href: PropTypes.string.isRequired,
-        };`}
-    </code>
-    <p>{`size="small" | "middle" | "tall" `} </p>
-    <h3>{'Anchor with size "middle"'}</h3>
-    <div>
-      <OutlinedA text="Upgrade" size="middle" colorSet="black" href="./" />
-    </div>
-    <h3>
-      {`Anchor with size "tall", only been seen on 'Get started' for now`}
-    </h3>
-    <div>
-      {' '}
-      <OutlinedA text="Get started" size="tall" colorSet="red" href="./" />
-    </div>
-  </div>
-);

@@ -10,7 +10,6 @@ import styled from 'styled-components';
 import * as outlinedStyle from './outlineStyle';
 import { btnBaseStyle, IconStyledButton } from './IconStyledButton';
 import * as Icons from '../../staticData/images/icons';
-import { AvtStyledImg } from '../Anchor/avatarStyle';
 import GlowStyledBtn from './GlowStyledBtn';
 
 function OutlinedButton(props) {
@@ -47,18 +46,6 @@ function IconButton(props) {
   );
 }
 
-function UserButton(props) {
-  const Btn = styled.button`
-    ${btnBaseStyle};
-  `;
-  // console.log(props.size || '32px');
-  return (
-    <Btn>
-      <AvtStyledImg {...props} />
-    </Btn>
-  );
-}
-
 OutlinedButton.propTypes = {
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
@@ -73,9 +60,4 @@ IconButton.propTypes = {
   effect: PropTypes.string,
 };
 
-UserButton.propTypes = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-};
-
-export { OutlinedButton, IconButton, UserButton };
+export { OutlinedButton, IconButton };
