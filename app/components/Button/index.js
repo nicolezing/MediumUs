@@ -14,7 +14,7 @@ import * as Icons from '../../staticData/images/icons';
 import GlowStyledBtn from './GlowStyledBtn';
 
 function OutlinedButton(props) {
-  const Btn = styled.button.attrs(({ onClick }) => ({ onClick }))`
+  const Btn = styled.button`
     ${outlinedStyle.base};
     ${outlinedStyle[props.size]}
     ${outlinedStyle[props.type]}

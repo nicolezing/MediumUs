@@ -12,7 +12,7 @@ const btnBaseStyle = css`
   }
 `;
 
-const IconStyledButton = styled.button.attrs(({ onClick }) => ({ onClick }))`
+const IconStyledButton = styled.button`
     ${btnBaseStyle}
     fill: ${props => getColor(props.colorSet).color};
     :hover {
