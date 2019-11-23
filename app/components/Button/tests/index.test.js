@@ -13,12 +13,12 @@ import { render } from 'react-testing-library';
 import Button from '../index';
 
 describe('<Button />', () => {
-  it('should render a <span> tag inside', () => {
-    const { container } = render(<Button />);
-    expect(
-      container.querySelector('button').querySelector('span'),
-    ).toBeDefined();
-  });
+  // it('should render a <span> tag inside', () => {
+  //   const { container } = render(<Button />);
+  //   expect(
+  //     container.querySelector('button').querySelector('span'),
+  //   ).toBeDefined();
+  // });
 
   // below are original tests, will be modified later
   it('Expect to not log errors in console', () => {

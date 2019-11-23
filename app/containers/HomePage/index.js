@@ -9,8 +9,9 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { OutlinedButton, IconButton } from '../../components/Button';
 import messages from './messages';
-
-// import { findByLabelText } from 'react-testing-library';
+import Avatar from '../../components/Avatar';
+import N from '../../staticData/images/N.png';
+import user001 from '../../staticData/images/user-profile001.png';
 
 export default function HomePage() {
   const [btnText, setBtnText] = useState('Follow');
@@ -51,6 +52,9 @@ export default function HomePage() {
       <div>
         <IconButton colorSet="purple" type="clapIcon" effect="glow" />
       </div>
+
+      <Avatar src={N} alt="username" />
+      <Avatar src={user001} alt="username001" size="80px" member />
     </div>
   );
 }
