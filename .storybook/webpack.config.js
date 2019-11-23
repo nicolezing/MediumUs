@@ -4,6 +4,5 @@ module.exports = function({ config }) {
     loaders: [require.resolve('@storybook/source-loader')],
     enforce: 'pre',
   });
-  console.log('config called');
   return config;
 };

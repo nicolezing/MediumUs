@@ -12,8 +12,6 @@ const GlowStyledBtn = styled.button`
   background: white;
   position: relative;
   border-radius: 50%;
-  // left: 0;
-  // top: 0;
   padding: 20% 2em;
   justify-content: center;
   align-items: center;

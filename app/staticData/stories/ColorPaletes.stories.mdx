@@ -1,0 +1,41 @@
+import _ from 'lodash';
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import styled from 'styled-components';
+import getColor, { colorSet } from '../colorSets';
+
+<Meta title="Components|ColorPaletes" />
+
+# Color Palete
+
+## Colors
+
+<Preview>
+  <Story name="colors">
+    <div>
+      {_.keys(colorSet).map(name => {
+        const { color, borderColor, hoverColor } = getColor(name);
+        const StyledDiv = styled.div`
+          margin: 5px;
+          display: inline-block;
+          width: 90px;
+          height: 50px;
+          color: ${color};
+          border: 5px solid ${borderColor};
+          :hover {
+            color: white;
+            background: ${hoverColor};
+          }
+        `;
+        return <StyledDiv>{name}</StyledDiv>;
+      })}
+    </div>
+  </Story>
+</Preview>
+
+## Default color
+
+<Preview>
+  <Story name="default color">
+    <div style={{ backgroundColor: getColor().color }}>Default color</div>
+  </Story>
+</Preview>

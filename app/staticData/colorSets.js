@@ -1,4 +1,4 @@
-const set = {
+export const colorSet = {
   green: {
     color: '#029e74',
     borderColor: '#03a87c',
@@ -46,4 +46,4 @@ const set = {
   },
 };
 
-export default color => set[color || 'green'];
+export default color => colorSet[color || 'green'];
