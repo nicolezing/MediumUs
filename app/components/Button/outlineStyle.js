@@ -72,7 +72,7 @@ const middle = css`
   padding: 4px 12px;
 `;
 
-const tall = css`
+const large = css`
   font-size: 16px;
   line-height: 37px;
   padding: 0 16px;
@@ -96,4 +96,4 @@ const outlined = css`
   }
 `;
 
-export { base, small, middle, tall, outlined, filled };
+export { base, small, middle, large, outlined, filled };
