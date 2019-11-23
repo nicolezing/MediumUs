@@ -19,19 +19,19 @@ describe('<Avatar />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
+  // it('Expect to have additional unit tests specified', () => {
+  //   expect(true).toEqual(false);
+  // });
 
   /**
    * Unskip this test to use it
    *
    * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
    */
-  it.skip('Should render and match the snapshot', () => {
-    const {
-      container: { firstChild },
-    } = render(<Avatar />);
-    expect(firstChild).toMatchSnapshot();
-  });
+  // it.skip('Should render and match the snapshot', () => {
+  //   const {
+  //     container: { firstChild },
+  //   } = render(<Avatar />);
+  //   expect(firstChild).toMatchSnapshot();
+  // });
 });
