@@ -1,46 +1,11 @@
-/**
- *
- * Tests for Button
- *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
- */
-
 import React from 'react';
 import { render } from 'react-testing-library';
-// import 'jest-dom/extend-expect'; // add some helpful assertions
-
-import Button from '../index';
+import { OutlinedButton } from '../index';
 
 describe('<Button />', () => {
-  it('should render a <span> tag inside', () => {
-    const { container } = render(<Button />);
-    expect(
-      container.querySelector('button').querySelector('span'),
-    ).toBeDefined();
-  });
-
-  // below are original tests, will be modified later
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<Button />);
+    render(<OutlinedButton text="test" type="outlined" size="middle" />);
     expect(spy).not.toHaveBeenCalled();
   });
-
-  // it('Expect to have additional unit tests specified', () => {
-  //   expect(true).toEqual(false);
-  // });
-
-  /*
-   *
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  // it.skip('Should render and match the snapshot', () => {
-  //   const {
-  //     container: { firstChild },
-  //   } = render(<Button />);
-  //   expect(firstChild).toMatchSnapshot();
-  // });
 });
