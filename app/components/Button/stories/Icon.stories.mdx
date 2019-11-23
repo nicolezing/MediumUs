@@ -1,0 +1,35 @@
+import _ from 'lodash';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { IconButton } from '..';
+import * as Icons from '../../../staticData/images/icons';
+
+<Meta title="Components|Button/icon" component={IconButton} />
+
+# Icon Button
+
+<Props of={IconButton} />
+
+## Icons
+
+<Preview>
+  <Story name="icons">
+    {_.keys(Icons).map(icon => (
+      <div>
+        <span>{icon}</span>
+        <br />
+        <IconButton type={icon} colorSet="pureBlack" />
+        <br />
+      </div>
+    ))}
+  </Story>
+</Preview>
+
+## Effects
+
+(Doesn't work properly in storybook)
+
+<Preview>
+  <Story name="glow">
+    <IconButton type="clapIcon" colorSet="pureBlack" effect="glow" />
+  </Story>
+</Preview>

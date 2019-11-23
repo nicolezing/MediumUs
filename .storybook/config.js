@@ -1,4 +1,7 @@
 import { configure } from '@storybook/react';
-import '../app/global-styles';
-// automatically import all files ending in *.stories.js
-configure(require.context('../stories', true, /\.stories\.js$/), module);
+
+import 'normalize.css';
+import 'sanitize.css';
+
+// automatically import all files ending in *.stories.js or *.stories.mdx
+configure(require.context('../app', true, /\.stories\.(js|mdx)$/), module);

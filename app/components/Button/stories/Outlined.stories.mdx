@@ -1,0 +1,53 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { OutlinedButton } from '..';
+
+<Meta title="Components|Button/outlined" component={OutlinedButton} />
+
+# Outlined Button
+
+<Props of={OutlinedButton} />
+
+## Size
+
+<Preview>
+  <Story name="small">
+    <OutlinedButton
+      text="small"
+      type="outlined"
+      size="small"
+      colorSet="black"
+    />
+  </Story>
+  <Story name="middle">
+    <OutlinedButton
+      text="middle"
+      type="outlined"
+      size="middle"
+      colorSet="black"
+    />
+  </Story>
+  <Story name="large">
+    <OutlinedButton text="large" type="outlined" size="tall" colorSet="black" />
+  </Story>
+</Preview>
+
+## Type
+
+<Preview>
+  <Story name="outlined">
+    <OutlinedButton
+      text="outlined"
+      type="outlined"
+      size="middle"
+      colorSet="black"
+    />
+  </Story>
+  <Story name="filled">
+    <OutlinedButton
+      text="filled"
+      type="filled"
+      size="middle"
+      colorSet="black"
+    />
+  </Story>
+</Preview>

@@ -1,10 +1,11 @@
 import { css } from 'styled-components';
+import getColor from '../../staticData/colorSets';
 
-const outlinedStyle = css`
+const base = css`
   display: inline-block;
   position: relative;
   margin: 0;
-  // background: rgba(0, 0, 0, 0);
+  background: #fff;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -29,7 +30,10 @@ const outlinedStyle = css`
   -moz-font-feature-settings: 'liga' on;
   vertical-align: middle;
 
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  // border: 1px solid rgba(0, 0, 0, 0.15);
+  border-width: 1px;
+  border-style: solid;
+
   -webkit-border-radius: 4px;
   border-radius: 4px;
 
@@ -50,22 +54,46 @@ const outlinedStyle = css`
   &:focus {
     outline: none;
   }
-  &:last-child {
-    margin-right: 0;
-  }
+  // &:last-child {
+  //   margin-right: 0;
+  // }
 `;
 
-const sm = css`
+const small = css`
   height: 19px;
   span {
     line-height: 19px;
   }
 `;
 
-const tall = css`
+const middle = css`
   font-size: 15.8px;
   line-height: 20px;
   padding: 4px 12px;
 `;
 
-export { outlinedStyle, sm, tall };
+const tall = css`
+  font-size: 16px;
+  line-height: 37px;
+  padding: 0 16px;
+`;
+const filled = css`
+  color: white;
+  border-color: ${props => getColor(props.colorSet).borderColor};
+  background: ${props => getColor(props.colorSet).borderColor};
+  :hover {
+    border-color: ${props => getColor(props.colorSet).color};
+    background: ${props => getColor(props.colorSet).hoverColor};
+  }
+`;
+const outlined = css`
+  color: ${props => getColor(props.colorSet).color};
+  border-color: ${props => getColor(props.colorSet).borderColor};
+  // background: white;
+  :hover {
+    color: ${props => getColor(props.colorSet).hoverColor};
+    border-color: ${props => getColor(props.colorSet).hoverColor};
+  }
+`;
+
+export { base, small, middle, tall, outlined, filled };

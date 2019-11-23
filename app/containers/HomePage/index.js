@@ -7,36 +7,50 @@
 
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Button from 'components/Button';
+import { OutlinedButton, IconButton } from '../../components/Button';
 import messages from './messages';
+
+// import { findByLabelText } from 'react-testing-library';
 
 export default function HomePage() {
   const [btnText, setBtnText] = useState('Follow');
   const [btnText2, setBtnText2] = useState('Follow');
 
   return (
-    <h1>
-      <FormattedMessage {...messages.header} />
-      <div />
-      <Button
+    <div>
+      <h1>
+        <FormattedMessage {...messages.header} />
+      </h1>
+      <div style={{ display: 'flex' }} />
+      <OutlinedButton
         text={btnText}
         type={btnText === 'Follow' ? 'outlined' : 'filled'}
-        size="sm"
-        color="#007DB8"
+        size="small"
+        colorSet="purple"
         onClick={() =>
           setBtnText(btnText === 'Follow' ? 'Following' : 'Follow')
         }
       />
       <div />
-      <Button
+      <OutlinedButton
         text={btnText2}
         type={btnText2 === 'Follow' ? 'outlined' : 'filled'}
-        size="tall"
-        color="#029e74"
+        size="middle"
+        colorSet="green"
         onClick={() =>
           setBtnText2(btnText2 === 'Follow' ? 'Following' : 'Follow')
         }
       />
-    </h1>
+      <div />
+
+      <IconButton colorSet="gray" type="bellIcon" />
+      <IconButton colorSet="gray" type="bookmarkIcon" />
+      <IconButton colorSet="gray" type="moreIcon" />
+      <IconButton colorSet="pureBlack" type="moreHollowIcon" />
+      <IconButton colorSet="gray" type="clapIcon" />
+      <div>
+        <IconButton colorSet="purple" type="clapIcon" effect="glow" />
+      </div>
+    </div>
   );
 }

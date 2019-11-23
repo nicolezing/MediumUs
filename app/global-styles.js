@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import normalize from 'normalize.css';
-import fonts from './fonts/fonts.css';
+import fonts from './staticData/fonts/fonts.css';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
