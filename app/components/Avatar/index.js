@@ -29,7 +29,7 @@ function Avatar(props) {
 
 Avatar.propTypes = {
   member: PropTypes.bool,
-  size: PropTypes.string.isRequired,
+  size: PropTypes.string,
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
 };
