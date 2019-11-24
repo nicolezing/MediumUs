@@ -33,13 +33,6 @@ function haloCompnents(size) {
 }
 
 const sizeSet = {
-  // 'tiny-32': [32, 36],
-  // 'small-36': [36, 39],
-  // 'middle-40': [40, 49],
-  // 'large-48': [48, 57],
-  // 'huge-80': [80, 91],
-  // 'gigantic-mobi-128': [64, 74],
-  // 'gigantic-128': [128, 145],
   '32px': [32, 36],
   '36px': [36, 39],
   '40px': [40, 49],
