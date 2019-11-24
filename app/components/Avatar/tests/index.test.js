@@ -8,6 +8,8 @@
 
 import React from 'react';
 import { render } from 'react-testing-library';
+import $ from 'jquery';
+
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import Avatar from '../index';
@@ -15,23 +17,19 @@ import Avatar from '../index';
 describe('<Avatar />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<Avatar />);
+    render(<Avatar src="" alt="" />);
     expect(spy).not.toHaveBeenCalled();
   });
 
-  // it('Expect to have additional unit tests specified', () => {
-  //   expect(true).toEqual(false);
-  // });
+  it('Have no wrapper element if non member', () => {
+    const {
+      container: { firstChild: avatar },
+    } = render(<Avatar src="" alt="" />);
+    expect($(avatar).prop('tagName')).toEqual('IMG');
+  });
 
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  // it.skip('Should render and match the snapshot', () => {
-  //   const {
-  //     container: { firstChild },
-  //   } = render(<Avatar />);
-  //   expect(firstChild).toMatchSnapshot();
-  // });
+  it('Have 2 wrapper elements with member', () => {
+    const { container } = render(<Avatar src="" alt="" size="80px" member />);
+    expect($(container).find('svg').length).toEqual(1);
+  });
 });
