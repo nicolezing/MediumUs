@@ -16,10 +16,19 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
+  let homeRoute = <Route exact path="/" component={HomePage} />;
+  if (process.env.NODE_ENV === 'production') {
+    homeRoute = (
+      <Route exact path="/MediumUs">
+        <Route path="/" component={HomePage} />
+      </Route>
+    );
+  }
+
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        {homeRoute}
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
