@@ -1,46 +1,34 @@
-/**
- *
- * Tests for Button
- *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
- */
-
 import React from 'react';
+import $ from 'jquery';
 import { render } from 'react-testing-library';
-// import 'jest-dom/extend-expect'; // add some helpful assertions
+import { OutlinedButton, IconButton } from '../index';
 
-import Button from '../index';
-
-describe('<Button />', () => {
-  // it('should render a <span> tag inside', () => {
-  //   const { container } = render(<Button />);
-  //   expect(
-  //     container.querySelector('button').querySelector('span'),
-  //   ).toBeDefined();
-  // });
-
-  // below are original tests, will be modified later
+describe('OutlinedButton', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<Button />);
+    render(<OutlinedButton text="test" type="outlined" size="middle" />);
     expect(spy).not.toHaveBeenCalled();
   });
 
-  // it('Expect to have additional unit tests specified', () => {
-  //   expect(true).toEqual(false);
-  // });
+  it('Have no wrapper elements', () => {
+    const {
+      container: { firstChild: button },
+    } = render(<OutlinedButton text="test" type="filled" size="small" />);
+    expect($(button).prop('tagName')).toEqual('BUTTON');
+  });
+});
 
-  /*
-   *
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  // it.skip('Should render and match the snapshot', () => {
-  //   const {
-  //     container: { firstChild },
-  //   } = render(<Button />);
-  //   expect(firstChild).toMatchSnapshot();
-  // });
+describe('IconButton', () => {
+  it('Expect to not log errors in console', () => {
+    const spy = jest.spyOn(global.console, 'error');
+    render(<IconButton text="test" type="clapIcon" />);
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('Have wrapper when glows', () => {
+    const {
+      container: { firstChild: button },
+    } = render(<IconButton text="test" type="clapIcon" effect="glow" />);
+    expect($(button).prop('tagName')).toEqual('DIV');
+  });
 });
