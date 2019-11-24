@@ -9,7 +9,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import $ from 'jquery';
-
 import Avatar from '../index';
 
 describe('<Avatar />', () => {
