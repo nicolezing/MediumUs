@@ -1,17 +1,31 @@
 import styled from 'styled-components';
 import getColor from '../../staticData/colorSets';
 
-const AvtStyledImg = styled.img.attrs(({ src, alt }) => ({
-  src,
-  alt,
-}))`
-  width: ${props => props.size || '32px'};
-  height: ${props => props.size || '32px'};
-  border-radius: 50%;
-  display: block;
-`;
-
 function haloCompnents(size) {
+  const narrowStyle =
+    size === '36px'
+      ? `
+  @media only screen and (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+  }`
+      : '';
+  const narrowHaloStyle =
+    size === '36px'
+      ? `
+    @media only screen and (max-width: 768px) {
+      width: 36px;
+      height: 36px;
+    }`
+      : '';
+  const AvtStyledImg = styled.img`
+    width: ${size || '32px'};
+    height: ${size || '32px'};
+    border-radius: 50%;
+    display: block;
+    ${narrowStyle}
+  `;
+
   const Halo = styled.div`
     width: calc(100% + 25px);
     height: calc(100% + 25px);
@@ -28,14 +42,16 @@ function haloCompnents(size) {
       width: ${sizeSet[size][1]}px;
       height: ${sizeSet[size][1]}px;
     }
+    ${narrowHaloStyle}
   `;
 
   const HaloWrapper = styled.div`
     width: ${size};
     height: ${size};
     position: relative;
+    ${narrowStyle}
   `;
-  return { Halo, HaloWrapper };
+  return { Halo, HaloWrapper, AvtStyledImg };
 }
 
 const sizeSet = {
@@ -48,4 +64,4 @@ const sizeSet = {
   '128px': [128, 145],
 };
 
-export { AvtStyledImg, haloCompnents };
+export { haloCompnents };
