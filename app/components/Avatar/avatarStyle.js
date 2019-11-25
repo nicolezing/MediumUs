@@ -13,6 +13,12 @@ const AvtStyledImg = styled.img.attrs(({ src, alt }) => ({
 
 function haloCompnents(size) {
   const Halo = styled.div`
+    width: calc(100% + 25px);
+    height: calc(100% + 25px);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
@@ -34,7 +40,7 @@ function haloCompnents(size) {
 
 const sizeSet = {
   '32px': [32, 36],
-  '36px': [36, 39],
+  '36px': [36, 43],
   '40px': [40, 49],
   '48px': [48, 57],
   '80px': [80, 91],

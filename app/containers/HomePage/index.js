@@ -7,10 +7,6 @@
 
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-<<<<<<< HEAD
-=======
-import { OutlinedButton, IconButton } from '../../components/Button';
->>>>>>> add author cards file with simple structure
 import { WriterInfoChunk } from '../../components/AuthorCards';
 import user001 from '../../staticData/images/user-profile001.png';
 
