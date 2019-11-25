@@ -21,15 +21,11 @@ const downTextWrapperBaseStyle = css`
 `;
 
 const aBaseStyle = css`
-  color: ${props => getColor(props.color).color};
+  color: ${getColor('black').color};
   :active,
   :hover {
-    color: ${props => getColor(props.color).hoverColor};
+    color: ${getColor('black').hoverColor};
     outline: 0;
-  }
-
-  :hover {
-    text-decoration: underline;
   }
 `;
 

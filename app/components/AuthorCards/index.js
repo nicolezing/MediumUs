@@ -6,7 +6,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 import Avatar from '../Avatar';
 import { styledComponents } from './AuthorCardsWrappers';
 import { OutlinedButton } from '../Button';
@@ -82,12 +81,4 @@ AuthorCards.propTypes = {
   member: PropTypes.bool.isRequired,
   premium: PropTypes.string.isRequired,
 };
-// WriterInfoChunk.propTypes = {
-//   authorLink: PropTypes.string,
-//   name: PropTypes.string,
-//   categoryLink: PropTypes.string,
-//   category: PropTypes.string,
-//   date: PropTypes.string,
-//   readingTime: PropTypes.string,
-// };
 export { AuthorCards };
