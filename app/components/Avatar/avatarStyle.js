@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import getColor from '../../staticData/colorSets';
 
-function haloCompnents(size) {
+function avatarImg(size) {
   const narrowStyle =
     size === '36px'
       ? `
@@ -10,6 +10,23 @@ function haloCompnents(size) {
     height: 32px;
   }`
       : '';
+  const AvtStyledImg = styled.img`
+    width: ${size || '32px'};
+    height: ${size || '32px'};
+    border-radius: 50%;
+    display: block;
+    ${narrowStyle}
+  `;
+  // const HaloWrapper = styled.div`
+  //   width: ${size};
+  //   height: ${size};
+  //   position: relative;
+  //   ${narrowStyle}
+  // `;
+  return { AvtStyledImg };
+}
+
+function haloCompnents(size) {
   const narrowHaloStyle =
     size === '36px'
       ? `
@@ -18,13 +35,21 @@ function haloCompnents(size) {
       height: 36px;
     }`
       : '';
-  const AvtStyledImg = styled.img`
-    width: ${size || '32px'};
-    height: ${size || '32px'};
-    border-radius: 50%;
-    display: block;
-    ${narrowStyle}
-  `;
+  const narrowStyle =
+    size === '36px'
+      ? `
+    @media only screen and (max-width: 768px) {
+      width: 32px;
+      height: 32px;
+    }`
+      : '';
+  // const AvtStyledImg = styled.img`
+  //   width: ${size || '32px'};
+  //   height: ${size || '32px'};
+  //   border-radius: 50%;
+  //   display: block;
+  //   ${narrowStyle}
+  // `;
 
   const Halo = styled.div`
     width: calc(100% + 25px);
@@ -51,7 +76,7 @@ function haloCompnents(size) {
     position: relative;
     ${narrowStyle}
   `;
-  return { Halo, HaloWrapper, AvtStyledImg };
+  return { Halo, HaloWrapper };
 }
 
 const sizeSet = {
@@ -64,4 +89,4 @@ const sizeSet = {
   '128px': [128, 145],
 };
 
-export { haloCompnents };
+export { haloCompnents, avatarImg };
