@@ -41,7 +41,7 @@ function Input(props) {
 }
 
 Input.propTypes = {
-  placeholderName: propTypes.string,
+  placeholderName: propTypes.string.isRequired,
 };
 
 export default Input;
