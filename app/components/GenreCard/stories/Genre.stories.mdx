@@ -1,0 +1,20 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import GenreCard from '../index.js';
+
+<Meta title="Components|GenreCard" component={GenreCard} />
+
+# GenreCard Props Validation
+
+<Props of={GenreCard} />
+
+# GenreCard Example
+
+<Preview>
+  <Story name="genreCard example">
+    <GenreCard
+      Genre="Art"
+      GenreLink="https://medium.com/topic/art"
+      GenreImg="https://cdn-images-1.medium.com/fit/c/560/360/1*H2blBoEmzkSusI_a4Bk0dg@2x.jpeg"
+    />
+  </Story>
+</Preview>
