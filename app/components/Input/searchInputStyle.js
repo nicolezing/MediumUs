@@ -1,6 +1,18 @@
 import styled from 'styled-components';
 import getDisplay from './getDisplay';
 
+export const IconSpan = styled.span`
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SearchInputLabel = styled.label`
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
 const SearchStyleInput = styled.input`
   transition: width 0.2s, padding 0.2s;
   display: inline-block;

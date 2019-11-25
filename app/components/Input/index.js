@@ -1,11 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import propTypes from 'prop-types';
-import SearchStyleInput from './searchInputStyle';
+import styled from 'styled-components';
+import SearchStyleInput, {
+  IconSpan,
+  SearchInputLabel,
+} from './searchInputStyle';
+import { searchIcon } from '../../staticData/images/icons';
 
 function Input(props) {
   const [inputDisplay, setInputDisplay] = useState(false);
   const [searchContent, setSearchContent] = useState('');
-
   let inputStyles = '';
   if (inputDisplay === true) {
     inputStyles = 'InputDisplay';
@@ -18,25 +22,35 @@ function Input(props) {
     inputRef.current.focus();
   });
 
+  const Wrapper = styled.div`
+    position: relative;
+    heighth: 37px;
+  `;
+
   return (
-    <div>
-      {/* <Button /> */}
-      {/* here should use the button component */}
-      <button type="button" onClick={() => setInputDisplay(!inputDisplay)}>
-        Test
-      </button>
-      <SearchStyleInput
-        ref={inputRef}
-        placeholder={props.placeholderName}
-        type="search"
-        id="searchInput"
-        value={searchContent}
-        onChange={event => {
-          setSearchContent(event.target.value);
-        }}
-        inputStyles={inputStyles}
-      />
-    </div>
+    <Wrapper>
+      <SearchInputLabel>
+        <IconSpan
+          onKeyPress={() => {}}
+          role="button"
+          onClick={() => setInputDisplay(!inputDisplay)}
+          tabIndex="0"
+        >
+          {searchIcon}
+        </IconSpan>
+        <SearchStyleInput
+          ref={inputRef}
+          placeholder={props.placeholderName}
+          type="search"
+          id="searchInput"
+          value={searchContent}
+          onChange={event => {
+            setSearchContent(event.target.value);
+          }}
+          inputStyles={inputStyles}
+        />
+      </SearchInputLabel>
+    </Wrapper>
   );
 }
 
