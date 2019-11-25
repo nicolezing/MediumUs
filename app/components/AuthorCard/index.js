@@ -12,7 +12,7 @@ import { OutlinedButton } from '../Button';
 import StarIcon from '../../staticData/images/starIcon';
 import getConfig from './authorCardsConfig';
 
-function AuthorCards(props) {
+function AuthorCard(props) {
   const {
     StyledContainer,
     StyledTextContainer,
@@ -64,11 +64,11 @@ function AuthorCards(props) {
   );
 }
 
-AuthorCards.propTypes = {
+AuthorCard.propTypes = {
   variation: PropTypes.oneOf([
+    'Home',
     'CollectionHome',
     'TopicHome',
-    'Home',
     'ArticleTitle',
   ]).isRequired,
   authorLink: PropTypes.string.isRequired,
@@ -79,6 +79,6 @@ AuthorCards.propTypes = {
   readingTime: PropTypes.string.isRequired,
   avatarImg: PropTypes.string.isRequired,
   member: PropTypes.bool.isRequired,
-  premium: PropTypes.string.isRequired,
+  premium: PropTypes.bool.isRequired,
 };
-export { AuthorCards };
+export { AuthorCard };

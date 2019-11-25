@@ -3,21 +3,26 @@ import getColor from '../../staticData/colorSets';
 
 const StyledContainer = styled.div`
   display: flex;
-  align-items: center !important;
-  white-space: nowrap !important;
-  text-overflow: ellipsis !important;
+  align-items: cente;
 `;
 
 const textContainerBaseStyle = css`
   text-rendering: auto;
   flex: 1 1 auto;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
-const UpTextWrapper = styled.div``;
+const UpTextWrapper = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 const downTextWrapperBaseStyle = css`
   color: #0000008a;
   fill: #0000008a;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const aBaseStyle = css`
