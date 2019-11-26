@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthorCard /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 hNKbRb"
+  >
+    <div
+      class="AuthorCardsWrappers__StyledTextContainer-sc-1v4o32t-10 cVADbr"
+    >
+      <div
+        class="AuthorCardsWrappers__UpTextWrapper-sc-1v4o32t-1 hjAOpW"
+      >
+        <a
+          class="AuthorCardsWrappers__StyledA-sc-1v4o32t-12 cHTpeG"
+          href="./"
+        >
+          Lisa Armstrong
+        </a>
+         in 
+        <a
+          class="AuthorCardsWrappers__StyledA-sc-1v4o32t-12 cHTpeG"
+          href="./"
+        >
+          OneZero
+        </a>
+      </div>
+      <div
+        class="AuthorCardsWrappers__DownTextWrapper-sc-1v4o32t-11 bDIlkS"
+      >
+        <time>
+          Nov 21
+        </time>
+        <span
+          class="AuthorCardsWrappers__StyledSpanSpecial-sc-1v4o32t-13 cvgNJb"
+        >
+          ·
+        </span>
+        <span>
+          13 min read
+        </span>
+        <span
+          class="AuthorCardsWrappers__StyledSpanSpecial-sc-1v4o32t-13 cvgNJb"
+        >
+          <svg
+            height="15"
+            viewBox="0 0 15 15"
+            width="15"
+          >
+            <path
+              d="M7.44 2.32c.03-.1.09-.1.12 0l1.2 3.53a.29.29 0 0 0 .26.2h3.88c.11 0 .13.04.04.1L9.8 8.33a.27.27 0 0 0-.1.29l1.2 3.53c.03.1-.01.13-.1.07l-3.14-2.18a.3.3 0 0 0-.32 0L4.2 12.22c-.1.06-.14.03-.1-.07l1.2-3.53a.27.27 0 0 0-.1-.3L2.06 6.16c-.1-.06-.07-.12.03-.12h3.89a.29.29 0 0 0 .26-.19l1.2-3.52z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+     
+  </div>
+</div>
+`;

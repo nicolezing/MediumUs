@@ -40,10 +40,14 @@ function AuthorCard(props) {
       )}
       <StyledTextContainer>
         <UpTextWrapper>
-          <StyledA href={props.authorLink}>{props.name}</StyledA>
+          <StyledA href={props.authorLink} key="name">
+            {props.name}
+          </StyledA>
           {props.collection && [
             ' in ',
-            <StyledA href={props.categoryLink}>{props.collection}</StyledA>,
+            <StyledA href={props.categoryLink} key="collection">
+              {props.collection}
+            </StyledA>,
           ]}
           {followButton && (
             <span style={{ marginLeft: '8px' }}>
@@ -53,10 +57,8 @@ function AuthorCard(props) {
         </UpTextWrapper>
         <DownTextWrapper>
           <time>{props.date}</time>
-          <StyledSpanSpecial className="middotDividerr">
-            &middot;
-          </StyledSpanSpecial>
-          <span className="readingTime">{props.readingTime}</span>
+          <StyledSpanSpecial>&middot;</StyledSpanSpecial>
+          <span>{props.readingTime}</span>
           {props.premium && <StyledSpanSpecial>{StarIcon}</StyledSpanSpecial>}
         </DownTextWrapper>
       </StyledTextContainer>{' '}
@@ -73,12 +75,12 @@ AuthorCard.propTypes = {
   ]).isRequired,
   authorLink: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  categoryLink: PropTypes.string,
-  collection: PropTypes.string,
   date: PropTypes.string.isRequired,
   readingTime: PropTypes.string.isRequired,
   avatarImg: PropTypes.string.isRequired,
   member: PropTypes.bool.isRequired,
   premium: PropTypes.bool.isRequired,
+  categoryLink: PropTypes.string,
+  collection: PropTypes.string,
 };
 export { AuthorCard };
