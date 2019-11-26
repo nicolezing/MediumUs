@@ -1,0 +1,43 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { AuthorCard } from '..';
+import { authorInfo } from './exampleData';
+
+<Meta title="Components|AuhtorCard" component={AuthorCard} />
+
+# AuhtorCard
+
+<Props of={AuthorCard} />
+
+(the star at the end was controlled by props.premium, which was not correctly positioned in storybook)
+
+## Home page AuthorCard
+
+<Preview>
+  <Story name="Home page AuthorCard">
+    <AuthorCard {...authorInfo} variation="Home" />
+  </Story>
+</Preview>
+
+## Collection page AuthorCard
+
+<Preview>
+  <Story name="Collection page AuthorCard">
+    <AuthorCard {...authorInfo} variation="CollectionHome" />
+  </Story>
+</Preview>
+
+## Topic page AuthorCard
+
+<Preview>
+  <Story name="Topic page AuthorCard">
+    <AuthorCard {...authorInfo} variation="TopicHome" />
+  </Story>
+</Preview>
+
+## Article page title AuthorCard
+
+<Preview>
+  <Story name="Article page AuthorCard">
+    <AuthorCard {...authorInfo} variation="ArticleTitle" />
+  </Story>
+</Preview>
