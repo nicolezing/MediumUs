@@ -71,7 +71,7 @@ const GenreCard = props => {
     <GenreCardContainer>
       <GenreCardHeader>
         <GenreCardTitle href={props.GenreLink}>{props.Genre}</GenreCardTitle>
-        <GenreCardButton />
+        <GenreCardButton type={props.GenreType} />
       </GenreCardHeader>
       <GenreCardImg
         href={props.GenreLink}
@@ -87,6 +87,7 @@ GenreCard.propTypes = {
   Genre: PropTypes.string.isRequired,
   GenreLink: PropTypes.string.isRequired,
   GenreImg: PropTypes.string.isRequired,
+  GenreType: PropTypes.oneOf(['default', 'active']).isRequired,
 };
 
 export default GenreCard;

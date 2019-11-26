@@ -1,12 +1,12 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 // import $ from 'jquery';
-import GenreCard from '../index';
+import GenreCardButton from '../index';
 
-describe('<GenreCard />', () => {
+describe('<GenreCardButton />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<GenreCard Genre="" GenreLink="" GenreImg="" GenreType="default" />);
+    render(<GenreCardButton type="default" />);
     expect(spy).not.toHaveBeenCalled();
   });
 });
