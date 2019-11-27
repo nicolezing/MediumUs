@@ -17,13 +17,6 @@ describe('OutlinedButton', () => {
     expect($(button).prop('tagName')).toEqual('BUTTON');
   });
 });
-// describe('<Button />', () => {
-// it('should render a <span> tag inside', () => {
-//   const { container } = render(<Button />);
-//   expect(
-//     container.querySelector('button').querySelector('span'),
-//   ).toBeDefined();
-// });
 
 describe('IconButton', () => {
   it('Expect to not log errors in console', () => {

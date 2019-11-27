@@ -11,7 +11,7 @@ import _ from 'lodash';
 import * as outlinedStyle from './outlineStyle';
 import { IconStyledButton } from './IconStyledButton';
 import * as Icons from '../../staticData/images/icons';
-import GlowStyledBtn from './GlowStyledBtn';
+import { GlowStyledBtn, Wrapper } from './GlowStyledBtn';
 
 function OutlinedButton(props) {
   const Btn = styled.button`
@@ -28,9 +28,6 @@ function OutlinedButton(props) {
 
 function IconButton(props) {
   if (props.effect === 'glow') {
-    const Wrapper = styled.div`
-      width: 70px;
-    `;
     return (
       <Wrapper>
         <GlowStyledBtn {...props}>{Icons[props.type]}</GlowStyledBtn>
