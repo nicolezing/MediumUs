@@ -4,7 +4,7 @@ import * as ArrowIcon from '../../../staticData/images/navArrowIcon';
 
 function Arrow(props) {
   return (
-    <button type="button" onClick={props.clicked(props.direction)}>
+    <button type="button" onClick={() => props.clicked(props.direction)}>
       <span>
         {props.direction === 'left'
           ? ArrowIcon.leftArrow

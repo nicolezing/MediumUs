@@ -22,7 +22,7 @@ function NavComponents(props) {
     padding-top: 15px;
     overflow: hidden;
     transition: all 5s;
-    transform: ${positionClick.left ? 'translateX(0px)' : 'translateX(100px)'};
+    transform: ${positionClick.left ? 'translateX(0px)' : 'translateX(-50px)'};
   `;
 
   const navList = props.navs.map(el => (
