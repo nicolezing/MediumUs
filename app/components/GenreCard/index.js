@@ -1,66 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import GenreCardButton from './GenreCardButton/index';
-
-const GenreCardContainer = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  width: 280px !important;
-  height: 280px !important;
-  margin-bottom: 30px !important;
-  margin-left: 15px !important;
-  margin-right: 15px !important;
-  box-sizing: border-box !important;
-  -webkit-box-flex: 0;
-  flex: 0 0 auto;
-  display: flex !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-box-direction: normal !important;
-  flex-direction: column !important;
-  -webkit-box-pack: center !important;
-  justify-content: center !important;
-`;
-
-const GenreCardHeader = styled.div`
-  padding-right: 20px !important;
-  padding-left: 20px !important;
-  flex: 1 1 auto;
-  -webkit-box-flex: 1;
-  display: flex !important;
-  -webkit-box-align: center !important;
-  -ms-flex-align: center !important;
-  align-items: center !important;
-`;
-
-const GenreCardTitle = styled.a`
-  font-weight: 600 !important;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  font-size: 22px !important;
-  font-family: medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-    sans-serif !important;
-  letter-spacing: 0 !important;
-  font-style: normal !important;
-  -webkit-box-flex: 1;
-  flex: 1 1 auto;
-  -webkit-tap-highlight-color: transparent;
-  background-color: transparent;
-`;
-
-const GenreCardImg = styled.a`
-  background-origin: border-box !important;
-  background-size: cover !important;
-  height: 180px !important;
-  -webkit-box-flex: 0;
-  flex: 0 0 auto;
-  -webkit-tap-highlight-color: transparent;
-  color: inherit;
-  text-decoration: none;
-  background-color: transparent;
-  cursor: pointer;
-`;
+import {
+  GenreCardContainer,
+  GenreCardHeader,
+  GenreCardTitle,
+  GenreCardImg,
+} from './GenreCardStyles';
+import {
+  Button,
+  ButtonState,
+  SvgIconAddMediaPlus,
+  SvgIconCheckboxTick,
+} from './GenreCardButtonStyle';
 
 const GenreCard = props => {
   const GenreCardImgStyle = {
@@ -71,7 +22,29 @@ const GenreCard = props => {
     <GenreCardContainer>
       <GenreCardHeader>
         <GenreCardTitle href={props.GenreLink}>{props.Genre}</GenreCardTitle>
-        <GenreCardButton type={props.GenreType} />
+        <Button>
+          <ButtonState>
+            {props.GenreState === 'default' ? (
+              <SvgIconAddMediaPlus>
+                <svg width="25" height="25">
+                  <path
+                    d="M20 12h-7V5h-1v7H5v1h7v7h1v-7h7"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </SvgIconAddMediaPlus>
+            ) : (
+              <SvgIconCheckboxTick>
+                <svg width="21" height="21">
+                  <path
+                    d="M5.5 7.854L3.379 9.975l5.82 5.82 8.675-8.675-2.121-2.121-6.554 6.553z"
+                    fillRule="evenodd"
+                  />
+                </svg>
+              </SvgIconCheckboxTick>
+            )}
+          </ButtonState>
+        </Button>
       </GenreCardHeader>
       <GenreCardImg
         href={props.GenreLink}
@@ -87,7 +60,7 @@ GenreCard.propTypes = {
   Genre: PropTypes.string.isRequired,
   GenreLink: PropTypes.string.isRequired,
   GenreImg: PropTypes.string.isRequired,
-  GenreType: PropTypes.oneOf(['default', 'active']).isRequired,
+  GenreState: PropTypes.oneOf(['default', 'active']).isRequired,
 };
 
 export default GenreCard;

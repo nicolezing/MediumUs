@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
+const Button = styled.button`
   color: rgba(0, 0, 0, 0.84);
   padding: 0;
   width: 37px;
@@ -65,7 +65,31 @@ export const Button = styled.button`
   }
 `;
 
-export const ButtonState = styled.span`
+const ButtonState = styled.span`
   display: inline-block;
   vertical-align: top;
 `;
+
+const SvgIconAddMediaPlus = styled.span`
+  fill: rgba(0, 0, 0, 0.84);
+  position: relative;
+  vertical-align: middle;
+  transition: 0.1s background-color, 0.1s border-color, 0.1s color, 0.1s fill;
+  line-height: 25px;
+  height: 25px;
+  display: inline-block;
+  top: -2px !important;
+`;
+
+const SvgIconCheckboxTick = styled.span`
+  fill: rgba(0, 0, 0, 0.84);
+  top: -1px;
+  position: relative;
+  vertical-align: middle;
+  transition: 0.1s background-color, 0.1s border-color, 0.1s color, 0.1s fill;
+  line-height: 21px;
+  height: 21px;
+  display: inline-block;
+`;
+
+export { Button, ButtonState, SvgIconAddMediaPlus, SvgIconCheckboxTick };

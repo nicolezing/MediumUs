@@ -6,7 +6,9 @@ import GenreCard from '../index';
 describe('<GenreCard />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<GenreCard Genre="" GenreLink="" GenreImg="" GenreType="default" />);
+    render(
+      <GenreCard Genre="" GenreLink="" GenreImg="" GenreState="default" />,
+    );
     expect(spy).not.toHaveBeenCalled();
   });
 });
