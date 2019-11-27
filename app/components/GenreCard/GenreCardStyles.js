@@ -1,55 +1,56 @@
 import styled from 'styled-components';
 
 const GenreCardContainer = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  width: 280px !important;
-  height: 280px !important;
-  margin-bottom: 30px !important;
-  margin-left: 15px !important;
-  margin-right: 15px !important;
-  box-sizing: border-box !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 280px;
+  height: 280px;
+  margin-bottom: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
+  box-sizing: border-box;
   -webkit-box-flex: 0;
   flex: 0 0 auto;
-  display: flex !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-box-direction: normal !important;
-  flex-direction: column !important;
-  -webkit-box-pack: center !important;
-  justify-content: center !important;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
 `;
 
 const GenreCardHeader = styled.div`
-  padding-right: 20px !important;
-  padding-left: 20px !important;
+  padding-right: 20px;
+  padding-left: 20px;
   flex: 1 1 auto;
   -webkit-box-flex: 1;
-  display: flex !important;
-  -webkit-box-align: center !important;
-  -ms-flex-align: center !important;
-  align-items: center !important;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const GenreCardTitle = styled.a`
-  font-weight: 600 !important;
+  font-weight: 600;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  font-size: 22px !important;
+  font-size: 22px;
   font-family: medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-    sans-serif !important;
-  letter-spacing: 0 !important;
-  font-style: normal !important;
+    sans-serif;
+  letter-spacing: 0;
+  font-style: normal;
   -webkit-box-flex: 1;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   -webkit-tap-highlight-color: transparent;
   background-color: transparent;
 `;
 
 const GenreCardImg = styled.a`
-  background-origin: border-box !important;
-  background-size: cover !important;
-  height: 180px !important;
+  background-origin: border-box;
+  background-size: cover;
+  height: 180px;
   -webkit-box-flex: 0;
   flex: 0 0 auto;
   -webkit-tap-highlight-color: transparent;
@@ -57,6 +58,8 @@ const GenreCardImg = styled.a`
   text-decoration: none;
   background-color: transparent;
   cursor: pointer;
+  background-image: url(${props => props.genreImg});
+  background-position: '50% 50%';
 `;
 
 export { GenreCardContainer, GenreCardHeader, GenreCardTitle, GenreCardImg };

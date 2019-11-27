@@ -17,10 +17,11 @@ export default function HomePage() {
         <FormattedMessage {...messages.header} />
       </h1>
       {/* <GenreCard
-        Genre="Art"
-        GenreLink="https://medium.com/topic/art"
-        GenreImg="https://cdn-images-1.medium.com/fit/c/560/360/1*H2blBoEmzkSusI_a4Bk0dg@2x.jpeg"
-        GenreState="default"
+        genre="Art"
+        genreLink="https://medium.com/topic/art"
+        genreImg="https://cdn-images-1.medium.com/fit/c/560/360/1*H2blBoEmzkSusI_a4Bk0dg@2x.jpeg"
+        genreState="activeState"
+        onClick={() => {}}
       /> */}
     </div>
   );

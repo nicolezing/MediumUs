@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import React from 'react';
 
-const Button = styled.button`
+const base = css`
   color: rgba(0, 0, 0, 0.84);
   padding: 0;
   width: 37px;
@@ -37,31 +38,18 @@ const Button = styled.button`
   overflow: visible;
   font: inherit;
   margin: 0;
-
-  &:hover,
-  &:active,
-  &:focus {
+  :hover,
+  :active,
+  :focus {
     color: rgba(0, 0, 0, 0.9);
   }
 
-  &:active,
-  &:focus {
+  :active,
+  :focus {
     outline: 0;
   }
-
-  &:active {
+  :active {
     transition: none;
-  }
-
-  &.isActive {
-    background: rgba(0, 0, 0, 0.54);
-    color: #fff;
-  }
-
-  &.isActive:hover,
-  &.isActive:active,
-  &.isActive:focus {
-    background: rgba(0, 0, 0, 0.68);
   }
 `;
 
@@ -70,6 +58,21 @@ const ButtonState = styled.span`
   vertical-align: top;
 `;
 
+const Default = styled.button`
+  ${base}
+`;
+
+const Active = styled.button`
+  ${base}
+  background: rgba(0, 0, 0, 0.54);
+  color: #fff;
+  :hover,
+  :active,
+  :focus {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.68);
+  }
+`;
 const SvgIconAddMediaPlus = styled.span`
   fill: rgba(0, 0, 0, 0.84);
   position: relative;
@@ -92,4 +95,31 @@ const SvgIconCheckboxTick = styled.span`
   display: inline-block;
 `;
 
-export { Button, ButtonState, SvgIconAddMediaPlus, SvgIconCheckboxTick };
+const DefaultState = () => (
+  <Default>
+    <ButtonState>
+      <SvgIconAddMediaPlus>
+        <svg width="25" height="25">
+          <path d="M20 12h-7V5h-1v7H5v1h7v7h1v-7h7" fillRule="evenodd" />
+        </svg>
+      </SvgIconAddMediaPlus>
+    </ButtonState>
+  </Default>
+);
+
+const ActiveState = () => (
+  <Active>
+    <ButtonState>
+      <SvgIconCheckboxTick>
+        <svg width="21" height="21">
+          <path
+            d="M5.5 7.854L3.379 9.975l5.82 5.82 8.675-8.675-2.121-2.121-6.554 6.553z"
+            fillRule="evenodd"
+          />
+        </svg>
+      </SvgIconCheckboxTick>
+    </ButtonState>
+  </Active>
+);
+
+export { DefaultState, ActiveState };
