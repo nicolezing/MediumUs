@@ -27,7 +27,7 @@ ArticleTitle.propTypes = {
   articleLink: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
-  type: PropTypes.oneOf([..._.keys(titleStyles)]).isRequired,
+  variation: PropTypes.oneOf([..._.keys(titleStyles)]).isRequired,
 };
 
 export default ArticleTitle;

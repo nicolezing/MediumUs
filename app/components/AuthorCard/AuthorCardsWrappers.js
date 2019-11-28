@@ -123,7 +123,7 @@ function conditionallyStyledComponents(variation) {
         `,
       };
     default:
-      throw new Error(`Unknown variantion: ${variation}`);
+      throw new Error(`Unknown variation: ${variation}`);
   }
 }
 

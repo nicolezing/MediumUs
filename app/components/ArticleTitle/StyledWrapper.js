@@ -5,7 +5,8 @@ const TitleWrapper = styled.div`
   display: flex;
   flex-flow: column wrap;
   word-wrap: break-word;
-  ${props => titleStyles[props.type].wrapper}
+  overflow: hidden;
+  ${props => titleStyles[props.variation].wrapper}
 `;
 
 const StyledTitle = styled.h1`
@@ -15,7 +16,7 @@ const StyledTitle = styled.h1`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   margin: 0;
-  ${props => titleStyles[props.type].h1}
+  ${props => titleStyles[props.variation].h1}
 `;
 
 const StyledSubtitle = styled.div`
@@ -23,7 +24,7 @@ const StyledSubtitle = styled.div`
   display: -webkit-box;
   -webkit-box-orient: vertical;
   color: rgba(0, 0, 0, 0.54);
-  ${props => titleStyles[props.type].sub}
+  ${props => titleStyles[props.variation].sub}
 `;
 
 export { TitleWrapper, StyledTitle, StyledSubtitle };

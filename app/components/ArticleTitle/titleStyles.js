@@ -12,11 +12,11 @@ export const HomeHeroLeft = {
     -webkit-line-clamp: 3;
     @media screen and (max-width: 767px) {
       font-size: 21px;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 3;
     }
   `,
   sub: css`
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     line-height: 20px;
   `,
 };
@@ -35,8 +35,9 @@ export const HomeHeroMid = {
     }
   `,
   sub: css`
+    -webkit-line-clamp: 1;
     @media screen and (max-width: 680px) {
-      -webkit-line-clamp: 1;
+      // -webkit-line-clamp: 1;
       line-height: 20px;
     }
   `,
@@ -60,7 +61,7 @@ export const HomeHeroRight = {
 export const HomeList = {
   wrapper: css`
     @media screen and (max-width: 767px) {
-      max-height: 50px;
+      max-height: 62px;
     }
   `,
   h1: css`

@@ -9,9 +9,9 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-dom/extend-expect'; // add some helpful assertions
-import { AuthorCard } from '../index';
+import AuthorCard from '../index';
 import getConfig from '../authorCardsConfig';
-import { authorInfo } from '../stories/exampleData';
+import authorInfo from '../stories/exampleData';
 
 test('AuthorInfo has desired props', () => {
   expect(authorInfo).toHaveProperty('name');

@@ -1,6 +1,6 @@
 import user001 from '../../../staticData/images/user-profile001.png';
 
-export const authorInfo = {
+const authorInfo = {
   authorLink: './',
   name: 'Lisa Armstrong',
   categoryLink: './',
@@ -11,3 +11,5 @@ export const authorInfo = {
   member: true,
   premium: true,
 };
+
+export default authorInfo;

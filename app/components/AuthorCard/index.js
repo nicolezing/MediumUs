@@ -83,4 +83,4 @@ AuthorCard.propTypes = {
   categoryLink: PropTypes.string,
   collection: PropTypes.string,
 };
-export { AuthorCard };
+export default AuthorCard;
