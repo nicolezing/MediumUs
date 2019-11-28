@@ -24,6 +24,7 @@ describe('
 <{{ properCase name }} />', () => {
 it('Expect to not log errors in console', () => {
 const spy = jest.spyOn(global.console, 'error');
+
 {{#if wantMessages}}
 render(
 <IntlProvider locale={DEFAULT_LOCALE}>
