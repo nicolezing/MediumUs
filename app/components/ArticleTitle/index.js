@@ -17,7 +17,7 @@ function ArticleTitle(props) {
         <StyledTitle {...props}>{props.title} </StyledTitle>
       </a>
       <a href={props.articleLink}>
-        <StyledSubtitle {...props.type}>{props.subtitle}</StyledSubtitle>
+        <StyledSubtitle {...props}>{props.subtitle}</StyledSubtitle>
       </a>
     </TitleWrapper>
   );
@@ -28,6 +28,7 @@ ArticleTitle.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   type: PropTypes.oneOf([..._.keys(titleStyles)]).isRequired,
+  // type: PropTypes.string.isRequired,
 };
 
 export default ArticleTitle;

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleTitle /> Should render and match the snapshot 1`] = `
+<div
+  class="StyledWrapper__TitleWrapper-sc-111jh54-0 ealqyf"
+  title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
+  type="ArticlePageTitle"
+>
+  <a
+    href="./"
+  >
+    <h1
+      class="StyledWrapper__StyledTitle-sc-111jh54-1 gYdKdB"
+      title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
+      type="ArticlePageTitle"
+    >
+      Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art
+       
+    </h1>
+  </a>
+  <a
+    href="./"
+  >
+    <div
+      class="StyledWrapper__StyledSubtitle-sc-111jh54-2 bomnVF"
+      title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
+      type="ArticlePageTitle"
+    >
+      And one last warning about their stupidly popular little brother
+    </div>
+  </a>
+</div>
+`;
