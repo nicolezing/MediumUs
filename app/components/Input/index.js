@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-import SearchStyleInput, {
-  IconSpan,
-  SearchInputLabel,
-} from './searchInputStyle';
-import { searchIcon } from '../../staticData/images/icons';
+import SearchStyleInput, { SearchStyledLabel } from './searchInputStyle';
+import { IconButton } from '../Button/index';
 
 function Input(props) {
   const [inputDisplay, setInputDisplay] = useState(false);
@@ -29,19 +26,19 @@ function Input(props) {
 
   return (
     <Wrapper>
-      <SearchInputLabel>
-        <IconSpan
-          onKeyPress={() => {}}
-          role="button"
+      <SearchStyledLabel>
+        <IconButton
+          aria-label="search-button"
           onClick={() => setInputDisplay(!inputDisplay)}
-          tabIndex="0"
-        >
-          {searchIcon}
-        </IconSpan>
+          type="searchIcon"
+          colorSet="gray"
+          style={{ verticalAlign: 'middle' }}
+        />
         <SearchStyleInput
           ref={inputRef}
           placeholder={props.placeholderName}
           type="search"
+          aria-label="search-input"
           id="searchInput"
           value={searchContent}
           onChange={event => {
@@ -49,7 +46,7 @@ function Input(props) {
           }}
           inputStyles={inputStyles}
         />
-      </SearchInputLabel>
+      </SearchStyledLabel>
     </Wrapper>
   );
 }

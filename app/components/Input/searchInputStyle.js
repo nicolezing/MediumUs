@@ -1,13 +1,7 @@
 import styled from 'styled-components';
 import getDisplay from './getDisplay';
 
-export const IconSpan = styled.span`
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const SearchInputLabel = styled.label`
+export const SearchStyledLabel = styled.label`
   position: absolute;
   top: 0;
   right: 0;
