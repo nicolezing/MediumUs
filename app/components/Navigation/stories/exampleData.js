@@ -1,5 +1,5 @@
 export const navItems = [
-  { id: '1', navName: 'Home', navURL: '' },
+  { id: '1', navName: 'HOME', navURL: '' },
   { id: '2', navName: 'ONEZERO', navURL: '' },
   { id: '3', navName: 'ELEMENTAL', navURL: '' },
   { id: '4', navName: 'GEN', navURL: '' },

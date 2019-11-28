@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as ArrowIcon from '../../../staticData/images/navArrowIcon';
+import { ArrowStyle, Button, Span } from './ArrowStyle';
 
 function Arrow(props) {
   return (
-    <button type="button" onClick={() => props.clicked(props.direction)}>
-      <span>
-        {props.direction === 'left'
-          ? ArrowIcon.leftArrow
-          : ArrowIcon.rightArrow}
-      </span>
-    </button>
+    <ArrowStyle>
+      <Button type="button" onClick={() => props.clicked(props.direction)}>
+        <Span>
+          {props.direction === 'left'
+            ? ArrowIcon.leftArrow
+            : ArrowIcon.rightArrow}
+        </Span>
+      </Button>
+    </ArrowStyle>
   );
 }
 
