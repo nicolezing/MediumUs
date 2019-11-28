@@ -1,6 +1,3 @@
-//  wrapper : css``,
-//  h1 : css``,
-//  sub : css``,
 import { css } from 'styled-components';
 
 // Home page
