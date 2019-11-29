@@ -47,6 +47,7 @@ function conditionallyStyledComponents(variation) {
           font-size: 15px;
           margin: 0 0 0 10px;
           line-height: 1.4;
+          margin-top: -3px;
         `,
         DownTextWrapper: styled.div`
           ${downTextWrapperBaseStyle}
@@ -70,11 +71,12 @@ function conditionallyStyledComponents(variation) {
           font-size: 15.8px;
           margin-left: 16px;
           line-height: 20px;
+          margin-top: -1px;
         `,
         DownTextWrapper: styled.div`
           ${downTextWrapperBaseStyle}
           line-height: 20px;
-          margin-top: 3px;
+          margin-top: 2px;
         `,
         StyledA: styled.a`
           ${aBaseStyle}
@@ -112,7 +114,7 @@ function conditionallyStyledComponents(variation) {
         `,
         DownTextWrapper: styled.div`
           ${downTextWrapperBaseStyle}
-          margin-top: 2px;
+          margin-top: 4px;
         `,
         StyledA: styled.a`
           ${aBaseStyle}

@@ -6,30 +6,27 @@ export default function getConfig(variation) {
     case 'HomeList':
     case 'TopicHomepageList':
       return { authorCardVariation: 'Home' };
-
-    case 'Sidebar': {
-      // different 3 cases, will separate as different component
-      return { authorCardVariation: 'Home' };
-    }
-
     case 'TopicHomepageHero': {
       return { authorCardVariation: 'TopicHome' };
     }
     case 'CollectionHomepageHero':
-    case 'CollectionHomepageList':
-      return { authorCardVariation: 'CollectionHome' };
-
+    case 'CollectionHomepageListX2':
+    case 'CollectionHomepageListX3':
+      return {
+        authorCardVariation: 'CollectionHome',
+      };
     case 'ArticlePageTitle': {
       return { authorCardVariation: 'ArticleTitle' };
     }
-    case 'ArticlePageRecommend': {
-      // different case??
+    case 'ArticlePageRecommendation': {
       return { authorCardVariation: 'TopicHome' };
-    }
-    case '': {
-      break;
     }
     default:
       return null;
   }
 }
+
+// case 'Sidebar': {
+//   // different 3 cases, will separate as different component
+//   return { authorCardVariation: 'Home' };
+// }

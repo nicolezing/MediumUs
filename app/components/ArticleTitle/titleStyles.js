@@ -4,6 +4,8 @@ import { css } from 'styled-components';
 export const HomeHeroLeft = {
   wrapper: css`
     max-height: 135px;
+    margin-top: 16px;
+    margin-bottom: 16px;
   `,
   h1: css`
     font-size: 24px;
@@ -24,11 +26,13 @@ export const HomeHeroLeft = {
 export const HomeHeroMid = {
   wrapper: css`
     max-height: 50px;
+    margin-bottom: 16px;
   `,
   h1: css`
     font-size: 18px;
     -webkit-line-clamp: 2;
     letter-spacing: -0.42px;
+    margin-bottom: 4px;
     @media screen and (max-width: 680px) {
       margin-bottom: 2px;
       -webkit-line-clamp: 2;
@@ -44,7 +48,10 @@ export const HomeHeroMid = {
 };
 
 export const HomeHeroRight = {
-  wrapper: css``,
+  wrapper: css`
+    margin-top: 16px;
+    margin-bottom: 16px;
+  `,
   h1: css`
     font-size: 21px;
     -webkit-line-clamp: 2;
@@ -63,6 +70,7 @@ export const HomeList = {
     @media screen and (max-width: 767px) {
       max-height: 62px;
     }
+    margin-bottom: 12px;
   `,
   h1: css`
     font-size: 24px;
@@ -80,29 +88,23 @@ export const HomeList = {
   `,
 };
 
-// Homepage sidebar and TopicHomepage Sidebar are same
-export const Sidebar = {
-  wrapper: css``,
-  h1: css`
-    font-size: 18px;
-    -webkit-line-clamp: 3;
-    letter-spacing: -0.17px;
-  `,
-  sub: css`
-    display: none;
-  `,
-};
-
 // Topic Home Page
 export const TopicHomepageHero = {
-  wrapper: css``,
+  wrapper: css`
+    margin-top: 13px;
+    @media screen and (max-width: 728px) {
+      margin-top: 21px;
+    }
+    margin-bottom: 16px;
+  `,
   h1: css`
     font-size: 44px;
     line-height: 48px;
     -webkit-line-clamp: 2;
     letter-spacing: -1.25px;
+    margin-bottom: 4px;
     @media screen and (max-width: 728px) {
-      font-size: 26px;
+      font-size: 25.2px;
       line-height: 28px;
       letter-spacing: -0.47px;
       -webkit-line-clamp: 2;
@@ -116,12 +118,18 @@ export const TopicHomepageHero = {
 };
 
 export const TopicHomepageList = {
-  wrapper: css``,
+  wrapper: css`
+    margin-bottom: 12px;
+  `,
   h1: css`
-    font-size: 22px;
+    font-size: 21.6px;
     line-height: 24px;
     letter-spacing: -0.32px;
     -webkit-line-clamp: 2;
+    margin-bottom: 4px;
+    @media screen and (max-width: 855px) {
+      margin-bottom: 0px;
+    }
   `,
   sub: css`
     font-size: 18px;
@@ -133,11 +141,19 @@ export const TopicHomepageList = {
 
 // Collection Home page
 export const CollectionHomepageHero = {
-  wrapper: css``,
+  wrapper: css`
+    margin-top: 7px;
+    margin-bottom: 20px;
+  `,
   h1: css`
     font-size: 32px;
     -webkit-line-clamp: 4;
     line-height: 1.1;
+    @media screen and (max-width: 767px) {
+      font-size: 26px;
+      margin-top: 15px;
+      -webkit-line-clamp: 3;
+    }
   `,
   sub: css`
     line-height: 1.2;
@@ -148,7 +164,10 @@ export const CollectionHomepageHero = {
 };
 
 export const CollectionHomepageList = {
-  wrapper: css``,
+  wrapper: css`
+    margin-top: 20px;
+    margin-bottom: 20px;
+  `,
   h1: css`
     font-size: 26px;
     -webkit-line-clamp: 3;
@@ -166,10 +185,14 @@ export const CollectionHomepageList = {
     }
   `,
 };
+export const CollectionHomepageListX2 = CollectionHomepageList;
+export const CollectionHomepageListX3 = CollectionHomepageList;
 
 // Article Page
 export const ArticlePageTitle = {
-  wrapper: css``,
+  wrapper: css`
+    margin-bottom: 20px;
+  `,
   h1: css`
     line-height: 48px;
     font-size: 40px;
@@ -185,8 +208,10 @@ export const ArticlePageTitle = {
   `,
 };
 
-export const ArticlePageRecommend = {
-  wrapper: css``,
+export const ArticlePageRecommendation = {
+  wrapper: css`
+    margin-bottom: 16px;
+  `,
   h1: css`
     line-height: 32px;
     font-size: 24px;
@@ -194,6 +219,19 @@ export const ArticlePageRecommend = {
       Times, serif;
     font-weight: 500;
     -webkit-line-clamp: 4;
+  `,
+  sub: css`
+    display: none;
+  `,
+};
+
+// Homepage sidebar and TopicHomepage Sidebar are same
+export const Sidebar = {
+  wrapper: css``,
+  h1: css`
+    font-size: 18px;
+    -webkit-line-clamp: 3;
+    letter-spacing: -0.17px;
   `,
   sub: css`
     display: none;

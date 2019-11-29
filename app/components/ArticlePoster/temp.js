@@ -1,64 +1,121 @@
-// HomeHeroLeft
-export const Cover = styled.a`
-  background-image: url(${props => props.articleCover});
-  background-size: cover;
-  background-origin: border-box;
-  background-position: 59% 53%;
-  height: 150px;
-  margin-bottom: 16px;
+//columnStructure
+//HomeHeroLeft, HomeHeroRight,TopicHomepageHero, CollectionHomepageList X2 X3
+const columnStructureCoverBaseStyle = css`
   display: block;
-`;
 
-export const InfoWrapper = styled.div`
-`;
-export const TitleWrapper = styled.div`
-  margin-bottom: 16px;
-`;
-export const AuthorWrapper = styled.div``;
+  //HomeHeroLeft, HomeHeroRight,
+  height: 150px;
 
-// HomeHeroMid
-export const Wrapper = styled.div`
-  width: 100%;
+  //TopicHomepageHero
+  height: 382px;
+  @media screen and (max-width: 728px) {
+    height: 320px;
+  }
+
+  //CollectionHomepageList X2
+  height: 272px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  @media screen and (max-width: 767px) {
+    height: 170px;
+  }
+  //CollectionHomepageList X3
+  height: 172px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  @media screen and (max-width: 767px) {
+    height: 170px;
+  }
+`;
+const columStructureInfoWrapperBaseStyle = css`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+//row HomeHeroMid, CollectionHomepageHero
+//rowverse HomeList, TopicHomepageList
+const rowStructureWrapperBaseStyle = css`
+  //all row
+  //all row-reverse
   display: flex;
-`;
 
-export const Cover = styled.a`
-  background-image: url(${props => props.articleCover});
-  background-size: cover;
-  background-origin: border-box;
-  background-position: 37% 31%;
+  //row-reverse
+  //HomeList, TopicHomepageList
+  flex-direction: row-reverse;
+  justify-content: space-between;
+
+  //row  HomeHeroMid
+  @media screen and (max-width: 680px) {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  //CollectionHomepageHero
+  @media screen and (max-width: 767px) {
+    display: block;
+  }
+`;
+const rowStructureCoverBaseStyle = css`
+  ${coverBaseStyle}
+  //HomeHeroMid
+  flex: none;
   height: 100px;
   width: 100px;
-  margin-right: 24px;
-  flex: 0 0 auto;
+  @media screen and (max-width: 680px) {
+    width: 140px;
+    height: auto;
+  }
+
+  //HomeList
+  width: 152px;
+  @media screen and (max-width: 855px) {
+    width: 140px;
+  }
+  flex: none;
+
+  //TopicHomepageList
+  width: 152px;
+  @media screen and (max-width: 855px) {
+    width: 77px;
+    height: 77px;
+  }
+  flex: none;
+
+  //CollectionHomepageHero
+  height 350px;
+  flex: 2;
+  @media screen and (max-width: 767px) {
+    display: block;
+    height: 170px;
+  }
 `;
 
-export const InfoWrapper = styled.div`
-  // maybe useless
+const rowStructureInfoWrapperBaseStyle = css`
+  //HomeHeroMid
+  margin-left: 24px;
+  @media screen and (max-width: 680px) {
+    min-width: 0;
+    margin-right: 24px;
+    margin-left: 0;
+  }
+
+  //HomeList, TopicHomepageList
   min-width: 0;
-`;
-export const TitleWrapper = styled.div`
-  margin-bottom: 16px;
-`;
-export const AuthorWrapper = styled.div``;
+  margin-right: 24px;
 
-// HomeHeroRight
-export const Wrapper = styled.div``;
-
-export const Cover = styled.a`
-  background-image: url(${props => props.articleCover});
-  background-size: cover;
-  background-origin: border-box;
-  height: 150px;
-  margin-bottom: 16px;
-  display: block;
-  // only difference from HomeHeroLeft
-  background-position: 26% 23%;
+  //CollectionHomepageHero
+  flex: 1;
+  margin-left: 24px;
+  @media screen and (max-width: 767px) {
+    margin-left: 0px;
+  }
 `;
 
-export const InfoWrapper = styled.div``;
-export const TitleWrapper = styled.div`
-  margin-bottom: 16px;
+const createMoreFromText = {
+  ArticlePageRecommendation: (
+    <MoreFromText>More from {props.collection || props.name}</MoreFromText>
+  ),
+};
+export const MoreFromText = styled.p`
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.54);
+  margin-bottom: 12px;
+  display: inline-block;
 `;
-export const AuthorWrapper = styled.div``;
-
