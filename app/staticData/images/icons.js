@@ -44,7 +44,7 @@ const fbRoundIcon = (
 );
 
 const linkedInIcon = (
-  <svg width="29" height="29" viewBox="0 0 29 29" fill="none">
+  <svg width="29" height="29" viewBox="0 0 29 29" fill="inherit">
     <path d="M5 6.36C5 5.61 5.63 5 6.4 5h16.2c.77 0 1.4.61 1.4 1.36v16.28c0 .75-.63 1.36-1.4 1.36H6.4c-.77 0-1.4-.6-1.4-1.36V6.36z" />
     <path
       fillRule="evenodd"

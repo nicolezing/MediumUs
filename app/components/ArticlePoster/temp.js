@@ -107,15 +107,3 @@ const rowStructureInfoWrapperBaseStyle = css`
     margin-left: 0px;
   }
 `;
-
-const createMoreFromText = {
-  ArticlePageRecommendation: (
-    <MoreFromText>More from {props.collection || props.name}</MoreFromText>
-  ),
-};
-export const MoreFromText = styled.p`
-  font-size: 16px;
-  color: rgba(0, 0, 0, 0.54);
-  margin-bottom: 12px;
-  display: inline-block;
-`;

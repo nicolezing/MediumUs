@@ -9,10 +9,9 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import AuthorCard from '../AuthorCard';
 import ArticleTitle from '../ArticleTitle';
-import * as sectionStyles from './sectionStyles';
-import { Wrapper, Cover, InfoWrapper, MoreFromText } from './coverStyledA';
+import * as wrapperStyles from './variationWrapperStyles';
+import { Wrapper, Cover, InfoWrapper } from './coverStyledA';
 import getConfig from './articleCardConfig';
-import { small } from '../Button/outlineStyle';
 
 function ArticlePoster(props) {
   const { authorCardVariation } = getConfig(props.variation);
@@ -36,7 +35,7 @@ function ArticlePoster(props) {
 }
 
 ArticlePoster.propTypes = {
-  variation: PropTypes.oneOf([..._.keys(sectionStyles)]).isRequired,
+  variation: PropTypes.oneOf([..._.keys(wrapperStyles)]).isRequired,
   authorLink: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,

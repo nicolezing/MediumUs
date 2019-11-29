@@ -7,7 +7,17 @@ export const HomeHeroLeft = {
   `,
 };
 
-export const HomeHeroRight = HomeHeroLeft;
+// not sure if it needs to control display: non here
+export const HomeHeroRight = {
+  wrapperStyle: css`
+    @media screen and (max-width: 1031px) {
+      display: none;
+    }
+  `,
+  coverStyle: css`
+    ${HomeHeroLeft.coverStyle}
+  `,
+};
 
 export const HomeHeroMid = {
   wrapperStyle: css`
@@ -120,6 +130,7 @@ export const CollectionHomepageHero = {
   coverStyle: css`
     height 350px;
     flex: 2;
+    border: 1px solid rgba(0, 0, 0, 0.15);
     @media screen and (max-width: 767px) {
       display: block;
       height: 170px;

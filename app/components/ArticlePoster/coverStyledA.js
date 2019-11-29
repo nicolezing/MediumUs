@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import * as sectionStyle from './sectionStyles';
+import * as wrapperStyle from './variationWrapperStyles';
 
 const coverBaseStyle = css`
   background-image: url(${props => props.articleCover});
@@ -10,14 +10,14 @@ const coverBaseStyle = css`
 `;
 
 export const Wrapper = styled.div`
-  ${props => sectionStyle[props.variation].wrapperStyle || ``}
+  ${props => wrapperStyle[props.variation].wrapperStyle || ``}
 `;
 export const Cover = styled.a`
   ${coverBaseStyle};
-  ${props => sectionStyle[props.variation].coverStyle || ``}
+  ${props => wrapperStyle[props.variation].coverStyle || ``}
 `;
 export const InfoWrapper = styled.div`
-  ${props => sectionStyle[props.variation].infoWrapperStyle || ``}
+  ${props => wrapperStyle[props.variation].infoWrapperStyle || ``}
 `;
 export const TitleWrapper = styled.div``;
 export const AuthorWrapper = styled.div``;

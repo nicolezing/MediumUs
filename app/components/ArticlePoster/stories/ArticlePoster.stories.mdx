@@ -1,0 +1,131 @@
+import _ from 'lodash';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import ArticlePoster from '..';
+import authorInfo from '../../AuthorCard/stories/exampleData';
+import articleInfo from './exampleData';
+
+<Meta title="Components|ArticlePoster" component={ArticlePoster} />
+
+# Article Poster
+
+<Props of={ArticlePoster} />
+
+(adjust your screen width to check responsive output)
+
+## HomeHeroLeft
+
+<Preview>
+  <Story name="HomeHeroLeft">
+    <ArticlePoster {...authorInfo} {...articleInfo} variation="HomeHeroLeft" />
+  </Story>
+</Preview>
+
+## HomeHeroRight
+
+(HomeHeroRight will disapear with small screen as designed, might change the controller in the future)
+
+<Preview>
+  <Story name="HomeHeroRight">
+    <ArticlePoster {...authorInfo} {...articleInfo} variation="HomeHeroRight" />
+  </Story>
+</Preview>
+
+## HomeHeroMid
+
+<Preview>
+  <Story name="HomeHeroMid">
+    <ArticlePoster {...authorInfo} {...articleInfo} variation="HomeHeroMid" />
+  </Story>
+</Preview>
+
+## HomeList
+
+<Preview>
+  <Story name="HomeList">
+    <ArticlePoster {...authorInfo} {...articleInfo} variation="HomeList" />
+  </Story>
+</Preview>
+
+## TopicHomepageHero
+
+<Preview>
+  <Story name="TopicHomepageHero">
+    <ArticlePoster
+      {...authorInfo}
+      {...articleInfo}
+      variation="TopicHomepageHero"
+    />
+  </Story>
+</Preview>
+
+## TopicHomepageList
+
+<Preview>
+  <Story name="TopicHomepageList">
+    <ArticlePoster
+      {...authorInfo}
+      {...articleInfo}
+      variation="TopicHomepageList"
+    />
+  </Story>
+</Preview>
+
+## CollectionHomepageListX2
+
+<Preview>
+  <Story name="CollectionHomepageListX2">
+    <ArticlePoster
+      {...authorInfo}
+      {...articleInfo}
+      variation="CollectionHomepageListX2"
+    />
+  </Story>
+</Preview>
+
+## CollectionHomepageListX3
+
+<Preview>
+  <Story name="CollectionHomepageListX3">
+    <ArticlePoster
+      {...authorInfo}
+      {...articleInfo}
+      variation="CollectionHomepageListX3"
+    />
+  </Story>
+</Preview>
+
+## CollectionHomepageHero
+
+<Preview>
+  <Story name="CollectionHomepageHero">
+    <ArticlePoster
+      {...authorInfo}
+      {...articleInfo}
+      variation="CollectionHomepageHero"
+    />
+  </Story>
+</Preview>
+
+## ArticlePageTitle
+
+<Preview>
+  <Story name="ArticlePageTitle">
+    <ArticlePoster
+      {...authorInfo}
+      {...articleInfo}
+      variation="ArticlePageTitle"
+    />
+  </Story>
+</Preview>
+
+## ArticlePageRecommendation
+
+<Preview>
+  <Story name="ArticlePageRecommendation">
+    <ArticlePoster
+      {...authorInfo}
+      {...articleInfo}
+      variation="ArticlePageRecommendation"
+    />
+  </Story>
+</Preview>
