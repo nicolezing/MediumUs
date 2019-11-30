@@ -13,9 +13,9 @@ const GenreCard = props => (
     <GenreCardHeader>
       <GenreCardTitle href={props.genreLink}>{props.genre}</GenreCardTitle>
       {props.genreState === 'defaultState' ? (
-        <DefaultState onClick={props.onClick} />
+        <DefaultState onClick={props.onActiveStateChange} />
       ) : (
-        <ActiveState onClick={props.onClick} />
+        <ActiveState onClick={props.onActiveStateChange} />
       )}
     </GenreCardHeader>
     <a href={props.genreLink}>
@@ -29,7 +29,7 @@ GenreCard.propTypes = {
   genreLink: PropTypes.string.isRequired,
   genreImg: PropTypes.string.isRequired,
   genreState: PropTypes.oneOf(['defaultState', 'activeState']).isRequired,
-  onClick: PropTypes.func.isRequired,
+  onActiveStateChange: PropTypes.func.isRequired,
 };
 
 export default GenreCard;
