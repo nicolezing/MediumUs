@@ -1,7 +1,12 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import GenreCard from '../index';
-import { DefaultState, ActiveState } from '../GenreCardButtonStyle';
+import {
+  DefaultState,
+  ActiveState,
+  Default,
+  Active,
+} from '../GenreCardButtonStyle';
 
 describe('<GenreCard />', () => {
   it('Expect to not log errors in console', () => {
@@ -17,16 +22,6 @@ describe('<GenreCard />', () => {
     );
     expect(spy).not.toHaveBeenCalled();
   });
-  // it('handles clicks', () => {
-  //   const onClickMock = jest.fn();
-  //   const text = 'Click me!';
-  //   const { getByText } = render(
-  //     <Default onClick={onClickMock}> {text} </Default>,
-  //   );
-
-  //   const test = jest.spyOn(fireEvent.click(getByText(text)));
-  //   expect(test).toHaveBeenCalled();
-  // });
 });
 
 describe('<DefaultState />', () => {
@@ -42,5 +37,31 @@ describe('<ActiveState />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(<ActiveState />);
     expect(spy).not.toHaveBeenCalled();
+  });
+});
+
+describe('<Default/>', () => {
+  it('handles clicks', () => {
+    const onClickMock = jest.fn();
+    const text = 'Click me!';
+    const { getByText } = render(
+      <Default onClick={onClickMock}> {text} </Default>,
+    );
+
+    fireEvent.click(getByText(text));
+    expect(onClickMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('<Active/>', () => {
+  it('handles clicks', () => {
+    const onClickMock = jest.fn();
+    const text = 'Click me!';
+    const { getByText } = render(
+      <Active onClick={onClickMock}> {text} </Active>,
+    );
+
+    fireEvent.click(getByText(text));
+    expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 });
