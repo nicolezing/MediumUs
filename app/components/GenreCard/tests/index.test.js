@@ -12,11 +12,21 @@ describe('<GenreCard />', () => {
         genreLink=""
         genreImg=""
         genreState="defaultState"
-        onClick={() => {}}
+        onActiveStateChange={() => {}}
       />,
     );
     expect(spy).not.toHaveBeenCalled();
   });
+  // it('handles clicks', () => {
+  //   const onClickMock = jest.fn();
+  //   const text = 'Click me!';
+  //   const { getByText } = render(
+  //     <Default onClick={onClickMock}> {text} </Default>,
+  //   );
+
+  //   const test = jest.spyOn(fireEvent.click(getByText(text)));
+  //   expect(test).toHaveBeenCalled();
+  // });
 });
 
 describe('<DefaultState />', () => {

@@ -100,19 +100,15 @@ const SvgIconCheckboxTick = styled.span`
 `;
 
 const DefaultState = () => (
-  <Default>
-    <ButtonState>
-      <SvgIconAddMediaPlus>{addMediaPlusIcon}</SvgIconAddMediaPlus>
-    </ButtonState>
-  </Default>
+  <ButtonState>
+    <SvgIconAddMediaPlus>{addMediaPlusIcon}</SvgIconAddMediaPlus>
+  </ButtonState>
 );
 
 const ActiveState = () => (
-  <Active>
-    <ButtonState>
-      <SvgIconCheckboxTick>{addCheckboxTickIcon}</SvgIconCheckboxTick>
-    </ButtonState>
-  </Active>
+  <ButtonState>
+    <SvgIconCheckboxTick>{addCheckboxTickIcon}</SvgIconCheckboxTick>
+  </ButtonState>
 );
 
-export { DefaultState, ActiveState };
+export { Default, Active, DefaultState, ActiveState };

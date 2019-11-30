@@ -21,7 +21,9 @@ export default function HomePage() {
         genreLink="https://medium.com/topic/art"
         genreImg="https://cdn-images-1.medium.com/fit/c/560/360/1*H2blBoEmzkSusI_a4Bk0dg@2x.jpeg"
         genreState="defaultState"
-        onClick={() => {}}
+        onActiveStateChange={() => {
+          console.log('fake function');
+        }}
       />
     </div>
   );

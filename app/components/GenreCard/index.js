@@ -6,20 +6,33 @@ import {
   GenreCardTitle,
   GenreCardImg,
 } from './GenreCardStyles';
-import { DefaultState, ActiveState } from './GenreCardButtonStyle';
+import {
+  DefaultState,
+  ActiveState,
+  Default,
+  Active,
+} from './GenreCardButtonStyle';
 
 const GenreCard = props => (
   <GenreCardContainer>
     <GenreCardHeader>
       <GenreCardTitle href={props.genreLink}>{props.genre}</GenreCardTitle>
       {props.genreState === 'defaultState' ? (
-        <DefaultState onClick={props.onActiveStateChange} />
+        <Default onClick={props.onActiveStateChange}>
+          <DefaultState />
+        </Default>
       ) : (
-        <ActiveState onClick={props.onActiveStateChange} />
+        <Active onClick={props.onActiveStateChange}>
+          <ActiveState />
+        </Active>
       )}
     </GenreCardHeader>
     <a href={props.genreLink}>
-      <GenreCardImg {...props} aria-label={props.genre} alt={props.genre} />
+      <GenreCardImg
+        genreImg={props.genreImg}
+        aria-label={props.genre}
+        alt={props.genre}
+      />
     </a>
   </GenreCardContainer>
 );
