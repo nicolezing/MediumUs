@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-// import $ from 'jquery';
 import GenreCard from '../index';
 import { DefaultState, ActiveState } from '../GenreCardButtonStyle';
 

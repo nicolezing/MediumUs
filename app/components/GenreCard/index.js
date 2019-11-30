@@ -18,12 +18,9 @@ const GenreCard = props => (
         <ActiveState onClick={props.onClick} />
       )}
     </GenreCardHeader>
-    <GenreCardImg
-      {...props}
-      href={props.genreLink}
-      aria-label={props.genre}
-      alt={props.genre}
-    />
+    <a href={props.genreLink}>
+      <GenreCardImg {...props} aria-label={props.genre} alt={props.genre} />
+    </a>
   </GenreCardContainer>
 );
 

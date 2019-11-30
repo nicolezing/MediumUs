@@ -47,19 +47,18 @@ const GenreCardTitle = styled.a`
   background-color: transparent;
 `;
 
-const GenreCardImg = styled.a`
+const GenreCardImg = styled.div`
   background-origin: border-box;
   background-size: cover;
   height: 180px;
+  width: 100%;
   -webkit-box-flex: 0;
   flex: 0 0 auto;
   -webkit-tap-highlight-color: transparent;
   color: inherit;
-  text-decoration: none;
   background-color: transparent;
-  cursor: pointer;
   background-image: url(${props => props.genreImg});
-  background-position: '50% 50%';
+  background-position: 50% 50%;
 `;
 
 export { GenreCardContainer, GenreCardHeader, GenreCardTitle, GenreCardImg };
