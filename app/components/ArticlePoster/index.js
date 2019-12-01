@@ -35,12 +35,12 @@ function ArticlePoster(props) {
         onClick={props.onRemoveBookmark}
       />
     ) : (
-        <IconButton
-          type="bookmarkIcon"
-          colorSet="black"
-          onClick={props.onAddBookmark}
-        />
-      );
+      <IconButton
+        type="bookmarkIcon"
+        colorSet="black"
+        onClick={props.onAddBookmark}
+      />
+    );
   }
 
   function renderIcons() {
@@ -51,8 +51,8 @@ function ArticlePoster(props) {
         return <BookmarkButton />;
       case 'HomeList':
         return [
-          <BookmarkButton />,
-          <IconButton type="moreIcon" colorSet="black" />,
+          <BookmarkButton key={props.variation} />,
+          <IconButton type="moreIcon" colorSet="black" key="moreIcon" />,
         ];
       case 'ArticlePageTitle':
         return [
@@ -71,14 +71,18 @@ function ArticlePoster(props) {
               <IconButton type="facebookSqureIcon" colorSet="black" />
             </a>
           ),
-          <BookmarkButton />,
+          <BookmarkButton key={props.variation} />,
         ];
       case 'ArticlePageRecommendation':
         return [
-          <IconButton type="clapSmallIcon" colorSet="black" />,
-          <ClapText>{kFormatter(props.claps)}</ClapText>,
-          <Divider />,
-          <BookmarkButton />,
+          <IconButton
+            type="clapSmallIcon"
+            colorSet="black"
+            key="clapSmallIcon"
+          />,
+          <ClapText key="claps">{kFormatter(props.claps)}</ClapText>,
+          <Divider key="divider" />,
+          <BookmarkButton key={props.variation} />,
         ];
       default:
         return '';
