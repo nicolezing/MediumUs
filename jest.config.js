@@ -5,6 +5,7 @@ module.exports = {
     '!app/*/RbGenerated*/*.{js,jsx}',
     '!app/app.js',
     '!app/global-styles.js',
+    '!app/firebase.js',
     '!app/*/*/Loadable.{js,jsx}',
   ],
   coverageThreshold: {
