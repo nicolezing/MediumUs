@@ -35,12 +35,12 @@ function ArticlePoster(props) {
         onClick={props.onRemoveBookmark}
       />
     ) : (
-      <IconButton
-        type="bookmarkIcon"
-        colorSet="black"
-        onClick={props.onAddBookmark}
-      />
-    );
+        <IconButton
+          type="bookmarkIcon"
+          colorSet="black"
+          onClick={props.onAddBookmark}
+        />
+      );
   }
 
   function renderIcons() {
@@ -57,17 +57,17 @@ function ArticlePoster(props) {
       case 'ArticlePageTitle':
         return [
           props.twitter && (
-            <a href={props.twitter}>
+            <a href={props.twitter} key="twitter">
               <IconButton type="twitterIcon" colorSet="black" />
             </a>
           ),
           props.linkedIn && (
-            <a href={props.linkedIn}>
+            <a href={props.linkedIn} key="linkedIn">
               <IconButton type="linkedInIcon" colorSet="black" />
             </a>
           ),
           props.facebook && (
-            <a href={props.facebook}>
+            <a href={props.facebook} key="facebook">
               <IconButton type="facebookSqureIcon" colorSet="black" />
             </a>
           ),
