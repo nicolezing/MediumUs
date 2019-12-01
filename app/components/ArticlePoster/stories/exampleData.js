@@ -6,6 +6,11 @@ const articleInfo = {
   articleCover:
     'https://cdn-images-1.medium.com/max/2000/1*FK8eDjLTgFGHrEsPo14T4A.jpeg',
   focusPosition: [30, 50],
+  bookmarked: false,
+  twitter: './',
+  facebook: './',
+  linkedIn: './',
+  claps: 4230,
 };
 
 export default articleInfo;

@@ -5,9 +5,15 @@ export const HomeHeroLeft = {
     display: block;
     height: 150px;
   `,
+  iconWrapperStyle: css`
+    align-self: center;
+    @media screen and (min-width: 681px) {
+      display: none;
+    }
+  `,
 };
 
-// not sure if it needs to control display: non here
+// might change the controller display: none here
 export const HomeHeroRight = {
   wrapperStyle: css`
     @media screen and (max-width: 1031px) {
@@ -44,6 +50,9 @@ export const HomeHeroMid = {
       margin-left: 0;
     }
   `,
+  iconWrapperStyle: css`
+    ${HomeHeroLeft.iconWrapperStyle}
+  `,
 };
 
 export const HomeList = {
@@ -73,6 +82,9 @@ export const HomeList = {
       // BASED ON YOUR READING HISTORY/POPULAR ON MEDIUM
     }
   `,
+  iconWrapperStyle: css`
+    align-self: center;
+  `,
 };
 
 export const TopicHomepageHero = {
@@ -98,11 +110,15 @@ export const TopicHomepageList = {
     flex: none;
   `,
   infoWrapperStyle: css`
-    ${HomeList.infoWrapperStyle}
+    min-width: 0;
+    margin-right: 24px;
+  `,
+  iconWrapperStyle: css`
+    align-self: center;
   `,
 };
 
-export const CollectionHomepageListX2 = {
+export const PublicationHomepageListX2 = {
   coverStyle: css`
     display: block;
     height: 272px;
@@ -113,14 +129,14 @@ export const CollectionHomepageListX2 = {
   `,
 };
 
-export const CollectionHomepageListX3 = {
+export const PublicationHomepageListX3 = {
   coverStyle: css`
-    ${CollectionHomepageListX2.coverStyle}
+    ${PublicationHomepageListX2.coverStyle}
     height: 172px;
   `,
 };
 
-export const CollectionHomepageHero = {
+export const PublicationHomepageHero = {
   wrapperStyle: css`
     display: flex;
     @media screen and (max-width: 767px) {
@@ -145,7 +161,24 @@ export const CollectionHomepageHero = {
   `,
 };
 
-export const ArticlePageTitle = {};
+export const ArticlePageTitle = {
+  authorWrapperStyle: css`
+    @media screen and (max-width: 728px) {
+      flex-direction: column-reverse;
+    }
+  `,
+  iconWrapperStyle: css`
+    display: flex;
+    align-self: flex-end;
+    a {
+      margin-right: 8px;
+    }
+    @media screen and (max-width: 728px) {
+      align-self: auto;
+      margin-bottom: 30px;
+    }
+  `,
+};
 
 const beforeContent = css`   
         &:before {
@@ -155,7 +188,7 @@ const beforeContent = css`
           white-space: nowrap; 
           overflow: hidden;
           text-overflow: ellipsis;
-          content: 'More from ${props => props.collection || props.name}';
+          content: 'More from ${props => props.publication || props.name}';
         };`;
 
 export const ArticlePageRecommendation = {
@@ -184,6 +217,9 @@ export const ArticlePageRecommendation = {
       flex-basis: 50%;
       ${beforeContent}
     }
-    overflow: hidden;
+  `,
+  iconWrapperStyle: css`
+    display: flex;
+    vertical-align: middle;
   `,
 };

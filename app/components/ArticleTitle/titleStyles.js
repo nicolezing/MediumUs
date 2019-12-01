@@ -139,8 +139,8 @@ export const TopicHomepageList = {
   `,
 };
 
-// Collection Home page
-export const CollectionHomepageHero = {
+// Publication Home page
+export const PublicationHomepageHero = {
   wrapper: css`
     margin-top: 7px;
     margin-bottom: 20px;
@@ -163,7 +163,7 @@ export const CollectionHomepageHero = {
   `,
 };
 
-export const CollectionHomepageList = {
+export const PublicationHomepageList = {
   wrapper: css`
     margin-top: 20px;
     margin-bottom: 20px;
@@ -185,8 +185,8 @@ export const CollectionHomepageList = {
     }
   `,
 };
-export const CollectionHomepageListX2 = CollectionHomepageList;
-export const CollectionHomepageListX3 = CollectionHomepageList;
+export const PublicationHomepageListX2 = PublicationHomepageList;
+export const PublicationHomepageListX3 = PublicationHomepageList;
 
 // Article Page
 export const ArticlePageTitle = {

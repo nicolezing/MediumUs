@@ -4,7 +4,7 @@ const authorInfo = {
   authorLink: './',
   name: 'Lisa Armstrong',
   categoryLink: './',
-  collection: 'OneZero',
+  publication: 'OneZero',
   date: 'Nov 21',
   readingTime: '13 min read',
   avatarImg: user001,

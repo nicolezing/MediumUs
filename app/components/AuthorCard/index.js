@@ -43,10 +43,10 @@ function AuthorCard(props) {
           <StyledA href={props.authorLink} key="name">
             {props.name}
           </StyledA>
-          {props.collection && [
+          {props.publication && [
             ' in ',
-            <StyledA href={props.categoryLink} key="collection">
-              {props.collection}
+            <StyledA href={props.categoryLink} key="publication">
+              {props.publication}
             </StyledA>,
           ]}
           {followButton && (
@@ -69,7 +69,7 @@ function AuthorCard(props) {
 AuthorCard.propTypes = {
   variation: PropTypes.oneOf([
     'Home',
-    'CollectionHome',
+    'PublicationHome',
     'TopicHome',
     'ArticleTitle',
   ]).isRequired,
@@ -81,6 +81,6 @@ AuthorCard.propTypes = {
   member: PropTypes.bool.isRequired,
   premium: PropTypes.bool.isRequired,
   categoryLink: PropTypes.string,
-  collection: PropTypes.string,
+  publication: PropTypes.string,
 };
 export default AuthorCard;

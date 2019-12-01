@@ -1,6 +1,6 @@
 export default function getConfig(variation) {
   switch (variation) {
-    case 'CollectionHome':
+    case 'PublicationHome':
       return { avatarSize: '36px', avatarDisplay: true, followButton: false };
     case 'TopicHome':
       return { avatarSize: '40px', avatarDisplay: true, followButton: false };

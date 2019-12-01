@@ -20,4 +20,21 @@ export const InfoWrapper = styled.div`
   ${props => wrapperStyle[props.variation].infoWrapperStyle || ``}
 `;
 export const TitleWrapper = styled.div``;
-export const AuthorWrapper = styled.div``;
+export const AuthorWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  ${props => wrapperStyle[props.variation].authorWrapperStyle || ``};
+`;
+
+export const IconWrapper = styled.div`
+  align-items: center;
+  white-space: nowrap;
+
+  ${props => wrapperStyle[props.variation].iconWrapperStyle || ``}
+`;
+
+export const ClapText = styled.span`
+  margin-left: 5px;
+  margin-top: 5px;
+  color: rgba(0, 0, 0, 0.54);
+`;

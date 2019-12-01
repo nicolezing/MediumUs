@@ -6,23 +6,17 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import _ from 'lodash';
-import * as outlinedStyle from './outlineStyle';
-import { IconStyledButton } from './IconStyledButton';
+import OutlinedStyleButton from './OutlinedStyleButton';
+import IconStyledButton from './IconStyledButton';
 import * as Icons from '../../staticData/images/icons';
 import { GlowStyledBtn, Wrapper } from './GlowStyledBtn';
 
 function OutlinedButton(props) {
-  const Btn = styled.button`
-    ${outlinedStyle.base};
-    ${outlinedStyle[props.size]}
-    ${outlinedStyle[props.type]}
-  `;
   return (
-    <Btn {...props}>
+    <OutlinedStyleButton {...props}>
       <span>{props.text}</span>
-    </Btn>
+    </OutlinedStyleButton>
   );
 }
 
@@ -35,6 +29,9 @@ function IconButton(props) {
     );
   }
 
+  // need to add in the future
+  // title="Bookmark this story to read later"
+  // aria-label="Bookmark this story to read later"
   return <IconStyledButton {...props}>{Icons[props.type]}</IconStyledButton>;
 }
 

@@ -20,4 +20,4 @@ const IconStyledButton = styled.button`
     }
   `;
 
-export { btnBaseStyle, IconStyledButton };
+export default IconStyledButton;

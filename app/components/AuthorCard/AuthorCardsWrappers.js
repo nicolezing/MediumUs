@@ -4,6 +4,7 @@ import getColor from '../../staticData/colorSets';
 const StyledContainer = styled.div`
   display: flex;
   align-items: cente;
+  min-width: 0;
 `;
 
 const textContainerBaseStyle = css`
@@ -40,7 +41,7 @@ const spanSpecialBaseStyle = css`
 
 function conditionallyStyledComponents(variation) {
   switch (variation) {
-    case 'CollectionHome':
+    case 'PublicationHome':
       return {
         StyledTextContainer: styled.div`
           ${textContainerBaseStyle}
@@ -76,7 +77,6 @@ function conditionallyStyledComponents(variation) {
         DownTextWrapper: styled.div`
           ${downTextWrapperBaseStyle}
           line-height: 20px;
-          margin-top: 2px;
         `,
         StyledA: styled.a`
           ${aBaseStyle}
