@@ -1,37 +1,29 @@
-language: node_js
-
-node_js:
-  - 'node'
-  - 'lts/*'
-
-services:
-  - xvfb
-
-script:
-  - node ./internals/scripts/generate-templates-for-linting
-  - npm test -- --maxWorkers=4
-  - npm run build
-
-before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-
-notifications:
-  email:
-    on_failure: change
-
-after_success: 'npm run coveralls'
-
-cache:
-  directories:
-    - node_modules
-
-deploy:
-  provider: pages
-  local_dir: build
-  target_branch: gh-pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  on:
-    branch: master
+{
+  'os': ['linux'],
+  'cache': { 'directories': ['node_modules'] },
+  'deploy':
+    [
+      {
+        'on': { 'branch': ['master'] },
+        'token': '$GITHUB_TOKEN',
+        'provider': 'pages',
+        'local_dir': 'build',
+        'keep_history': true,
+        'skip_cleanup': true,
+        'target_branch': 'gh-pages',
+      },
+    ],
+  'script':
+    [
+      'node ./internals/scripts/generate-templates-for-linting',
+      'npm test -- --maxWorkers=4',
+      'npm run build',
+    ],
+  'node_js': ['node', 'lts/*'],
+  'language': 'node_js',
+  'services': ['xvfb'],
+  'after_success': ['npm run coveralls'],
+  'notifications': { 'email': [{ 'on_failure': 'change' }] },
+  'before_install':
+    ['export CHROME_BIN=chromium-browser', 'export DISPLAY=:99.0'],
+}
