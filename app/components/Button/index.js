@@ -29,7 +29,7 @@ function IconButton(props) {
     );
   }
 
-  // need to add in the future
+  // need to add more like below in the future
   // title="Bookmark this story to read later"
   // aria-label="Bookmark this story to read later"
   return <IconStyledButton {...props}>{Icons[props.type]}</IconStyledButton>;

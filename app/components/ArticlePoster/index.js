@@ -120,6 +120,7 @@ ArticlePoster.propTypes = {
   facebook: PropTypes.string,
   linkedIn: PropTypes.string,
   claps: PropTypes.number,
+  focusPostion: PropTypes.array,
 };
 
 export default ArticlePoster;

@@ -19,7 +19,6 @@ export const Cover = styled.a`
 export const InfoWrapper = styled.div`
   ${props => wrapperStyle[props.variation].infoWrapperStyle || ``}
 `;
-export const TitleWrapper = styled.div``;
 export const AuthorWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -29,7 +28,6 @@ export const AuthorWrapper = styled.div`
 export const IconWrapper = styled.div`
   align-items: center;
   white-space: nowrap;
-
   ${props => wrapperStyle[props.variation].iconWrapperStyle || ``}
 `;
 

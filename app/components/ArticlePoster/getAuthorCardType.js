@@ -25,8 +25,3 @@ export default function getAuthorCardType(variation) {
       return null;
   }
 }
-
-// case 'Sidebar': {
-//   // different 3 cases, will separate as different component
-//   return { authorCardVariation: 'Home' };
-// }
