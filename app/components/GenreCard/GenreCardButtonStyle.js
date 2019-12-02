@@ -3,7 +3,7 @@ import React from 'react';
 import {
   addMediaPlusIcon,
   addCheckboxTickIcon,
-} from '../../staticData/images/icons';
+} from '../../staticData/Svgs/GernerCArd_Icons';
 
 const base = css`
   color: rgba(0, 0, 0, 0.84);
@@ -73,7 +73,6 @@ const Active = styled.button`
   :hover,
   :active,
   :focus {
-    color: #fff;
     background: rgba(0, 0, 0, 0.68);
   }
 `;
@@ -89,7 +88,7 @@ const SvgIconAddMediaPlus = styled.span`
 `;
 
 const SvgIconCheckboxTick = styled.span`
-  fill: rgba(0, 0, 0, 0.84);
+  fill: #fff;
   top: -1px;
   position: relative;
   vertical-align: middle;

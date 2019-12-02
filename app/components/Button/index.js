@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import OutlinedStyleButton from './OutlinedStyleButton';
 import IconStyledButton from './IconStyledButton';
-import * as Icons from '../../staticData/images/icons';
+import * as Icons from '../../staticData/Svgs/IconButton_Icons';
 import { GlowStyledBtn, Wrapper } from './GlowStyledBtn';
 
 function OutlinedButton(props) {

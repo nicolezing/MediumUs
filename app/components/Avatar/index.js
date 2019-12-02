@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import avatarHaloIcon from '../../staticData/images/avatarHaloIcon';
+import avatarHaloIcon from '../../staticData/Svgs/avatarHaloIcon';
 import { haloCompnents, avatarImg } from './avatarStyle';
 
 function Avatar(props) {

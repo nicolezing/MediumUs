@@ -1,4 +1,5 @@
 import React from 'react';
+
 export default (
   <svg width="91" height="91" viewBox="0 0 91 91" fill="inherit">
     <path

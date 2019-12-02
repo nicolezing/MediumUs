@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import Avatar from '../Avatar';
 import { styledComponents } from './AuthorCardsWrappers';
 import { OutlinedButton } from '../Button';
-import StarIcon from '../../staticData/images/starIcon';
+import StarIcon from '../../staticData/Svgs/starIcon';
 import getConfig from './authorCardsConfig';
 
 function AuthorCard(props) {
