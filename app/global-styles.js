@@ -18,10 +18,15 @@ const GlobalStyle = createGlobalStyle`
     -moz-font-feature-settings: "liga" on;
   }
 
-  a{
+  a, 
+  button{
     text-decoration: none;
     cursor: pointer;
+    // &:focus {
+    //   outline: none;
+    // }
   }
+
   // html,
   // body {
   //   height: 100%;

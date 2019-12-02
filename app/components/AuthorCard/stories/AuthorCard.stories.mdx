@@ -1,6 +1,6 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import { AuthorCard } from '..';
-import { authorInfo } from './exampleData';
+import AuthorCard from '..';
+import authorInfo from './exampleData';
 
 <Meta title="Components|AuhtorCard" component={AuthorCard} />
 
@@ -18,11 +18,11 @@ import { authorInfo } from './exampleData';
   </Story>
 </Preview>
 
-## Collection page AuthorCard
+## Publication page AuthorCard
 
 <Preview>
-  <Story name="Collection page AuthorCard">
-    <AuthorCard {...authorInfo} variation="CollectionHome" />
+  <Story name="Publication page AuthorCard">
+    <AuthorCard {...authorInfo} variation="PublicationHome" />
   </Story>
 </Preview>
 

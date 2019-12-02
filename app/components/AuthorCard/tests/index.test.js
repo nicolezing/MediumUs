@@ -9,9 +9,9 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-dom/extend-expect'; // add some helpful assertions
-import { AuthorCard } from '../index';
+import AuthorCard from '../index';
 import getConfig from '../authorCardsConfig';
-import { authorInfo } from '../stories/exampleData';
+import authorInfo from '../stories/exampleData';
 
 test('AuthorInfo has desired props', () => {
   expect(authorInfo).toHaveProperty('name');
@@ -29,16 +29,16 @@ test('authorCardsConfig has desired configuration', () => {
 describe('<AuthorCard />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<AuthorCard {...authorInfo} variation="CollectionHome" />);
+    render(<AuthorCard {...authorInfo} variation="PublicationHome" />);
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Expect to have authorInfo.name and authorInfo.collection in html', () => {
+  it('Expect to have authorInfo.name and authorInfo.Publication in html', () => {
     const { getByText } = render(
       <AuthorCard {...authorInfo} variation="ArticleTitle" />,
     );
     expect(getByText(authorInfo.name)).toBeInTheDocument();
-    expect(getByText(authorInfo.collection)).toBeInTheDocument();
+    expect(getByText(authorInfo.publication)).toBeInTheDocument();
     expect(getByText('Follow')).toBeInTheDocument();
   });
 
@@ -49,12 +49,12 @@ describe('<AuthorCard />', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('Should have in collection on the page', () => {
+  it('Should have in publication on the page', () => {
     const { container } = render(
       <AuthorCard {...authorInfo} variation="TopicHome" />,
     );
     expect(container.getElementsByTagName('a')[2].innerHTML).toEqual(
-      authorInfo.collection,
+      authorInfo.publication,
     );
   });
 });

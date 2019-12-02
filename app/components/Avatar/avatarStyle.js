@@ -17,12 +17,6 @@ function avatarImg(size) {
     display: block;
     ${narrowStyle}
   `;
-  // const HaloWrapper = styled.div`
-  //   width: ${size};
-  //   height: ${size};
-  //   position: relative;
-  //   ${narrowStyle}
-  // `;
   return { AvtStyledImg };
 }
 
@@ -43,13 +37,6 @@ function haloCompnents(size) {
       height: 32px;
     }`
       : '';
-  // const AvtStyledImg = styled.img`
-  //   width: ${size || '32px'};
-  //   height: ${size || '32px'};
-  //   border-radius: 50%;
-  //   display: block;
-  //   ${narrowStyle}
-  // `;
 
   const Halo = styled.div`
     width: calc(100% + 25px);

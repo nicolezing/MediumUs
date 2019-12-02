@@ -3,7 +3,7 @@
 exports[`<AuthorCard /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 hNKbRb"
+    class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 dnQuGq"
   >
     <div
       class="AuthorCardsWrappers__StyledTextContainer-sc-1v4o32t-10 cVADbr"

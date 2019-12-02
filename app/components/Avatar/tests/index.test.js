@@ -25,7 +25,7 @@ describe('<Avatar />', () => {
     expect($(avatar).prop('tagName')).toEqual('IMG');
   });
 
-  it('Have 2 wrapper elements with member', () => {
+  it('Have one svg icon', () => {
     const { container } = render(<Avatar src="" alt="" size="80px" member />);
     expect($(container).find('svg').length).toEqual(1);
   });
