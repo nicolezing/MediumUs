@@ -220,6 +220,5 @@ export const ArticlePageRecommendation = {
   `,
   iconWrapperStyle: css`
     display: flex;
-    vertical-align: middle;
   `,
 };

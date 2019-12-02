@@ -158,7 +158,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
           href="./"
         >
           <button
-            class="IconStyledButton-sc-1u1vzbn-0 eKfjle"
+            class="IconStyledButton-sc-1u1vzbn-0 hdGyG"
             type="twitterIcon"
           >
             <svg
@@ -176,7 +176,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
           href="./"
         >
           <button
-            class="IconStyledButton-sc-1u1vzbn-0 eKfjle"
+            class="IconStyledButton-sc-1u1vzbn-0 hdGyG"
             type="linkedInIcon"
           >
             <svg
@@ -201,7 +201,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
           href="./"
         >
           <button
-            class="IconStyledButton-sc-1u1vzbn-0 eKfjle"
+            class="IconStyledButton-sc-1u1vzbn-0 hdGyG"
             type="facebookSqureIcon"
           >
             <svg
@@ -216,7 +216,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
           </button>
         </a>
         <button
-          class="IconStyledButton-sc-1u1vzbn-0 eKfjle"
+          class="IconStyledButton-sc-1u1vzbn-0 hdGyG"
           type="bookmarkIcon"
         >
           <svg
