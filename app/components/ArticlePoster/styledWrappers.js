@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import * as wrapperStyle from './variationWrapperStyles';
 
 const coverBaseStyle = css`
-  background-image: url(${props => props.articleCover});
+  background-image: url(${props => props.cover});
   background-position: ${props =>
     props.focusPosition ? `${props.focusPosition.join('% ')}%` : `50% 50%`};
   background-size: cover;

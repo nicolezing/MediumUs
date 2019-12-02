@@ -1,4 +1,18 @@
-const articleInfo = {
+import user001 from '../../../staticData/images/user-profile001.png';
+
+export const authorCardInfo = {
+  authorLink: './',
+  name: 'Lisa Armstrong',
+  avatarImg: user001,
+  member: true,
+  premium: true,
+  publicationLink: './',
+  publication: 'OneZero',
+  date: 'Nov 21',
+  readingTime: '13 min read',
+};
+
+export const articleInfo = {
   title:
     'Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art',
   subtitle: 'And one last warning about their stupidly popular little brother',
@@ -12,5 +26,3 @@ const articleInfo = {
   linkedIn: './',
   claps: 4230,
 };
-
-export default articleInfo;

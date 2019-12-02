@@ -4,23 +4,18 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
 <div
   class="styledWrappers__Wrapper-p14edy-0 czhChT"
   name="Lisa Armstrong"
-  title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
 >
   <a
-    aria-label="[object Object]"
+    aria-label="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
     class="styledWrappers__Cover-p14edy-1 jAuwIe"
     href="./"
-    name="Lisa Armstrong"
-    title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
   />
   <div
     class="styledWrappers__InfoWrapper-p14edy-2 KYYYq"
     name="Lisa Armstrong"
-    title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
   >
     <div
       class="StyledWrapper__TitleWrapper-sc-111jh54-0 bxiuLE"
-      name="Lisa Armstrong"
       title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
     >
       <a
@@ -28,7 +23,6 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
       >
         <h1
           class="StyledWrapper__StyledTitle-sc-111jh54-1 gYdKdB"
-          name="Lisa Armstrong"
           title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
         >
           Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art
@@ -40,7 +34,6 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
       >
         <div
           class="StyledWrapper__StyledSubtitle-sc-111jh54-2 bomnVF"
-          name="Lisa Armstrong"
           title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
         >
           And one last warning about their stupidly popular little brother
@@ -49,8 +42,6 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
     </div>
     <div
       class="styledWrappers__AuthorWrapper-p14edy-3 cVrZcl"
-      name="Lisa Armstrong"
-      title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
     >
       <div
         class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 dnQuGq"
@@ -81,7 +72,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
               <img
                 alt="Go to the profile of Lisa Armstrong"
                 class="avatarStyle__AvtStyledImg-sc-1o8l9nu-0 hngbRH"
-                src="IMAGE_MOCK"
+                src="app/staticData/images/user-profile001.png"
               />
             </div>
           </div>
@@ -151,8 +142,6 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
       </div>
       <div
         class="styledWrappers__IconWrapper-p14edy-4 gwPqps"
-        name="Lisa Armstrong"
-        title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
       >
         <a
           href="./"

@@ -10,18 +10,42 @@ import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 import ArticlePoster from '../index';
-import authorInfo from '../../AuthorCard/stories/exampleData';
-import articleInfo from '../stories/exampleData';
-import kFormatter from '../kFormatter';
+import roundToThousand from '../roundToThousand';
 import getAuthorCardType from '../getAuthorCardType';
+
+const authorCardInfo = {
+  authorLink: './',
+  name: 'Lisa Armstrong',
+  avatarImg: 'app/staticData/images/user-profile001.png',
+  member: true,
+  premium: true,
+  publicationLink: './',
+  publication: 'OneZero',
+  date: 'Nov 21',
+  readingTime: '13 min read',
+};
+const articleInfo = {
+  title:
+    'Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art',
+  subtitle: 'And one last warning about their stupidly popular little brother',
+  articleLink: './',
+  articleCover:
+    'https://cdn-images-1.medium.com/max/2000/1*FK8eDjLTgFGHrEsPo14T4A.jpeg',
+  focusPosition: [30, 50],
+  bookmarked: false,
+  twitter: './',
+  facebook: './',
+  linkedIn: './',
+  claps: 4230,
+};
 
 describe('<ArticleCard />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <ArticlePoster
-        {...authorInfo}
-        {...articleInfo}
+        authorCardInfo={authorCardInfo}
+        articleInfo={articleInfo}
         variation="HomeHeroLeft"
       />,
     );
@@ -31,12 +55,12 @@ describe('<ArticleCard />', () => {
   it('Expect to have title content', () => {
     const { container } = render(
       <ArticlePoster
-        {...authorInfo}
-        {...articleInfo}
+        authorCardInfo={authorCardInfo}
+        articleInfo={{ ...articleInfo, title: 'Title Test' }}
         variation="TopicHomepageList"
       />,
     );
-    expect(container).toHaveTextContent(articleInfo.title);
+    expect(container).toHaveTextContent('Title Test');
   });
 
   it('Should render and match the snapshot', () => {
@@ -44,8 +68,8 @@ describe('<ArticleCard />', () => {
       container: { firstChild },
     } = render(
       <ArticlePoster
-        {...authorInfo}
-        {...articleInfo}
+        authorCardInfo={authorCardInfo}
+        articleInfo={articleInfo}
         variation="ArticlePageTitle"
       />,
     );
@@ -55,50 +79,54 @@ describe('<ArticleCard />', () => {
   it('Expect to have subtitle content', () => {
     const { container } = render(
       <ArticlePoster
-        {...authorInfo}
-        {...articleInfo}
+        authorCardInfo={authorCardInfo}
+        articleInfo={{ ...articleInfo, subtitle: 'Subtitle test' }}
         variation="TopicHomepageHero"
       />,
     );
-    expect(container).toHaveTextContent(articleInfo.subtitle);
+    expect(container).toHaveTextContent('Subtitle test');
   });
 
-  it('Expect second div to have autor name', () => {
-    const { container } = render(
-      <ArticlePoster {...authorInfo} {...articleInfo} variation="HomeList" />,
-    );
-    expect(container.querySelectorAll('div')[1]).toHaveTextContent(
-      authorInfo.name,
-    );
-  });
-
-  it('Expect to have subtitle content', () => {
+  it('Expect second div to have author name', () => {
     const { container } = render(
       <ArticlePoster
-        {...authorInfo}
-        {...articleInfo}
+        authorCardInfo={authorCardInfo}
+        articleInfo={articleInfo}
+        variation="HomeList"
+      />,
+    );
+    expect(container.querySelectorAll('div')[1]).toHaveTextContent(
+      authorCardInfo.name,
+    );
+  });
+
+  it('Expect to have author name', () => {
+    const { container } = render(
+      <ArticlePoster
+        authorCardInfo={{ ...authorCardInfo, name: 'Nicole' }}
+        articleInfo={articleInfo}
         variation="PublicationHomepageHero"
       />,
     );
-    expect(container).toHaveTextContent(articleInfo.subtitle);
+    expect(container).toHaveTextContent('Nicole');
   });
 
   it('Expect to have content 4.2K clpas', () => {
     const { container } = render(
       <ArticlePoster
-        {...authorInfo}
-        {...articleInfo}
+        authorCardInfo={authorCardInfo}
+        articleInfo={{ ...articleInfo, claps: 5211 }}
         variation="ArticlePageRecommendation"
       />,
     );
-    expect(container).toHaveTextContent('4.2K');
+    expect(container).toHaveTextContent('5.2K');
   });
 
   it('Expect to return K formatted number', () => {
-    const num = kFormatter(3200);
-    expect(num).toEqual('3.2K');
-    const n = kFormatter(-32);
-    expect(n).toEqual('-32');
+    const a = roundToThousand(3200);
+    expect(a).toEqual('3.2K');
+    const b = roundToThousand(-32);
+    expect(b).toEqual('-32');
   });
 
   it('Expect default value to be null', () => {
@@ -106,8 +134,8 @@ describe('<ArticleCard />', () => {
     expect(type).toBe(null);
   });
 
-  it('Expect to have position 50% 50%', () => {
-    const article = {
+  it('Expect to have position 50% 50% if no focusPosition is provided', () => {
+    const articleInfoTest = {
       title:
         'Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art',
       subtitle:
@@ -117,29 +145,39 @@ describe('<ArticleCard />', () => {
       bookmarked: true,
       twitter: './',
       facebook: './',
-      linkedIn: './',
       claps: 4230,
     };
 
-    const author = {
-      authorLink: './',
-      name: 'Lisa Armstrong',
-      categoryLink: './',
-      date: 'Nov 21',
-      readingTime: '13 min read',
-      avatarImg: './',
-      member: true,
-      premium: true,
-    };
     const { container } = render(
       <ArticlePoster
-        {...author}
-        {...article}
+        authorCardInfo={authorCardInfo}
+        articleInfo={articleInfoTest}
         variation="ArticlePageRecommendation"
       />,
     );
     expect(container.querySelector('a')).toHaveStyle(
       `background-position: 50% 50%`,
     );
+  });
+  it('Should render More from Nicole if no publication is provided, but this test could query pseudo element, so expect no errors logged in console', () => {
+    const authorCardInfoTest = {
+      authorLink: './',
+      name: 'Nicole',
+      avatarImg: 'app/staticData/images/user-profile001.png',
+      member: true,
+      premium: true,
+      date: 'Nov 21',
+      readingTime: '13 min read',
+    };
+    const spy = jest.spyOn(global.console, 'error');
+    render(
+      <ArticlePoster
+        authorCardInfo={authorCardInfoTest}
+        articleInfo={articleInfo}
+        variation="ArticlePageRecommendation"
+      />,
+    );
+
+    expect(spy).not.toHaveBeenCalled();
   });
 });

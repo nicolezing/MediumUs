@@ -21,14 +21,13 @@ import {
 import Divider from './styledDivider';
 import getAuthorCardType from './getAuthorCardType';
 import { IconButton } from '../Button';
-import kFormatter from './kFormatter';
+import roundToThousand from './roundToThousand';
 
 function ArticlePoster(props) {
   const { authorCardVariation } = getAuthorCardType(props.variation);
-  const { articleLink, title } = { ...props };
 
   function BookmarkButton() {
-    return props.bookmarked ? (
+    return props.articleInfo.bookmarked ? (
       <IconButton
         type="bookmarkFilledIcon"
         colorSet="pureBlack"
@@ -48,7 +47,7 @@ function ArticlePoster(props) {
       case 'HomeHeroLeft':
       case 'HomeHeroMid':
       case 'TopicHomepageList':
-        return <BookmarkButton />;
+        return [<BookmarkButton key={props.variation} />];
       case 'HomeList':
         return [
           <BookmarkButton key={props.variation} />,
@@ -56,18 +55,18 @@ function ArticlePoster(props) {
         ];
       case 'ArticlePageTitle':
         return [
-          props.twitter && (
-            <a href={props.twitter} key="twitter">
+          props.articleInfo.twitter && (
+            <a href={props.articleInfo.twitter} key="twitter">
               <IconButton type="twitterIcon" colorSet="black" />
             </a>
           ),
-          props.linkedIn && (
-            <a href={props.linkedIn} key="linkedIn">
+          props.articleInfo.linkedIn && (
+            <a href={props.articleInfo.linkedIn} key="linkedIn">
               <IconButton type="linkedInIcon" colorSet="black" />
             </a>
           ),
-          props.facebook && (
-            <a href={props.facebook} key="facebook">
+          props.articleInfo.facebook && (
+            <a href={props.articleInfo.facebook} key="facebook">
               <IconButton type="facebookSqureIcon" colorSet="black" />
             </a>
           ),
@@ -80,23 +79,47 @@ function ArticlePoster(props) {
             colorSet="black"
             key="clapSmallIcon"
           />,
-          <ClapText key="claps">{kFormatter(props.claps)}</ClapText>,
+          <ClapText key="claps">
+            {roundToThousand(props.articleInfo.claps)}
+          </ClapText>,
           <Divider key="divider" />,
           <BookmarkButton key={props.variation} />,
         ];
       default:
-        return '';
+        return [];
     }
   }
 
   return (
-    <Wrapper {...props}>
-      <Cover href={articleLink} {...props} aria-label={{ title }} />
-      <InfoWrapper {...props}>
-        <ArticleTitle {...props} variation={props.variation} />
-        <AuthorWrapper {...props}>
-          <AuthorCard {...props} variation={authorCardVariation} />
-          <IconWrapper {...props}>{renderIcons()}</IconWrapper>
+    <Wrapper
+      variation={props.variation}
+      publication={props.authorCardInfo.publication}
+      name={props.authorCardInfo.name}
+    >
+      <Cover
+        href={props.articleInfo.articleLink}
+        variation={props.variation}
+        aria-label={props.articleInfo.title}
+        cover={props.articleInfo.articleCover}
+        focusPosition={props.articleInfo.focusPosition}
+      />
+      <InfoWrapper
+        variation={props.variation}
+        publication={props.authorCardInfo.publication}
+        name={props.authorCardInfo.name}
+      >
+        <ArticleTitle
+          articleLink={props.articleInfo.articleLink}
+          title={props.articleInfo.title}
+          subtitle={props.articleInfo.subtitle}
+          variation={props.variation}
+        />
+        <AuthorWrapper variation={props.variation}>
+          <AuthorCard
+            {...props.authorCardInfo}
+            variation={authorCardVariation}
+          />
+          <IconWrapper variation={props.variation}>{renderIcons()}</IconWrapper>
         </AuthorWrapper>
       </InfoWrapper>
     </Wrapper>
@@ -104,27 +127,32 @@ function ArticlePoster(props) {
 }
 
 ArticlePoster.propTypes = {
-  variation: PropTypes.oneOf([..._.keys(wrapperStyles)]).isRequired,
-  authorLink: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  readingTime: PropTypes.string.isRequired,
-  avatarImg: PropTypes.string.isRequired,
-  member: PropTypes.bool.isRequired,
-  premium: PropTypes.bool.isRequired,
-  categoryLink: PropTypes.string,
-  publication: PropTypes.string,
-  articleLink: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  bookmarked: PropTypes.bool.isRequired,
+  authorCardInfo: PropTypes.shape({
+    authorLink: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarImg: PropTypes.string.isRequired,
+    member: PropTypes.bool.isRequired,
+    premium: PropTypes.bool.isRequired,
+    readingTime: PropTypes.string.isRequired,
+    publication: PropTypes.string,
+    publicationLink: PropTypes.string,
+    date: PropTypes.string.isRequired,
+  }),
+  articleInfo: PropTypes.shape({
+    articleLink: PropTypes.string.isRequired,
+    articleCover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    bookmarked: PropTypes.bool.isRequired,
+    twitter: PropTypes.string,
+    facebook: PropTypes.string,
+    linkedIn: PropTypes.string,
+    claps: PropTypes.number,
+    focusPosition: PropTypes.array,
+  }),
   onAddBookmark: PropTypes.func,
   onRemoveBookmark: PropTypes.func,
-  twitter: PropTypes.string,
-  facebook: PropTypes.string,
-  linkedIn: PropTypes.string,
-  claps: PropTypes.number,
-  focusPostion: PropTypes.array,
+  variation: PropTypes.oneOf([..._.keys(wrapperStyles)]).isRequired,
 };
 
 export default ArticlePoster;

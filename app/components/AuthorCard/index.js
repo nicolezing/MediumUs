@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import Avatar from '../Avatar';
 import { styledComponents } from './AuthorCardsWrappers';
 import { OutlinedButton } from '../Button';
-import StarIcon from '../../staticData/Svgs/starIcon';
+import StarIcon from '../../staticData/svgIcons/starIcon';
 import getConfig from './authorCardsConfig';
 
 function AuthorCard(props) {
@@ -45,7 +45,7 @@ function AuthorCard(props) {
           </StyledA>
           {props.publication && [
             ' in ',
-            <StyledA href={props.categoryLink} key="publication">
+            <StyledA href={props.publicationLink} key="publication">
               {props.publication}
             </StyledA>,
           ]}
@@ -80,7 +80,7 @@ AuthorCard.propTypes = {
   avatarImg: PropTypes.string.isRequired,
   member: PropTypes.bool.isRequired,
   premium: PropTypes.bool.isRequired,
-  categoryLink: PropTypes.string,
+  publicationLink: PropTypes.string,
   publication: PropTypes.string,
 };
 export default AuthorCard;

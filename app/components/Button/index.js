@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import OutlinedStyleButton from './OutlinedStyleButton';
 import IconStyledButton from './IconStyledButton';
-import * as Icons from '../../staticData/Svgs/IconButton_Icons';
+import * as Icons from '../../staticData/svgIcons/IconButton_Icons';
 import { GlowStyledBtn, Wrapper } from './GlowStyledBtn';
 
 function OutlinedButton(props) {
@@ -29,7 +29,7 @@ function IconButton(props) {
     );
   }
 
-  // need to add more like below in the future
+  // TODO: add more like below in the future
   // title="Bookmark this story to read later"
   // aria-label="Bookmark this story to read later"
   return <IconStyledButton {...props}>{Icons[props.type]}</IconStyledButton>;
