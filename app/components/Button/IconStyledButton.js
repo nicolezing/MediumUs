@@ -10,6 +10,7 @@ const btnBaseStyle = css`
   :focus {
     outline: none;
   }
+  vertical-align: middle;
 `;
 
 const IconStyledButton = styled.button`
