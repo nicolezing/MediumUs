@@ -137,7 +137,7 @@ ArticlePoster.propTypes = {
     publication: PropTypes.string,
     publicationLink: PropTypes.string,
     date: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
   articleInfo: PropTypes.shape({
     articleLink: PropTypes.string.isRequired,
     articleCover: PropTypes.string.isRequired,
@@ -149,7 +149,7 @@ ArticlePoster.propTypes = {
     linkedIn: PropTypes.string,
     claps: PropTypes.number,
     focusPosition: PropTypes.array,
-  }),
+  }).isRequired,
   onAddBookmark: PropTypes.func,
   onRemoveBookmark: PropTypes.func,
   variation: PropTypes.oneOf([..._.keys(wrapperStyles)]).isRequired,
