@@ -12,9 +12,9 @@ import messages from './messages';
 export default function HomePage() {
   return (
     <div>
-      <h1>
+      <h2>
         <FormattedMessage {...messages.header} />
-      </h1>
+      </h2>
     </div>
   );
 }
