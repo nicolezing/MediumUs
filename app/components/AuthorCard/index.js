@@ -14,7 +14,7 @@ import getConfig from './authorCardsConfig';
 import OverlayTrigger from '../OverlayTrigger';
 import PopoverContent from './PopoverContent/index';
 import generatePropsValidator from '../../utils/generatePropsValidator';
-import formatDate from '../../utils/formatDate';
+import formatDate from './formatDate';
 import UpdatedDatePopoverContent from './updatedDatePopoverContent';
 
 function AuthorCard(props) {
@@ -26,6 +26,7 @@ function AuthorCard(props) {
     DownTextWrapper,
     StyledSpanSpecial,
   } = styledComponents(props.variation);
+
   const { avatarSize, isDisplayAvatar, hasFollowButton } = getConfig(
     props.variation,
   );

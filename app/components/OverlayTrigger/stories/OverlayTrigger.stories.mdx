@@ -1,0 +1,183 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import N from '../../../staticData/images/N.png';
+import user001 from '../../../staticData/images/user-profile001.png';
+import Avatar from '../../Avatar';
+import OverlayTrigger from '../';
+import UserSettingList from '../../../containers/HomePage/UserSettingList';
+import ArticlePoster from '../../ArticlePoster';
+import { dropdownInfo, authorCardInfo, articleInfo } from './exampleData';
+
+<Meta title="Components|Popover" component={OverlayTrigger} />
+
+# Overlays
+
+<Props of={OverlayTrigger} />
+
+# Noted: the click action is not correctly rendered in storybook
+
+## Overlay click trigger, dropdown, auto adjusting the position
+
+<Preview>
+  <Story name="Auto adjusting the position">
+    <div>
+      <OverlayTrigger
+        placement="dropdown"
+        trigger="click"
+        popoverContent={
+          <div style={{ padding: '20px 30px' }}>
+            Click anywhere else on the page
+          </div>
+        }
+      >
+        <div style={{ padding: '10px', border: '1px solid' }}>Click Me</div>
+      </OverlayTrigger>
+      <div style={{ marginLeft: '200px' }}>
+        <OverlayTrigger
+          placement="dropdown"
+          trigger="click"
+          popoverContent={
+            <div style={{ padding: '20px 30px' }}>
+              Click anywhere else on the page
+            </div>
+          }
+        >
+          <div style={{ padding: '10px', border: '1px solid' }}>Click Me</div>
+        </OverlayTrigger>
+      </div>
+      <div style={{ float: 'right', marginRight: '10px' }}>
+        <OverlayTrigger
+          placement="dropdown"
+          trigger="click"
+          popoverContent={
+            <div style={{ padding: '20px 30px', whiteSpace: 'nowrap' }}>
+              Click anywhere else on the page
+            </div>
+          }
+        >
+          <div style={{ padding: '10px', border: '1px solid' }}>Click Me</div>
+        </OverlayTrigger>
+      </div>
+    </div>
+  </Story>
+</Preview>
+
+## Overlay hover trigger, dropdown and top-bottom
+
+<Preview>
+  <Story name="Dropdown and top-bottom">
+    <div>
+      <div style={{ marginLeft: '100px' }}>
+        <OverlayTrigger
+          placement="dropdown"
+          trigger="hover"
+          popoverContent={
+            <div style={{ padding: '20px 30px', whiteSpace: 'nowrap' }}>
+              Hover on me I'll stay, then try hover off
+            </div>
+          }
+        >
+          <div style={{ padding: '10px', border: '1px solid' }}>
+            Hover Me Dropdown
+          </div>
+        </OverlayTrigger>
+      </div>
+      <div style={{ marginLeft: '300px' }}>
+        <OverlayTrigger
+          placement="top-bottom"
+          trigger="hover"
+          popoverContent={
+            <div style={{ padding: '20px 30px', whiteSpace: 'nowrap' }}>
+              No enough space above me, so I rendered under trigger
+            </div>
+          }
+        >
+          <div style={{ padding: '10px', border: '1px solid' }}>
+            Hover Me Top-bottom
+          </div>
+        </OverlayTrigger>
+      </div>
+      <div style={{ marginLeft: '500px', marginTop: '100px' }}>
+        <OverlayTrigger
+          placement="top-bottom"
+          trigger="hover"
+          popoverContent={
+            <div style={{ padding: '20px 30px', whiteSpace: 'nowrap' }}>
+              If there is enough space, I will render on the top
+            </div>
+          }
+        >
+          <div style={{ padding: '10px', border: '1px solid' }}>
+            Hover Me Top-bottom
+          </div>
+        </OverlayTrigger>
+      </div>
+    </div>
+  </Story>
+</Preview>
+
+## Overlay change background
+
+<Preview>
+  <Story name="Change background">
+    <div style={{ marginLeft: '100px' }}>
+      <OverlayTrigger
+        placement="dropdown"
+        trigger="hover"
+        popoverContent={
+          <div style={{ padding: '20px 30px', color: '#fff' }}>
+            Now I'm black
+          </div>
+        }
+        popoverColor="rgb(34,34,34)"
+      >
+        <div style={{ padding: '10px', border: '1px solid' }}>Hover Me</div>
+      </OverlayTrigger>
+    </div>
+  </Story>
+</Preview>
+
+## Example use of component
+
+### User Settings Dropdown
+
+<Preview>
+  <Story name="Example User Settings Dropdown">
+    <OverlayTrigger
+      placement="dropdown"
+      trigger="click"
+      popoverContent={<UserSettingList {...dropdownInfo} />}
+    >
+      <Avatar src={dropdownInfo.userAvatar} alt={dropdownInfo.username} />
+    </OverlayTrigger>
+  </Story>
+</Preview>
+
+### Homepage Hero Left with hoverEffct
+
+(Hover on the authorName, OneZero, and date)
+
+<Preview>
+  <Story name="Example Homepage Hero Left with hoverEffct">
+    <ArticlePoster
+      authorCardInfo={authorCardInfo}
+      articleInfo={articleInfo}
+      variation="HomeHeroLeft"
+      hoverEffect
+    />
+  </Story>
+</Preview>
+
+### Homepage List with hoverEffct
+
+(Click the moreIcon button, the one next to the bookmarkIcon)
+
+<Preview>
+  <Story name="Example Homepage List with hoverEffct">
+    <ArticlePoster
+      authorCardInfo={authorCardInfo}
+      articleInfo={articleInfo}
+      variation="HomeList"
+      hoverEffect
+    />
+  </Story>
+</Preview>
