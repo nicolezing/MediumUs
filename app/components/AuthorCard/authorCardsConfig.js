@@ -1,14 +1,26 @@
 export default function getConfig(variation) {
   switch (variation) {
     case 'PublicationHome':
-      return { avatarSize: '36px', avatarDisplay: true, followButton: false };
+      return {
+        avatarSize: '36px',
+        isDisplayAvatar: true,
+        hasFollowButton: false,
+      };
     case 'TopicHome':
-      return { avatarSize: '40px', avatarDisplay: true, followButton: false };
+      return {
+        avatarSize: '40px',
+        isDisplayAvatar: true,
+        hasFollowButton: false,
+      };
     case 'Home':
-      return { avatarSize: '', avatarDisplay: false, followButton: false };
+      return { avatarSize: '', isDisplayAvatar: false, hasFollowButton: false };
     case 'ArticleTitle':
-      return { avatarSize: '48px', avatarDisplay: true, followButton: true };
+      return {
+        avatarSize: '48px',
+        isDisplayAvatar: true,
+        hasFollowButton: true,
+      };
     default:
-      throw new Error(`Unknown variantion: ${variation}`);
+      throw new Error(`Unknown variation: ${variation}`);
   }
 }

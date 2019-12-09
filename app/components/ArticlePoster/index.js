@@ -21,11 +21,13 @@ import {
 import Divider from './styledDivider';
 import getAuthorCardType from './getAuthorCardType';
 import { IconButton } from '../Button';
-import roundToThousand from './roundToThousand';
+import roundToThousand from '../../utils/roundToThousand';
+import OverlayTrigger from '../OverlayTrigger';
+import MoreIconPopoverContent from './MoreIconPopoverContent';
+import generatePropsValidator from '../../utils/generatePropsValidator';
 
 function ArticlePoster(props) {
   const { authorCardVariation } = getAuthorCardType(props.variation);
-
   function BookmarkButton() {
     return props.articleInfo.bookmarked ? (
       <IconButton
@@ -51,7 +53,17 @@ function ArticlePoster(props) {
       case 'HomeList':
         return [
           <BookmarkButton key={props.variation} />,
-          <IconButton type="moreIcon" colorSet="black" key="moreIcon" />,
+          <OverlayTrigger
+            trigger="click"
+            placement="dropdown"
+            popoverContent={
+              <MoreIconPopoverContent>
+                Dismiss this story
+              </MoreIconPopoverContent>
+            }
+          >
+            <IconButton type="moreIcon" colorSet="black" key="moreIcon" />
+          </OverlayTrigger>,
         ];
       case 'ArticlePageTitle':
         return [
@@ -67,7 +79,7 @@ function ArticlePoster(props) {
           ),
           props.articleInfo.facebook && (
             <a href={props.articleInfo.facebook} key="facebook">
-              <IconButton type="facebookSqureIcon" colorSet="black" />
+              <IconButton type="facebookSquareIcon" colorSet="black" />
             </a>
           ),
           <BookmarkButton key={props.variation} />,
@@ -94,7 +106,7 @@ function ArticlePoster(props) {
     <Wrapper
       variation={props.variation}
       publication={props.authorCardInfo.publication}
-      name={props.authorCardInfo.name}
+      name={props.authorCardInfo.authorName}
     >
       <Cover
         href={props.articleInfo.articleLink}
@@ -106,7 +118,7 @@ function ArticlePoster(props) {
       <InfoWrapper
         variation={props.variation}
         publication={props.authorCardInfo.publication}
-        name={props.authorCardInfo.name}
+        name={props.authorCardInfo.authorName}
       >
         <ArticleTitle
           articleLink={props.articleInfo.articleLink}
@@ -118,6 +130,7 @@ function ArticlePoster(props) {
           <AuthorCard
             {...props.authorCardInfo}
             variation={authorCardVariation}
+            hoverEffect={props.hoverEffect}
           />
           <IconWrapper variation={props.variation}>{renderIcons()}</IconWrapper>
         </AuthorWrapper>
@@ -127,32 +140,55 @@ function ArticlePoster(props) {
 }
 
 ArticlePoster.propTypes = {
+  // same as AuthorCard.propTypes
   authorCardInfo: PropTypes.shape({
     authorLink: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    authorName: PropTypes.string.isRequired,
+    authorFollowers: PropTypes.number.isRequired,
+    authorDescription: PropTypes.string,
     avatarImg: PropTypes.string.isRequired,
     member: PropTypes.bool.isRequired,
-    premium: PropTypes.bool.isRequired,
+    memberJoinedDate: generatePropsValidator(
+      ['member', 'hoverEffect'],
+      'string',
+    ),
+    creatDate: PropTypes.string.isRequired,
+    lastModified: PropTypes.string,
     readingTime: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired,
     publication: PropTypes.string,
-    publicationLink: PropTypes.string,
-    date: PropTypes.string.isRequired,
+    publicationLink: generatePropsValidator(['publication'], 'string'),
+    publicationFollowers: generatePropsValidator(
+      ['publication', 'hoverEffect'],
+      'number',
+    ),
+    publicationLogo: PropTypes.string,
+    publicationDescription: PropTypes.string,
+    variation: PropTypes.oneOf([
+      'Home',
+      'PublicationHome',
+      'TopicHome',
+      'ArticleTitle',
+    ]).isRequired,
+    hoverEffect: PropTypes.bool,
   }).isRequired,
   articleInfo: PropTypes.shape({
     articleLink: PropTypes.string.isRequired,
     articleCover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
-    bookmarked: PropTypes.bool.isRequired,
+    bookmarked: PropTypes.bool,
     twitter: PropTypes.string,
     facebook: PropTypes.string,
     linkedIn: PropTypes.string,
     claps: PropTypes.number,
     focusPosition: PropTypes.array,
   }).isRequired,
+
   onAddBookmark: PropTypes.func,
   onRemoveBookmark: PropTypes.func,
   variation: PropTypes.oneOf([..._.keys(wrapperStyles)]).isRequired,
+  hoverEffect: PropTypes.bool,
 };
 
 export default ArticlePoster;

@@ -14,13 +14,13 @@ function avatarImg(size) {
     width: ${size || '32px'};
     height: ${size || '32px'};
     border-radius: 50%;
-    display: block;
+    display: inline-block;
     ${narrowStyle}
   `;
   return { AvtStyledImg };
 }
 
-function haloCompnents(size) {
+function haloComponents(size) {
   const narrowHaloStyle =
     size === '36px'
       ? `
@@ -66,6 +66,7 @@ function haloCompnents(size) {
   return { Halo, HaloWrapper };
 }
 
+// the matched pairs of avatar size and the halo size
 const sizeSet = {
   '32px': [32, 36],
   '36px': [36, 43],
@@ -74,6 +75,7 @@ const sizeSet = {
   '80px': [80, 91],
   '64px': [64, 74],
   '128px': [128, 145],
+  '60px': [60, 69],
 };
 
-export { haloCompnents, avatarImg };
+export { haloComponents, avatarImg };

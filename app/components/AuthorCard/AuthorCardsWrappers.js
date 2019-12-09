@@ -3,7 +3,7 @@ import getColor from '../../staticData/colorSets';
 
 const StyledContainer = styled.div`
   display: flex;
-  align-items: cente;
+  align-items: center;
   min-width: 0;
 `;
 

@@ -1,30 +1,23 @@
 /**
  *
- * Dropdown
+ * UserSettingList
  *
  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '../Avatar';
 import {
   UnorderedList,
-  DividerList,
+  DividedList,
   A,
   GreenA,
   UserDarkStyledA,
   UserColorStyledA,
 } from './styledListItems';
+import { UserWrapper, UsernameWrapper } from './styledWrappers';
+import Avatar from '../../../components/Avatar';
 
-import {
-  UserWrapper,
-  UsernameWrapper,
-  PopoverInnerWrapper,
-  PopoverOuterWrapper,
-} from './styledWrapper';
-import { PopoverArrow } from './PopoverArrow';
-
-function Dropdown(props) {
+function UserSettingList(props) {
   const listItems = [
     { key: 'divider1' },
     { key: 'newStory', href: './', innerHtml: 'New story' },
@@ -57,45 +50,42 @@ function Dropdown(props) {
           </li>
         );
       }
-      return <DividerList key={item.key} />;
+      return <DividedList key={item.key} />;
     });
   }
 
   return (
-    <PopoverOuterWrapper>
-      <PopoverInnerWrapper>
-        <UnorderedList>
-          <li key="username">
-            <UserWrapper>
-              <Avatar size="50px" src={props.userAvatar} alt={props.username} />
-              <UsernameWrapper>
-                <UserDarkStyledA
-                  href={props.userLink}
-                  aria-label={`Go to the profile of ${props.username}`}
-                >
-                  {props.username}
-                </UserDarkStyledA>
-                <UserColorStyledA href={props.userLink}>
-                  {`@${props.username.toLowerCase()}`}
-                </UserColorStyledA>
-              </UsernameWrapper>
-            </UserWrapper>
-          </li>
-          <li key="becomeAMember">
-            <GreenA href="./">Become a member</GreenA>
-          </li>
-          {renderList(listItems)}
-        </UnorderedList>
-      </PopoverInnerWrapper>
-      <PopoverArrow />
-    </PopoverOuterWrapper>
+    <UnorderedList>
+      <li key="username">
+        <UserWrapper>
+          <Avatar size="50px" src={props.userAvatar} alt={props.username} />
+          <UsernameWrapper>
+            <UserDarkStyledA
+              href={`${props.domain}/${props.userLinkSuffix}`}
+              aria-label={`Go to the profile of ${props.username}`}
+            >
+              {props.username}
+            </UserDarkStyledA>
+            <UserColorStyledA href={`${props.domain}/${props.userLinkSuffix}`}>
+              {props.userLinkSuffix}
+            </UserColorStyledA>
+          </UsernameWrapper>
+        </UserWrapper>
+      </li>
+      <li key="becomeAMember">
+        <GreenA href="./">Become a member</GreenA>
+      </li>
+      {renderList(listItems)}
+    </UnorderedList>
   );
 }
 
-Dropdown.propTypes = {
+UserSettingList.propTypes = {
   userAvatar: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
-  userLink: PropTypes.string.isRequired,
+  userLinkSuffix: PropTypes.string.isRequired,
+  domain: PropTypes.string.isRequired,
+  // #TODO: will add other links as props
 };
 
-export default Dropdown;
+export default UserSettingList;
