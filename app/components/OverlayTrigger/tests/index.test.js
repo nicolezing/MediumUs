@@ -14,6 +14,15 @@ import { dropdownInfo } from '../stories/exampleData';
 import 'jest-dom/extend-expect';
 import setPosition from '../setPopoverPosition';
 import OverlayTrigger from '../index';
+import { getEventHandler } from '../getEventHandler';
+import waitForExpect from 'wait-for-expect';
+
+describe('getEventHandler', () => {
+  it('Expect to return eventHandler object with onMouseDown', () => {
+    const obj = getEventHandler('click', () => true, () => true, () => {});
+    expect(obj.onMouseDown()).toBe(true);
+  });
+});
 
 describe('setPosition', () => {
   const triggerSize = { left: 10, top: 10, width: 32, height: 32 };
@@ -114,21 +123,43 @@ describe('<OverlayTrigger />', () => {
 
   it('Expect to not log errors in console with mock click', () => {
     const spy = jest.spyOn(global.console, 'error');
-    const { getByText } = render(
-      <OverlayTrigger
-        placement="dropdown"
-        trigger="click"
-        popoverContent={<UserSettingList {...dropdownInfo} />}
-      >
-        <div>Clicker</div>
-      </OverlayTrigger>,
+    const { container, getByText } = render(
+      <div>
+        <OverlayTrigger
+          placement="dropdown"
+          trigger="click"
+          popoverContent={<UserSettingList {...dropdownInfo} />}
+        >
+          <div>Clicker</div>
+        </OverlayTrigger>
+        <div>Outside</div>
+      </div>,
     );
-    fireEvent.click(getByText('Clicker'));
-    fireEvent.mouseOver(getByText('New story'));
+    fireEvent.mouseDown(getByText('Clicker'));
+    expect(
+      getComputedStyle(
+        container.querySelector('div div :nth-child(2)'),
+      ).getPropertyValue('visibility'),
+    ).toEqual('normal');
+
+    getByText('New story').focus();
+    expect(
+      getComputedStyle(
+        container.querySelector('div div :nth-child(2)'),
+      ).getPropertyValue('visibility'),
+    ).toEqual('normal');
+
+    getByText('New story').blur();
+    fireEvent.mouseDown(getByText('Outside'));
+    expect(
+      getComputedStyle(
+        container.querySelector('div div :nth-child(2)'),
+      ).getPropertyValue('visibility'),
+    ).toEqual('hidden');
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Expect to HoverIn visible with mock hover', () => {
+  it('Expect to HoverIn visible with mock hover', async () => {
     const spy = jest.spyOn(global.console, 'error');
 
     const { container, getByText } = render(
@@ -144,11 +175,42 @@ describe('<OverlayTrigger />', () => {
         >
           <div style={{ padding: '10px', border: '1px solid' }}>HoverMe</div>
         </OverlayTrigger>
+        <div>Outside</div>
       </div>,
     );
-    fireEvent.mouseOver(getByText('HoverMe'));
-    console.log(container.querySelectorAll('div')[1].style.visibility);
-    fireEvent.mouseOver(getByText('HoverMe'));
+    const popoverEleVisibility = getComputedStyle(
+      container.querySelector('div div :nth-child(2)'),
+    ).getPropertyValue('visibility');
+    const waitForExpect = require('wait-for-expect');
+    const sleep = ms => new Promise(resolve => setTimeout(() => resolve(), ms));
+
+    fireEvent.mouseOver(getByText('HoverIn'));
+    console.log('want hidden : ', popoverEleVisibility);
+    setTimeout(() => console.log('want normal : ', popoverEleVisibility), 850);
+    await waitForExpect(async () => {
+      await sleep(10);
+      expect(popoverEleVisibility).toEqual('normal');
+    });
+    setTimeout(() => fireEvent.mouseOver(getByText('HoverMe')), 900);
+    setTimeout(() => console.log('want normal : ', popoverEleVisibility), 1800);
+    setTimeout(() => fireEvent.mouseOver(getByText('Outside')), 2700);
+    setTimeout(() => console.log('want normal: ', popoverEleVisibility), 2900);
+    setTimeout(
+      () => console.log('want hidden 003: ', popoverEleVisibility),
+      3600,
+    );
+    // setTimeout(() => expect(popoverEleVisibility).toEqual('hidden'), 1000);
+    // expect(
+    //   getComputedStyle(
+    //     container.querySelector('div div :nth-child(2)'),
+    //   ).getPropertyValue('visibility'),
+    // ).toEqual('normal');
+
+    // fireEvent.mouseOver(getByText('HoverIn'));
+    // console.log(
+    //   'should log',
+    //   getComputedStyle(container.querySelector('div div :nth-child(2)')),
+    // );
     expect(spy).not.toHaveBeenCalled();
 
     // console.log(getByText('HoverIn'));

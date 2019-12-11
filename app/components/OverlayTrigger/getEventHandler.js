@@ -1,4 +1,4 @@
-function getTriggerAction(trigger, showFn, hideFn, delayFn) {
+function getEventHandler(trigger, showFn, hideFn, delayFn) {
   // onfocus is default for all cases for better accessibility
   let actions = {
     onFocus: delayFn(showFn),
@@ -17,4 +17,4 @@ function getTriggerAction(trigger, showFn, hideFn, delayFn) {
   return actions;
 }
 
-export { getTriggerAction };
+export { getEventHandler };
