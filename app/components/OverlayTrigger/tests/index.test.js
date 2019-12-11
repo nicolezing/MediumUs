@@ -8,14 +8,13 @@ https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
 */
 
 import React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent, act } from 'react-testing-library';
 import UserSettingList from '../../../containers/HomePage/UserSettingList';
 import { dropdownInfo } from '../stories/exampleData';
 import 'jest-dom/extend-expect';
 import setPosition from '../setPopoverPosition';
 import OverlayTrigger from '../index';
 import { getEventHandler } from '../getEventHandler';
-import waitForExpect from 'wait-for-expect';
 
 describe('getEventHandler', () => {
   it('Expect to return eventHandler object with onMouseDown', () => {
@@ -135,6 +134,7 @@ describe('<OverlayTrigger />', () => {
         <div>Outside</div>
       </div>,
     );
+
     fireEvent.mouseDown(getByText('Clicker'));
     expect(
       getComputedStyle(
@@ -142,15 +142,19 @@ describe('<OverlayTrigger />', () => {
       ).getPropertyValue('visibility'),
     ).toEqual('normal');
 
-    getByText('New story').focus();
+    act(() => {
+      getByText('New story').focus();
+    });
     expect(
       getComputedStyle(
         container.querySelector('div div :nth-child(2)'),
       ).getPropertyValue('visibility'),
     ).toEqual('normal');
 
-    getByText('New story').blur();
-    fireEvent.mouseDown(getByText('Outside'));
+    act(() => {
+      getByText('New story').blur();
+      fireEvent.mouseDown(getByText('Outside'));
+    });
     expect(
       getComputedStyle(
         container.querySelector('div div :nth-child(2)'),
@@ -159,9 +163,7 @@ describe('<OverlayTrigger />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Expect to HoverIn visible with mock hover', async () => {
-    const spy = jest.spyOn(global.console, 'error');
-
+  it('Expect to HoverIn visible with mock hover', () => {
     const { container, getByText } = render(
       <div style={{ marginLeft: '500px', marginTop: '100px' }}>
         <OverlayTrigger
@@ -169,7 +171,8 @@ describe('<OverlayTrigger />', () => {
           trigger="hover"
           popoverContent={
             <div style={{ padding: '20px 30px', whiteSpace: 'nowrap' }}>
-              HoverIn
+              <div>HoverIn</div>
+              <div>HoverInStill</div>
             </div>
           }
         >
@@ -178,42 +181,38 @@ describe('<OverlayTrigger />', () => {
         <div>Outside</div>
       </div>,
     );
-    const popoverEleVisibility = getComputedStyle(
-      container.querySelector('div div :nth-child(2)'),
-    ).getPropertyValue('visibility');
-    const waitForExpect = require('wait-for-expect');
-    const sleep = ms => new Promise(resolve => setTimeout(() => resolve(), ms));
 
-    fireEvent.mouseOver(getByText('HoverIn'));
-    console.log('want hidden : ', popoverEleVisibility);
-    setTimeout(() => console.log('want normal : ', popoverEleVisibility), 850);
-    await waitForExpect(async () => {
-      await sleep(10);
-      expect(popoverEleVisibility).toEqual('normal');
+    const getVisibility = () =>
+      getComputedStyle(
+        container.querySelector('div div :nth-child(2)'),
+      ).getPropertyValue('visibility');
+    jest.useFakeTimers();
+
+    act(() => {
+      fireEvent.mouseOver(getByText('HoverMe'));
+      jest.runAllTimers();
     });
-    setTimeout(() => fireEvent.mouseOver(getByText('HoverMe')), 900);
-    setTimeout(() => console.log('want normal : ', popoverEleVisibility), 1800);
-    setTimeout(() => fireEvent.mouseOver(getByText('Outside')), 2700);
-    setTimeout(() => console.log('want normal: ', popoverEleVisibility), 2900);
-    setTimeout(
-      () => console.log('want hidden 003: ', popoverEleVisibility),
-      3600,
-    );
-    // setTimeout(() => expect(popoverEleVisibility).toEqual('hidden'), 1000);
-    // expect(
-    //   getComputedStyle(
-    //     container.querySelector('div div :nth-child(2)'),
-    //   ).getPropertyValue('visibility'),
-    // ).toEqual('normal');
+    expect(getVisibility()).toEqual('normal');
 
-    // fireEvent.mouseOver(getByText('HoverIn'));
-    // console.log(
-    //   'should log',
-    //   getComputedStyle(container.querySelector('div div :nth-child(2)')),
-    // );
-    expect(spy).not.toHaveBeenCalled();
+    act(() => {
+      fireEvent.mouseOut(getByText('HoverMe'));
+      fireEvent.mouseOver(getByText('HoverIn'));
+      jest.runAllTimers();
+    });
+    expect(getVisibility()).toEqual('normal');
 
-    // console.log(getByText('HoverIn'));
-    // expect(getByText('HoverIn')).toHaveStyle(`visibility: normal`);
+    act(() => {
+      fireEvent.mouseOut(getByText('HoverIn'));
+      fireEvent.mouseOver(getByText('HoverInStill'));
+      jest.runAllTimers();
+    });
+    expect(getVisibility()).toEqual('normal');
+
+    act(() => {
+      fireEvent.mouseOut(getByText('HoverInStill'));
+      fireEvent.mouseOver(getByText('Outside'));
+      jest.runAllTimers();
+    });
+    expect(getVisibility()).toEqual('hidden');
   });
 });

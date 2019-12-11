@@ -59,7 +59,6 @@ function OverlayTrigger(props) {
   const onTriggerShow = () => {
     // clearTimeOut
     clearTimeout(timer);
-    // setTimeOut delay
     if (!isVisible) {
       setPositionStates();
       setVisibility(true);
@@ -83,7 +82,6 @@ function OverlayTrigger(props) {
 
   const onPopoverHover = () => {
     // if mouse is on popover and current state is visible
-
     if (!mouseOnPopover && isVisible) {
       // change mouseOnPopover to true, and popover will stay visible;
       mouseOnPopover = true;
@@ -98,9 +96,6 @@ function OverlayTrigger(props) {
         e.parentNode === findDOMNode(popover.current) ||
         e === findDOMNode(popover.current)
       ) {
-        if (e.preventDefault) {
-          e.preventDefault();
-        }
         return false;
       }
       e = e.parentNode;
@@ -109,7 +104,6 @@ function OverlayTrigger(props) {
     mouseOnPopover = false;
     // only delay hide when off hover if the trigger type is 'hover' or 'focus'
     if (props.trigger !== 'click') {
-      // return delayHide();
       return delayAction(onTriggerHide)();
     }
     return mouseOnPopover;
