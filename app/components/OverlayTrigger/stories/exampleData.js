@@ -42,5 +42,4 @@ export const articleInfo = {
   facebook: './',
   linkedIn: './',
   claps: 4230,
-  publicationFollowers: 1432,
 };

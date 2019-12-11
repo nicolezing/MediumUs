@@ -13,17 +13,41 @@ import AuthorCard from '../index';
 import getConfig from '../authorCardsConfig';
 import authorInfo from '../stories/exampleData';
 
+const authorCardInfo = {
+  authorLink: './',
+  authorName: 'Lisa Armstrong',
+  avatarImg: './',
+  member: true,
+  memberJoinedDate: '03/11/2019',
+
+  premium: true,
+  publicationLink: './',
+  publication: 'OneZero',
+  publicationLogo:
+    'https://cdn-images-1.medium.com/fit/c/120/120/1*88Z0O0wD4KOrk6Y5EceZog.png',
+  creatDate: '11/08/2019 05:23:31',
+  lastModified: '12/09/2019 15:45:01',
+  readingTime: '13 min read',
+  authorDescription:
+    'Web developer. Open source lover. Editor @ Bits and Pieces.',
+  authorFollowers: 245,
+
+  publicationFollowers: 1432,
+  publicationDescription:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+};
+
 test('AuthorInfo has desired props', () => {
-  expect(authorInfo).toHaveProperty('name');
+  expect(authorInfo).toHaveProperty('authorName');
   expect(authorInfo).toHaveProperty('authorLink');
-  expect(authorInfo).toHaveProperty('date');
+  expect(authorInfo).toHaveProperty('creatDate');
 });
 
 test('authorCardsConfig has desired configuration', () => {
   const authorCardsConfig = getConfig('TopicHome');
   expect(authorCardsConfig).toHaveProperty('avatarSize', '40px');
-  expect(authorCardsConfig).toHaveProperty('avatarDisplay', true);
-  expect(authorCardsConfig).toHaveProperty('followButton', false);
+  expect(authorCardsConfig).toHaveProperty('isDisplayAvatar', true);
+  expect(authorCardsConfig).toHaveProperty('hasFollowButton', false);
 });
 
 describe('<AuthorCard />', () => {
@@ -33,11 +57,23 @@ describe('<AuthorCard />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Expect to have authorInfo.name and authorInfo.Publication in html', () => {
+  it('Expect to not log errors in console with hoverEffect', () => {
+    const spy = jest.spyOn(global.console, 'error');
+    render(
+      <AuthorCard
+        {...authorCardInfo}
+        variation="PublicationHome"
+        hoverEffect
+      />,
+    );
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('Expect to have authorInfo.authorName and authorInfo.Publication in html', () => {
     const { getByText } = render(
       <AuthorCard {...authorInfo} variation="ArticleTitle" />,
     );
-    expect(getByText(authorInfo.name)).toBeInTheDocument();
+    expect(getByText(authorInfo.authorName)).toBeInTheDocument();
     expect(getByText(authorInfo.publication)).toBeInTheDocument();
     expect(getByText('Follow')).toBeInTheDocument();
   });
@@ -56,5 +92,16 @@ describe('<AuthorCard />', () => {
     expect(container.getElementsByTagName('a')[2].innerHTML).toEqual(
       authorInfo.publication,
     );
+  });
+
+  it('Expect this to throw error', () => {
+    console.error.mockImplementation(() => {});
+    expect(() =>
+      render(<AuthorCard {...authorInfo} variation="InvalidVariation" />),
+    ).toThrow();
+  });
+
+  it('Expect getConfig to throw error with invalid variation', () => {
+    expect(() => getConfig('InvalidVariation')).toThrow();
   });
 });

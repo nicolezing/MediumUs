@@ -35,7 +35,7 @@ function UserSettingList(props) {
       innerHtml: 'Customize your interests',
     },
     { key: 'divider4' },
-    { key: 'profile', href: './', innerHtml: 'Become a Profile' },
+    { key: 'profile', href: './', innerHtml: 'Profile' },
     { key: 'settings', href: './', innerHtml: 'Settings' },
     { key: 'help', href: './', innerHtml: 'Help' },
     { key: 'signOut', href: './', innerHtml: 'SignOut' },

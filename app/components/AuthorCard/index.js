@@ -37,7 +37,7 @@ function AuthorCard(props) {
     authorName,
     authorDescription,
     memberJoinedDate = null,
-    member = false,
+    member,
     avatarImg,
     authorFollowers,
     publicationLink,
@@ -182,8 +182,8 @@ AuthorCard.propTypes = {
   // *
   authorLink: PropTypes.string.isRequired,
   authorName: PropTypes.string.isRequired,
-  authorFollowers: PropTypes.number.isRequired,
-  authorDescription: PropTypes.string,
+  authorFollowers: generatePropsValidator(['hoverEffect'], 'number'),
+  authorDescription: generatePropsValidator(['hoverEffect'], 'string'),
   avatarImg: PropTypes.string.isRequired,
   member: PropTypes.bool.isRequired,
   // if is a member && need hoverEffect, memberJoinedDate: PropTypes.string.isRequired,
@@ -207,8 +207,14 @@ AuthorCard.propTypes = {
     ['publication', 'hoverEffect'],
     'number',
   ),
-  publicationLogo: PropTypes.string,
-  publicationDescription: PropTypes.string,
+  publicationLogo: generatePropsValidator(
+    ['publication', 'hoverEffect'],
+    'string',
+  ),
+  publicationDescription: generatePropsValidator(
+    ['publication', 'hoverEffect'],
+    'string',
+  ),
   // *
   // component related props
   // *

@@ -61,8 +61,9 @@ function ArticlePoster(props) {
                 Dismiss this story
               </MoreIconPopoverContent>
             }
+            key="moreIcon"
           >
-            <IconButton type="moreIcon" colorSet="black" key="moreIcon" />
+            <IconButton type="moreIcon" colorSet="black" />
           </OverlayTrigger>,
         ];
       case 'ArticlePageTitle':
@@ -144,8 +145,8 @@ ArticlePoster.propTypes = {
   authorCardInfo: PropTypes.shape({
     authorLink: PropTypes.string.isRequired,
     authorName: PropTypes.string.isRequired,
-    authorFollowers: PropTypes.number.isRequired,
-    authorDescription: PropTypes.string,
+    authorFollowers: generatePropsValidator(['hoverEffect'], 'number'),
+    authorDescription: generatePropsValidator(['hoverEffect'], 'string'),
     avatarImg: PropTypes.string.isRequired,
     member: PropTypes.bool.isRequired,
     memberJoinedDate: generatePropsValidator(
@@ -162,15 +163,14 @@ ArticlePoster.propTypes = {
       ['publication', 'hoverEffect'],
       'number',
     ),
-    publicationLogo: PropTypes.string,
-    publicationDescription: PropTypes.string,
-    variation: PropTypes.oneOf([
-      'Home',
-      'PublicationHome',
-      'TopicHome',
-      'ArticleTitle',
-    ]).isRequired,
-    hoverEffect: PropTypes.bool,
+    publicationLogo: generatePropsValidator(
+      ['publication', 'hoverEffect'],
+      'string',
+    ),
+    publicationDescription: generatePropsValidator(
+      ['publication', 'hoverEffect'],
+      'string',
+    ),
   }).isRequired,
   articleInfo: PropTypes.shape({
     articleLink: PropTypes.string.isRequired,

@@ -11,13 +11,8 @@ import PropTypes from 'prop-types';
 import setPosition from './setPopoverPosition';
 import PopoverBox from '../PopoverBox';
 import OverlayWrapper from './OverlayWrapper';
-
-class RefHolder extends React.Component {
-  render() {
-    return this.props.children;
-  }
-}
-RefHolder.propTypes = { children: PropTypes.element.isRequired };
+import RefHolder from './RefHolder';
+import { getTriggerAction } from './getTriggerAction';
 
 function OverlayTrigger(props) {
   const trigger = useRef();
@@ -26,12 +21,13 @@ function OverlayTrigger(props) {
   const [arrowPosition, setArrowPosition] = useState([0, 0]);
   const [popoverPosition, setPopoverPosition] = useState([0, 0]);
   const [popoverPlacement, setPopoverPlacement] = useState('under');
-  let onPopover = false;
+  let mouseOnPopover = false;
 
   function setPositionStates() {
     const { aX, aY, pX, pY, place } = setPosition(
       findDOMNode(trigger.current).getBoundingClientRect(),
       findDOMNode(popover.current).getBoundingClientRect(),
+      window.innerWidth,
       props.placement,
     );
     setArrowPosition([aX, aY]);
@@ -39,7 +35,7 @@ function OverlayTrigger(props) {
     setPopoverPlacement(place);
   }
 
-  const handleClickOutside = () => {
+  const handleClickOutsideTrigger = () => {
     if (findDOMNode(trigger.current) && isVisible) {
       onTriggerHide();
     }
@@ -48,13 +44,14 @@ function OverlayTrigger(props) {
   useEffect(() => {
     if (props.trigger === 'click') {
       // Bind the event listener
-      document.addEventListener('mousedown', handleClickOutside);
+      console.log('add handleclikcoutsidetrigger');
+      document.addEventListener('mousedown', handleClickOutsideTrigger);
     }
     // Unbind the event listener on clean up
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutsideTrigger);
     };
-    // not sure about the skip is working or not
+    // #TODO not sure about the skip is working or not
   }, [isVisible]);
 
   // declare public timer
@@ -64,7 +61,10 @@ function OverlayTrigger(props) {
     // clearTimeOut
     clearTimeout(timer);
     // setTimeOut delay
+    console.log('in trigger show');
     if (!isVisible) {
+      console.log("it's time to show");
+
       setPositionStates();
       setVisibility(true);
     }
@@ -72,36 +72,41 @@ function OverlayTrigger(props) {
 
   const onTriggerHide = () => {
     // clearTimeOut
+    console.log('in trigger hide');
     clearTimeout(timer);
-    if (isVisible && !onPopover) {
-      // console.log("it's time to invisible");
+    console.log(isVisible, !mouseOnPopover, `in trigger hide`);
+    if (isVisible && !mouseOnPopover) {
+      console.log("it's time to hide");
+
+      // if current state is visible, and mouse is not on popover, it's time to invisible
       setVisibility(false);
     }
   };
 
-  const delayHide = () => {
-    clearTimeout(timer);
-    timer = setTimeout(onTriggerHide, 800);
-  };
-
-  const delayShow = () => {
-    // clearTimeOut
+  const delayAction = fn => () => {
     clearTimeout(timer);
     // setTimeOut delay
-    timer = setTimeout(onTriggerShow, 800);
+    console.log('start delay timer');
+    timer = setTimeout(fn, 800);
   };
 
   const onPopoverHover = () => {
-    if (!onPopover && isVisible) {
-      // console.log('will stay visible');
-      onPopover = true;
+    // if mouse is on popover and current state is visible
+    console.log('in popoverHover');
+
+    if (!mouseOnPopover && isVisible) {
+      console.log('on popover, stay visible');
+      // change mouseOnPopover to true, and popover will stay visible;
+      mouseOnPopover = true;
+      //????
       setVisibility(true);
     }
   };
 
   const offPopoverHover = event => {
-    // if the event is children element or the origin element itself, means the mouse is still on the popover, so just return
+    // if the event is children element or the origin element itself, means the mouse is on the popover, so just return
     let e = event.toElement || event.relatedTarget;
+    console.log('in offPopoverHover');
     while (e && e.parentNode && e.parentNode !== window) {
       if (
         e.parentNode === findDOMNode(popover.current) ||
@@ -114,31 +119,27 @@ function OverlayTrigger(props) {
       }
       e = e.parentNode;
     }
-    // if event is neither children element, nor origin element, means the mouse is outside the dropdown
-    onPopover = false;
-    // only delay hide if off hover when the trigger === 'hover' or 'focus'
+    // if event is not any element of popover, means the mouse is outside the popover
+    mouseOnPopover = false;
+    // only delay hide when off hover if the trigger type is 'hover' or 'focus'
     if (props.trigger !== 'click') {
-      return delayHide();
+      console.log('mouse off, its not a  click, start delay hide');
+      // return delayHide();
+      return delayAction(onTriggerHide)();
     }
-    return onPopover;
+    console.log('its a click, return');
+    return mouseOnPopover;
   };
-
-  function triggerAction() {
-    // onfocus is default for all cases for better accessibility
-    let actions = { onFocus: delayShow, onBlur: delayHide };
-    if (props.trigger === 'click') {
-      actions = { onClick: onTriggerShow, ...actions };
-    }
-    if (props.trigger === 'hover') {
-      actions = { onMouseOver: delayShow, onMouseOut: delayHide, ...actions };
-    }
-    return actions;
-  }
-
+  const eventListeners = getTriggerAction(
+    props.trigger,
+    onTriggerShow,
+    onTriggerHide,
+    delayAction,
+  );
   return (
     <OverlayWrapper>
       <RefHolder ref={trigger}>
-        {cloneElement(props.children, triggerAction())}
+        {cloneElement(props.children, eventListeners)}
       </RefHolder>
       <RefHolder ref={popover}>
         <PopoverBox

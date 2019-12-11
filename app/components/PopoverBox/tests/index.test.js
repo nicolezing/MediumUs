@@ -12,29 +12,25 @@ import { render } from 'react-testing-library';
 
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import Dropdown from '../index';
+import PopoverBox from '../index';
 
-describe('<Dropdown />', () => {
+describe('<PopoverBox />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
 
-    render(<Dropdown />);
+    render(
+      <PopoverBox
+        renderPlace="above"
+        arrowPosition={[0, 0]}
+        popoverPosition={[0, 0]}
+        isVisible={false}
+        onMouseOver={() => {}}
+        onFocus={() => {}}
+        onMouseOut={() => {}}
+        onBlur={() => {}}
+        popoverContent={<div />}
+      />,
+    );
     expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
-
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  it.skip('Should render and match the snapshot', () => {
-    const {
-      container: { firstChild },
-    } = render(<Dropdown />);
-    expect(firstChild).toMatchSnapshot();
   });
 });

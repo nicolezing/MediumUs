@@ -11,13 +11,13 @@ function generatePropsValidator(dependencies = [], requiredType = 'default') {
   ];
   // validate requiredTypes
   if (!validTypes.includes(requiredType)) {
-    return new Error(
+    throw new Error(
       `Invalid input of requiredType, use any one from : ${validTypes}`,
     );
   }
   // validate dependencies
   if (dependencies.length <= 0) {
-    return new Error(`Please enter at least one dependency as an array`);
+    throw new Error(`Please enter at least one dependency as an array`);
   }
 
   return (props, propName, componentName) => {

@@ -2,13 +2,13 @@ import user001 from '../../../staticData/images/user-profile001.png';
 
 export const authorCardInfo = {
   authorLink: './',
-  name: 'Lisa Armstrong',
+  authorName: 'Lisa Armstrong',
   avatarImg: user001,
   member: true,
   premium: true,
   publicationLink: './',
   publication: 'OneZero',
-  date: 'Nov 21',
+  creatDate: 'Nov 21',
   readingTime: '13 min read',
 };
 
