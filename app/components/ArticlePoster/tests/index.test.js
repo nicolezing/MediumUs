@@ -29,7 +29,7 @@ const authorCardInfo = {
     'https://cdn-images-1.medium.com/fit/c/120/120/1*88Z0O0wD4KOrk6Y5EceZog.png',
   creationDate: '11/08/2019 05:23:31',
   lastModified: '12/09/2019 15:45:01',
-  readingTime: '13 min read',
+  wordCount: 2413,
   authorDescription:
     'Web developer. Open source lover. Editor @ Bits and Pieces.',
   authorFollowers: 245,
@@ -174,7 +174,7 @@ describe('<ArticlePoster />', () => {
       member: true,
       premium: true,
       creationDate: '11/08/2019 05:23:31',
-      readingTime: '13 min read',
+      wordCount: 2123,
     };
     const spy = jest.spyOn(global.console, 'error');
     render(

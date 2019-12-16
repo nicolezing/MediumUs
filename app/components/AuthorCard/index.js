@@ -48,7 +48,7 @@ function AuthorCard(props) {
     publicationLogo,
     publicationFollowers,
     creationDate,
-    readingTime,
+    wordCount,
     premium,
     lastModified,
   } = props;
@@ -123,7 +123,7 @@ function AuthorCard(props) {
       <DownTextWrapper>
         <time>{`${month} ${day}`}</time>
         <StyledSpanSpecial>&middot;</StyledSpanSpecial>
-        <span>{readingTime}</span>
+        <span>{`${wordCount} min read`}</span>
         {premium && <StyledSpanSpecial>{StarIcon}</StyledSpanSpecial>}
       </DownTextWrapper>
     );
@@ -196,7 +196,7 @@ AuthorCard.propTypes = {
   // *
   creationDate: PropTypes.string.isRequired,
   lastModified: PropTypes.string,
-  readingTime: PropTypes.string.isRequired,
+  wordCount: PropTypes.number.isRequired,
   premium: PropTypes.bool.isRequired,
   // *
   // publication related props

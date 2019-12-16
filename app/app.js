@@ -32,6 +32,7 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+// import testState from './store/reducers';
 
 // firebase init
 import initFirebase from './firebase';

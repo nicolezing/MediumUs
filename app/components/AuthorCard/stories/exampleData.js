@@ -5,7 +5,7 @@ const authorInfo = {
   authorName: 'Lisa Armstrong',
   publicationLink: './',
   publication: 'OneZero',
-  readingTime: '13 min read',
+  wordCount: 1000,
   avatarImg: user001,
   member: true,
   premium: true,

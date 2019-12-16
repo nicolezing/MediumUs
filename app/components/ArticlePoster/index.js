@@ -152,7 +152,7 @@ ArticlePoster.propTypes = {
     memberJoinedDate: requiredIfAllPresent(['member', 'hoverEffect'], 'string'),
     creationDate: PropTypes.string.isRequired,
     lastModified: PropTypes.string,
-    readingTime: PropTypes.string.isRequired,
+    wordCount: PropTypes.number.isRequired,
     premium: PropTypes.bool.isRequired,
     publication: PropTypes.string,
     publicationLink: requiredIfAllPresent(['publication'], 'string'),
