@@ -24,7 +24,7 @@ import { IconButton } from '../Button';
 import roundToThousand from '../../utils/roundToThousand';
 import OverlayTrigger from '../OverlayTrigger';
 import MoreIconPopoverContent from './MoreIconPopoverContent';
-import generatePropsValidator from '../../utils/generatePropsValidator';
+import requiredIfAllPresent from '../../utils/requiredIfAllPresent';
 
 function ArticlePoster(props) {
   const { authorCardVariation } = getAuthorCardType(props.variation);
@@ -145,29 +145,26 @@ ArticlePoster.propTypes = {
   authorCardInfo: PropTypes.shape({
     authorLink: PropTypes.string.isRequired,
     authorName: PropTypes.string.isRequired,
-    authorFollowers: generatePropsValidator(['hoverEffect'], 'number'),
-    authorDescription: generatePropsValidator(['hoverEffect'], 'string'),
+    authorFollowers: requiredIfAllPresent(['hoverEffect'], 'number'),
+    authorDescription: requiredIfAllPresent(['hoverEffect'], 'string'),
     avatarImg: PropTypes.string.isRequired,
     member: PropTypes.bool.isRequired,
-    memberJoinedDate: generatePropsValidator(
-      ['member', 'hoverEffect'],
-      'string',
-    ),
-    creatDate: PropTypes.string.isRequired,
+    memberJoinedDate: requiredIfAllPresent(['member', 'hoverEffect'], 'string'),
+    creationDate: PropTypes.string.isRequired,
     lastModified: PropTypes.string,
     readingTime: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
     publication: PropTypes.string,
-    publicationLink: generatePropsValidator(['publication'], 'string'),
-    publicationFollowers: generatePropsValidator(
+    publicationLink: requiredIfAllPresent(['publication'], 'string'),
+    publicationFollowers: requiredIfAllPresent(
       ['publication', 'hoverEffect'],
       'number',
     ),
-    publicationLogo: generatePropsValidator(
+    publicationLogo: requiredIfAllPresent(
       ['publication', 'hoverEffect'],
       'string',
     ),
-    publicationDescription: generatePropsValidator(
+    publicationDescription: requiredIfAllPresent(
       ['publication', 'hoverEffect'],
       'string',
     ),

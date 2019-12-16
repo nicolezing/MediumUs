@@ -3,19 +3,19 @@ const setPosition = (triggerSize, popoverSize, windowWidth, placement) => {
   const aY = 0;
   let pX = 0;
   let pY = 0;
-  let place = 'under';
+  let place = 'below';
   // set margin of the popover to the screen
-  const marginNeeded = 4;
+  const MARGIN_NEEDED = 4;
+  const ARROW_DIMENSION = 14;
 
   // only adjust Y when the placement set to "top-bottom"
   if (placement === 'top-bottom') {
     const topRemainedMargin = triggerSize.top - triggerSize.height / 2;
-    const need = popoverSize.height + marginNeeded;
+    const need = popoverSize.height + MARGIN_NEEDED;
 
     if (topRemainedMargin >= need) {
       // render above trigger;
-      // 14 is the arrow dimension
-      pY = -need - triggerSize.height - 14;
+      pY = -need - triggerSize.height - ARROW_DIMENSION;
       place = 'above';
     }
   }
@@ -25,20 +25,23 @@ const setPosition = (triggerSize, popoverSize, windowWidth, placement) => {
     windowWidth - triggerSize.left - triggerSize.width / 2;
   const leftRemainedMargin = triggerSize.left + triggerSize.width / 2;
   const middle = (triggerSize.width - popoverSize.width) / 2;
-  const need = Math.abs(middle) + marginNeeded;
+  const need = Math.abs(middle) + MARGIN_NEEDED;
 
   if (rightRemainedMargin < need && leftRemainedMargin > need) {
     // render to left
-    // 7 is half of the arrow dimension
-    aX = popoverSize.width + marginNeeded - rightRemainedMargin - 7;
-    pX = middle - (popoverSize.width / 2 - rightRemainedMargin) - marginNeeded;
+    aX =
+      popoverSize.width +
+      MARGIN_NEEDED -
+      rightRemainedMargin -
+      ARROW_DIMENSION / 2;
+    pX = middle - (popoverSize.width / 2 - rightRemainedMargin) - MARGIN_NEEDED;
   } else if (leftRemainedMargin < need && rightRemainedMargin > need) {
     // render to right
-    aX = leftRemainedMargin - 7 - marginNeeded;
-    pX = marginNeeded - triggerSize.left;
+    aX = leftRemainedMargin - ARROW_DIMENSION / 2 - MARGIN_NEEDED;
+    pX = MARGIN_NEEDED - triggerSize.left;
   } else {
     // render to middle
-    aX = popoverSize.width / 2 - 7;
+    aX = popoverSize.width / 2 - ARROW_DIMENSION / 2;
     pX = middle;
   }
   return { aX, aY, pX, pY, place };

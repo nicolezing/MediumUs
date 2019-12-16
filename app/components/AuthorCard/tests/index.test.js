@@ -10,7 +10,7 @@ import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-dom/extend-expect'; // add some helpful assertions
 import AuthorCard from '../index';
-import getConfig from '../authorCardsConfig';
+import getAuthorInfoDisplayPropertiesByVariation from '../getAuthorInfoDisplayPropertiesByVariation';
 import authorInfo from '../stories/exampleData';
 
 const authorCardInfo = {
@@ -25,7 +25,7 @@ const authorCardInfo = {
   publication: 'OneZero',
   publicationLogo:
     'https://cdn-images-1.medium.com/fit/c/120/120/1*88Z0O0wD4KOrk6Y5EceZog.png',
-  creatDate: '11/08/2019 05:23:31',
+  creationDate: '11/08/2019 05:23:31',
   lastModified: '12/09/2019 15:45:01',
   readingTime: '13 min read',
   authorDescription:
@@ -40,14 +40,14 @@ const authorCardInfo = {
 test('AuthorInfo has desired props', () => {
   expect(authorInfo).toHaveProperty('authorName');
   expect(authorInfo).toHaveProperty('authorLink');
-  expect(authorInfo).toHaveProperty('creatDate');
+  expect(authorInfo).toHaveProperty('creationDate');
 });
 
-test('authorCardsConfig has desired configuration', () => {
-  const authorCardsConfig = getConfig('TopicHome');
-  expect(authorCardsConfig).toHaveProperty('avatarSize', '40px');
-  expect(authorCardsConfig).toHaveProperty('isDisplayAvatar', true);
-  expect(authorCardsConfig).toHaveProperty('hasFollowButton', false);
+test('getAuthorInfoDisplayPropertiesByVariation has desired configuration', () => {
+  const configuration = getAuthorInfoDisplayPropertiesByVariation('TopicHome');
+  expect(configuration).toHaveProperty('avatarSize', '40px');
+  expect(configuration).toHaveProperty('isDisplayAvatar', true);
+  expect(configuration).toHaveProperty('hasFollowButton', false);
 });
 
 describe('<AuthorCard />', () => {
@@ -102,6 +102,8 @@ describe('<AuthorCard />', () => {
   });
 
   it('Expect getConfig to throw error with invalid variation', () => {
-    expect(() => getConfig('InvalidVariation')).toThrow();
+    expect(() =>
+      getAuthorInfoDisplayPropertiesByVariation('InvalidVariation'),
+    ).toThrow();
   });
 });

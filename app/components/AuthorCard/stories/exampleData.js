@@ -10,7 +10,7 @@ const authorInfo = {
   member: true,
   premium: true,
   authorFollowers: 245,
-  creatDate: '11/08/2019 05:23:31',
+  creationDate: '11/08/2019 05:23:31',
 };
 
 export default authorInfo;

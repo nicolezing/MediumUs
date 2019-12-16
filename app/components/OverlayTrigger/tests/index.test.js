@@ -32,7 +32,7 @@ describe('setPosition', () => {
     setPosition(triggerSize, popoverSize, windowWidth, 'dropdown');
     expect(spy).not.toHaveBeenCalled();
   });
-  it('Expect render to right and under, output equal as expect', () => {
+  it('Expect render to right and below, output equal as expect', () => {
     const position = setPosition(
       triggerSize,
       popoverSize,
@@ -44,7 +44,7 @@ describe('setPosition', () => {
       aY: 0,
       pX: -6,
       pY: 0,
-      place: 'under',
+      place: 'below',
     });
   });
   it('Expect render to middle and above, output equal as expect', () => {
@@ -58,7 +58,7 @@ describe('setPosition', () => {
       place: 'above',
     });
   });
-  it('Expect render to right and under, output equal as expect', () => {
+  it('Expect render to right and below, output equal as expect', () => {
     const tSize = { left: 600, top: 300, width: 32, height: 32 };
     const position = setPosition(tSize, popoverSize, windowWidth, 'top-bottom');
     expect(position).toEqual({
@@ -66,7 +66,7 @@ describe('setPosition', () => {
       aY: 0,
       pX: -204,
       pY: 0,
-      place: 'under',
+      place: 'below',
     });
   });
 });

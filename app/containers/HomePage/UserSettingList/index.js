@@ -20,25 +20,25 @@ import Avatar from '../../../components/Avatar';
 function UserSettingList(props) {
   const listItems = [
     { key: 'divider1' },
-    { key: 'newStory', href: './', innerHtml: 'New story' },
-    { key: 'stores', href: './', innerHtml: 'Stories' },
-    { key: 'series', href: './', innerHtml: 'Series' },
-    { key: 'stats', href: './', innerHtml: 'Stats' },
+    { key: 'newStory', href: './', text: 'New story' },
+    { key: 'stores', href: './', text: 'Stories' },
+    { key: 'series', href: './', text: 'Series' },
+    { key: 'stats', href: './', text: 'Stats' },
     { key: 'divider2' },
-    { key: 'partnerProgram', href: './', innerHtml: 'Medium Partner Program' },
+    { key: 'partnerProgram', href: './', text: 'Medium Partner Program' },
     { key: 'divider3' },
-    { key: 'bookmark', href: './', innerHtml: 'Bookmarks' },
-    { key: 'publications', href: './', innerHtml: 'Publications' },
+    { key: 'bookmark', href: './', text: 'Bookmarks' },
+    { key: 'publications', href: './', text: 'Publications' },
     {
       key: 'customizeInterests',
       href: './',
-      innerHtml: 'Customize your interests',
+      text: 'Customize your interests',
     },
     { key: 'divider4' },
-    { key: 'profile', href: './', innerHtml: 'Profile' },
-    { key: 'settings', href: './', innerHtml: 'Settings' },
-    { key: 'help', href: './', innerHtml: 'Help' },
-    { key: 'signOut', href: './', innerHtml: 'SignOut' },
+    { key: 'profile', href: './', text: 'Profile' },
+    { key: 'settings', href: './', text: 'Settings' },
+    { key: 'help', href: './', text: 'Help' },
+    { key: 'signOut', href: './', text: 'SignOut' },
   ];
 
   function renderList(list) {
@@ -46,7 +46,7 @@ function UserSettingList(props) {
       if (item.href) {
         return (
           <li key={item.key}>
-            <A href={item.href}>{item.innerHtml}</A>
+            <A href={item.href}>{item.text}</A>
           </li>
         );
       }

@@ -27,7 +27,7 @@ const authorCardInfo = {
   publication: 'OneZero',
   publicationLogo:
     'https://cdn-images-1.medium.com/fit/c/120/120/1*88Z0O0wD4KOrk6Y5EceZog.png',
-  creatDate: '11/08/2019 05:23:31',
+  creationDate: '11/08/2019 05:23:31',
   lastModified: '12/09/2019 15:45:01',
   readingTime: '13 min read',
   authorDescription:
@@ -173,7 +173,7 @@ describe('<ArticlePoster />', () => {
       avatarImg: 'app/staticData/images/user-profile001.png',
       member: true,
       premium: true,
-      creatDate: '11/08/2019 05:23:31',
+      creationDate: '11/08/2019 05:23:31',
       readingTime: '13 min read',
     };
     const spy = jest.spyOn(global.console, 'error');

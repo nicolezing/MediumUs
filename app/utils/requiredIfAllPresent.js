@@ -1,4 +1,4 @@
-function generatePropsValidator(dependencies = [], requiredType = 'default') {
+function requiredIfAllPresent(dependencies = [], requiredType = 'default') {
   const validTypes = [
     'undefined',
     'object',
@@ -22,9 +22,9 @@ function generatePropsValidator(dependencies = [], requiredType = 'default') {
 
   return (props, propName, componentName) => {
     let error;
-    // props validator
-    // check all the dependencies is true in props
+    // check if all the dependencies are true in props
     if (dependencies.every(ele => props[ele])) {
+      // check if props provided and has required type
       if (!props[propName]) {
         error = new Error(
           `Please provide property: ${propName} in ${componentName}`,
@@ -40,4 +40,4 @@ function generatePropsValidator(dependencies = [], requiredType = 'default') {
   };
 }
 
-export default generatePropsValidator;
+export default requiredIfAllPresent;

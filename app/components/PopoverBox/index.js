@@ -37,7 +37,7 @@ function PopoverBox(props) {
 }
 
 PopoverBox.propTypes = {
-  renderPlace: PropTypes.oneOf(['above', 'under']).isRequired,
+  renderPlace: PropTypes.oneOf(['above', 'below']).isRequired,
   arrowPosition: PropTypes.array.isRequired,
   popoverPosition: PropTypes.array.isRequired,
   isVisible: PropTypes.bool.isRequired,

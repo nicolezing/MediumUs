@@ -1,35 +1,31 @@
 /**
- * Test generatePropsValidator
+ * Test requiredIfAllPresent
  */
 import 'jest-dom/extend-expect';
-import generatePropsValidator from '../generatePropsValidator';
+import requiredIfAllPresent from '../requiredIfAllPresent';
 
-describe('generatePropsValidator()', () => {
+describe('requiredIfAllPresent()', () => {
   it('Expect to return error if wrong parameter entered', () => {
-    expect(() => generatePropsValidator()).toThrow();
+    expect(() => requiredIfAllPresent()).toThrow();
   });
 
   it('Expect generator to fail with invalid requiredType input', () => {
-    expect(() => generatePropsValidator(['A'], 'str')).toThrow();
+    expect(() => requiredIfAllPresent(['A'], 'str')).toThrow();
   });
 
   it('Expect generator to fail if no dependency is provided', () => {
-    expect(() => generatePropsValidator([], 'string')).toThrow();
+    expect(() => requiredIfAllPresent([], 'string')).toThrow();
   });
 
   it('Expect to return error if A is true, but B is not provided', () => {
     expect(
-      generatePropsValidator(['A'], 'string')(
-        { A: true },
-        'B',
-        'test component',
-      ),
+      requiredIfAllPresent(['A'], 'string')({ A: true }, 'B', 'test component'),
     ).toBeInstanceOf(Error);
   });
 
   it('Expect to have no error if dependencies are not true, and B is not provided', () => {
     const spy = jest.spyOn(global.console, 'error');
-    generatePropsValidator(['A'], 'string')(
+    requiredIfAllPresent(['A'], 'string')(
       { A: true, D: false },
       'B',
       'test component',
@@ -39,7 +35,7 @@ describe('generatePropsValidator()', () => {
 
   it('Expect to return error if A is true, B is provided with wrong type', () => {
     expect(
-      generatePropsValidator(['A'], 'string')(
+      requiredIfAllPresent(['A'], 'string')(
         { A: true, B: 2 },
         'B',
         'test component',

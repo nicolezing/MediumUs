@@ -8,7 +8,7 @@ export const authorCardInfo = {
   premium: true,
   publicationLink: './',
   publication: 'OneZero',
-  creatDate: 'Nov 21',
+  creationDate: 'Nov 21',
   readingTime: '13 min read',
 };
 

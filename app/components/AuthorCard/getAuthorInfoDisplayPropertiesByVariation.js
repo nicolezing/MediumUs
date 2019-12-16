@@ -1,4 +1,4 @@
-export default function getConfig(variation) {
+export default function getAuthorInfoDisplayPropertiesByVariation(variation) {
   switch (variation) {
     case 'PublicationHome':
       return {

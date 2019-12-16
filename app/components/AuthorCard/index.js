@@ -10,10 +10,10 @@ import Avatar from '../Avatar';
 import { styledComponents } from './AuthorCardsWrappers';
 import { OutlinedButton } from '../Button';
 import StarIcon from '../../staticData/svgIcons/starIcon';
-import getConfig from './authorCardsConfig';
+import getAuthorInfoDisplayPropertiesByVariation from './getAuthorInfoDisplayPropertiesByVariation';
 import OverlayTrigger from '../OverlayTrigger';
 import PopoverContent from './PopoverContent/index';
-import generatePropsValidator from '../../utils/generatePropsValidator';
+import requiredIfAllPresent from '../../utils/requiredIfAllPresent';
 import formatDate from './formatDate';
 import UpdatedDatePopoverContent from './updatedDatePopoverContent';
 
@@ -27,9 +27,11 @@ function AuthorCard(props) {
     StyledSpanSpecial,
   } = styledComponents(props.variation);
 
-  const { avatarSize, isDisplayAvatar, hasFollowButton } = getConfig(
-    props.variation,
-  );
+  const {
+    avatarSize,
+    isDisplayAvatar,
+    hasFollowButton,
+  } = getAuthorInfoDisplayPropertiesByVariation(props.variation);
 
   const {
     hoverEffect,
@@ -45,7 +47,7 @@ function AuthorCard(props) {
     publicationDescription,
     publicationLogo,
     publicationFollowers,
-    creatDate,
+    creationDate,
     readingTime,
     premium,
     lastModified,
@@ -116,7 +118,7 @@ function AuthorCard(props) {
   };
 
   function renderDateTime() {
-    const { month, day } = formatDate(creatDate);
+    const { month, day } = formatDate(creationDate);
     const ele = (
       <DownTextWrapper>
         <time>{`${month} ${day}`}</time>
@@ -182,17 +184,17 @@ AuthorCard.propTypes = {
   // *
   authorLink: PropTypes.string.isRequired,
   authorName: PropTypes.string.isRequired,
-  authorFollowers: generatePropsValidator(['hoverEffect'], 'number'),
-  authorDescription: generatePropsValidator(['hoverEffect'], 'string'),
+  authorFollowers: requiredIfAllPresent(['hoverEffect'], 'number'),
+  authorDescription: requiredIfAllPresent(['hoverEffect'], 'string'),
   avatarImg: PropTypes.string.isRequired,
   member: PropTypes.bool.isRequired,
   // if is a member && need hoverEffect, memberJoinedDate: PropTypes.string.isRequired,
-  memberJoinedDate: generatePropsValidator(['member', 'hoverEffect'], 'string'),
+  memberJoinedDate: requiredIfAllPresent(['member', 'hoverEffect'], 'string'),
 
   // *
   // article related props
   // *
-  creatDate: PropTypes.string.isRequired,
+  creationDate: PropTypes.string.isRequired,
   lastModified: PropTypes.string,
   readingTime: PropTypes.string.isRequired,
   premium: PropTypes.bool.isRequired,
@@ -201,17 +203,17 @@ AuthorCard.propTypes = {
   // *
   publication: PropTypes.string,
   // if belong to a publication, publicationLink: PropTypes.string.isRequired,
-  publicationLink: generatePropsValidator(['publication'], 'string'),
+  publicationLink: requiredIfAllPresent(['publication'], 'string'),
   // if belong to a publication && need hoverEffect, publicationFollowers: PropTypes.number.isRequired,
-  publicationFollowers: generatePropsValidator(
+  publicationFollowers: requiredIfAllPresent(
     ['publication', 'hoverEffect'],
     'number',
   ),
-  publicationLogo: generatePropsValidator(
+  publicationLogo: requiredIfAllPresent(
     ['publication', 'hoverEffect'],
     'string',
   ),
-  publicationDescription: generatePropsValidator(
+  publicationDescription: requiredIfAllPresent(
     ['publication', 'hoverEffect'],
     'string',
   ),

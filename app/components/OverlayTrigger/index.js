@@ -20,7 +20,7 @@ function OverlayTrigger(props) {
   const [isVisible, setVisibility] = useState(false);
   const [arrowPosition, setArrowPosition] = useState([0, 0]);
   const [popoverPosition, setPopoverPosition] = useState([0, 0]);
-  const [popoverPlacement, setPopoverPlacement] = useState('under');
+  const [popoverPlacement, setPopoverPlacement] = useState('below');
   let mouseOnPopover = false;
 
   function setPositionStates() {
@@ -57,7 +57,6 @@ function OverlayTrigger(props) {
   let timer = null;
 
   const onTriggerShow = () => {
-    // clearTimeOut
     clearTimeout(timer);
     if (!isVisible) {
       setPositionStates();
@@ -66,7 +65,6 @@ function OverlayTrigger(props) {
   };
 
   const onTriggerHide = () => {
-    // clearTimeOut
     clearTimeout(timer);
     if (isVisible && !mouseOnPopover) {
       // if current state is visible, and mouse is not on popover, it's time to invisible
@@ -76,7 +74,6 @@ function OverlayTrigger(props) {
 
   const delayAction = fn => () => {
     clearTimeout(timer);
-    // setTimeOut delay
     timer = setTimeout(fn, 800);
   };
 
@@ -89,24 +86,23 @@ function OverlayTrigger(props) {
   };
 
   const offPopoverHover = event => {
-    // if the event is children element or the origin element itself, means the mouse is on the popover, so just return
     let e = event.toElement || event.relatedTarget;
+    // if the event is children element or the origin element itself, means the mouse is still on the popover, no action will be made
     while (e && e.parentNode && e.parentNode !== window) {
       if (
         e.parentNode === findDOMNode(popover.current) ||
         e === findDOMNode(popover.current)
       ) {
-        return false;
+        return;
       }
       e = e.parentNode;
     }
-    // if event is not any element of popover, means the mouse is outside the popover
+    // if event is not any element of popover, means the mouse is outside the popover, change the state, and trigger hide
     mouseOnPopover = false;
     // only delay hide when off hover if the trigger type is 'hover' or 'focus'
     if (props.trigger !== 'click') {
-      return delayAction(onTriggerHide)();
+      delayAction(onTriggerHide)();
     }
-    return mouseOnPopover;
   };
   return (
     <OverlayWrapper>
