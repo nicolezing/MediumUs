@@ -11,9 +11,10 @@
       cover: ImageUrl?
       author: User.id
       content: String
-      contentLength: Num
-      publishedAt: Timestamp
+      state: Draft | Published
+      createdAt: Timestamp
       updatedAt: Timestamp
+      publishedAt: Timestamp
 
 ### User
 
