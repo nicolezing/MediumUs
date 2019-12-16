@@ -6,12 +6,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import avatarHaloIcon from '../../staticData/svgIcons/avatarHaloIcon';
-import { haloCompnents, avatarImg } from './avatarStyle';
+import { haloComponents, avatarImg } from './avatarStyle';
 
 function Avatar(props) {
   const { AvtStyledImg } = avatarImg(props.size);
   if (props.member) {
-    const { Halo, HaloWrapper } = haloCompnents(props.size);
+    const { Halo, HaloWrapper } = haloComponents(props.size);
     return (
       <HaloWrapper>
         <Halo>{avatarHaloIcon}</Halo>

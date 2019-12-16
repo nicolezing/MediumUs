@@ -10,19 +10,33 @@ import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 import ArticlePoster from '../index';
-import roundToThousand from '../roundToThousand';
 import getAuthorCardType from '../getAuthorCardType';
+import {
+  authorCardInfo as overlayAuthorCardInfo,
+  articleInfo as overlayArticleInfo,
+} from '../../OverlayTrigger/stories/exampleData';
 
 const authorCardInfo = {
   authorLink: './',
-  name: 'Lisa Armstrong',
+  authorName: 'Lisa Armstrong',
   avatarImg: 'app/staticData/images/user-profile001.png',
   member: true,
+  memberJoinedDate: '03/11/2019',
   premium: true,
   publicationLink: './',
   publication: 'OneZero',
-  date: 'Nov 21',
+  publicationLogo:
+    'https://cdn-images-1.medium.com/fit/c/120/120/1*88Z0O0wD4KOrk6Y5EceZog.png',
+  creationDate: '11/08/2019 05:23:31',
+  lastModified: '12/09/2019 15:45:01',
   readingTime: '13 min read',
+  authorDescription:
+    'Web developer. Open source lover. Editor @ Bits and Pieces.',
+  authorFollowers: 245,
+
+  publicationFollowers: 1432,
+  publicationDescription:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
 };
 const articleInfo = {
   title:
@@ -39,7 +53,7 @@ const articleInfo = {
   claps: 4230,
 };
 
-describe('<ArticleCard />', () => {
+describe('<ArticlePoster />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
@@ -96,14 +110,14 @@ describe('<ArticleCard />', () => {
       />,
     );
     expect(container.querySelectorAll('div')[1]).toHaveTextContent(
-      authorCardInfo.name,
+      authorCardInfo.authorName,
     );
   });
 
   it('Expect to have author name', () => {
     const { container } = render(
       <ArticlePoster
-        authorCardInfo={{ ...authorCardInfo, name: 'Nicole' }}
+        authorCardInfo={{ ...authorCardInfo, authorName: 'Nicole' }}
         articleInfo={articleInfo}
         variation="PublicationHomepageHero"
       />,
@@ -111,7 +125,7 @@ describe('<ArticleCard />', () => {
     expect(container).toHaveTextContent('Nicole');
   });
 
-  it('Expect to have content 4.2K clpas', () => {
+  it('Expect to have content 4.2K claps', () => {
     const { container } = render(
       <ArticlePoster
         authorCardInfo={authorCardInfo}
@@ -120,13 +134,6 @@ describe('<ArticleCard />', () => {
       />,
     );
     expect(container).toHaveTextContent('5.2K');
-  });
-
-  it('Expect to return K formatted number', () => {
-    const a = roundToThousand(3200);
-    expect(a).toEqual('3.2K');
-    const b = roundToThousand(-32);
-    expect(b).toEqual('-32');
   });
 
   it('Expect default value to be null', () => {
@@ -162,11 +169,11 @@ describe('<ArticleCard />', () => {
   it('Should render More from Nicole if no publication is provided, but this test could query pseudo element, so expect no errors logged in console', () => {
     const authorCardInfoTest = {
       authorLink: './',
-      name: 'Nicole',
+      authorName: 'Nicole',
       avatarImg: 'app/staticData/images/user-profile001.png',
       member: true,
       premium: true,
-      date: 'Nov 21',
+      creationDate: '11/08/2019 05:23:31',
       readingTime: '13 min read',
     };
     const spy = jest.spyOn(global.console, 'error');
@@ -177,7 +184,19 @@ describe('<ArticleCard />', () => {
         variation="ArticlePageRecommendation"
       />,
     );
+    expect(spy).not.toHaveBeenCalled();
+  });
 
+  it('Expect to not log errors in console with hoverEffect', () => {
+    const spy = jest.spyOn(global.console, 'error');
+    render(
+      <ArticlePoster
+        authorCardInfo={overlayAuthorCardInfo}
+        articleInfo={overlayArticleInfo}
+        variation="HomeList"
+        hoverEffect
+      />,
+    );
     expect(spy).not.toHaveBeenCalled();
   });
 });

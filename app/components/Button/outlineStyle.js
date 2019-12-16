@@ -35,9 +35,10 @@ const small = css`
 `;
 
 const middle = css`
-  font-size: 15.8px;
-  line-height: 20px;
-  padding: 4px 12px;
+  font-size: 15px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0px 14px;
 `;
 
 const large = css`

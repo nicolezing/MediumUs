@@ -3,7 +3,7 @@
 exports[`<AuthorCard /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 dnQuGq"
+    class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 eNosqP"
   >
     <div
       class="AuthorCardsWrappers__StyledTextContainer-sc-1v4o32t-10 cVADbr"
@@ -29,7 +29,7 @@ exports[`<AuthorCard /> Should render and match the snapshot 1`] = `
         class="AuthorCardsWrappers__DownTextWrapper-sc-1v4o32t-11 bDIlkS"
       >
         <time>
-          Nov 21
+          Nov 08
         </time>
         <span
           class="AuthorCardsWrappers__StyledSpanSpecial-sc-1v4o32t-13 cvgNJb"
@@ -54,7 +54,6 @@ exports[`<AuthorCard /> Should render and match the snapshot 1`] = `
         </span>
       </div>
     </div>
-     
   </div>
 </div>
 `;

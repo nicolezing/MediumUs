@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
+exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
 <div
   class="styledWrappers__Wrapper-p14edy-0 czhChT"
   name="Lisa Armstrong"
@@ -44,7 +44,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
       class="styledWrappers__AuthorWrapper-p14edy-3 cVrZcl"
     >
       <div
-        class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 dnQuGq"
+        class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 eNosqP"
       >
         <a
           href="./"
@@ -71,7 +71,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
               </div>
               <img
                 alt="Go to the profile of Lisa Armstrong"
-                class="avatarStyle__AvtStyledImg-sc-1o8l9nu-0 hngbRH"
+                class="avatarStyle__AvtStyledImg-sc-1o8l9nu-0 dujRNa"
                 src="app/staticData/images/user-profile001.png"
               />
             </div>
@@ -96,9 +96,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
             >
               OneZero
             </a>
-            <span
-              style="margin-left: 8px;"
-            >
+            <span>
               <button
                 class="OutlinedStyleButton-sc-18pjqv6-0 mypDe"
                 type="outlined"
@@ -113,7 +111,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
             class="AuthorCardsWrappers__DownTextWrapper-sc-1v4o32t-15 gpWgVx"
           >
             <time>
-              Nov 21
+              Nov 08
             </time>
             <span
               class="AuthorCardsWrappers__StyledSpanSpecial-sc-1v4o32t-17 gTquLW"
@@ -138,7 +136,6 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
             </span>
           </div>
         </div>
-         
       </div>
       <div
         class="styledWrappers__IconWrapper-p14edy-4 gwPqps"
@@ -191,7 +188,7 @@ exports[`<ArticleCard /> Should render and match the snapshot 1`] = `
         >
           <button
             class="IconStyledButton-sc-1u1vzbn-0 hdGyG"
-            type="facebookSqureIcon"
+            type="facebookSquareIcon"
           >
             <svg
               fill="inherit"
