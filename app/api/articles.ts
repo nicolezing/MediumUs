@@ -1,5 +1,19 @@
+import * as uuid from 'uuid/v4';
+import { firestore } from 'firebase';
+import { mapValues } from 'lodash';
+import { getDb, getAuth } from './index';
+import { UserId } from './users';
+import { getTime } from './utils';
+import { DocumentData, DocumentSnapshot } from '@firebase/firestore-types';
+
+export const COLLECTION_ARTICLE = 'articles';
+
 // The unique identifier of an article.
 export type ArticleId = string;
+function newArticleId(): ArticleId {
+  return uuid();
+}
+
 export enum ArticleState {
   DRAFT,
   PUBLISHED,
@@ -22,6 +36,17 @@ export type ArticleMeta = {
 
 export type Article = { id: ArticleId } & ArticleData & ArticleMeta;
 
+function articleToDoc(article: ArticleData & ArticleMeta): object {
+  return mapValues(article, (v, k) => {
+    switch (k) {
+      case 'cover':
+        return (v as URL).href;
+      default:
+        return v;
+    }
+  });
+}
+
 // Draft operations
 
 /**
@@ -29,6 +54,21 @@ export type Article = { id: ArticleId } & ArticleData & ArticleMeta;
  * Returns the ID of the newly created article draft.
  */
 export async function createDraft(request: ArticleData): Promise<ArticleId> {
+  const articleId = newArticleId();
+  const now = getTime();
+  await getDb()
+    .collection(COLLECTION_ARTICLE)
+    .doc(articleId)
+    .set(
+      articleToDoc({
+        ...request,
+        author: getAuth().currentUser!.uid,
+        createdAt: now,
+        updatedAt: now,
+        state: ArticleState.DRAFT,
+      }),
+    );
+  return articleId;
 }
 
 /**
