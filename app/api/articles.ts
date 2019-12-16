@@ -47,6 +47,25 @@ function articleToDoc(article: ArticleData & ArticleMeta): object {
   });
 }
 
+function articleFromDoc(doc: DocumentSnapshot<DocumentData>): Article {
+  const data = doc.data();
+  return {
+    id: doc.id,
+    ...(mapValues(data, (v, k) => {
+      switch (k) {
+        case 'cover':
+          return new URL(v);
+        case 'createdAt':
+        case 'updatedAt':
+        case 'publishedAt':
+          return (v as firestore.Timestamp).toDate();
+        default:
+          return v;
+      }
+    }) as (ArticleData & ArticleMeta)),
+  };
+}
+
 // Draft operations
 
 /**
@@ -95,6 +114,12 @@ export function publishDraft() {}
  * Returns the full Article doc for the given ArticleId.
  */
 export async function read(id: ArticleId): Promise<Article> {
+  return articleFromDoc(
+    await getDb()
+      .collection(COLLECTION_ARTICLE)
+      .doc(id)
+      .get(),
+  );
 }
 
 export function unpublish() {}
