@@ -53,3 +53,15 @@ export async function getArticle(
     .get();
   return ts2Date(doc.data()) as Article;
 }
+
+export async function insertArticles(
+  db: FirebaseFirestore,
+  articles: Article[],
+) {
+  const collectionRef = db.collection(COLLECTION_ARTICLE);
+  const batch = db.batch();
+  articles.forEach(article =>
+    batch.set(collectionRef.doc(article.id), omit(article, ['id'])),
+  );
+  return batch.commit();
+}

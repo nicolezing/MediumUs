@@ -75,6 +75,12 @@ export async function createDraft(request: ArticleData): Promise<ArticleId> {
  * Returns IDs of all article drafts for the current user.
  */
 export async function listUserDrafts(): Promise<Array<ArticleId>> {
+  const collectionSnapshot = await getDb()
+    .collection(COLLECTION_ARTICLE)
+    .where('author', '==', getAuth().currentUser!.uid)
+    .where('state', '==', ArticleState.DRAFT)
+    .get();
+  return collectionSnapshot.docs.map(doc => doc.id);
 }
 
 export function updateDraft() {}
