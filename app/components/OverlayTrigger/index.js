@@ -9,7 +9,7 @@ import React, { useRef, useState, useEffect, cloneElement } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import setPosition from './setPopoverPosition';
-import PopoverBox from '../PopoverBox';
+import PopoverBox from './PopoverBox';
 import OverlayWrapper from './OverlayWrapper';
 import RefHolder from './RefHolder';
 import { getEventHandler } from './getEventHandler';
@@ -28,6 +28,8 @@ function OverlayTrigger(props) {
       findDOMNode(trigger.current).getBoundingClientRect(),
       findDOMNode(popover.current).getBoundingClientRect(),
       window.innerWidth,
+      window.scrollX,
+      window.scrollY,
       props.placement,
     );
     setArrowPosition([aX, aY]);
@@ -36,6 +38,8 @@ function OverlayTrigger(props) {
   }
 
   const handleClickOutsideTrigger = () => {
+    console.log('mousedown');
+    console.log(findDOMNode(trigger.current), isVisible);
     if (findDOMNode(trigger.current) && isVisible) {
       onTriggerHide();
     }
@@ -51,14 +55,17 @@ function OverlayTrigger(props) {
       document.removeEventListener('mousedown', handleClickOutsideTrigger);
     };
     // #TODO not sure about the skip is working or not
-  }, [isVisible]);
+  });
 
   // declare public timer
   let timer = null;
 
   const onTriggerShow = () => {
     clearTimeout(timer);
+    console.log('clicked in ');
     if (!isVisible) {
+      console.log('clicked show');
+
       setPositionStates();
       setVisibility(true);
     }
@@ -68,6 +75,8 @@ function OverlayTrigger(props) {
     clearTimeout(timer);
     if (isVisible && !mouseOnPopover) {
       // if current state is visible, and mouse is not on popover, it's time to invisible
+      console.log('clicked hide');
+
       setVisibility(false);
     }
   };

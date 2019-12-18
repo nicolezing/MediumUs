@@ -6,7 +6,10 @@ export const PopoverInnerWrapper = styled.div`
 `;
 export const PopoverOuterWrapper = styled.div`
   z-index: 900;
-  margin-top: 9px;
+  top: 0;
+  left: 0px;
+
+  margin-top: 7px;
   position: absolute;
   background: ${props => props.color};
   transform: ${props =>

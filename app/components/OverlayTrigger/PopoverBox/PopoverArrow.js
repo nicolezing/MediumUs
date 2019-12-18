@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const PopoverTopArrow = styled.div`
   top: -14px;
-  // will-change: transform;
-  clip: rect(0 18px 14px -4px);
+  clip: rect(0 18px 18px -4px);
   left: -2px;
   transform: ${props =>
     `translate(${props.position[0]}px, ${props.position[1]}px)`};
@@ -20,9 +19,8 @@ export const PopoverTopArrow = styled.div`
 `;
 
 export const PopoverBottomArrow = styled.div`
-  bottom: -13px;
-  // will-change: transform;
-  clip: rect(0px 18px 14px -4px);
+  bottom: -14px;
+  clip: rect(-4px 18px 14px -4px);
   left: -2px;
   transform: ${props =>
     `translate(${props.position[0]}px, ${props.position[1]}px)`};

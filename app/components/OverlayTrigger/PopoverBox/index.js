@@ -13,7 +13,7 @@ function PopoverBox(props) {
   return (
     <PopoverOuterWrapper
       position={props.popoverPosition}
-      visibility={props.isVisible ? 'normal' : 'hidden'}
+      visibility={props.isVisible ? 'visible' : 'hidden'}
       onMouseOver={props.onMouseOver}
       onFocus={props.onFocus}
       onMouseOut={props.onMouseOut}
