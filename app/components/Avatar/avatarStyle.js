@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import getColor from '../../staticData/colorSets';
+import sizeSet from './avatarHaloSizeSets';
 
 function avatarImg(size) {
   const narrowStyle =
@@ -10,6 +11,7 @@ function avatarImg(size) {
     height: 32px;
   }`
       : '';
+
   const AvtStyledImg = styled.img`
     width: ${size || '32px'};
     height: ${size || '32px'};
@@ -17,6 +19,7 @@ function avatarImg(size) {
     display: inline-block;
     ${narrowStyle}
   `;
+
   return { AvtStyledImg };
 }
 
@@ -29,6 +32,7 @@ function haloComponents(size) {
       height: 36px;
     }`
       : '';
+
   const narrowStyle =
     size === '36px'
       ? `
@@ -65,17 +69,5 @@ function haloComponents(size) {
   `;
   return { Halo, HaloWrapper };
 }
-
-// the matched pairs of avatar size and the halo size
-const sizeSet = {
-  '32px': [32, 36],
-  '36px': [36, 43],
-  '40px': [40, 49],
-  '48px': [48, 57],
-  '80px': [80, 91],
-  '64px': [64, 74],
-  '128px': [128, 145],
-  '60px': [60, 69],
-};
 
 export { haloComponents, avatarImg };
