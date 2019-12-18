@@ -5,29 +5,43 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { TitleWrapper, StyledTitle, StyledSubtitle } from './StyledWrapper';
-import * as titleStyles from './titleStyles';
+import { Wrapper, StyledTitle, StyledSubtitle } from './StyledWrapper';
+import * as variations from './variateTitleStyles';
 
 function ArticleTitle(props) {
   return (
-    <TitleWrapper {...props}>
+    <Wrapper variation={props.variation}>
       <a href={props.articleLink}>
-        <StyledTitle {...props}>{props.title} </StyledTitle>
+        <StyledTitle variation={props.variation}>{props.title} </StyledTitle>
       </a>
       <a href={props.articleLink}>
-        <StyledSubtitle {...props}>{props.subtitle}</StyledSubtitle>
+        <StyledSubtitle variation={props.variation}>
+          {props.subtitle}
+        </StyledSubtitle>
       </a>
-    </TitleWrapper>
+    </Wrapper>
   );
 }
 
 ArticleTitle.propTypes = {
   articleLink: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  variation: PropTypes.oneOf([..._.keys(titleStyles)]).isRequired,
+  subtitle: PropTypes.string,
+  variation: PropTypes.oneOf([..._.keys(variations)]).isRequired,
+  // eslint-disable-next-line react/no-unused-prop-types
+  id: PropTypes.string.isRequired,
 };
 
-export default ArticleTitle;
+function mapStateToProps(state, ownProps) {
+  const { id } = ownProps;
+  const { articleInfo } = state.testState[id];
+  return {
+    articleLink: articleInfo.articleLink,
+    title: articleInfo.title,
+    subtitle: articleInfo.subtitle,
+  };
+}
+export default connect(mapStateToProps)(ArticleTitle);
