@@ -12,27 +12,33 @@ import IconStyledButton from './IconStyledButton';
 import * as Icons from '../../staticData/svgIcons/IconButton_Icons';
 import { GlowStyledBtn, Wrapper } from './GlowStyledBtn';
 
+// #TODO: add more like below in the future
+// title="Bookmark this story to read later"
+// aria-label="Bookmark this story to read later"
 function OutlinedButton(props) {
   return (
-    <OutlinedStyleButton {...props}>
+    <OutlinedStyleButton {...props} onClick={props.onBtnClick}>
       <span>{props.text}</span>
     </OutlinedStyleButton>
   );
 }
 
 function IconButton(props) {
-  if (props.effect === 'glow') {
-    return (
-      <Wrapper>
-        <GlowStyledBtn {...props}>{Icons[props.type]}</GlowStyledBtn>
-      </Wrapper>
-    );
-  }
+  return (
+    <IconStyledButton {...props} onClick={props.onBtnClick}>
+      {Icons[props.iconName]}
+    </IconStyledButton>
+  );
+}
 
-  // #TODO: add more like below in the future
-  // title="Bookmark this story to read later"
-  // aria-label="Bookmark this story to read later"
-  return <IconStyledButton {...props}>{Icons[props.type]}</IconStyledButton>;
+function GlowIconButton(props) {
+  return (
+    <Wrapper>
+      <GlowStyledBtn {...props} onClick={props.onBtnClick}>
+        {Icons[props.iconName]}
+      </GlowStyledBtn>
+    </Wrapper>
+  );
 }
 
 OutlinedButton.propTypes = {
@@ -40,13 +46,19 @@ OutlinedButton.propTypes = {
   type: PropTypes.oneOf(['outlined', 'filled']).isRequired,
   size: PropTypes.oneOf(['small', 'middle', 'large']).isRequired,
   colorSet: PropTypes.string,
-  onClick: PropTypes.func,
+  onBtnClick: PropTypes.func,
 };
 
 IconButton.propTypes = {
-  type: PropTypes.oneOf([..._.keys(Icons)]).isRequired,
-  effect: PropTypes.oneOf(['glow']),
+  iconName: PropTypes.oneOf([..._.keys(Icons)]).isRequired,
   colorSet: PropTypes.string,
+  onBtnClick: PropTypes.func,
 };
 
-export { OutlinedButton, IconButton };
+GlowIconButton.propTypes = {
+  iconName: PropTypes.oneOf([..._.keys(Icons)]).isRequired,
+  colorSet: PropTypes.string,
+  onBtnClick: PropTypes.func,
+};
+
+export { OutlinedButton, IconButton, GlowIconButton };

@@ -7,14 +7,33 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import messages from './messages';
+// import OverlayTrigger from '../../components/OverlayTrigger';
+import ArticlePoster from '../../components/ArticlePoster';
 
-export default function HomePage() {
+function HomePage(props) {
   return (
     <div>
       <h2>
         <FormattedMessage {...messages.header} />
-      </h2>
+      </h1>
+
+      <ArticlePoster
+        authorCardInfo={props.authorCardInfo}
+        articleInfo={props.articleInfo}
+        variation="HomeHeroLeft"
+        hoverEffect
+      />
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  const { testState } = state;
+  return {
+    authorCardInfo: testState.authorInfo,
+    articleInfo: testState.articleInfo,
+  };
+}
+export default connect(mapStateToProps)(HomePage);

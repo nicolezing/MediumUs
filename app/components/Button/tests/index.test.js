@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { render } from 'react-testing-library';
-import { OutlinedButton, IconButton } from '../index';
+import { OutlinedButton, IconButton, GlowIconButton } from '../index';
 
 describe('OutlinedButton', () => {
   it('Expect to not log errors in console', () => {
@@ -21,14 +21,14 @@ describe('OutlinedButton', () => {
 describe('IconButton', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<IconButton text="test" type="clapIcon" />);
+    render(<IconButton text="test" iconName="clapIcon" />);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Have wrapper when glows', () => {
     const {
       container: { firstChild: button },
-    } = render(<IconButton text="test" type="clapIcon" effect="glow" />);
+    } = render(<GlowIconButton text="test" iconName="clapIcon" />);
     expect($(button).prop('tagName')).toEqual('DIV');
   });
 });

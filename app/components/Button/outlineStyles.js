@@ -25,6 +25,10 @@ const base = css`
   line-height: 19px;
   padding: 0 10px;
   font-size: 15px;
+
+  :focus {
+    outline: none;
+  }
 `;
 
 const small = css`
