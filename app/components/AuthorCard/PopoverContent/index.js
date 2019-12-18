@@ -34,12 +34,7 @@ function PopoverContent(props) {
         </TitleWrapper>
 
         {props.imgType === 'avatar' ? (
-          <Avatar
-            member={props.member}
-            size="60px"
-            src={props.imgLink}
-            alt={props.imgAlt}
-          />
+          <Avatar size="60px" id={props.id} />
         ) : (
           <Img src={props.imgLink} alt={props.imgAlt} />
         )}
@@ -66,6 +61,7 @@ PopoverContent.propTypes = {
   imgAlt: PropTypes.string,
   followersNumber: PropTypes.number.isRequired,
   imgType: PropTypes.oneOf(['avatar']),
+  id: PropTypes.string,
 };
 
 export default PopoverContent;

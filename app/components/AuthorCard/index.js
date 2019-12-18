@@ -5,9 +5,10 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from '../Avatar';
-import { styledComponents } from './AuthorCardsWrappers';
+import { styledComponents, StyledButtonWrapper } from './AuthorCardsWrappers';
 import { OutlinedButton } from '../Button';
 import StarIcon from '../../staticData/svgIcons/starIcon';
 import getAuthorInfoDisplayPropertiesByVariation from './getAuthorInfoDisplayPropertiesByVariation';
@@ -15,16 +16,17 @@ import OverlayTrigger from '../OverlayTrigger';
 import PopoverContent from './PopoverContent/index';
 import requiredIfAllPresent from '../../utils/requiredIfAllPresent';
 import formatDate from './formatDate';
-import UpdatedDatePopoverContent from './updatedDatePopoverContent';
+import UpdatedDateStyledSpan from './UpdatedDateStyledSpan';
+import calcReadingTime from '../../utils/calcReadingTime';
 
 function AuthorCard(props) {
   const {
-    StyledContainer,
-    StyledTextContainer,
+    StyledWrapper,
+    StyledInfoWrapper,
     StyledA,
-    UpTextWrapper,
-    DownTextWrapper,
-    StyledSpanSpecial,
+    AuthorInfoWrapper,
+    ReadingInfoWrapper,
+    StyledSpan,
   } = styledComponents(props.variation);
 
   const {
@@ -35,12 +37,12 @@ function AuthorCard(props) {
 
   const {
     hoverEffect,
+    id,
     authorLink,
     authorName,
     authorDescription,
     memberJoinedDate = null,
     member,
-    avatarImg,
     authorFollowers,
     publicationLink,
     publication,
@@ -49,12 +51,12 @@ function AuthorCard(props) {
     publicationFollowers,
     creationDate,
     wordCount,
-    premium,
+    isPremium,
     lastModified,
   } = props;
 
   function renderAuthor() {
-    const ele = (
+    const element = (
       <StyledA href={authorLink} key="name">
         {authorName}
       </StyledA>
@@ -62,119 +64,119 @@ function AuthorCard(props) {
 
     if (hoverEffect) {
       const { year, month } = formatDate(memberJoinedDate);
+      const popoverContent = (
+        <PopoverContent
+          headerLink={authorLink}
+          header={authorName}
+          subHeader={authorDescription}
+          joinedDate={`${month} ${year}`}
+          member={member}
+          followersNumber={authorFollowers}
+          imgType="avatar"
+          id={id}
+        />
+      );
       return (
         <OverlayTrigger
-          popoverContent={
-            <PopoverContent
-              headerLink={authorLink}
-              header={authorName}
-              subHeader={authorDescription}
-              joinedDate={`${month} ${year}`}
-              member={member}
-              imgLink={avatarImg}
-              imgAlt={authorName}
-              followersNumber={authorFollowers}
-              imgType="avatar"
-            />
-          }
+          popoverContent={popoverContent}
           trigger="hover"
           placement="top-bottom"
         >
-          {ele}
+          {element}
         </OverlayTrigger>
       );
     }
-    return ele;
+    return element;
   }
 
   const renderPublication = () => {
-    const ele = (
+    const element = (
       <StyledA href={publicationLink} key="publication">
         {publication}
       </StyledA>
     );
 
     if (hoverEffect) {
+      const popoverContent = (
+        <PopoverContent
+          headerLink={publicationLink}
+          header={publication}
+          subHeader={publicationDescription}
+          imgLink={publicationLogo}
+          imgAlt={publication}
+          followersNumber={publicationFollowers}
+        />
+      );
       return (
         <OverlayTrigger
-          popoverContent={
-            <PopoverContent
-              headerLink={publicationLink}
-              header={publication}
-              subHeader={publicationDescription}
-              imgLink={publicationLogo}
-              imgAlt={publication}
-              followersNumber={publicationFollowers}
-            />
-          }
+          popoverContent={popoverContent}
           trigger="hover"
           placement="top-bottom"
         >
-          {ele}
+          {element}
         </OverlayTrigger>
       );
     }
-    return ele;
+    return element;
   };
 
   function renderDateTime() {
     const { month, day } = formatDate(creationDate);
-    const ele = (
-      <DownTextWrapper>
+    const element = (
+      <ReadingInfoWrapper>
         <time>{`${month} ${day}`}</time>
-        <StyledSpanSpecial>&middot;</StyledSpanSpecial>
-        <span>{`${wordCount} min read`}</span>
-        {premium && <StyledSpanSpecial>{StarIcon}</StyledSpanSpecial>}
-      </DownTextWrapper>
+        <StyledSpan>&middot;</StyledSpan>
+        <span>{`${calcReadingTime(wordCount)} min read`}</span>
+        {isPremium && <StyledSpan>{StarIcon}</StyledSpan>}
+      </ReadingInfoWrapper>
     );
     // if the article is updated and have hover effect on, add hover effect for lastModified
-    if (hoverEffect && lastModified) {
+    if (hoverEffect && creationDate !== lastModified) {
       const { month: mon, day: d } = formatDate(lastModified);
       return (
         <OverlayTrigger
           popoverContent={
-            <UpdatedDatePopoverContent>
+            <UpdatedDateStyledSpan>
               {`Updated ${mon} ${d}`}
-            </UpdatedDatePopoverContent>
+            </UpdatedDateStyledSpan>
           }
           popoverColor="rgb(49, 49, 49)"
           trigger="hover"
           placement="top-bottom"
         >
-          {ele}
+          {element}
         </OverlayTrigger>
       );
     }
-    return ele;
+    return element;
   }
 
   return (
-    <StyledContainer>
+    <StyledWrapper>
       {isDisplayAvatar && (
         <a href={props.authorLink}>
           <div>
             <Avatar
-              src={props.avatarImg}
               alt={`Go to the profile of ${props.authorName}`}
               size={avatarSize}
-              member={props.member}
+              id={props.id}
             />
           </div>
         </a>
       )}
-      <StyledTextContainer>
-        <UpTextWrapper>
-          {renderAuthor({ props })}
+      <StyledInfoWrapper>
+        <AuthorInfoWrapper>
+          {renderAuthor()}
           {props.publication && <> in {renderPublication()}</>}
           {hasFollowButton && (
-            <span>
+            <StyledButtonWrapper>
               <OutlinedButton text="Follow" size="small" type="outlined" />
-            </span>
+            </StyledButtonWrapper>
           )}
-        </UpTextWrapper>
+        </AuthorInfoWrapper>
         {renderDateTime()}
-      </StyledTextContainer>
-    </StyledContainer>
+      </StyledInfoWrapper>
+    </StyledWrapper>
   );
 }
 
@@ -186,25 +188,20 @@ AuthorCard.propTypes = {
   authorName: PropTypes.string.isRequired,
   authorFollowers: requiredIfAllPresent(['hoverEffect'], 'number'),
   authorDescription: requiredIfAllPresent(['hoverEffect'], 'string'),
-  avatarImg: PropTypes.string.isRequired,
   member: PropTypes.bool.isRequired,
-  // if is a member && need hoverEffect, memberJoinedDate: PropTypes.string.isRequired,
   memberJoinedDate: requiredIfAllPresent(['member', 'hoverEffect'], 'string'),
-
   // *
   // article related props
   // *
   creationDate: PropTypes.string.isRequired,
   lastModified: PropTypes.string,
   wordCount: PropTypes.number.isRequired,
-  premium: PropTypes.bool.isRequired,
+  isPremium: PropTypes.bool.isRequired,
   // *
   // publication related props
   // *
   publication: PropTypes.string,
-  // if belong to a publication, publicationLink: PropTypes.string.isRequired,
   publicationLink: requiredIfAllPresent(['publication'], 'string'),
-  // if belong to a publication && need hoverEffect, publicationFollowers: PropTypes.number.isRequired,
   publicationFollowers: requiredIfAllPresent(
     ['publication', 'hoverEffect'],
     'number',
@@ -217,9 +214,7 @@ AuthorCard.propTypes = {
     ['publication', 'hoverEffect'],
     'string',
   ),
-  // *
-  // component related props
-  // *
+
   variation: PropTypes.oneOf([
     'Home',
     'PublicationHome',
@@ -227,5 +222,45 @@ AuthorCard.propTypes = {
     'ArticleTitle',
   ]).isRequired,
   hoverEffect: PropTypes.bool,
+  id: PropTypes.string.isRequired,
 };
-export default AuthorCard;
+
+function mapStateToProps(state, ownProps) {
+  const { id, hoverEffect } = ownProps;
+  const { userInfo, articleInfo } = state.testState[id];
+  const componentProps = {
+    authorName: userInfo.name,
+    authorLink: userInfo.authorLink,
+    member: userInfo.member,
+
+    articleLink: articleInfo.articleLink,
+    title: articleInfo.title,
+    subtitle: articleInfo.subtitle,
+
+    creationDate: articleInfo.creationDate,
+    lastModified: articleInfo.lastModified,
+    wordCount: articleInfo.wordCount,
+    isPremium: articleInfo.premium,
+  };
+
+  if (articleInfo.publicationInfo) {
+    const { publicationInfo } = articleInfo;
+    componentProps.publication = publicationInfo.publication;
+    componentProps.publicationLink = publicationInfo.publicationLink;
+    componentProps.publicationFollowers = publicationInfo.publicationFollowers;
+    componentProps.publicationLogo = publicationInfo.publicationLogo;
+    componentProps.publicationDescription =
+      publicationInfo.publicationDescription;
+  }
+
+  if (hoverEffect) {
+    componentProps.authorFollowers = userInfo.authorFollowers;
+    componentProps.authorDescription = userInfo.authorDescription;
+    if (componentProps.member) {
+      componentProps.memberJoinedDate = userInfo.memberJoinedDate;
+    }
+  }
+  return componentProps;
+}
+
+export default connect(mapStateToProps)(AuthorCard);
