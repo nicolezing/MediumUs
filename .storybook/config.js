@@ -1,13 +1,18 @@
-import { configure } from '@storybook/react';
+import { configure, addDecorator } from '@storybook/react';
 import React from 'react';
 import GlobalStyle from '../app/global-styles';
-import { addDecorator } from '@storybook/react';
+import { Provider } from 'react-redux';
+import { testState } from '../app/store/reducers/testState';
+import { createStore, combineReducers } from 'redux';
 
 addDecorator(s => (
   <>
     <GlobalStyle />
-    {s()}
+    <Provider store={createStore(combineReducers({ testState }))}>
+      {s()}
+    </Provider>
   </>
 ));
+
 // automatically import all files ending in *.stories.js or *.stories.mdx
 configure(require.context('../app', true, /\.stories\.(js|mdx)$/), module);
