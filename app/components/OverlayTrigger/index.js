@@ -38,8 +38,6 @@ function OverlayTrigger(props) {
   }
 
   const handleClickOutsideTrigger = () => {
-    console.log('mousedown');
-    console.log(findDOMNode(trigger.current), isVisible);
     if (findDOMNode(trigger.current) && isVisible) {
       onTriggerHide();
     }
@@ -62,10 +60,7 @@ function OverlayTrigger(props) {
 
   const onTriggerShow = () => {
     clearTimeout(timer);
-    console.log('clicked in ');
     if (!isVisible) {
-      console.log('clicked show');
-
       setPositionStates();
       setVisibility(true);
     }
@@ -75,8 +70,6 @@ function OverlayTrigger(props) {
     clearTimeout(timer);
     if (isVisible && !mouseOnPopover) {
       // if current state is visible, and mouse is not on popover, it's time to invisible
-      console.log('clicked hide');
-
       setVisibility(false);
     }
   };

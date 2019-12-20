@@ -179,3 +179,4 @@ function mapStateToProps(state, ownProps) {
   return componentProps;
 }
 export default connect(mapStateToProps)(ArticlePoster);
+export { ArticlePoster };

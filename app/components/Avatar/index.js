@@ -55,3 +55,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps)(Avatar);
+// for storybook props
+export { Avatar };
