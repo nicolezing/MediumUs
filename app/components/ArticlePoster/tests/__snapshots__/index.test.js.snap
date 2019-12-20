@@ -6,7 +6,7 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
   name="Lisa Armstrong"
 >
   <a
-    aria-label="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
+    aria-label="Face Filters for Instagram and Snapshot Are the New Frontier of Surrealist Art"
     class="styledWrappers__Cover-p14edy-1 jAuwIe"
     href="./"
   />
@@ -15,17 +15,15 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
     name="Lisa Armstrong"
   >
     <div
-      class="StyledWrapper__TitleWrapper-sc-111jh54-0 bxiuLE"
-      title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
+      class="StyledWrapper__Wrapper-sc-111jh54-0 jeerqJ"
     >
       <a
         href="./"
       >
         <h1
           class="StyledWrapper__StyledTitle-sc-111jh54-1 gYdKdB"
-          title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
         >
-          Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art
+          Face Filters for Instagram and Snapshot Are the New Frontier of Surrealist Art
            
         </h1>
       </a>
@@ -34,7 +32,6 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
       >
         <div
           class="StyledWrapper__StyledSubtitle-sc-111jh54-2 bomnVF"
-          title="Face Filters for Instagram and Snapchat Are the New Frontier of Surrealist Art"
         >
           And one last warning about their stupidly popular little brother
         </div>
@@ -44,7 +41,7 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
       class="styledWrappers__AuthorWrapper-p14edy-3 cVrZcl"
     >
       <div
-        class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 eNosqP"
+        class="AuthorCardsWrappers__StyledWrapper-sc-1v4o32t-0 fxYLcq"
       >
         <a
           href="./"
@@ -72,33 +69,37 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
               <img
                 alt="Go to the profile of Lisa Armstrong"
                 class="avatarStyle__AvtStyledImg-sc-1o8l9nu-0 dujRNa"
-                src="app/staticData/images/user-profile001.png"
+                id="ID001"
+                name="Lisa Armstrong"
+                src="IMAGE_MOCK"
               />
             </div>
           </div>
         </a>
         <div
-          class="AuthorCardsWrappers__StyledTextContainer-sc-1v4o32t-14 cFKdyf"
+          class="AuthorCardsWrappers__StyledInfoWrapper-sc-1v4o32t-15 ejiuPg"
         >
           <div
-            class="AuthorCardsWrappers__UpTextWrapper-sc-1v4o32t-1 hjAOpW"
+            class="AuthorCardsWrappers__AuthorInfoWrapper-sc-1v4o32t-1 fzmaxg"
           >
             <a
-              class="AuthorCardsWrappers__StyledA-sc-1v4o32t-16 eMsgoW"
+              class="AuthorCardsWrappers__StyledA-sc-1v4o32t-17 bTBtut"
               href="./"
             >
               Lisa Armstrong
             </a>
              in 
             <a
-              class="AuthorCardsWrappers__StyledA-sc-1v4o32t-16 eMsgoW"
+              class="AuthorCardsWrappers__StyledA-sc-1v4o32t-17 bTBtut"
               href="./"
             >
               OneZero
             </a>
-            <span>
+            <span
+              class="AuthorCardsWrappers__StyledButtonWrapper-sc-1v4o32t-2 gYMvBY"
+            >
               <button
-                class="OutlinedStyleButton-sc-18pjqv6-0 mypDe"
+                class="OutlinedStyleButton-sc-18pjqv6-0 kJmWQL"
                 type="outlined"
               >
                 <span>
@@ -108,21 +109,21 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
             </span>
           </div>
           <div
-            class="AuthorCardsWrappers__DownTextWrapper-sc-1v4o32t-15 gpWgVx"
+            class="AuthorCardsWrappers__ReadingInfoWrapper-sc-1v4o32t-16 kKiKQr"
           >
             <time>
               Nov 08
             </time>
             <span
-              class="AuthorCardsWrappers__StyledSpanSpecial-sc-1v4o32t-17 gTquLW"
+              class="AuthorCardsWrappers__StyledSpan-sc-1v4o32t-18 iFZSbm"
             >
               ·
             </span>
             <span>
-              13 min read
+              5 min read
             </span>
             <span
-              class="AuthorCardsWrappers__StyledSpanSpecial-sc-1v4o32t-17 gTquLW"
+              class="AuthorCardsWrappers__StyledSpan-sc-1v4o32t-18 iFZSbm"
             >
               <svg
                 height="15"
@@ -145,7 +146,6 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
         >
           <button
             class="IconStyledButton-sc-1u1vzbn-0 hdGyG"
-            type="twitterIcon"
           >
             <svg
               fill="inherit"
@@ -163,7 +163,6 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
         >
           <button
             class="IconStyledButton-sc-1u1vzbn-0 hdGyG"
-            type="linkedInIcon"
           >
             <svg
               fill="inherit"
@@ -188,7 +187,6 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
         >
           <button
             class="IconStyledButton-sc-1u1vzbn-0 hdGyG"
-            type="facebookSquareIcon"
           >
             <svg
               fill="inherit"
@@ -203,7 +201,6 @@ exports[`<ArticlePoster /> Should render and match the snapshot 1`] = `
         </a>
         <button
           class="IconStyledButton-sc-1u1vzbn-0 hdGyG"
-          type="bookmarkIcon"
         >
           <svg
             fill="inherit"

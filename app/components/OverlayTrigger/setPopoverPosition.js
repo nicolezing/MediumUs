@@ -25,7 +25,6 @@ const setPosition = (
 
     if (topRemainedMargin >= need) {
       // render above trigger;
-      console.log('above, triggerSize.height ', triggerSize.height);
       pY =
         -need -
         triggerSize.height -
@@ -42,15 +41,9 @@ const setPosition = (
   const leftRemainedMargin = triggerSize.left + triggerSize.width / 2;
   const middle = (triggerSize.width - popoverSize.width) / 2;
   const need = popoverSize.width / 2 + MARGIN_NEEDED;
-  console.log('triggerSize ', triggerSize);
-  console.log('popoverSize ', popoverSize);
-  console.log('scroll ', scrollX, scrollY);
-  console.log('margins ', leftRemainedMargin, rightRemainedMargin);
-  console.log('middle ', middle);
-  console.log('need ', need);
+
   if (rightRemainedMargin < need && leftRemainedMargin > need) {
     // render to left
-    console.log('left');
     aX =
       popoverSize.width +
       MARGIN_NEEDED -
@@ -63,17 +56,13 @@ const setPosition = (
       (triggerSize.left + scrollX);
   } else if (leftRemainedMargin < need && rightRemainedMargin > need) {
     // render to right
-    console.log('right');
-
     aX = leftRemainedMargin - ARROW_DIMENSION / 2 - MARGIN_NEEDED;
     pX = MARGIN_NEEDED;
   } else {
     // render to middle
-    console.log('middle');
     aX = popoverSize.width / 2 - ARROW_DIMENSION / 2;
     pX = middle + (triggerSize.left + scrollX);
   }
-  console.log('result : ', aX, aY, pX, pY, place);
   return { aX, aY, pX, pY, place };
 };
 

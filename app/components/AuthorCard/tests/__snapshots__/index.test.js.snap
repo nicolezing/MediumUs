@@ -3,44 +3,44 @@
 exports[`<AuthorCard /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="AuthorCardsWrappers__StyledContainer-sc-1v4o32t-0 eNosqP"
+    class="AuthorCardsWrappers__StyledWrapper-sc-1v4o32t-0 fxYLcq"
   >
     <div
-      class="AuthorCardsWrappers__StyledTextContainer-sc-1v4o32t-10 cVADbr"
+      class="AuthorCardsWrappers__StyledInfoWrapper-sc-1v4o32t-11 jBdzHu"
     >
       <div
-        class="AuthorCardsWrappers__UpTextWrapper-sc-1v4o32t-1 hjAOpW"
+        class="AuthorCardsWrappers__AuthorInfoWrapper-sc-1v4o32t-1 fzmaxg"
       >
         <a
-          class="AuthorCardsWrappers__StyledA-sc-1v4o32t-12 cHTpeG"
+          class="AuthorCardsWrappers__StyledA-sc-1v4o32t-13 flLGbO"
           href="./"
         >
           Lisa Armstrong
         </a>
          in 
         <a
-          class="AuthorCardsWrappers__StyledA-sc-1v4o32t-12 cHTpeG"
+          class="AuthorCardsWrappers__StyledA-sc-1v4o32t-13 flLGbO"
           href="./"
         >
           OneZero
         </a>
       </div>
       <div
-        class="AuthorCardsWrappers__DownTextWrapper-sc-1v4o32t-11 bDIlkS"
+        class="AuthorCardsWrappers__ReadingInfoWrapper-sc-1v4o32t-12 bsKmYC"
       >
         <time>
           Nov 08
         </time>
         <span
-          class="AuthorCardsWrappers__StyledSpanSpecial-sc-1v4o32t-13 cvgNJb"
+          class="AuthorCardsWrappers__StyledSpan-sc-1v4o32t-14 fiOFZf"
         >
           ·
         </span>
         <span>
-          13 min read
+          5 min read
         </span>
         <span
-          class="AuthorCardsWrappers__StyledSpanSpecial-sc-1v4o32t-13 cvgNJb"
+          class="AuthorCardsWrappers__StyledSpan-sc-1v4o32t-14 fiOFZf"
         >
           <svg
             height="15"

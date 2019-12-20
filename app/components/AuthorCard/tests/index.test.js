@@ -7,41 +7,10 @@
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import renderWithRedux from '../../../../internals/testing/renderWithRedux';
 import 'jest-dom/extend-expect'; // add some helpful assertions
 import AuthorCard from '../index';
 import getAuthorInfoDisplayPropertiesByVariation from '../getAuthorInfoDisplayPropertiesByVariation';
-import authorInfo from '../stories/exampleData';
-
-const authorCardInfo = {
-  authorLink: './',
-  authorName: 'Lisa Armstrong',
-  avatarImg: './',
-  member: true,
-  memberJoinedDate: '03/11/2019',
-
-  premium: true,
-  publicationLink: './',
-  publication: 'OneZero',
-  publicationLogo:
-    'https://cdn-images-1.medium.com/fit/c/120/120/1*88Z0O0wD4KOrk6Y5EceZog.png',
-  creationDate: '11/08/2019 05:23:31',
-  lastModified: '12/09/2019 15:45:01',
-  wordCount: 2131,
-  authorDescription:
-    'Web developer. Open source lover. Editor @ Bits and Pieces.',
-  authorFollowers: 245,
-
-  publicationFollowers: 1432,
-  publicationDescription:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-};
-
-test('AuthorInfo has desired props', () => {
-  expect(authorInfo).toHaveProperty('authorName');
-  expect(authorInfo).toHaveProperty('authorLink');
-  expect(authorInfo).toHaveProperty('creationDate');
-});
 
 test('getAuthorInfoDisplayPropertiesByVariation has desired configuration', () => {
   const configuration = getAuthorInfoDisplayPropertiesByVariation('TopicHome');
@@ -53,51 +22,45 @@ test('getAuthorInfoDisplayPropertiesByVariation has desired configuration', () =
 describe('<AuthorCard />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<AuthorCard {...authorInfo} variation="PublicationHome" />);
+    renderWithRedux(<AuthorCard id="ID001" variation="PublicationHome" />);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Expect to not log errors in console with hoverEffect', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(
-      <AuthorCard
-        {...authorCardInfo}
-        variation="PublicationHome"
-        hoverEffect
-      />,
+    renderWithRedux(
+      <AuthorCard id="ID001" variation="PublicationHome" hoverEffect />,
     );
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Expect to have authorInfo.authorName and authorInfo.Publication in html', () => {
-    const { getByText } = render(
-      <AuthorCard {...authorInfo} variation="ArticleTitle" />,
+    const { getByText } = renderWithRedux(
+      <AuthorCard id="ID001" variation="ArticleTitle" />,
     );
-    expect(getByText(authorInfo.authorName)).toBeInTheDocument();
-    expect(getByText(authorInfo.publication)).toBeInTheDocument();
+    expect(getByText('Lisa Armstrong')).toBeInTheDocument();
+    expect(getByText('OneZero')).toBeInTheDocument();
     expect(getByText('Follow')).toBeInTheDocument();
   });
 
   it('Should render and match the snapshot', () => {
-    const { container } = render(
-      <AuthorCard {...authorInfo} variation="Home" />,
+    const { container } = renderWithRedux(
+      <AuthorCard id="ID001" variation="Home" />,
     );
     expect(container).toMatchSnapshot();
   });
 
   it('Should have in publication on the page', () => {
-    const { container } = render(
-      <AuthorCard {...authorInfo} variation="TopicHome" />,
+    const { container } = renderWithRedux(
+      <AuthorCard id="ID001" variation="TopicHome" />,
     );
-    expect(container.getElementsByTagName('a')[2].innerHTML).toEqual(
-      authorInfo.publication,
-    );
+    expect(container.getElementsByTagName('a')[2].innerHTML).toEqual('OneZero');
   });
 
   it('Expect this to throw error', () => {
     console.error.mockImplementation(() => {});
     expect(() =>
-      render(<AuthorCard {...authorInfo} variation="InvalidVariation" />),
+      renderWithRedux(<AuthorCard id="ID001" variation="InvalidVariation" />),
     ).toThrow();
   });
 
