@@ -1,13 +1,12 @@
-import _ from 'lodash';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import ArticlePoster from '..';
-import { articleInfo, authorCardInfo } from './exampleData';
+import { ArticlePoster as ArticlePosterProps } from '..';
 
 <Meta title="Components|ArticlePoster" component={ArticlePoster} />
 
 # Article Poster
 
-<Props of={ArticlePoster} />
+<Props of={ArticlePosterProps} />
 
 (adjust your screen width to check responsive output)
 
@@ -15,11 +14,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="HomeHeroLeft">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="HomeHeroLeft"
-    />
+    <ArticlePoster id="ID001" variation="HomeHeroLeft" hoverEffect />
   </Story>
 </Preview>
 
@@ -29,11 +24,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="HomeHeroRight">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="HomeHeroRight"
-    />
+    <ArticlePoster id="ID001" variation="HomeHeroRight" hoverEffect />
   </Story>
 </Preview>
 
@@ -41,11 +32,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="HomeHeroMid">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="HomeHeroMid"
-    />
+    <ArticlePoster id="ID001" variation="HomeHeroMid" hoverEffect />
   </Story>
 </Preview>
 
@@ -53,11 +40,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="HomeList">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="HomeList"
-    />
+    <ArticlePoster id="ID001" variation="HomeList" hoverEffect />
   </Story>
 </Preview>
 
@@ -65,11 +48,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="TopicHomepageHero">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="TopicHomepageHero"
-    />
+    <ArticlePoster id="ID001" variation="TopicHomepageHero" />
   </Story>
 </Preview>
 
@@ -77,11 +56,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="TopicHomepageList">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="TopicHomepageList"
-    />
+    <ArticlePoster id="ID001" variation="TopicHomepageList" />
   </Story>
 </Preview>
 
@@ -89,11 +64,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="PublicationHomepageListX2">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="PublicationHomepageListX2"
-    />
+    <ArticlePoster id="ID001" variation="PublicationHomepageListX2" />
   </Story>
 </Preview>
 
@@ -101,11 +72,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="PublicationHomepageListX3">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="PublicationHomepageListX3"
-    />
+    <ArticlePoster id="ID001" variation="PublicationHomepageListX3" />
   </Story>
 </Preview>
 
@@ -113,11 +80,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="PublicationHomepageHero">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="PublicationHomepageHero"
-    />
+    <ArticlePoster id="ID001" variation="PublicationHomepageHero" />
   </Story>
 </Preview>
 
@@ -125,11 +88,7 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="ArticlePageTitle">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="ArticlePageTitle"
-    />
+    <ArticlePoster id="ID001" variation="ArticlePageTitle" />
   </Story>
 </Preview>
 
@@ -137,10 +96,6 @@ import { articleInfo, authorCardInfo } from './exampleData';
 
 <Preview>
   <Story name="ArticlePageRecommendation">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="ArticlePageRecommendation"
-    />
+    <ArticlePoster id="ID001" variation="ArticlePageRecommendation" />
   </Story>
 </Preview>

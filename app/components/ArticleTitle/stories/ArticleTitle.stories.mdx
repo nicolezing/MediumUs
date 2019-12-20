@@ -1,18 +1,18 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import ArticleTitle from '..';
-import articleInfo from './exampleData';
+import { ArticleTitle as ArticleTitleProps } from '..';
 
 <Meta title="Components|ArticleTitle" component={ArticleTitle} />
 
 # ArticleTitle
 
-<Props of={ArticleTitle} />
+<Props of={ArticleTitleProps} />
 
 ## HomeHeroLeft
 
 <Preview>
   <Story name="HomeHeroLeft">
-    <ArticleTitle {...articleInfo} variation="HomeHeroLeft" />
+    <ArticleTitle id="ID001" variation="HomeHeroLeft" />
   </Story>
 </Preview>
 
@@ -20,7 +20,7 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="HomeHeroMid">
-    <ArticleTitle {...articleInfo} variation="HomeHeroMid" />
+    <ArticleTitle id="ID001" variation="HomeHeroMid" />
   </Story>
 </Preview>
 
@@ -28,7 +28,7 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="HomeHeroRight">
-    <ArticleTitle {...articleInfo} variation="HomeHeroRight" />
+    <ArticleTitle id="ID001" variation="HomeHeroRight" />
   </Story>
 </Preview>
 
@@ -36,7 +36,7 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="HomeList">
-    <ArticleTitle {...articleInfo} variation="HomeList" />
+    <ArticleTitle id="ID001" variation="HomeList" />
   </Story>
 </Preview>
 
@@ -44,7 +44,7 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="Sidebar">
-    <ArticleTitle {...articleInfo} variation="Sidebar" />
+    <ArticleTitle id="ID001" variation="Sidebar" />
   </Story>
 </Preview>
 
@@ -52,7 +52,7 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="TopicHomepageHero">
-    <ArticleTitle {...articleInfo} variation="TopicHomepageHero" />
+    <ArticleTitle id="ID001" variation="TopicHomepageHero" />
   </Story>
 </Preview>
 
@@ -60,7 +60,7 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="TopicHomepageList">
-    <ArticleTitle {...articleInfo} variation="TopicHomepageList" />
+    <ArticleTitle id="ID001" variation="TopicHomepageList" />
   </Story>
 </Preview>
 
@@ -68,7 +68,7 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="PublicationHomepageHero">
-    <ArticleTitle {...articleInfo} variation="PublicationHomepageHero" />
+    <ArticleTitle id="ID001" variation="PublicationHomepageHero" />
   </Story>
 </Preview>
 
@@ -76,7 +76,7 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="PublicationHomepageList">
-    <ArticleTitle {...articleInfo} variation="PublicationHomepageList" />
+    <ArticleTitle id="ID001" variation="PublicationHomepageList" />
   </Story>
 </Preview>
 
@@ -84,7 +84,7 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="ArticlePageTitle">
-    <ArticleTitle {...articleInfo} variation="ArticlePageTitle" />
+    <ArticleTitle id="ID001" variation="ArticlePageTitle" />
   </Story>
 </Preview>
 
@@ -92,6 +92,6 @@ import articleInfo from './exampleData';
 
 <Preview>
   <Story name="ArticlePageRecommendation">
-    <ArticleTitle {...articleInfo} variation="ArticlePageRecommendation" />
+    <ArticleTitle id="ID001" variation="ArticlePageRecommendation" />
   </Story>
 </Preview>
