@@ -132,7 +132,27 @@ export async function update(id: ArticleId, update: Partial<ArticleData>) {
   });
 }
 
-export function unpublish() {}
+/**
+ * Unpublishes an article. Fails if the specified article is not found.
+ */
+export async function unpublish(id: ArticleId) {
+  const docRef = getDb()
+    .collection(COLLECTION_ARTICLE)
+    .doc(id);
+  const now = getTime();
+  return getDb().runTransaction(async transaction => {
+    const doc = await transaction.get(docRef);
+    if (!doc.exists) throw ERROR_ARTICLE_NOT_FOUND;
+    if (doc.data()!.state === ArticleState.DRAFT) {
+      return transaction.update(docRef, {});
+    }
+
+    transaction.update(docRef, {
+      state: ArticleState.DRAFT,
+      updatedAt: now,
+    });
+  });
+}
 
 /**
  * Removes the specified article. Removing a non-existent article is a legal operation.
