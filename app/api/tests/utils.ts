@@ -8,7 +8,9 @@ import { ArticleId, Article, COLLECTION_ARTICLE } from '../articles';
 
 import { use } from 'chai';
 import * as chaiDatetime from 'chai-datetime';
+import * as chaiAsPromised from 'chai-as-promised';
 use(chaiDatetime);
+use(chaiAsPromised);
 
 const PROJECT_ID = 'medium-us-test-firestore';
 
@@ -51,7 +53,7 @@ export async function getArticle(
     .collection(COLLECTION_ARTICLE)
     .doc(articleId)
     .get();
-  return ts2Date(doc.data()) as Article;
+  return { ...ts2Date(doc.data()), id: articleId } as Article;
 }
 
 export async function insertArticles(

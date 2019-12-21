@@ -1,10 +1,14 @@
 import * as uuid from 'uuid/v4';
 import { firestore } from 'firebase';
-import { mapValues } from 'lodash';
+import { mapValues, isEmpty } from 'lodash';
 import { getDb, getAuth } from './index';
 import { UserId } from './users';
 import { getTime } from './utils';
-import { DocumentData, DocumentSnapshot } from '@firebase/firestore-types';
+import {
+  DocumentData,
+  DocumentSnapshot,
+  Transaction,
+} from '@firebase/firestore-types';
 
 export const COLLECTION_ARTICLE = 'articles';
 
@@ -36,35 +40,7 @@ export type ArticleMeta = {
 
 export type Article = { id: ArticleId } & ArticleData & ArticleMeta;
 
-function articleToDoc(article: ArticleData & ArticleMeta): object {
-  return mapValues(article, (v, k) => {
-    switch (k) {
-      case 'cover':
-        return (v as URL).href;
-      default:
-        return v;
-    }
-  });
-}
-
-function articleFromDoc(doc: DocumentSnapshot<DocumentData>): Article {
-  const data = doc.data();
-  return {
-    id: doc.id,
-    ...(mapValues(data, (v, k) => {
-      switch (k) {
-        case 'cover':
-          return new URL(v);
-        case 'createdAt':
-        case 'updatedAt':
-        case 'publishedAt':
-          return (v as firestore.Timestamp).toDate();
-        default:
-          return v;
-      }
-    }) as (ArticleData & ArticleMeta)),
-  };
-}
+export const ERROR_ARTICLE_NOT_FOUND = 'Article not found';
 
 // Draft operations
 
@@ -102,8 +78,6 @@ export async function listUserDrafts(): Promise<Array<ArticleId>> {
   return collectionSnapshot.docs.map(doc => doc.id);
 }
 
-export function updateDraft() {}
-
 export function removeDraft() {}
 
 export function publishDraft() {}
@@ -120,6 +94,24 @@ export async function read(id: ArticleId): Promise<Article> {
       .doc(id)
       .get(),
   );
+}
+
+/**
+ * Updates ArticleData fields of the specified article.
+ */
+export async function update(id: ArticleId, update: Partial<ArticleData>) {
+  if (isEmpty(update)) return;
+
+  const docRef = getDb()
+    .collection(COLLECTION_ARTICLE)
+    .doc(id);
+  const now = getTime();
+  return getDb().runTransaction(async transaction => {
+    const doc = await transaction.get(docRef);
+    if (!doc.exists) throw ERROR_ARTICLE_NOT_FOUND;
+
+    transaction.update(docRef, { ...update, updatedAt: now });
+  });
 }
 
 export function unpublish() {}
@@ -153,3 +145,33 @@ export function listByPublications() {}
 export function listHomePageRecommendations() {}
 
 export function listPersonalRecommendations() {}
+
+function articleToDoc(article: ArticleData & ArticleMeta): object {
+  return mapValues(article, (v, k) => {
+    switch (k) {
+      case 'cover':
+        return (v as URL).href;
+      default:
+        return v;
+    }
+  });
+}
+
+function articleFromDoc(doc: DocumentSnapshot<DocumentData>): Article {
+  const data = doc.data();
+  return {
+    id: doc.id,
+    ...(mapValues(data, (v, k) => {
+      switch (k) {
+        case 'cover':
+          return new URL(v);
+        case 'createdAt':
+        case 'updatedAt':
+        case 'publishedAt':
+          return (v as firestore.Timestamp).toDate();
+        default:
+          return v;
+      }
+    }) as (ArticleData & ArticleMeta)),
+  };
+}
