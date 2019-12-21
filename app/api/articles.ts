@@ -78,8 +78,6 @@ export async function listUserDrafts(): Promise<Array<ArticleId>> {
   return collectionSnapshot.docs.map(doc => doc.id);
 }
 
-export function removeDraft() {}
-
 export function publishDraft() {}
 
 // Single article operations
@@ -116,7 +114,15 @@ export async function update(id: ArticleId, update: Partial<ArticleData>) {
 
 export function unpublish() {}
 
-export function remove() {}
+/**
+ * Removes the specified article. Removing a non-existent article is a legal operation.
+ */
+export function remove(id: ArticleId) {
+  return getDb()
+    .collection(COLLECTION_ARTICLE)
+    .doc(id)
+    .delete();
+}
 
 export function bookmark() {}
 

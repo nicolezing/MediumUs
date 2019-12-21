@@ -67,3 +67,10 @@ export async function insertArticles(
   );
   return batch.commit();
 }
+
+export async function listArticleIds(
+  db: FirebaseFirestore,
+): Promise<Array<ArticleId>> {
+  const snapshot = await db.collection(COLLECTION_ARTICLE).get();
+  return snapshot.docs.map(doc => doc.id);
+}

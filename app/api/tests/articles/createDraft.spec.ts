@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { authedApp, freezeTime, getArticle } from '../utils';
-import { createDraft, COLLECTION_ARTICLE, ArticleState } from '../../articles';
+import { authedApp, freezeTime, getArticle, listArticleIds } from '../utils';
+import { createDraft, ArticleState } from '../../articles';
 
 const ARTICLE_TITLE = 'title';
 const ARTICLE_SUBTITLE = 'subtitle';
@@ -22,11 +22,8 @@ describe('articles.createDraft', () => {
       }),
     ]);
 
-    const snapshot = await db.collection(COLLECTION_ARTICLE).get();
-    expect(snapshot.docs.map(doc => doc.id)).to.include.members([
-      articleId1,
-      articleId2,
-    ]);
+    const articleIds = await listArticleIds(db);
+    expect(articleIds).to.include.members([articleId1, articleId2]);
   });
 
   it('should forward article data', async () => {
