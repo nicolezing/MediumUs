@@ -9,6 +9,9 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 // import { connect } from 'react-redux';
 import messages from './messages';
+import { Wrapper } from './Wrappers';
+import Header from './Header';
+import MainHero from './MainHero';
 // import OverlayTrigger from '../../components/OverlayTrigger';
 // import ArticlePoster from '../../components/ArticlePoster';
 // import Avatar from '../../components/Avatar';
@@ -18,10 +21,13 @@ import messages from './messages';
 
 function HomePage() {
   return (
-    <div>
-      <h1>
+    <Wrapper>
+      {/* <h1>
         <FormattedMessage {...messages.header} />
-      </h1>
+      </h1> */}
+      <Header />
+      <div>NavBar</div>
+      <MainHero />
       {/* <Avatar id="loggedIn" />
       <OverlayTrigger
         popoverContent={<UserSettingList id="loggedIn" />}
@@ -44,7 +50,7 @@ function HomePage() {
       />
       <ArticlePoster id="ID002" variation="HomeList" hoverEffect />
       <ArticlePoster id="ID002" variation="ArticlePageTitle" hoverEffect /> */}
-    </div>
+    </Wrapper>
   );
 }
 
