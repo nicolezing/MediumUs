@@ -41,7 +41,6 @@ export type ArticleMeta = {
 export type Article = { id: ArticleId } & ArticleData & ArticleMeta;
 
 export const ERROR_ARTICLE_NOT_FOUND = 'Article not found';
-
 // Draft operations
 
 /**
@@ -78,7 +77,28 @@ export async function listUserDrafts(): Promise<Array<ArticleId>> {
   return collectionSnapshot.docs.map(doc => doc.id);
 }
 
-export function publishDraft() {}
+/**
+ * Publishes an article draft. Fails if the specified article is not found.
+ */
+export function publishDraft(id: ArticleId) {
+  const docRef = getDb()
+    .collection(COLLECTION_ARTICLE)
+    .doc(id);
+  const now = getTime();
+  return getDb().runTransaction(async transaction => {
+    const doc = await transaction.get(docRef);
+    if (!doc.exists) throw ERROR_ARTICLE_NOT_FOUND;
+    if (doc.data()!.state === ArticleState.PUBLISHED) {
+      return transaction.update(docRef, {});
+    }
+
+    transaction.update(docRef, {
+      state: ArticleState.PUBLISHED,
+      updatedAt: now,
+      publishedAt: now,
+    });
+  });
+}
 
 // Single article operations
 
