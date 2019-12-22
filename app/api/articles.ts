@@ -4,19 +4,12 @@ import { mapValues, isEmpty } from 'lodash';
 import { getDb, getAuth } from './index';
 import { UserId } from './users';
 import { getTime } from './utils';
-import {
-  DocumentData,
-  DocumentSnapshot,
-  Transaction,
-} from '@firebase/firestore-types';
+import { DocumentData, DocumentSnapshot } from '@firebase/firestore-types';
 
 export const COLLECTION_ARTICLE = 'articles';
 
 // The unique identifier of an article.
 export type ArticleId = string;
-function newArticleId(): ArticleId {
-  return uuid();
-}
 
 export enum ArticleState {
   DRAFT,
@@ -128,7 +121,7 @@ export async function update(id: ArticleId, update: Partial<ArticleData>) {
     const doc = await transaction.get(docRef);
     if (!doc.exists) throw ERROR_ARTICLE_NOT_FOUND;
 
-    transaction.update(docRef, { ...update, updatedAt: now });
+    transaction.update(docRef, { ...articleToDoc(update), updatedAt: now });
   });
 }
 
@@ -192,7 +185,11 @@ export function listHomePageRecommendations() {}
 
 export function listPersonalRecommendations() {}
 
-function articleToDoc(article: ArticleData & ArticleMeta): object {
+function newArticleId(): ArticleId {
+  return uuid();
+}
+
+function articleToDoc(article: Partial<ArticleData & ArticleMeta>): object {
   return mapValues(article, (v, k) => {
     switch (k) {
       case 'cover':
