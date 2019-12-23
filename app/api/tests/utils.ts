@@ -5,6 +5,7 @@ import { FirebaseFirestore } from '@firebase/firestore-types';
 import { setDb, setAuth } from '../index';
 import { setTimesource, DEFAULT_TIMESOURCE } from '../utils';
 import { ArticleId, Article, COLLECTION_ARTICLE } from '../articles';
+import { UserId, COLLECTION_USER, User } from '../users';
 
 import { use } from 'chai';
 import * as chaiDatetime from 'chai-datetime';
@@ -28,6 +29,36 @@ export function authedApp(auth: { uid: string }) {
   return app.firestore();
 }
 
+export function insertUser(db: FirebaseFirestore, uid: UserId) {
+  const now = new Date();
+  return db
+    .collection(COLLECTION_USER)
+    .doc(uid)
+    .set({
+      createdAt: now,
+      updatedAt: now,
+      bookmarkedArticles: [],
+    });
+}
+
+export async function getUser(
+  db: FirebaseFirestore,
+  uid: UserId,
+): Promise<User> {
+  const doc = await db
+    .collection(COLLECTION_USER)
+    .doc(uid)
+    .get();
+  return { ...ts2Date(doc.data()), id: uid } as User;
+}
+
+export async function listUserIds(
+  db: FirebaseFirestore,
+): Promise<Array<UserId>> {
+  const snapshot = await db.collection(COLLECTION_USER).get();
+  return snapshot.docs.map(doc => doc.id);
+}
+
 export function freezeTime() {
   const now = new Date();
   setTimesource(() => now);
@@ -35,14 +66,6 @@ export function freezeTime() {
     now,
     restore: () => setTimesource(DEFAULT_TIMESOURCE),
   };
-}
-
-function ts2Date(obj: object | undefined) {
-  if (obj) {
-    return mapValues(obj, (v: any) =>
-      v instanceof Object && v.toDate ? v.toDate() : v,
-    );
-  }
 }
 
 export async function getArticle(
@@ -73,4 +96,12 @@ export async function listArticleIds(
 ): Promise<Array<ArticleId>> {
   const snapshot = await db.collection(COLLECTION_ARTICLE).get();
   return snapshot.docs.map(doc => doc.id);
+}
+
+function ts2Date(obj: object | undefined) {
+  if (obj) {
+    return mapValues(obj, (v: any) =>
+      v instanceof Object && v.toDate ? v.toDate() : v,
+    );
+  }
 }

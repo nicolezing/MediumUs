@@ -2,7 +2,7 @@ import * as uuid from 'uuid/v4';
 import { firestore } from 'firebase';
 import { mapValues, isEmpty } from 'lodash';
 import { getDb, getAuth } from './index';
-import { UserId } from './users';
+import { UserId, COLLECTION_USER, assertLoggedIn } from './users';
 import { getTime } from './utils';
 import { DocumentData, DocumentSnapshot } from '@firebase/firestore-types';
 
@@ -41,6 +41,7 @@ export const ERROR_ARTICLE_NOT_FOUND = 'Article not found';
  * Returns the ID of the newly created article draft.
  */
 export async function createDraft(request: ArticleData): Promise<ArticleId> {
+  const uid = assertLoggedIn();
   const articleId = newArticleId();
   const now = getTime();
   await getDb()
@@ -49,7 +50,7 @@ export async function createDraft(request: ArticleData): Promise<ArticleId> {
     .set(
       articleToDoc({
         ...request,
-        author: getAuth().currentUser!.uid,
+        author: uid,
         createdAt: now,
         updatedAt: now,
         state: ArticleState.DRAFT,
@@ -62,9 +63,10 @@ export async function createDraft(request: ArticleData): Promise<ArticleId> {
  * Returns IDs of all article drafts for the current user.
  */
 export async function listUserDrafts(): Promise<Array<ArticleId>> {
+  const uid = assertLoggedIn();
   const collectionSnapshot = await getDb()
     .collection(COLLECTION_ARTICLE)
-    .where('author', '==', getAuth().currentUser!.uid)
+    .where('author', '==', uid)
     .where('state', '==', ArticleState.DRAFT)
     .get();
   return collectionSnapshot.docs.map(doc => doc.id);
@@ -157,7 +159,38 @@ export function remove(id: ArticleId) {
     .delete();
 }
 
-export function bookmark() {}
+export function bookmark(articleId: ArticleId) {
+  const uid = assertLoggedIn();
+  const userRef = getDb()
+    .collection(COLLECTION_USER)
+    .doc(uid);
+  const articleRef = getDb()
+    .collection(COLLECTION_ARTICLE)
+    .doc(articleId);
+
+  const now = getTime();
+  return getDb().runTransaction(async transaction => {
+    const article = await transaction.get(articleRef);
+    const user = await transaction.get(userRef);
+
+    if (article.exists) {
+      transaction.update(articleRef, {});
+    }
+
+    if (!user.exists) {
+      return;
+    }
+
+    if (articleId in user.data()!.bookmarkedArticles) {
+      return transaction.update(userRef, {});
+    }
+
+    transaction.update(userRef, {
+      bookmarkedArticles: [...user.data()!.bookmarkedArticles, articleId],
+      updatedAt: now,
+    });
+  });
+}
 
 export function unbookmark() {}
 

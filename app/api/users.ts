@@ -48,6 +48,11 @@ export type User = { id: UserId } & UserProfile & UserMeta & UserRelations;
 export const ERROR_NOT_SIGNED_IN = 'No account signed in.';
 export const ERROR_USER_NOT_FOUND = 'User not found.';
 
+export function assertLoggedIn() {
+  if (!getAuth().currentUser) throw ERROR_NOT_SIGNED_IN;
+  return getAuth().currentUser!.uid;
+}
+
 // Current user operations
 
 /**
@@ -68,9 +73,7 @@ export async function signOut() {
  * Updates the account profile for the currently logged in user.
  */
 export async function updateProfile(update: Partial<UserProfile>) {
-  if (!getAuth().currentUser) throw ERROR_NOT_SIGNED_IN;
-
-  const uid = getAuth().currentUser!.uid;
+  const uid = assertLoggedIn();
   return getDb()
     .collection(COLLECTION_USER)
     .doc(uid)
@@ -88,11 +91,12 @@ export async function createAccount(
     email,
     password,
   );
+  const uid = user!.uid;
 
   const now = getTime();
   await getDb()
     .collection(COLLECTION_USER)
-    .doc(user.uid)
+    .doc(uid)
     .set({
       name: email,
       accountState: AccountState.ACTIVE,
@@ -102,7 +106,7 @@ export async function createAccount(
       bookmarkedArticles: [],
     });
 
-  return user.uid;
+  return uid;
 }
 
 // General user operations
@@ -141,7 +145,7 @@ function userToDoc(
 }
 
 function userFromDoc(doc: DocumentSnapshot<DocumentData>): User {
-  const data = doc.data();
+  const data = doc.data()!;
   if (!data.avatar) {
     data.avatar = defaultAvatar(data.name);
   }
@@ -154,6 +158,10 @@ function userFromDoc(doc: DocumentSnapshot<DocumentData>): User {
           return new URL(v);
         case 'externalLinks':
           return mapValues(v as object, vv => new URL(vv));
+        case 'createdAt':
+        case 'updatedAt':
+        case 'memberSince':
+          return (v as firestore.Timestamp).toDate();
         default:
           return v;
       }
@@ -198,7 +206,7 @@ function defaultAvatar(name: string) {
   canvas.width = avatarSize;
   canvas.height = avatarSize;
 
-  const context = canvas.getContext('2d');
+  const context = canvas.getContext('2d')!;
   context.fillStyle = colours[colourIndex];
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.font = '128px Arial';
