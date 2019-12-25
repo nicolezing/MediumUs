@@ -1,7 +1,7 @@
 import * as uuid from 'uuid/v4';
 import { firestore } from 'firebase';
-import { mapValues, isEmpty } from 'lodash';
-import { getDb, getAuth } from './index';
+import { mapValues, isEmpty, without } from 'lodash';
+import { getDb } from './index';
 import { UserId, COLLECTION_USER, assertLoggedIn } from './users';
 import { getTime } from './utils';
 import { DocumentData, DocumentSnapshot } from '@firebase/firestore-types';
@@ -192,7 +192,30 @@ export function bookmark(articleId: ArticleId) {
   });
 }
 
-export function unbookmark() {}
+export function unbookmark(articleId: ArticleId) {
+  const uid = assertLoggedIn();
+  const userRef = getDb()
+    .collection(COLLECTION_USER)
+    .doc(uid);
+
+  const now = getTime();
+  return getDb().runTransaction(async transaction => {
+    const user = await transaction.get(userRef);
+
+    if (!user.exists) {
+      return;
+    }
+
+    if (!(articleId in user.data()!.bookmarkedArticles)) {
+      return transaction.update(userRef, {});
+    }
+
+    transaction.update(userRef, {
+      bookmarkedArticles: without(user.data()!.bookmarkedArticles, articleId),
+      updatedAt: now,
+    });
+  });
+}
 
 // User-related listing operations
 

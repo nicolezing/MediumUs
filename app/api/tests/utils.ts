@@ -29,15 +29,19 @@ export function authedApp(auth: { uid: string }) {
   return app.firestore();
 }
 
-export function insertUser(db: FirebaseFirestore, uid: UserId) {
+export function insertUser(
+  db: FirebaseFirestore,
+  user: { id: string; [key: string]: any },
+) {
   const now = new Date();
   return db
     .collection(COLLECTION_USER)
-    .doc(uid)
+    .doc(user.id)
     .set({
       createdAt: now,
       updatedAt: now,
       bookmarkedArticles: [],
+      ...omit(user, 'id'),
     });
 }
 

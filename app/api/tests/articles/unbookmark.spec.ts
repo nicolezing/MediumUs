@@ -7,7 +7,7 @@ import {
   listUserIds,
   freezeTime,
 } from '../utils';
-import { bookmark, ArticleState } from '../../articles';
+import { unbookmark, ArticleState } from '../../articles';
 
 const USER = 'tester';
 const ARTICLE_1 = {
@@ -38,49 +38,45 @@ const ARTICLE_3 = {
   updatedAt: new Date(),
 };
 
-describe('articles.bookmark', () => {
-  it('should bookmark articles', async () => {
+describe('articles.unbookmark', () => {
+  it('should unbookmark articles', async () => {
     const db = authedApp({ uid: USER });
-    await insertUser(db, { id: USER });
     await insertArticles(db, [ARTICLE_1, ARTICLE_2, ARTICLE_3]);
-    const { now, restore } = freezeTime();
+    await insertUser(db, {
+      id: USER,
+      bookmarkedArticles: [ARTICLE_1.id, ARTICLE_2.id, ARTICLE_3.id],
+    });
 
-    await bookmark(ARTICLE_1.id);
-    await bookmark(ARTICLE_3.id);
+    const { now, restore } = freezeTime();
+    await unbookmark(ARTICLE_2.id);
+    restore();
+
     const user = await getUser(db, USER);
     expect(user.bookmarkedArticles).to.include.members([
       ARTICLE_1.id,
       ARTICLE_3.id,
     ]);
     expect(user.updatedAt).to.equalDate(now);
-    restore();
   });
 
-  it('should do nothing if the article is already bookmarked', async () => {
+  it('should do nothing if the article is not bookmarked', async () => {
     const db = authedApp({ uid: USER });
-    await insertUser(db, { id: USER });
-    await insertArticles(db, [ARTICLE_1]);
+    await insertArticles(db, [ARTICLE_1, ARTICLE_2, ARTICLE_3]);
+    await insertUser(db, {
+      id: USER,
+      bookmarkedArticles: [ARTICLE_1.id, ARTICLE_2.id, ARTICLE_3.id],
+    });
 
     const { now: t1, restore } = freezeTime();
-    await bookmark(ARTICLE_1.id);
+    await unbookmark(ARTICLE_2.id);
     restore();
-    await bookmark(ARTICLE_1.id);
+    await unbookmark(ARTICLE_2.id);
     const user = await getUser(db, USER);
-    expect(user.bookmarkedArticles).to.include.members([ARTICLE_1.id]);
+    expect(user.bookmarkedArticles).to.include.members(
+      [ARTICLE_1.id],
+      ARTICLE_3.id,
+    );
     expect(user.updatedAt).to.equalDate(t1);
-  });
-
-  it('should do nothing if the article is deleted', async () => {
-    /* not supported by the emulator
-    const db = authedApp({ uid: USER });
-    await insertUser(db, { id: USER });
-    await insertArticles(db, [ARTICLE_1]);
-
-    await bookmark(ARTICLE_1.id);
-    await bookmark(ARTICLE_2.id);
-    const user = await getUser(db, USER);
-    expect(user.bookmarkedArticles).to.include.members([ARTICLE_1.id]);
-    */
   });
 
   it('should do nothing if the user is deleted', async () => {
@@ -88,7 +84,7 @@ describe('articles.bookmark', () => {
     const db = authedApp({ uid: USER });
     await insertArticles(db, [ARTICLE_1]);
 
-    await bookmark(ARTICLE_1.id);
+    await unbookmark(ARTICLE_1.id);
     expect(await listUserIds(db)).to.not.include(USER);
     */
   });
