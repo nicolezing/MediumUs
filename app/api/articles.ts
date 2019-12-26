@@ -256,13 +256,19 @@ export function listClapped() {}
 
 export function search() {}
 
-export function listByUsers() {}
+export async function listByAuthor(uid: UserId): Promise<Array<ArticleId>> {
+  const articleRefs = await getDb()
+    .collection(COLLECTION_ARTICLE)
+    .where('author', '==', uid)
+    .get();
+  return articleRefs.docs.map(doc => doc.id);
+}
 
-export function listByTags() {}
+export function listByTag() {}
 
-export function listByTopics() {}
+export function listByTopic() {}
 
-export function listByPublications() {}
+export function listByPublication() {}
 
 export function listHomePageRecommendations() {}
 
