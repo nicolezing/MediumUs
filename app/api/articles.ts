@@ -13,6 +13,7 @@ import { UserId, COLLECTION_USER, assertLoggedIn } from './users';
 import { getTime } from './utils';
 import { DocumentData, DocumentSnapshot } from '@firebase/firestore-types';
 import { TagId } from './tags';
+import { TopicId, COLLECTION_TOPIC } from './topics';
 
 export const COLLECTION_ARTICLE = 'articles';
 
@@ -325,7 +326,22 @@ export async function listByTag(tag: TagId): Promise<ArticleId[]> {
   return articleDocs.docs.map(doc => doc.id);
 }
 
-export function listByTopic() {}
+export async function listByTopic(topicId: TopicId): Promise<ArticleId[]> {
+  const topicDoc = await getDb()
+    .collection(COLLECTION_TOPIC)
+    .doc(topicId)
+    .get();
+  if (!topicDoc.exists) return [];
+
+  const topicTagIds = topicDoc.data()!.tags;
+  if (isEmpty(topicTagIds)) return [];
+
+  const articleDocs = await getDb()
+    .collection(COLLECTION_ARTICLE)
+    .where('tags', 'array-contains-any', topicTagIds)
+    .get();
+  return articleDocs.docs.map(doc => doc.id);
+}
 
 export function listByPublication() {}
 

@@ -10,6 +10,8 @@ import { UserId, COLLECTION_USER, User } from '../users';
 import { use } from 'chai';
 import * as chaiDatetime from 'chai-datetime';
 import * as chaiAsPromised from 'chai-as-promised';
+import { TopicId, COLLECTION_TOPIC } from '../topics';
+import { TagId } from '../tags';
 use(chaiDatetime);
 use(chaiAsPromised);
 
@@ -109,4 +111,17 @@ function ts2Date(obj: object | undefined) {
       v instanceof Object && v.toDate ? v.toDate() : v,
     );
   }
+}
+
+export function insertTopicTags(
+  db: FirebaseFirestore,
+  topicId: TopicId,
+  tagIds: TagId[],
+) {
+  return db
+    .collection(COLLECTION_TOPIC)
+    .doc(topicId)
+    .set({
+      tags: tagIds,
+    });
 }
