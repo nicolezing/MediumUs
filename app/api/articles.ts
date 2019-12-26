@@ -152,11 +152,31 @@ export async function unpublish(id: ArticleId) {
 /**
  * Removes the specified article. Removing a non-existent article is a legal operation.
  */
-export function remove(id: ArticleId) {
-  return getDb()
+export async function remove(id: ArticleId) {
+  const docRef = getDb()
     .collection(COLLECTION_ARTICLE)
-    .doc(id)
-    .delete();
+    .doc(id);
+  const bookmarkingUsers = await getDb()
+    .collection(COLLECTION_USER)
+    .where('bookmarkedArticles', 'array-contains', id)
+    .get();
+  const userRefs = bookmarkingUsers.docs.map(user =>
+    getDb()
+      .collection(COLLECTION_USER)
+      .doc(user.id),
+  );
+
+  const now = getTime();
+  return getDb().runTransaction(async transaction => {
+    transaction.delete(docRef);
+    // TODO: clean up bookmarks added between user-listing and this transaction.
+    userRefs.forEach(userRef =>
+      transaction.update(userRef, {
+        bookmarkedArticles: firestore.FieldValue.arrayRemove(id),
+        updatedAt: now,
+      }),
+    );
+  });
 }
 
 export function bookmark(articleId: ArticleId) {
