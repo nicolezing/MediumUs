@@ -239,7 +239,14 @@ export function unbookmark(articleId: ArticleId) {
 
 // User-related listing operations
 
-export function listBookmarked() {}
+export async function listBookmarked(uid: UserId): Promise<Array<ArticleId>> {
+  const user = await getDb()
+    .collection(COLLECTION_USER)
+    .doc(uid)
+    .get();
+  if (!user.exists) return [];
+  return user.data()!.bookmarkedArticles;
+}
 
 export function listCommented() {}
 
