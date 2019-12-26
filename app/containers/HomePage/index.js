@@ -6,12 +6,14 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 // import { connect } from 'react-redux';
-import messages from './messages';
-import { Wrapper } from './Wrappers';
+// import messages from './messages';
+import { Wrapper, SideWrapper } from './Wrappers';
 import Header from './Header';
 import MainHero from './MainHero';
+import HeroList from './HeroList';
+import Sidebars from './Sidebars';
 // import OverlayTrigger from '../../components/OverlayTrigger';
 // import ArticlePoster from '../../components/ArticlePoster';
 // import Avatar from '../../components/Avatar';
@@ -26,8 +28,22 @@ function HomePage() {
         <FormattedMessage {...messages.header} />
       </h1> */}
       <Header />
-      <div>NavBar</div>
+      <div
+        style={{
+          position: 'sticky',
+          top: 0,
+          height: '40px',
+          background: 'gray',
+          zIndex: 999,
+        }}
+      >
+        NavBar
+      </div>
       <MainHero />
+      <SideWrapper>
+        <HeroList list="homeList" />
+        <Sidebars />
+      </SideWrapper>
       {/* <Avatar id="loggedIn" />
       <OverlayTrigger
         popoverContent={<UserSettingList id="loggedIn" />}

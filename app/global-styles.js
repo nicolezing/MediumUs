@@ -27,6 +27,13 @@ const GlobalStyle = createGlobalStyle`
     // }
   }
 
+  a{
+    color:rgba(0,0,0,.84);
+    text-decoration: none;
+    cursor: pointer;
+ 
+  }
+
   // html,
   // body {
   //   height: 100%;

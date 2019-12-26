@@ -41,9 +41,15 @@ export const HomeHeroMid = {
       width: 140px;
       height: auto;
     }
+    @media screen and (max-width: 504px) {
+      width: 80px;
+      height: 80px;
+    }
   `,
   infoWrapperStyle: css`
     margin-left: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     @media screen and (max-width: 680px) {
       min-width: 0;
       margin-right: 24px;
@@ -55,22 +61,32 @@ export const HomeHeroMid = {
   `,
 };
 
+const content = ({ source, publication }) =>
+  (source || publication || '').toUpperCase();
+
 export const HomeList = {
   wrapperStyle: css`
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+    margin-bottom: 48px;
   `,
   coverStyle: css`
     width: 152px;
     @media screen and (max-width: 855px) {
       width: 140px;
     }
+    @media screen and (max-width: 504px) {
+      width: 80px;
+      height: 80px;
+    }
     flex: none;
   `,
   infoWrapperStyle: css`
     min-width: 0;
     margin-right: 24px;
+    //changed
+    flex-grow: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     &:before {
@@ -78,7 +94,7 @@ export const HomeList = {
       white-space: nowrap;
       letter-spacing: 0.03em;
       color: rgba(0, 0, 0, 0.54);
-      content: 'POPULAR ON MEDIUM';
+      content: '${content}';
       // BASED ON YOUR READING HISTORY/POPULAR ON MEDIUM
     }
   `,

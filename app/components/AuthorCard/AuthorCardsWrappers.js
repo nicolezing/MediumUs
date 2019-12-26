@@ -9,10 +9,10 @@ const StyledWrapper = styled.div`
 
 const AuthorInfoWrapper = styled.div`
   overflow: hidden;
-  text-overflow: ellipsis;
+  // text-overflow: ellipsis;
 `;
 
-const StyledButtonWrapper = styled.span`
+export const StyledButtonWrapper = styled.span`
   margin-left: 8px;
 `;
 
@@ -42,6 +42,7 @@ const aBaseStyle = css`
   :active,
   :hover {
     color: ${getColor('black').hoverColor};
+    text-decoration: underline;
     outline: 0;
   }
 `;
@@ -148,4 +149,3 @@ export function styledComponents(variation) {
     ...conditionallyStyledComponents(variation),
   };
 }
-export { StyledButtonWrapper };

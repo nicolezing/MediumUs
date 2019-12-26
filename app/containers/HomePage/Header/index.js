@@ -28,8 +28,8 @@ function Header() {
       </div>
       <GridStyledWrapper>
         {/* placeholder, should be the input component */}
-        <IconButton iconName="searchIcon" colorSet="gray" />
-        <IconButton iconName="bellIcon" colorSet="gray" />
+        <IconButton iconName="searchIcon" colorSet="gray" title="Search" />
+        <IconButton iconName="bellIcon" colorSet="gray" title="Notifications" />
         <AutoHiddenStyledA href="./">
           <OutlinedButton
             text="Upgrade"

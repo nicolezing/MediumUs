@@ -8,8 +8,8 @@ import {
   MidHero,
   RightHero,
   MidMarginWrapper,
-  FooterStyledA,
-  StyledSpan,
+  A,
+  Span,
   Divider,
 } from './Wrappers';
 
@@ -33,12 +33,12 @@ function MainHero() {
           <ArticlePoster id="ID001" variation="HomeHeroRight" hoverEffect />
         </RightHero>
       </HeroWrapper>
-      <FooterStyledA href="./">
-        <StyledSpan>
+      <A href="./">
+        <Span>
           SEE EDITOR&apos;S PICKS
           {ArrowIcon}
-        </StyledSpan>
-      </FooterStyledA>
+        </Span>
+      </A>
       <Divider />
     </Wrapper>
   );

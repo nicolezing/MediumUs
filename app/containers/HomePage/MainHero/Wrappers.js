@@ -24,6 +24,7 @@ export const LeftHero = styled.div`
   max-width: 360px;
   @media screen and (max-width: 680px) {
     max-width: 100%;
+    min-width: 0;
     margin: 0 0 40px 0;
   }
 
@@ -39,7 +40,8 @@ export const MidHero = styled.div`
   margin-right: 24px;
   @media screen and (max-width: 680px) {
     max-width: 100%;
-    margin-bottom: 40px;
+    min-width: 0;
+    margin: 0 0 40px 0;
   }
   @media screen and (max-width: 1031px) and (min-width: 681px) {
     max-width: 50%;
@@ -55,7 +57,7 @@ export const RightHero = styled.div`
   max-width: 323px;
 `;
 
-export const FooterStyledA = styled.a`
+export const A = styled.a`
   color: #03a87c;
   font-size: 15px;
   margin-top: 8px;
@@ -65,8 +67,9 @@ export const FooterStyledA = styled.a`
     margin-top: 0;
   }
 `;
-export const StyledSpan = styled.span`
-  vertical-align: bottom;
+export const Span = styled.span`
+  display: flex;
+  align-items: flex-end;
 `;
 
 export const Divider = styled.div`

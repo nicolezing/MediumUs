@@ -27,9 +27,10 @@ function OverlayTrigger(props) {
     const { aX, aY, pX, pY, place } = setPosition(
       findDOMNode(trigger.current).getBoundingClientRect(),
       findDOMNode(popover.current).getBoundingClientRect(),
-      window.innerWidth,
       window.scrollX,
       window.scrollY,
+      document.documentElement.clientWidth,
+      document.documentElement.clientHeight,
       props.placement,
     );
     setArrowPosition([aX, aY]);
@@ -55,6 +56,18 @@ function OverlayTrigger(props) {
     // #TODO not sure about the skip is working or not
   });
 
+  const handleResize = () => {
+    if (isVisible) {
+      setPositionStates();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  });
   // declare public timer
   let timer = null;
 
@@ -141,7 +154,8 @@ function OverlayTrigger(props) {
 
 OverlayTrigger.propTypes = {
   trigger: PropTypes.oneOf(['click', 'hover', 'focus']).isRequired,
-  placement: PropTypes.oneOf(['dropdown', 'top-bottom']).isRequired,
+  placement: PropTypes.oneOf(['dropdown', 'top-bottom', 'bottom-top'])
+    .isRequired,
   popoverContent: PropTypes.element.isRequired,
   popoverColor: PropTypes.string,
   children: PropTypes.element.isRequired,

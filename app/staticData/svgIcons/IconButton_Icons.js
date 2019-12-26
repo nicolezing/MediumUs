@@ -69,6 +69,24 @@ export const bookmarkFilledIcon = (
   </svg>
 );
 
+export const bookmarkSmallIcon = (
+  <svg width="21" height="21" fill="inherit">
+    <path
+      d="M14.31 4c.374 0 .69.33.69.716l.002 11.705-3.914-2.88-.596-.44-4.49 3.33L6 4.72c0-.39.316-.718.69-.718h7.62m0-1H6.69C5.76 3 5 3.772 5 4.717v12.9c.02.087.048.173.11.243.084.097.198.14.313.14a.407.407 0 0 0 .285-.11l4.784-3.543 4.81 3.545c.08.075.183.11.286.11a.405.405 0 0 0 .31-.14.406.406 0 0 0 .102-.24V4.72C16 3.773 15.24 3 14.31 3"
+      fillRule="evenodd"
+    />
+  </svg>
+);
+
+export const bookmarkSmallFilledIcon = (
+  <svg width="21" height="21" fill="inherit">
+    <path
+      d="M6.69 3C5.76 3 5 3.773 5 4.718v12.9c.02.087.048.173.11.243.084.1.198.14.313.14.102 0 .204-.03.285-.11l4.784-3.54 4.81 3.55c.08.08.183.11.286.11a.39.39 0 0 0 .31-.14.399.399 0 0 0 .102-.24V4.72C16 3.773 15.24 3 14.31 3H6.69z"
+      fillRule="evenodd"
+    />
+  </svg>
+);
+
 export const moreIcon = (
   <svg width="25" height="25" fill="inherit">
     <path

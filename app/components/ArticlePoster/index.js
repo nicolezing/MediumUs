@@ -33,14 +33,16 @@ function ArticlePoster(props) {
   function BookmarkButton() {
     return bookmarked ? (
       <IconButton
+        title="Bookmark this story to read later"
         iconName="bookmarkFilledIcon"
         colorSet="pureBlack"
         onClick={onRemoveBookmark}
       />
     ) : (
       <IconButton
+        title="Bookmark this story to read later"
         iconName="bookmarkIcon"
-        colorSet="black"
+        colorSet="gray"
         onClick={onAddBookmark}
       />
     );
@@ -57,15 +59,15 @@ function ArticlePoster(props) {
           <BookmarkButton key={props.variation} />,
           <OverlayTrigger
             trigger="click"
-            placement="dropdown"
+            placement="bottom-top"
             popoverContent={
-              <MoreIconPopoverContent>
+              <MoreIconPopoverContent title="Dismiss this story">
                 Dismiss this story
               </MoreIconPopoverContent>
             }
             key="moreIcon"
           >
-            <IconButton iconName="moreIcon" colorSet="black" />
+            <IconButton iconName="moreIcon" colorSet="gray" />
           </OverlayTrigger>,
         ];
       case 'ArticlePageTitle':
@@ -108,6 +110,7 @@ function ArticlePoster(props) {
       variation={props.variation}
       publication={props.publication}
       name={props.authorName}
+      key={props.title}
     >
       <Cover
         href={props.articleLink}
@@ -119,6 +122,7 @@ function ArticlePoster(props) {
       <InfoWrapper
         variation={props.variation}
         publication={props.publication}
+        source={props.source}
         name={props.authorName}
       >
         <ArticleTitle id={props.id} variation={props.variation} />
@@ -147,6 +151,7 @@ ArticlePoster.propTypes = {
   linkedIn: PropTypes.string,
   claps: PropTypes.number,
   focusPosition: PropTypes.array,
+  source: PropTypes.string,
   onAddBookmark: PropTypes.func,
   onRemoveBookmark: PropTypes.func,
   variation: PropTypes.oneOf([..._.keys(wrapperStyles)]).isRequired,
@@ -168,6 +173,7 @@ function mapStateToProps(state, ownProps) {
     facebook: userInfo.facebook,
     linkedIn: userInfo.linkedIn,
     claps: articleInfo.claps,
+    source: articleInfo.source,
   };
   if (articleInfo.focusPosition) {
     componentProps.focusPosition = articleInfo.focusPosition;

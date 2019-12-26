@@ -40,15 +40,15 @@ function AuthorCard(props) {
     id,
     authorLink,
     authorName,
-    authorDescription,
-    memberJoinedDate = null,
-    member,
-    authorFollowers,
+    // authorDescription,
+    // memberJoinedDate = null,
+    // member,
+    // authorFollowers,
     publicationLink,
     publication,
-    publicationDescription,
-    publicationLogo,
-    publicationFollowers,
+    // publicationDescription,
+    // publicationLogo,
+    // publicationFollowers,
     creationDate,
     wordCount,
     isPremium,
@@ -63,15 +63,15 @@ function AuthorCard(props) {
     );
 
     if (hoverEffect) {
-      const { year, month } = formatDate(memberJoinedDate);
+      // const { year, month } = formatDate(memberJoinedDate);
       const popoverContent = (
         <PopoverContent
-          headerLink={authorLink}
-          header={authorName}
-          subHeader={authorDescription}
-          joinedDate={`${month} ${year}`}
-          member={member}
-          followersNumber={authorFollowers}
+          // headerLink={authorLink}
+          // header={authorName}
+          // subHeader={authorDescription}
+          // joinedDate={`${month} ${year}`}
+          // member={member}
+          // followersNumber={authorFollowers}
           imgType="avatar"
           id={id}
         />
@@ -99,12 +99,14 @@ function AuthorCard(props) {
     if (hoverEffect) {
       const popoverContent = (
         <PopoverContent
-          headerLink={publicationLink}
-          header={publication}
-          subHeader={publicationDescription}
-          imgLink={publicationLogo}
-          imgAlt={publication}
-          followersNumber={publicationFollowers}
+          // headerLink={publicationLink}
+          // header={publication}
+          // subHeader={publicationDescription}
+          // imgLink={publicationLogo}
+          // imgAlt={publication}
+          // followersNumber={publicationFollowers}
+          imgType="publication"
+          id={props.id}
         />
       );
       return (
@@ -121,12 +123,18 @@ function AuthorCard(props) {
   };
 
   function renderDateTime() {
-    const { month, day } = formatDate(creationDate);
+    const { year, month, day } = formatDate(creationDate);
+    let time = `${month} ${day}`;
+    // #TODO try memo or sth else to call it less times
+    if (year < new Date().getFullYear()) {
+      time = time.concat(`, ${year}`);
+    }
+    const readingTime = `${calcReadingTime(wordCount)} min read`;
     const element = (
       <ReadingInfoWrapper>
-        <time>{`${month} ${day}`}</time>
+        <time title={time}>{time}</time>
         <StyledSpan>&middot;</StyledSpan>
-        <span>{`${calcReadingTime(wordCount)} min read`}</span>
+        <span title={readingTime}>{readingTime}</span>
         {isPremium && <StyledSpan>{StarIcon}</StyledSpan>}
       </ReadingInfoWrapper>
     );
@@ -148,6 +156,7 @@ function AuthorCard(props) {
         </OverlayTrigger>
       );
     }
+
     return element;
   }
 
@@ -186,10 +195,10 @@ AuthorCard.propTypes = {
   // *
   authorLink: PropTypes.string.isRequired,
   authorName: PropTypes.string.isRequired,
-  authorFollowers: requiredIfAllPresent(['hoverEffect'], 'number'),
-  authorDescription: requiredIfAllPresent(['hoverEffect'], 'string'),
-  member: PropTypes.bool.isRequired,
-  memberJoinedDate: requiredIfAllPresent(['member', 'hoverEffect'], 'string'),
+  // authorFollowers: requiredIfAllPresent(['hoverEffect'], 'number'),
+  // authorDescription: requiredIfAllPresent(['hoverEffect'], 'string'),
+  // member: PropTypes.bool.isRequired,
+  // memberJoinedDate: requiredIfAllPresent(['member', 'hoverEffect'], 'string'),
   // *
   // article related props
   // *
@@ -202,18 +211,18 @@ AuthorCard.propTypes = {
   // *
   publication: PropTypes.string,
   publicationLink: requiredIfAllPresent(['publication'], 'string'),
-  publicationFollowers: requiredIfAllPresent(
-    ['publication', 'hoverEffect'],
-    'number',
-  ),
-  publicationLogo: requiredIfAllPresent(
-    ['publication', 'hoverEffect'],
-    'string',
-  ),
-  publicationDescription: requiredIfAllPresent(
-    ['publication', 'hoverEffect'],
-    'string',
-  ),
+  // publicationFollowers: requiredIfAllPresent(
+  //   ['publication', 'hoverEffect'],
+  //   'number',
+  // ),
+  // publicationLogo: requiredIfAllPresent(
+  //   ['publication', 'hoverEffect'],
+  //   'string',
+  // ),
+  // publicationDescription: requiredIfAllPresent(
+  //   ['publication', 'hoverEffect'],
+  //   'string',
+  // ),
 
   variation: PropTypes.oneOf([
     'Home',
@@ -226,16 +235,16 @@ AuthorCard.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  const { id, hoverEffect } = ownProps;
+  const { id } = ownProps;
   const { userInfo, articleInfo } = state.testState[id];
   const componentProps = {
     authorName: userInfo.name,
     authorLink: userInfo.authorLink,
-    member: userInfo.member,
+    // member: userInfo.member,
 
     articleLink: articleInfo.articleLink,
-    title: articleInfo.title,
-    subtitle: articleInfo.subtitle,
+    // title: articleInfo.title,
+    // subtitle: articleInfo.subtitle,
 
     creationDate: articleInfo.creationDate,
     lastModified: articleInfo.lastModified,
@@ -247,19 +256,19 @@ function mapStateToProps(state, ownProps) {
     const { publicationInfo } = articleInfo;
     componentProps.publication = publicationInfo.publication;
     componentProps.publicationLink = publicationInfo.publicationLink;
-    componentProps.publicationFollowers = publicationInfo.publicationFollowers;
-    componentProps.publicationLogo = publicationInfo.publicationLogo;
-    componentProps.publicationDescription =
-      publicationInfo.publicationDescription;
+    // componentProps.publicationFollowers = publicationInfo.publicationFollowers;
+    // componentProps.publicationLogo = publicationInfo.publicationLogo;
+    // componentProps.publicationDescription =
+    //   publicationInfo.publicationDescription;
   }
 
-  if (hoverEffect) {
-    componentProps.authorFollowers = userInfo.authorFollowers;
-    componentProps.authorDescription = userInfo.authorDescription;
-    if (componentProps.member) {
-      componentProps.memberJoinedDate = userInfo.memberJoinedDate;
-    }
-  }
+  // if (hoverEffect) {
+  //   // componentProps.authorFollowers = userInfo.authorFollowers;
+  //   // componentProps.authorDescription = userInfo.authorDescription;
+  //   if (componentProps.member) {
+  //     // componentProps.memberJoinedDate = userInfo.memberJoinedDate;
+  //   }
+  // }
   return componentProps;
 }
 
