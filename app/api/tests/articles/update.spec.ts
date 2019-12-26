@@ -9,6 +9,7 @@ const ARTICLE = {
   author: USER,
   title: 'title 1',
   content: 'content 1',
+  tags: [],
   state: ArticleState.PUBLISHED,
   createdAt: new Date(),
   updatedAt: new Date(),

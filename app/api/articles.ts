@@ -1,10 +1,18 @@
 import * as uuid from 'uuid/v4';
 import { firestore } from 'firebase';
-import { mapValues, isEmpty, without } from 'lodash';
+import {
+  mapValues,
+  isEmpty,
+  without,
+  intersection,
+  union,
+  isEqual,
+} from 'lodash';
 import { getDb } from './index';
 import { UserId, COLLECTION_USER, assertLoggedIn } from './users';
 import { getTime } from './utils';
 import { DocumentData, DocumentSnapshot } from '@firebase/firestore-types';
+import { TagId } from './tags';
 
 export const COLLECTION_ARTICLE = 'articles';
 
@@ -31,9 +39,17 @@ export type ArticleMeta = {
   publishedAt?: Date;
 };
 
-export type Article = { id: ArticleId } & ArticleData & ArticleMeta;
+export type ArticleRelations = {
+  tags: TagId[];
+};
+
+export type Article = { id: ArticleId } & ArticleData &
+  ArticleMeta &
+  ArticleRelations;
 
 export const ERROR_ARTICLE_NOT_FOUND = 'Article not found';
+export const ERROR_EDITING_CONFLICT =
+  'Cannot add and remove the same entity in one operation';
 // Draft operations
 
 /**
@@ -54,6 +70,7 @@ export async function createDraft(request: ArticleData): Promise<ArticleId> {
         createdAt: now,
         updatedAt: now,
         state: ArticleState.DRAFT,
+        tags: [],
       }),
     );
   return articleId;
@@ -144,6 +161,42 @@ export async function unpublish(id: ArticleId) {
 
     transaction.update(docRef, {
       state: ArticleState.DRAFT,
+      updatedAt: now,
+    });
+  });
+}
+
+export async function editTags(
+  articleId: ArticleId,
+  tagsToAdd: TagId[],
+  tagsToRemove: TagId[],
+) {
+  if (intersection(tagsToAdd, tagsToRemove).length > 0) {
+    throw ERROR_EDITING_CONFLICT;
+  }
+
+  const docRef = getDb()
+    .collection(COLLECTION_ARTICLE)
+    .doc(articleId);
+
+  const now = getTime();
+  return getDb().runTransaction(async transaction => {
+    const doc = await transaction.get(docRef);
+    if (!doc.exists) {
+      return;
+    }
+
+    const newTags = union(
+      without(doc.data()!.tags, ...tagsToRemove),
+      tagsToAdd,
+    );
+    if (isEqual(newTags, doc.data()!.tags)) {
+      transaction.update(docRef, {});
+      return;
+    }
+
+    transaction.update(docRef, {
+      tags: newTags,
       updatedAt: now,
     });
   });
@@ -264,7 +317,13 @@ export async function listByAuthor(uid: UserId): Promise<Array<ArticleId>> {
   return articleRefs.docs.map(doc => doc.id);
 }
 
-export function listByTag() {}
+export async function listByTag(tag: TagId): Promise<ArticleId[]> {
+  const articleDocs = await getDb()
+    .collection(COLLECTION_ARTICLE)
+    .where('tags', 'array-contains', tag)
+    .get();
+  return articleDocs.docs.map(doc => doc.id);
+}
 
 export function listByTopic() {}
 
@@ -278,7 +337,9 @@ function newArticleId(): ArticleId {
   return uuid();
 }
 
-function articleToDoc(article: Partial<ArticleData & ArticleMeta>): object {
+function articleToDoc(
+  article: Partial<ArticleData & ArticleMeta & ArticleRelations>,
+): object {
   return mapValues(article, (v, k) => {
     switch (k) {
       case 'cover':
@@ -304,6 +365,6 @@ function articleFromDoc(doc: DocumentSnapshot<DocumentData>): Article {
         default:
           return v;
       }
-    }) as (ArticleData & ArticleMeta)),
+    }) as (ArticleData & ArticleMeta & ArticleRelations)),
   };
 }
