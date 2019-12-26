@@ -173,11 +173,30 @@ export function unfollow(uidToUnfollow: UserId) {
   });
 }
 
-export function getFollowerCount() {}
+export async function getFollowerCount(uid: UserId) {
+  const followerDocs = await getDb()
+    .collection(COLLECTION_USER)
+    .where('followedUsers', 'array-contains', uid)
+    .get();
+  return followerDocs.docs.length;
+}
 
-export function listFollowers() {}
+export async function listFollowers(uid: UserId): Promise<Array<UserId>> {
+  const followerDocs = await getDb()
+    .collection(COLLECTION_USER)
+    .where('followedUsers', 'array-contains', uid)
+    .get();
+  return followerDocs.docs.map(doc => doc.id);
+}
 
-export function listFollowings() {}
+export async function listFollowings(uid: UserId): Promise<Array<UserId>> {
+  const userDoc = await getDb()
+    .collection(COLLECTION_USER)
+    .doc(uid)
+    .get();
+  if (!userDoc.exists) return [];
+  return userDoc.data()!.followedUsers;
+}
 
 export function getNameAutoCompleteSuggestions() {}
 
