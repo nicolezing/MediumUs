@@ -41,6 +41,7 @@ export function insertUser(
       createdAt: now,
       updatedAt: now,
       bookmarkedArticles: [],
+      followedUsers: [],
       ...omit(user, 'id'),
     });
 }

@@ -1,5 +1,5 @@
 import { firestore } from 'firebase';
-import { mapValues } from 'lodash';
+import { mapValues, without } from 'lodash';
 import { ArticleId } from './articles';
 import { getTime } from './utils';
 import { getDb, getAuth } from './index';
@@ -41,6 +41,7 @@ export type UserMeta = {
 
 export type UserRelations = {
   bookmarkedArticles: Array<ArticleId>;
+  followedUsers: Array<UserId>;
 };
 
 export type User = { id: UserId } & UserProfile & UserMeta & UserRelations;
@@ -104,6 +105,7 @@ export async function createAccount(
       createdAt: now,
       updatedAt: now,
       bookmarkedArticles: [],
+      followedUsers: [],
     });
 
   return uid;
@@ -122,6 +124,56 @@ export async function readProfile(uid: UserId): Promise<User> {
 
   return userFromDoc(doc);
 }
+
+export function follow(uidToFollow: UserId) {
+  const uid = assertLoggedIn();
+  const userRef = getDb()
+    .collection(COLLECTION_USER)
+    .doc(uid);
+  const now = getTime();
+  return getDb().runTransaction(async transaction => {
+    const user = await transaction.get(userRef);
+    if (!user.exists) {
+      return;
+    }
+
+    if (user.data()!.followedUsers.includes(uidToFollow)) {
+      transaction.update(userRef, {});
+      return;
+    }
+
+    transaction.update(userRef, {
+      followedUsers: [...user.data()!.followedUsers, uidToFollow],
+      updatedAt: now,
+    });
+  });
+}
+
+export function unfollow(uidToUnfollow: UserId) {
+  const uid = assertLoggedIn();
+  const userRef = getDb()
+    .collection(COLLECTION_USER)
+    .doc(uid);
+  const now = getTime();
+  return getDb().runTransaction(async transaction => {
+    const user = await transaction.get(userRef);
+    if (!user.exists) {
+      return;
+    }
+
+    if (!user.data()!.followedUsers.includes(uidToUnfollow)) {
+      transaction.update(userRef, {});
+      return;
+    }
+
+    transaction.update(userRef, {
+      followedUsers: without(user.data()!.followedUsers, uidToUnfollow),
+      updatedAt: now,
+    });
+  });
+}
+
+export function getFollowerCount() {}
 
 export function listFollowers() {}
 

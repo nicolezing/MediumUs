@@ -201,7 +201,7 @@ export function bookmark(articleId: ArticleId) {
       return;
     }
 
-    if (articleId in user.data()!.bookmarkedArticles) {
+    if (user.data()!.bookmarkedArticles.includes(articleId)) {
       return transaction.update(userRef, {});
     }
 
@@ -226,7 +226,7 @@ export function unbookmark(articleId: ArticleId) {
       return;
     }
 
-    if (!(articleId in user.data()!.bookmarkedArticles)) {
+    if (!user.data()!.bookmarkedArticles.includes(articleId)) {
       return transaction.update(userRef, {});
     }
 
