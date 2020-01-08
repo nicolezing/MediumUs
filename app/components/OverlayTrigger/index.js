@@ -10,7 +10,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import setPosition from './setPopoverPosition';
 import PopoverBox from './PopoverBox';
-import OverlayWrapper from './OverlayWrapper';
+import { OverlayWrapper, PopoverWrapper } from './OverlayWrapper';
 import RefHolder from './RefHolder';
 import { getEventHandler } from './getEventHandler';
 
@@ -53,7 +53,6 @@ function OverlayTrigger(props) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutsideTrigger);
     };
-    // #TODO not sure about the skip is working or not
   });
 
   const handleResize = () => {
@@ -64,8 +63,10 @@ function OverlayTrigger(props) {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleResize);
     };
   });
   // declare public timer
@@ -132,22 +133,24 @@ function OverlayTrigger(props) {
           ),
         )}
       </RefHolder>
-      <RefHolder ref={popover}>
-        <PopoverBox
-          popoverContent={props.popoverContent}
-          popoverColor={props.popoverColor}
-          renderPlace={popoverPlacement}
-          arrowPosition={arrowPosition}
-          popoverPosition={popoverPosition}
-          isVisible={isVisible}
-          // if onTriggerShow && mouse on popover, stay visible
-          onMouseOver={onPopoverHover}
-          onFocus={onPopoverHover}
-          // if onTriggerHide && mouse off popover, change to invisible
-          onMouseOut={offPopoverHover}
-          onBlur={offPopoverHover}
-        />
-      </RefHolder>
+      <PopoverWrapper>
+        <RefHolder ref={popover}>
+          <PopoverBox
+            popoverContent={props.popoverContent}
+            popoverColor={props.popoverColor}
+            renderPlace={popoverPlacement}
+            arrowPosition={arrowPosition}
+            popoverPosition={popoverPosition}
+            isVisible={isVisible}
+            // if onTriggerShow && mouse on popover, stay visible
+            onMouseOver={onPopoverHover}
+            onFocus={onPopoverHover}
+            // if onTriggerHide && mouse off popover, change to invisible
+            onMouseOut={offPopoverHover}
+            onBlur={offPopoverHover}
+          />
+        </RefHolder>
+      </PopoverWrapper>
     </OverlayWrapper>
   );
 }

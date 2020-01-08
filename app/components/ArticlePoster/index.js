@@ -57,18 +57,20 @@ function ArticlePoster(props) {
       case 'HomeList':
         return [
           <BookmarkButton key={props.variation} />,
-          <OverlayTrigger
-            trigger="click"
-            placement="bottom-top"
-            popoverContent={
-              <MoreIconPopoverContent title="Dismiss this story">
-                Dismiss this story
-              </MoreIconPopoverContent>
-            }
-            key="moreIcon"
-          >
-            <IconButton iconName="moreIcon" colorSet="gray" />
-          </OverlayTrigger>,
+          <div>
+            <OverlayTrigger
+              trigger="click"
+              placement="bottom-top"
+              popoverContent={
+                <MoreIconPopoverContent title="Dismiss this story">
+                  Dismiss this story
+                </MoreIconPopoverContent>
+              }
+              key="moreIcon"
+            >
+              <IconButton iconName="moreIcon" colorSet="gray" />
+            </OverlayTrigger>
+          </div>,
         ];
       case 'ArticlePageTitle':
         return [

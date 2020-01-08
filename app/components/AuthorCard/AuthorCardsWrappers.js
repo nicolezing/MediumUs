@@ -10,6 +10,7 @@ const StyledWrapper = styled.div`
 const AuthorInfoWrapper = styled.div`
   overflow: hidden;
   // text-overflow: ellipsis;
+  display: initial;
 `;
 
 export const StyledButtonWrapper = styled.span`
@@ -17,9 +18,10 @@ export const StyledButtonWrapper = styled.span`
 `;
 
 const infoWrapperBaseStyle = css`
-  flex: 1 1 auto;
+  flex: auto;
   overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
   // // changed
   // display: grid;
   // grid-auto-columns: min-content;
@@ -34,7 +36,7 @@ const redingInfoWrapperBaseStyle = css`
   overflow: hidden;
   text-overflow: ellipsis;
   // // changed
-  display: flex;
+  // display: flex;
 `;
 
 const aBaseStyle = css`

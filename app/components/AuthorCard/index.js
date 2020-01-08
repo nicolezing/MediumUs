@@ -183,7 +183,7 @@ function AuthorCard(props) {
             </StyledButtonWrapper>
           )}
         </AuthorInfoWrapper>
-        {renderDateTime()}
+        <div>{renderDateTime()}</div>
       </StyledInfoWrapper>
     </StyledWrapper>
   );

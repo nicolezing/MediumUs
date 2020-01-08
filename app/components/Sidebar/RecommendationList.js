@@ -12,17 +12,19 @@ const RecommendationList = props => {
     let ele;
     if (props.type === 'newFromNetwork') {
       ele = (
-        <OverlayTrigger
-          trigger="hover"
-          placement="top-bottom"
-          popoverContent={<PopoverContent id={props.id} imgType="avatar" />}
-        >
-          <a href={props.authorLink}>
-            <div>
-              <Avatar id={props.id} size="40px" />
-            </div>
-          </a>
-        </OverlayTrigger>
+        <div>
+          <OverlayTrigger
+            trigger="hover"
+            placement="top-bottom"
+            popoverContent={<PopoverContent id={props.id} imgType="avatar" />}
+          >
+            <a href={props.authorLink}>
+              <div>
+                <Avatar id={props.id} size="40px" />
+              </div>
+            </a>
+          </OverlayTrigger>
+        </div>
       );
     } else if (props.type === 'popularOnMedium') {
       ele = <NumWrapper>{`0${props.index + 1}`}</NumWrapper>;

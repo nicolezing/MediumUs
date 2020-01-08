@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-export const PopoverInnerWrapper = styled.div`
-  position: relative;
-  overflow: visible;
-`;
 export const PopoverOuterWrapper = styled.div`
   z-index: 900;
   top: 0;
@@ -18,4 +14,10 @@ export const PopoverOuterWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   visibility: ${props => props.visibility};
+  // visibility: visible;
+`;
+
+export const PopoverInnerWrapper = styled.div`
+  position: relative;
+  overflow: visible;
 `;

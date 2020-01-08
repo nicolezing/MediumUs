@@ -28,6 +28,9 @@ export const AuthorWrapper = styled.div`
 export const IconWrapper = styled.div`
   align-items: center;
   white-space: nowrap;
+  //changed
+  display: flex;
+  //
   ${props => wrapperStyle[props.variation].iconWrapperStyle || ``}
 `;
 
