@@ -6,7 +6,7 @@ export const UserWrapper = styled.div`
 `;
 
 export const UsernameWrapper = styled.div`
-  flex: 1 1 auto;
+  flex: auto;
   display: flex;
   flex-direction: column;
   margin-left: 15px;

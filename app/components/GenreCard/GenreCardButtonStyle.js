@@ -34,7 +34,7 @@ const base = css`
   -webkit-font-smoothing: antialiased;
   border-color: rgba(0, 0, 0, 0.54) !important;
   -webkit-box-flex: 0;
-  flex: 0 0 auto;
+  flex: none;
   user-select: none !important;
   -webkit-tap-highlight-color: transparent !important;
   -webkit-appearance: button;

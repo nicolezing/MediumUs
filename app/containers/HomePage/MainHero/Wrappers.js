@@ -11,7 +11,7 @@ export const HeroWrapper = styled.section`
   justify-content: center;
   height: 350px;
   max-width: 1208px;
-  margin: 12px auto 0 auto;
+  margin: 12px 0 0 0;
   @media screen and (max-width: 680px) {
     flex-direction: column;
     height: auto;
@@ -19,7 +19,7 @@ export const HeroWrapper = styled.section`
 `;
 
 export const LeftHero = styled.div`
-  flex: 0 1 auto;
+  flex: initial;
   margin-right: 24px;
   max-width: 360px;
   @media screen and (max-width: 680px) {
@@ -53,7 +53,7 @@ export const MidMarginWrapper = styled.div`
 `;
 
 export const RightHero = styled.div`
-  flex: 0 1 auto;
+  flex: initial;
   max-width: 323px;
 `;
 
