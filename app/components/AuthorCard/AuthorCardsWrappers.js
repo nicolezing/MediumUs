@@ -8,8 +8,6 @@ const StyledWrapper = styled.div`
 `;
 
 const AuthorInfoWrapper = styled.div`
-  overflow: hidden;
-  // text-overflow: ellipsis;
   display: initial;
 `;
 
@@ -22,12 +20,6 @@ const infoWrapperBaseStyle = css`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  // // changed
-  // display: grid;
-  // grid-auto-columns: min-content;
-  // display: flex;
-  // min-width: 20px;
-  // flex-direction: column;
 `;
 
 const redingInfoWrapperBaseStyle = css`
@@ -35,12 +27,13 @@ const redingInfoWrapperBaseStyle = css`
   fill: #0000008a;
   overflow: hidden;
   text-overflow: ellipsis;
-  // // changed
-  // display: flex;
 `;
 
 const aBaseStyle = css`
   color: ${getColor('black').color};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   :active,
   :hover {
     color: ${getColor('black').hoverColor};
@@ -62,7 +55,6 @@ function conditionallyStyledComponents(variation) {
           font-size: 15px;
           margin: 0 0 0 10px;
           line-height: 1.4;
-          // margin-top: -3px;
           vertical-align: center;
         `,
         ReadingInfoWrapper: styled.div`
