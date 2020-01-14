@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.footer`
+export const Wrapper = styled.div`
   width: 328px;
   display: flex;
   border-top: 1px solid rgba(0, 0, 0, 0.05);

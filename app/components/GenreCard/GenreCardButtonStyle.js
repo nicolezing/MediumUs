@@ -3,7 +3,7 @@ import React from 'react';
 import {
   addMediaPlusIcon,
   addCheckboxTickIcon,
-} from '../../staticData/svgIcons/GernerCArd_Icons';
+} from '../../staticData/svgIcons/GenreCard_Icons';
 
 const base = css`
   color: rgba(0, 0, 0, 0.84);

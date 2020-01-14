@@ -11,17 +11,10 @@ const base = css`
   white-space: nowrap;
   // user-select: none;
   box-sizing: border-box;
-
   border-width: 1px;
   border-style: solid;
   border-radius: 4px;
-
-  // -webkit-transition: 0.1s background-color, 0.1s border-color, 0.1s color,
-  //   0.1s fill;
   transition: 0.1s background-color, 0.1s border-color, 0.1s color, 0.1s fill;
-
-  // -webkit-tap-highlight-color: transparent ;
-
   line-height: 19px;
   padding: 0 10px;
   font-size: 15px;
@@ -62,7 +55,6 @@ const filled = css`
 const outlined = css`
   color: ${props => getColor(props.colorSet).color};
   border-color: ${props => getColor(props.colorSet).borderColor};
-  // background: white;
   :hover {
     color: ${props => getColor(props.colorSet).hoverColor};
     border-color: ${props => getColor(props.colorSet).hoverColor};

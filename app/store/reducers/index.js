@@ -4,4 +4,3 @@ import { testState } from './testState';
 export default createReducer({
   testState,
 });
-// export default testState;

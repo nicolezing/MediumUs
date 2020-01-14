@@ -41,7 +41,6 @@ export const HomeHeroMid = {
   sub: css`
     -webkit-line-clamp: 1;
     @media screen and (max-width: 680px) {
-      // -webkit-line-clamp: 1;
       line-height: 20px;
     }
   `,

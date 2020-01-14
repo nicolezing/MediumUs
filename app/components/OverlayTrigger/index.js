@@ -27,10 +27,7 @@ function OverlayTrigger(props) {
     const { aX, aY, pX, pY, place } = setPosition(
       findDOMNode(trigger.current).getBoundingClientRect(),
       findDOMNode(popover.current).getBoundingClientRect(),
-      window.scrollX,
-      window.scrollY,
       document.documentElement.clientWidth,
-      document.documentElement.clientHeight,
       props.placement,
     );
     setArrowPosition([aX, aY]);

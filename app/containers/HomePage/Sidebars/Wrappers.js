@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const SidebarWrapper = styled.div`
   width: 328px;
   flex: none;
-  // height: fit-content;
   @media screen and (max-width: 855px) {
     width: 100%;
     display: none;

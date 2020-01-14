@@ -95,7 +95,6 @@ export const HomeList = {
       letter-spacing: 0.03em;
       color: rgba(0, 0, 0, 0.54);
       content: '${content}';
-      // BASED ON YOUR READING HISTORY/POPULAR ON MEDIUM
     }
   `,
   iconWrapperStyle: css`

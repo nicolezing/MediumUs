@@ -28,11 +28,6 @@ const setPosition = (
       (placement === 'bottom-top' && bottomRemainedMargin < need)
     ) {
       // render above trigger;
-      // pY =
-      //   -need -
-      //   triggerSize.height -
-      //   ARROW_DIMENSION / 2 +
-      //   (scrollY + triggerSize.top + triggerSize.height);
       pY = pY - popoverSize.height - triggerSize.height - ARROW_DIMENSION * 2;
       place = 'above';
     }

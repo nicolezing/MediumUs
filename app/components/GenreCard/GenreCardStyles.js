@@ -22,7 +22,6 @@ const GenreCardHeader = styled.div`
   padding-right: 20px;
   padding-left: 20px;
   flex: auto;
-  -webkit-box-flex: 1;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;

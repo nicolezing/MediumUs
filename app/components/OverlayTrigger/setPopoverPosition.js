@@ -1,12 +1,4 @@
-const setPosition = (
-  triggerSize,
-  popoverSize,
-  scrollX,
-  scrollY,
-  screenWidth,
-  screenHeight,
-  placement,
-) => {
+const setPosition = (triggerSize, popoverSize, screenWidth, placement) => {
   // set margin of the popover to the screen
   const MARGIN_NEEDED = 4;
   const ARROW_DIMENSION = 14;
