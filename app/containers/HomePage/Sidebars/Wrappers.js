@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const SidebarWrapper = styled.div`
   width: 328px;
   flex: none;
-  height: fit-content;
+  // height: fit-content;
   @media screen and (max-width: 855px) {
     width: 100%;
     display: none;
@@ -15,4 +15,9 @@ export const MidWrapper = styled.section`
   @media screen and (max-width: 855px) {
     margin-bottom: 48px;
   }
+`;
+
+export const StickyWrapper = styled.div`
+  width: inherit;
+  ${props => props.wrapperStyles}
 `;
