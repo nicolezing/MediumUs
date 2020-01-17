@@ -18,5 +18,5 @@ export const MidWrapper = styled.section`
 
 export const StickyWrapper = styled.div`
   width: inherit;
-  ${props => props.wrapperStyles}
+  overscroll-behavior: none;
 `;

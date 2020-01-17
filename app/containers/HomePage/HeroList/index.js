@@ -1,46 +1,82 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ArticlePoster from '../../../components/ArticlePoster';
 import { Wrapper, SidebarWrapper } from './Wrappers';
-import { NewFromNetwork, PopularOnMedium, ReadingList } from '../Sidebars';
+import {
+  NewFromNetwork,
+  PopularOnMedium,
+  ReadingList,
+} from '../Sidebars/index';
+import { loadMoreHomelist } from '../../../store/actions';
 
 function HeroList(props) {
-  const renderList = id => (
-    <ArticlePoster
-      variation="HomeList"
-      hoverEffect
-      id={id}
-      key={`articleID${id}`}
-    />
-  );
+  const sectionRef = useRef();
+  const dividerPosition = [0, 3, 8, 11, 17, 22];
+
+  const renderIdList = arr =>
+    arr.map(id => (
+      <ArticlePoster
+        variation="HomeList"
+        hoverEffect
+        id={id}
+        key={`articleID${id}`}
+      />
+    ));
+
+  function unlimitedLoading() {
+    const windowHeight = window.innerHeight;
+    // eslint-disable-next-line react/no-find-dom-node
+    const { bottom } = findDOMNode(sectionRef.current).getBoundingClientRect();
+    if (bottom <= windowHeight) {
+      props.loadMoreHomelist();
+    }
+  }
+
+  useEffect(() => {
+    unlimitedLoading();
+    window.addEventListener('scroll', unlimitedLoading);
+    return () => {
+      window.removeEventListener('scroll', unlimitedLoading);
+    };
+  });
 
   return (
     <Wrapper>
-      <section>
-        {props.articleList.slice(0, 3).map(id => renderList(id))}
+      <section ref={sectionRef}>
+        {renderIdList(
+          props.articleList.slice(dividerPosition[0], dividerPosition[1]),
+        )}
         <SidebarWrapper>
           <NewFromNetwork />
         </SidebarWrapper>
-        {props.articleList.slice(3, 8).map(id => renderList(id))}
+        {renderIdList(
+          props.articleList.slice(dividerPosition[1], dividerPosition[2]),
+        )}
         <SidebarWrapper>
           <NewFromNetwork />
         </SidebarWrapper>
-        {props.articleList.slice(8, 11).map(id => renderList(id))}
+        {renderIdList(
+          props.articleList.slice(dividerPosition[2], dividerPosition[3]),
+        )}
         <SidebarWrapper>
           <ReadingList />
         </SidebarWrapper>
-        {props.articleList.slice(11, 17).map(id => renderList(id))}
+        {renderIdList(
+          props.articleList.slice(dividerPosition[3], dividerPosition[4]),
+        )}
         <SidebarWrapper>
           <PopularOnMedium />
         </SidebarWrapper>
-        {props.articleList.slice(17).map(id => renderList(id))}
+        {renderIdList(props.articleList.slice(dividerPosition[4]))}
       </section>
     </Wrapper>
   );
 }
 HeroList.propTypes = {
   articleList: PropTypes.array,
+  loadMoreHomelist: PropTypes.func,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -50,4 +86,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(HeroList);
+export default connect(
+  mapStateToProps,
+  { loadMoreHomelist },
+)(HeroList);
