@@ -44,6 +44,11 @@ export const colorSet = {
     borderColor: '#D44596',
     hoverColor: '#962f68',
   },
+  // disable: {
+  //   color: 'rgba(0,0,0,.54)',
+  //   borderColor: 'rgba(0,0,0,.54)',
+  //   hoverColor: 'rgba(0,0,0,.54)',
+  // },
 };
 
 export default color => colorSet[color || 'green'];

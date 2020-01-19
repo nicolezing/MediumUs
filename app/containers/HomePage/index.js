@@ -9,37 +9,31 @@ import React from 'react';
 // import { FormattedMessage } from 'react-intl';
 // import { connect } from 'react-redux';
 // import messages from './messages';
-import { Wrapper, SideWrapper } from './Wrappers';
+import { WidthConstrainWrapper, SideWrapper } from './Wrappers';
 import Header from './Header';
 import MainHero from './MainHero';
 import HeroList from './HeroList';
 import Sidebars from './Sidebars';
+import Navbar from './Navbar';
 
 function HomePage() {
   return (
-    <Wrapper>
-      {/* <h1>
+    <>
+      <WidthConstrainWrapper>
+        {/* <h1>
         <FormattedMessage {...messages.header} />
       </h1> */}
-      <Header />
-      <div
-        id="navbar"
-        style={{
-          position: 'sticky',
-          top: 0,
-          height: '50px',
-          background: 'gray',
-          zIndex: 10,
-        }}
-      >
-        NavBar
-      </div>
-      <MainHero />
-      <SideWrapper>
-        <HeroList list="homeList" />
-        <Sidebars />
-      </SideWrapper>
-    </Wrapper>
+        <Header />
+      </WidthConstrainWrapper>
+      <Navbar />
+      <WidthConstrainWrapper>
+        <MainHero />
+        <SideWrapper>
+          <HeroList list="homeList" />
+          <Sidebars />
+        </SideWrapper>
+      </WidthConstrainWrapper>
+    </>
   );
 }
 

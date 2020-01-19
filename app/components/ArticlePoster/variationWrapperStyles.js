@@ -99,6 +99,8 @@ export const HomeList = {
   `,
   iconWrapperStyle: css`
     align-self: center;
+    //changed
+    display: inline-flex;
   `,
 };
 

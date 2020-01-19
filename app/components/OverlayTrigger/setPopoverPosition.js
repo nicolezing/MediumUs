@@ -1,4 +1,10 @@
-const setPosition = (triggerSize, popoverSize, screenWidth, placement) => {
+const setPosition = (
+  triggerSize,
+  popoverSize,
+  screenWidth,
+  screenHeight,
+  placement,
+) => {
   // set margin of the popover to the screen
   const MARGIN_NEEDED = 4;
   const ARROW_DIMENSION = 14;
@@ -11,7 +17,7 @@ const setPosition = (triggerSize, popoverSize, screenWidth, placement) => {
   // adjust Y when the placement set to "top-bottom" or "bottom-top"
   if (placement !== 'dropdown') {
     const topRemainedMargin = triggerSize.top - triggerSize.height / 2;
-    const bottomRemainedMargin = triggerSize.bottom;
+    const bottomRemainedMargin = screenHeight - triggerSize.bottom;
     const need = popoverSize.height + MARGIN_NEEDED + ARROW_DIMENSION;
 
     if (

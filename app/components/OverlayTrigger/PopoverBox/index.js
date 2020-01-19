@@ -1,6 +1,6 @@
 /**
  *
- * Dropdown
+ * PopoverBox
  *
  */
 

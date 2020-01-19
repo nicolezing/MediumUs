@@ -11,6 +11,9 @@ const btnBaseStyle = css`
     outline: none;
   }
   vertical-align: middle;
+  :disabled {
+    cursor: default;
+  }
 `;
 
 const IconStyledButton = styled.button`

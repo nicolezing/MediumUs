@@ -29,6 +29,13 @@ function Header() {
       <GridStyledWrapper>
         {/* placeholder, should be the input component */}
         <IconButton iconName="searchIcon" colorSet="gray" title="Search" />
+        <AutoHiddenStyledA href="./">
+          <IconButton
+            iconName="bookmarkList"
+            colorSet="gray"
+            title="Bookmarks"
+          />
+        </AutoHiddenStyledA>
         <IconButton iconName="bellIcon" colorSet="gray" title="Notifications" />
         <AutoHiddenStyledA href="./">
           <OutlinedButton

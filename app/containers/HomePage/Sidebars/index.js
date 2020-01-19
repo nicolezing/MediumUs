@@ -119,7 +119,6 @@ function Sidebars() {
 
   useEffect(() => {
     if (window.scrollY !== 0) {
-      // console.log('scroll');
       adjustSidebarPosition();
     }
     window.addEventListener('scroll', adjustSidebarPosition);

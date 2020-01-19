@@ -27,15 +27,17 @@ export const LogoIconStyledA = styled.a`
 
 export const GridStyledWrapper = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto;
   grid-gap: 16px;
+  align-items: center;
   @media screen and (max-width: 767px) {
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     grid-gap: 10px;
   }
 `;
 
 export const AutoHiddenStyledA = styled.a`
+  transition: 0.1s background-color, 0.1s border-color, 0.1s color, 0.1s fill;
   @media screen and (max-width: 767px) {
     display: none;
   }

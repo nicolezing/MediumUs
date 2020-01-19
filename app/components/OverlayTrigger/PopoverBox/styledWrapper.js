@@ -14,6 +14,7 @@ export const PopoverOuterWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   visibility: ${props => props.visibility};
+  transition: visibility 0s linear 0s, opacity 0.2s 0s;
 `;
 
 export const PopoverInnerWrapper = styled.div`
