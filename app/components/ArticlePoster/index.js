@@ -143,10 +143,10 @@ function ArticlePoster(props) {
 
 ArticlePoster.propTypes = {
   publication: PropTypes.string,
-  authorName: PropTypes.string.isRequired,
-  articleLink: PropTypes.string.isRequired,
-  articleCover: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  authorName: PropTypes.string,
+  articleLink: PropTypes.string,
+  articleCover: PropTypes.string,
+  title: PropTypes.string,
   bookmarked: PropTypes.bool,
   twitter: PropTypes.string,
   facebook: PropTypes.string,

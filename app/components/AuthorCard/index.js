@@ -48,13 +48,25 @@ function AuthorCard(props) {
     lastModified,
   } = props;
 
-  function renderAuthor() {
-    const element = (
-      <StyledA href={authorLink} key="name">
-        {authorName}
-      </StyledA>
-    );
+  const avatarElement = (
+    <a href={authorLink}>
+      <div>
+        <Avatar
+          alt={`Go to the profile of ${authorName}`}
+          size={avatarSize}
+          id={id}
+        />
+      </div>
+    </a>
+  );
 
+  const authorElement = (
+    <StyledA href={authorLink} key="name">
+      {authorName}
+    </StyledA>
+  );
+
+  function renderAuthor(element) {
     if (hoverEffect) {
       const popoverContent = <PopoverContent imgType="avatar" id={id} />;
       return (
@@ -134,21 +146,13 @@ function AuthorCard(props) {
 
   return (
     <StyledWrapper>
-      {isDisplayAvatar && (
-        <a href={props.authorLink}>
-          <div>
-            <Avatar
-              alt={`Go to the profile of ${props.authorName}`}
-              size={avatarSize}
-              id={props.id}
-            />
-          </div>
-        </a>
-      )}
+      {isDisplayAvatar && renderAuthor(avatarElement)}
       <StyledInfoWrapper>
         <AuthorInfoWrapper>
-          {renderAuthor()}
-          {props.publication && <> in {renderPublication()}</>}
+          {renderAuthor(authorElement)}
+          {props.publication && props.variation !== 'PublicationHome' && (
+            <> in {renderPublication()}</>
+          )}
           {hasFollowButton && (
             <StyledButtonWrapper>
               <OutlinedButton text="Follow" size="small" type="outlined" />
