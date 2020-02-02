@@ -8,14 +8,20 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Router } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
+import { Elemental } from 'containers/Elemental';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
   let homeRoute = <Route exact path="/" component={HomePage} />;
+  const elementalRoute = (
+    <Route exact path="/elemental" component={Elemental} />
+  );
+  // const NotFoundPage = <Route component={NotFoundPage} />;
+
   if (process.env.NODE_ENV === 'production') {
     homeRoute = (
       <Route exact path="/MediumUs">
@@ -27,8 +33,10 @@ export default function App() {
   return (
     <div>
       <Switch>
-        {homeRoute}
-        <Route component={NotFoundPage} />
+        <>
+          {homeRoute}
+          {elementalRoute}
+        </>
       </Switch>
       <GlobalStyle />
     </div>
