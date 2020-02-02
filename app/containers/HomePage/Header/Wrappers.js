@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   height: 65px;
@@ -25,14 +24,15 @@ export const LogoIconStyledA = styled.a`
   }
 `;
 
-export const GridStyledWrapper = styled.div`
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  grid-gap: 16px;
+export const FlexStyledWrapper = styled.div`
+  display: flex;
   align-items: center;
+`;
+
+export const MarginWrapper = styled.div`
+  margin-left: 16px;
   @media screen and (max-width: 767px) {
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 10px;
+    margin-left: 10px;
   }
 `;
 

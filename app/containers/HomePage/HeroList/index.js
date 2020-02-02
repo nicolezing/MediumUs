@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ArticlePoster from '../../../components/ArticlePoster';
@@ -10,6 +9,7 @@ import {
   ReadingList,
 } from '../Sidebars/index';
 import { loadMoreHomelist } from '../../../store/actions';
+import unlimitedLoading from '../../../utils/unlimitedLoading';
 
 function HeroList(props) {
   const sectionRef = useRef();
@@ -25,20 +25,25 @@ function HeroList(props) {
       />
     ));
 
-  function unlimitedLoading() {
-    const windowHeight = window.innerHeight;
-    // eslint-disable-next-line react/no-find-dom-node
-    const { bottom } = findDOMNode(sectionRef.current).getBoundingClientRect();
-    if (bottom <= windowHeight) {
-      props.loadMoreHomelist();
-    }
-  }
+  // function unlimitedLoading() {
+  //   const windowHeight = window.innerHeight;
+  //   // eslint-disable-next-line react/no-find-dom-node
+  //   const { bottom } = findDOMNode(sectionRef.current).getBoundingClientRect();
+  //   if (bottom <= windowHeight) {
+  //     props.loadMoreHomelist();
+  //   }
+  // }
+  const unlimitedLoader = unlimitedLoading(
+    window,
+    sectionRef,
+    props.loadMoreHomelist,
+  );
 
   useEffect(() => {
     unlimitedLoading();
-    window.addEventListener('scroll', unlimitedLoading);
+    window.addEventListener('scroll', unlimitedLoader);
     return () => {
-      window.removeEventListener('scroll', unlimitedLoading);
+      window.removeEventListener('scroll', unlimitedLoader);
     };
   });
 

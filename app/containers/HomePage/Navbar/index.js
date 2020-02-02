@@ -33,7 +33,7 @@ function Navbar() {
     },
     {
       menuItem: 'ELEMENTAL',
-      link: './',
+      link: './elemental',
     },
     {
       menuItem: 'GEN',

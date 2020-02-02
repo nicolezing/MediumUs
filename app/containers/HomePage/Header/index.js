@@ -11,7 +11,8 @@ import {
   Wrapper,
   MainIconStyledA,
   LogoIconStyledA,
-  GridStyledWrapper,
+  FlexStyledWrapper,
+  MarginWrapper,
   AutoHiddenStyledA,
 } from './Wrappers';
 
@@ -26,33 +27,50 @@ function Header() {
           <IconButton iconName="logoIcon" colorSet="pureBlack" />
         </LogoIconStyledA>
       </div>
-      <GridStyledWrapper>
+      <FlexStyledWrapper>
         {/* placeholder, should be the input component */}
-        <IconButton iconName="searchIcon" colorSet="gray" title="Search" />
+        <MarginWrapper>
+          <IconButton iconName="searchIcon" colorSet="gray" title="Search" />
+        </MarginWrapper>
+
         <AutoHiddenStyledA href="./">
+          <MarginWrapper>
+            <IconButton
+              iconName="bookmarkList"
+              colorSet="gray"
+              title="Bookmarks"
+            />
+          </MarginWrapper>
+        </AutoHiddenStyledA>
+
+        <MarginWrapper>
           <IconButton
-            iconName="bookmarkList"
+            iconName="bellIcon"
             colorSet="gray"
-            title="Bookmarks"
+            title="Notifications"
           />
-        </AutoHiddenStyledA>
-        <IconButton iconName="bellIcon" colorSet="gray" title="Notifications" />
+        </MarginWrapper>
+
         <AutoHiddenStyledA href="./">
-          <OutlinedButton
-            text="Upgrade"
-            type="outlined"
-            size="middle"
-            colorSet="black"
-          />
+          <MarginWrapper>
+            <OutlinedButton
+              text="Upgrade"
+              type="outlined"
+              size="middle"
+              colorSet="black"
+            />
+          </MarginWrapper>
         </AutoHiddenStyledA>
-        <OverlayTrigger
-          popoverContent={<UserSettingList id="loggedIn" />}
-          trigger="click"
-          placement="dropdown"
-        >
-          <Avatar id="loggedIn" />
-        </OverlayTrigger>
-      </GridStyledWrapper>
+        <MarginWrapper>
+          <OverlayTrigger
+            popoverContent={<UserSettingList id="loggedIn" />}
+            trigger="click"
+            placement="dropdown"
+          >
+            <Avatar id="loggedIn" />
+          </OverlayTrigger>
+        </MarginWrapper>
+      </FlexStyledWrapper>
     </Wrapper>
   );
 }
