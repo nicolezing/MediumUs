@@ -14,7 +14,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { WidthConstrainWrapper } from '../HomePage/Wrappers';
-import PublicationHeader from '../PublicationComponents/PublicationHeader';
+import PublicationHeaderAutoShow from '../PublicationComponents/PublicationHeaderAutoShow';
 import PublicationHeaderTypeA from '../PublicationComponents/PublicationHeaderTypeA';
 import NavbarTypeA from '../PublicationComponents/NavbarTypeA';
 import HeroList from './HeroList';
@@ -34,13 +34,15 @@ export function Elemental() {
         <title>Elemental</title>
         <meta name="description" content="Description of Elemental" />
       </Helmet>
-      <WidthConstrainWrapper>
-        <PublicationHeader />
-        <PublicationHeaderTypeA topic={publication} />
-        <NavbarTypeA topic={publication} />
-        <HeroList topic={publication} />
-        <Footer />
-      </WidthConstrainWrapper>
+      <div>
+        <PublicationHeaderAutoShow />
+        <WidthConstrainWrapper>
+          <PublicationHeaderTypeA topic={publication} />
+          <NavbarTypeA topic={publication} />
+          <HeroList topic={publication} />
+          <Footer />
+        </WidthConstrainWrapper>
+      </div>
     </div>
   );
 }

@@ -20,10 +20,10 @@ function Header() {
   return (
     <Wrapper>
       <div>
-        <MainIconStyledA href="./Homepage">
+        <MainIconStyledA href="./">
           <IconButton iconName="mainIcon" colorSet="pureBlack" />
         </MainIconStyledA>
-        <LogoIconStyledA href="./Homepage">
+        <LogoIconStyledA href="./">
           <IconButton iconName="logoIcon" colorSet="pureBlack" />
         </LogoIconStyledA>
       </div>
