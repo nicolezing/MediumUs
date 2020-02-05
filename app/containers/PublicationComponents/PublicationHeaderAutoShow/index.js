@@ -1,5 +1,5 @@
 /*
- * PublicationHeader
+ * PublicationHeaderAutoShow
  */
 
 import React, { useRef, useEffect } from 'react';

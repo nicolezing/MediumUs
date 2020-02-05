@@ -1,5 +1,5 @@
 /*
- * NavbarTypeA
+ * NavbarBasic
  */
 
 import React from 'react';
@@ -16,7 +16,7 @@ import {
   ButtonWrapper,
 } from './Wrappers';
 
-function NavbarTypeA(props) {
+function NavbarBasic(props) {
   const { topicNav, socialMedia } = props;
   const renderNavbar = () =>
     topicNav.map((cur, index) => {
@@ -67,7 +67,7 @@ function NavbarTypeA(props) {
   );
 }
 
-NavbarTypeA.propTypes = {
+NavbarBasic.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   topic: PropTypes.string.isRequired,
   // topicLink: PropTypes.string,
@@ -85,4 +85,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(NavbarTypeA);
+export default connect(mapStateToProps)(NavbarBasic);

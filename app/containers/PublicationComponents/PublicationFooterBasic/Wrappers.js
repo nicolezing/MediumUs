@@ -13,6 +13,7 @@ export const A = styled.a`
   font-size: 16px;
   font-weight: 400;
   line-height: 35px;
+  text-transform: capitalize;
   color: rgba(0, 0, 0, 0.54);
   :hover {
     color: rgba(0, 0, 0, 0.68);

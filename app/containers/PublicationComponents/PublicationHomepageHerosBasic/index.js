@@ -1,5 +1,5 @@
 /*
- * PublicationHomepageHeros
+ * PublicationHomepageHerosBasic
  */
 
 import React from 'react';

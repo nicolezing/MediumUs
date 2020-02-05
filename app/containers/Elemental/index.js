@@ -15,10 +15,10 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { WidthConstrainWrapper } from '../HomePage/Wrappers';
 import PublicationHeaderAutoShow from '../PublicationComponents/PublicationHeaderAutoShow';
-import PublicationHeaderTypeA from '../PublicationComponents/PublicationHeaderTypeA';
-import NavbarTypeA from '../PublicationComponents/NavbarTypeA';
+import PublicationHeaderBasic from '../PublicationComponents/PublicationHeaderBasic';
+import NavbarBasic from '../PublicationComponents/NavbarBasic';
 import HeroList from './HeroList';
-import Footer from './Footer';
+import PublicationFooterBasic from '../PublicationComponents/PublicationFooterBasic';
 import makeSelectElemental from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -37,10 +37,10 @@ export function Elemental() {
       <div>
         <PublicationHeaderAutoShow />
         <WidthConstrainWrapper>
-          <PublicationHeaderTypeA topic={publication} />
-          <NavbarTypeA topic={publication} />
+          <PublicationHeaderBasic topic={publication} />
+          <NavbarBasic topic={publication} />
           <HeroList topic={publication} />
-          <Footer />
+          <PublicationFooterBasic topic={publication} />
         </WidthConstrainWrapper>
       </div>
     </div>

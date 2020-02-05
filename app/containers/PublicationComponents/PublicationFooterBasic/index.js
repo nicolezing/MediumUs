@@ -1,14 +1,16 @@
 /*
- * Footer
+ * PublicationFooterBasic
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Wrapper, A, MarginWrapper, Span } from './Wrappers';
 
-function Footer() {
+function PublicationFooterBasic(props) {
   const footerList = {
-    'About Elemental': './',
-    'Latest Stories': './',
+    [`about ${props.topic}`]: props.about,
+    'latest stories': props.latest,
     Archive: './',
     'About Medium': './',
     Terms: './',
@@ -39,4 +41,16 @@ function Footer() {
   return <Wrapper>{renderFooterListItem(Object.keys(footerList))}</Wrapper>;
 }
 
-export default Footer;
+PublicationFooterBasic.propTypes = {
+  topic: PropTypes.string.isRequired,
+  about: PropTypes.string,
+  latest: PropTypes.string,
+};
+
+function mapStateToProps(state, ownProps) {
+  const { topic } = ownProps;
+  const { about, latest } = state.testState.topicList[topic];
+  return { about, latest };
+}
+
+export default connect(mapStateToProps)(PublicationFooterBasic);

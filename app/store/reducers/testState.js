@@ -131,6 +131,8 @@ export const testState = () => ({
       topicLogoImg: Elemental,
       topicSlogan: 'by Medium',
       topicLink: './elemental',
+      latest: './',
+      about: './',
       topicNav: [
         { navItem: 'body', itemLink: './' },
         { navItem: 'brain', itemLink: './' },

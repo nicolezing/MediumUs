@@ -1,5 +1,5 @@
 /*
- * PublicationHeaderTypeA
+ * PublicationHeaderBasic
  */
 
 import React from 'react';
@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Wrapper, ImgWrapper, Img, TextWrapper, H2 } from './Wrappers';
 
-function PublicationHeaderTypeA(props) {
+function PublicationHeaderBasic(props) {
   return (
     <Wrapper>
       <ImgWrapper>
@@ -22,7 +22,7 @@ function PublicationHeaderTypeA(props) {
   );
 }
 
-PublicationHeaderTypeA.propTypes = {
+PublicationHeaderBasic.propTypes = {
   topic: PropTypes.string.isRequired,
   topicLink: PropTypes.string,
   topicLogoImg: PropTypes.string,
@@ -41,4 +41,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(PublicationHeaderTypeA);
+export default connect(mapStateToProps)(PublicationHeaderBasic);
