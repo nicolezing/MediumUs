@@ -186,6 +186,14 @@ export const testState = () => ({
         'ID001',
         'ID002',
       ],
+      pageArrangement: {
+        // for each smallest arr, arr[0] is hero per row, arr[1] is total number of heros;
+        default: [[1, 1]],
+        Latest: [[3, 6]],
+        'Exercise is Medicine': [[1, 1], [3, 6], [1, 1], [3, 3], [2, 2]],
+        'The Nuance': [[3, 3], [2, 2]],
+        MORE: [[1, 1], [3, 18]],
+      },
     },
   },
 });
