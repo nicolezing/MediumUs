@@ -1,4 +1,7 @@
-import { renderList, renderSectionTitle } from '../PublicationHomepageHeros';
+import {
+  renderList,
+  renderSectionTitle,
+} from '../PublicationHomepageHerosBasic';
 
 const renderListInSection = arrangementObject => title => {
   let componentTitle;
