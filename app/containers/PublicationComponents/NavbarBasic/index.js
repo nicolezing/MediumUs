@@ -70,17 +70,15 @@ function NavbarBasic(props) {
 NavbarBasic.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   topic: PropTypes.string.isRequired,
-  // topicLink: PropTypes.string,
   topicNav: PropTypes.array,
   socialMedia: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
   const { topic } = ownProps;
-  const { topicNav, topicLink, socialMedia } = state.testState.topicList[topic];
+  const { topicNav, socialMedia } = state.testState.topicList[topic];
   return {
     topicNav,
-    topicLink,
     socialMedia,
   };
 }

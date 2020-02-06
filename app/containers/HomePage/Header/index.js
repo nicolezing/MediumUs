@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { IconButton, OutlinedButton } from '../../../components/Button';
 import OverlayTrigger from '../../../components/OverlayTrigger';
 import Avatar from '../../../components/Avatar';
@@ -16,9 +17,18 @@ import {
   AutoHiddenStyledA,
 } from './Wrappers';
 
-function Header() {
-  return (
-    <Wrapper>
+function Header(props) {
+  const renderLogo = () => {
+    if (props.logoType === 'icon') {
+      return (
+        <div>
+          <a href="./">
+            <IconButton iconName="logoIcon" colorSet="pureBlack" />
+          </a>
+        </div>
+      );
+    }
+    return (
       <div>
         <MainIconStyledA href="./">
           <IconButton iconName="mainIcon" colorSet="pureBlack" />
@@ -27,6 +37,12 @@ function Header() {
           <IconButton iconName="logoIcon" colorSet="pureBlack" />
         </LogoIconStyledA>
       </div>
+    );
+  };
+
+  return (
+    <Wrapper>
+      {renderLogo()}
       <FlexStyledWrapper>
         {/* placeholder, should be the input component */}
         <MarginWrapper>
@@ -74,5 +90,10 @@ function Header() {
     </Wrapper>
   );
 }
+
+Header.propTypes = {
+  // eslint-disable-next-line react/no-unused-prop-types
+  logoType: PropTypes.string,
+};
 
 export default Header;

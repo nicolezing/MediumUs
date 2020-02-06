@@ -1,6 +1,7 @@
 import N from '../../staticData/images/N.png';
 import user001 from '../../staticData/images/user-profile001.png';
 import Elemental from '../../staticData/images/Elemental.png';
+import ElementalSmall from '../../staticData/images/ElementalSmall.png';
 
 export const testState = () => ({
   loggedIn: {
@@ -129,6 +130,7 @@ export const testState = () => ({
   topicList: {
     elemental: {
       topicLogoImg: Elemental,
+      topicLogoImgSmall: ElementalSmall,
       topicSlogan: 'by Medium',
       topicLink: './elemental',
       latest: './',

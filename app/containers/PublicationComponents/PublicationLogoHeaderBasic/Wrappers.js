@@ -22,4 +22,7 @@ export const H2 = styled.h2`
   color: rgba(0, 0, 0, 0.54);
   font-size: 26px;
   font-weight: 400;
+  @media screen and (max-width: 767px) {
+    font-size: 20px;
+  }
 `;
