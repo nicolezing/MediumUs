@@ -1,0 +1,18 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import Input from '../index.js';
+
+<Meta title="Components|Input" component={Input} />
+
+# Search Input
+
+<Props of={Input} />
+
+## Input Display
+
+<Preview>
+  <Story name="SearchInput">
+    <div style={{ border: '1px solid black', height: '40px', width: '260px' }}>
+      <Input placeholderName="Search Medium" inputDisplay="false" />
+    </div>
+  </Story>
+</Preview>
