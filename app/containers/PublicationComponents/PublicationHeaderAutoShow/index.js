@@ -3,7 +3,6 @@
  */
 
 import React, { useRef, useEffect } from 'react';
-import { findDOMNode } from 'react-dom';
 
 import { IconButton } from '../../../components/Button';
 import OverlayTrigger from '../../../components/OverlayTrigger';
@@ -28,8 +27,7 @@ function PublicationHeader() {
 
   const autoShowNavbar = () => {
     const { scrollY } = window;
-    // eslint-disable-next-line react/no-find-dom-node
-    const { height } = findDOMNode(navbarRef.current).getBoundingClientRect();
+    const { height } = navbarRef.current.getBoundingClientRect();
     placeholderRef.current.style.height = `${height}px`;
 
     if (scrollY === 0) {

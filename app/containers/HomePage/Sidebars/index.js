@@ -1,7 +1,5 @@
 /* eslint-disable no-param-reassign */
-/* eslint-disable react/no-find-dom-node */
 import React, { useRef, useEffect } from 'react';
-import { findDOMNode } from 'react-dom';
 import Sidebar from '../../../components/Sidebar';
 import { SidebarWrapper, MidWrapper, StickyWrapper } from './Wrappers';
 import Footer from '../Footer';
@@ -23,6 +21,7 @@ export const ReadingList = () => (
     <Sidebar recommendationSource="readingList" />
   </MidWrapper>
 );
+
 function ScrollListenerMaker() {
   let scrollDistance = 0;
   let scrollDirection = 1;
@@ -37,10 +36,12 @@ function ScrollListenerMaker() {
     if (display !== 'none') {
       const windowHeight = document.documentElement.clientHeight;
       const navbarHeight = document.getElementById('navbar').clientHeight;
-      const { offsetTop } = findDOMNode(sidebarRef.current);
-      const { top, bottom, height } = findDOMNode(
-        stickyContentRef.current,
-      ).getBoundingClientRect();
+      const { offsetTop } = sidebarRef.current;
+      const {
+        top,
+        bottom,
+        height,
+      } = stickyContentRef.current.getBoundingClientRect();
       scrollDirection = scrollY - scrollDistance;
       scrollDistance = scrollY;
 
@@ -85,7 +86,6 @@ function ScrollListenerMaker() {
         // console.log('going down');
         if (newFixedAt === 'top') {
           // console.log('will relative');
-
           stickyContentRef.current.style.position = 'relative';
           stickyContentRef.current.style.transform = `translateY(${scrollY -
             offsetTop}px)`;

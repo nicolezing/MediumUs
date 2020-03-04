@@ -195,15 +195,27 @@ export const ArticlePageTitle = {
   h1: css`
     line-height: 48px;
     font-size: 40px;
-    font-family: medium-content-title-font, Georgia, Cambria, 'Times New Roman',
-      Times, serif;
+    font-family: vanilla-fell, medium-content-title-font, Georgia, Cambria,
+      'Times New Roman', Times, serif;
     font-weight: 400;
+    margin-top: 0.78em;
     margin-bottom: 8px;
+    color: rgba(0, 0, 0, 0.84);
+    @media screen and (max-width: 728px) {
+      font-size: 30px;
+      line-height: 40px;
+    }
   `,
   sub: css`
     line-height: 32px;
     font-size: 24px;
     font-weight: 300;
+    color: rgba(0, 0, 0, 0.54);
+    font-family: vanilla-sohne, medium-content-title-font, serif;
+    @media screen and (max-width: 728px) {
+      font-size: 16px;
+      line-height: 22px;
+    }
   `,
 };
 

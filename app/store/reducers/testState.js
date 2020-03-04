@@ -34,9 +34,17 @@ export const testState = () => ({
       subtitle:
         'And one last warning about their stupidly popular little brother',
       articleLink: './',
-      articleCover:
-        'https://cdn-images-1.medium.com/max/2000/1*FK8eDjLTgFGHrEsPo14T4A.jpeg',
-      focusPosition: [30, 50],
+      articleCover: {
+        coverSmall:
+          'https://cdn-images-1.medium.com/max/2000/1*mmwGCGBxhypOOOKa98XjKQ.jpeg',
+        coverMiddle:
+          'data:image/jpeg;base64,/9j/2wCEACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//gBKy0tPDU8dkFBdviljKX4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+P/AABEIACcAPAMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/ANWlpMgDJ4FMMyDGSeenFMkkpKTI9aje5jQ4J5zigFqS0U0OGGQaR5VQZJ+g9aBeQ+kzUaTK44yPY07NC1B6CScpz071WlZWIjIwSeOePxq2KYYkznaKmUblRlYgjbceDx71XlBLAHO4Y6c469K0AgB4FI8SMcsoNNxuhRlyu5Tts5b0zT3/ANZk56YqyEA7UNGrDkZocbxsCnaXMVo+p464xU4oCKvQYp2KIR5VYU5czuPoooqhC0UUUAJQaWkNADTSZpTTaZJ//9k=',
+        coverLarge:
+          'https://miro.medium.com/max/10136/1*mmwGCGBxhypOOOKa98XjKQ.jpeg',
+        figcaption: 'Photo: Cavan Images/Getty Images',
+        description: 'Female doctors examining petri dish in laboratory',
+        focusPosition: [50, 50],
+      },
       creationDate: '11/08/2019 05:23:31',
       lastModified: '12/09/2019 15:45:01',
       wordCount: 1342,
@@ -74,9 +82,18 @@ export const testState = () => ({
       subtitle:
         'Palforzia, a new drug for peanut allergies, may open the door to a new era of food allergy treatments',
       articleLink: './',
-      articleCover:
-        'https://cdn-images-1.medium.com/max/2000/1*mmwGCGBxhypOOOKa98XjKQ.jpeg',
-      // focusPosition: [30, 50],
+      articleCover: {
+        coverLarge:
+          'https://miro.medium.com/max/4800/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg',
+        coverSmall:
+          'https://cdn-images-1.medium.com/max/800/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg',
+        coverMiddle:
+          'https://miro.medium.com/max/60/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg?q=20',
+        figcaption: 'Photo: Cavan Images/Getty Images',
+        description: 'Female doctors examining petri dish in laboratory',
+
+        // focusPosition: [30, 50],
+      },
       bookmarked: false,
       premium: false,
       creationDate: '11/08/2019 05:23:31',

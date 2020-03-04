@@ -118,8 +118,8 @@ function ArticlePoster(props) {
         href={props.articleLink}
         variation={props.variation}
         aria-label={props.title}
-        cover={props.articleCover}
-        focusPosition={props.focusPosition}
+        cover={props.articleCover.coverSmall}
+        focusPosition={props.articleCover.focusPosition}
       />
       <InfoWrapper
         variation={props.variation}
@@ -145,7 +145,7 @@ ArticlePoster.propTypes = {
   publication: PropTypes.string,
   authorName: PropTypes.string,
   articleLink: PropTypes.string,
-  articleCover: PropTypes.string,
+  articleCover: PropTypes.object,
   title: PropTypes.string,
   bookmarked: PropTypes.bool,
   twitter: PropTypes.string,

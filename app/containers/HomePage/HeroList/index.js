@@ -28,7 +28,7 @@ function HeroList(props) {
   // function unlimitedLoading() {
   //   const windowHeight = window.innerHeight;
   //   // eslint-disable-next-line react/no-find-dom-node
-  //   const { bottom } = findDOMNode(sectionRef.current).getBoundingClientRect();
+  //   const { bottom } = (sectionRef.current).getBoundingClientRect();
   //   if (bottom <= windowHeight) {
   //     props.loadMoreHomelist();
   //   }
