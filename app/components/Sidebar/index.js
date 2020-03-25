@@ -19,6 +19,7 @@ import {
   H3,
   Img,
 } from './AsideWrappers';
+import { selectHomeRecommendationLists } from '../../selectors';
 
 function Sidebar(props) {
   const StyledAside =
@@ -31,18 +32,18 @@ function Sidebar(props) {
       ? ReadingListImageHeaderWrapper
       : NetworkImageHeaderWrapper;
 
-  const { sourceHeader, recommendationSource, headerImg } = props;
+  const { header, recommendationSource, headerImg } = props;
   const renderHeader = () => {
     if (recommendationSource === 'popularOnMedium') {
       return (
         <HeaderWrapper>
-          <H3>{sourceHeader}</H3>
+          <H3>{header}</H3>
         </HeaderWrapper>
       );
     }
     return (
       <StyledImageHeaderWrapper source={recommendationSource}>
-        <H2>{sourceHeader}</H2>
+        <H2>{header}</H2>
         {headerImg ? <Img src={headerImg} alt="background" /> : ''}
       </StyledImageHeaderWrapper>
     );
@@ -68,7 +69,7 @@ function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
-  sourceHeader: PropTypes.string.isRequired,
+  header: PropTypes.string.isRequired,
   sourceLink: PropTypes.string.isRequired,
   headerImg: PropTypes.string,
   articleList: PropTypes.array.isRequired,
@@ -78,23 +79,19 @@ Sidebar.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { recommendationSource } = ownProps;
-  const { sourceLink, articleList, headerImg } = state.testState[
-    recommendationSource
-  ];
-  const componentProps = {
+  const {
     articleList,
+    header,
     sourceLink,
+    headerImg,
+  } = selectHomeRecommendationLists(state, recommendationSource);
+
+  return {
+    articleList,
+    header,
+    sourceLink,
+    headerImg,
   };
-  if (recommendationSource === 'newFromNetwork') {
-    componentProps.sourceHeader = 'New from your network';
-    componentProps.headerImg = headerImg;
-  } else if (recommendationSource === 'popularOnMedium') {
-    componentProps.sourceHeader = 'Popular On Medium';
-  } else if (recommendationSource === 'readingList') {
-    componentProps.sourceHeader = 'Reading list';
-    componentProps.headerImg = headerImg;
-  }
-  return componentProps;
 }
 
 export default connect(mapStateToProps)(Sidebar);

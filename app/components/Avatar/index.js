@@ -10,12 +10,13 @@ import _ from 'lodash';
 import avatarHaloIcon from '../../staticData/svgIcons/avatarHaloIcon';
 import { haloComponents, avatarImg } from './avatarStyle';
 import avatarHaloSizeSets from './avatarHaloSizeSets';
+import { selectUserInfo } from '../../selectors';
 
 function Avatar(props) {
   const { AvtStyledImg } = avatarImg(props.size);
   const element = (
     <AvtStyledImg
-      src={props.avatarImg}
+      src={props.avatar}
       alt={props.alt || props.name}
       size={props.size}
       // pass down eventListener if any
@@ -37,7 +38,7 @@ function Avatar(props) {
 Avatar.propTypes = {
   member: PropTypes.bool.isRequired,
   size: PropTypes.string,
-  avatarImg: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
   alt: PropTypes.string,
   name: PropTypes.string,
   // eslint-disable-next-line react/no-unused-prop-types
@@ -46,11 +47,12 @@ Avatar.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { id } = ownProps;
-  const { userInfo } = state.testState[id];
+  const { avatar, name, member, link: alt } = selectUserInfo(state, id);
   return {
-    avatarImg: userInfo.avatarImg,
-    name: userInfo.name,
-    member: userInfo.member,
+    avatar,
+    name,
+    member,
+    alt,
   };
 }
 

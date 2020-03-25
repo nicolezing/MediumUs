@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import mapDetailListFromArrangement from '../../PublicationComponents/utils/mapDetailListFromArrangement';
 import renderListInSection from '../../PublicationComponents/utils/renderListInSection';
 import { PaddingWrapper } from './Wrappers';
+import { selectTopicInfo } from '../../../selectors';
 
 function HeroList(props) {
   const detailList = mapDetailListFromArrangement(
@@ -42,7 +43,7 @@ HeroList.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { topic } = ownProps;
-  const { heroList, pageArrangement } = state.testState.topicList[topic];
+  const { heroList, pageArrangement } = selectTopicInfo(state, topic);
   return { heroList, pageArrangement };
 }
 

@@ -1,6 +1,6 @@
 /**
  *
- * ArticleCard
+ * ArticlePoster
  *
  */
 
@@ -22,41 +22,29 @@ import {
 import Divider from './styledDivider';
 import getAuthorCardType from './getAuthorCardType';
 import { IconButton } from '../Button';
+import BookmarkButton from '../Button/BookmarkedButton';
 import roundToThousand from '../../utils/roundToThousand';
 import OverlayTrigger from '../OverlayTrigger';
 import MoreIconPopoverContent from './MoreIconPopoverContent';
+import {
+  selectUserInfo,
+  selectArticleCover,
+  selectArticleAllInfo,
+  selectPublicationInfo,
+} from '../../selectors';
 
 function ArticlePoster(props) {
   const { authorCardVariation } = getAuthorCardType(props.variation);
-  const { bookmarked, onRemoveBookmark, onAddBookmark } = props;
-
-  function BookmarkButton() {
-    return bookmarked ? (
-      <IconButton
-        title="Bookmark this story to read later"
-        iconName="bookmarkFilledIcon"
-        colorSet="pureBlack"
-        onClick={onRemoveBookmark}
-      />
-    ) : (
-      <IconButton
-        title="Bookmark this story to read later"
-        iconName="bookmarkIcon"
-        colorSet="gray"
-        onClick={onAddBookmark}
-      />
-    );
-  }
 
   function renderIcons() {
     switch (props.variation) {
       case 'HomeHeroLeft':
       case 'HomeHeroMid':
       case 'TopicHomepageList':
-        return [<BookmarkButton key={props.variation} />];
+        return <BookmarkButton id={props.id} key={props.id} />;
       case 'HomeList':
         return [
-          <BookmarkButton key={props.variation} />,
+          <BookmarkButton id={props.id} key={props.id} />,
           <div>
             <OverlayTrigger
               trigger="click"
@@ -89,7 +77,7 @@ function ArticlePoster(props) {
               <IconButton iconName="facebookSquareIcon" colorSet="black" />
             </a>
           ),
-          <BookmarkButton key={props.variation} />,
+          <BookmarkButton id={props.id} key={props.id} />,
         ];
       case 'ArticlePageRecommendation':
         return [
@@ -100,7 +88,7 @@ function ArticlePoster(props) {
           />,
           <ClapText key="claps">{roundToThousand(props.claps)}</ClapText>,
           <Divider key="divider" />,
-          <BookmarkButton key={props.variation} />,
+          <BookmarkButton id={props.id} key={props.id} />,
         ];
       default:
         return [];
@@ -110,7 +98,7 @@ function ArticlePoster(props) {
   return (
     <Wrapper
       variation={props.variation}
-      publication={props.publication}
+      publication={props.publicationName}
       name={props.authorName}
       key={props.title}
     >
@@ -118,12 +106,12 @@ function ArticlePoster(props) {
         href={props.articleLink}
         variation={props.variation}
         aria-label={props.title}
-        cover={props.articleCover.coverSmall}
-        focusPosition={props.articleCover.focusPosition}
+        cover={props.articleCover}
+        focusPosition={props.focusPosition}
       />
       <InfoWrapper
         variation={props.variation}
-        publication={props.publication}
+        publication={props.publicationName}
         source={props.source}
         name={props.authorName}
       >
@@ -142,20 +130,18 @@ function ArticlePoster(props) {
 }
 
 ArticlePoster.propTypes = {
-  publication: PropTypes.string,
+  publicationName: PropTypes.string,
+  // authorID: PropTypes.string,
   authorName: PropTypes.string,
   articleLink: PropTypes.string,
-  articleCover: PropTypes.object,
+  articleCover: PropTypes.string,
   title: PropTypes.string,
-  bookmarked: PropTypes.bool,
   twitter: PropTypes.string,
   facebook: PropTypes.string,
   linkedIn: PropTypes.string,
   claps: PropTypes.number,
   focusPosition: PropTypes.array,
   source: PropTypes.string,
-  onAddBookmark: PropTypes.func,
-  onRemoveBookmark: PropTypes.func,
   variation: PropTypes.oneOf([..._.keys(wrapperStyles)]).isRequired,
   hoverEffect: PropTypes.bool,
   id: PropTypes.string.isRequired,
@@ -163,28 +149,38 @@ ArticlePoster.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { id } = ownProps;
-  const { userInfo, articleInfo } = state.testState[id];
-  const componentProps = {
-    userInfo,
-    authorName: articleInfo.authorName,
-    articleLink: articleInfo.articleLink,
-    articleCover: articleInfo.articleCover,
-    title: articleInfo.title,
-    bookmarked: articleInfo.bookmarked,
-    twitter: userInfo.twitter,
-    facebook: userInfo.facebook,
-    linkedIn: userInfo.linkedIn,
-    claps: articleInfo.claps,
-    source: articleInfo.source,
+  const {
+    title,
+    author: authorID,
+    link: articleLink,
+    claps,
+    publication: publicationId,
+  } = selectArticleAllInfo(state, id);
+  const { authorName, twitter, facebook, linkedIn } = selectUserInfo(
+    state,
+    authorID,
+  );
+  const {
+    coverMiddle: articleCover,
+    focusPosition = undefined,
+  } = selectArticleCover(state, id);
+  let publicationName;
+  if (publicationId) {
+    ({ name: publicationName } = selectPublicationInfo(state, publicationId));
+  }
+  let source;
+  return {
+    publicationName,
+    authorName,
+    articleLink,
+    articleCover,
+    title,
+    twitter,
+    facebook,
+    linkedIn,
+    claps,
+    focusPosition,
   };
-  if (articleInfo.focusPosition) {
-    componentProps.focusPosition = articleInfo.focusPosition;
-  }
-  if (articleInfo.publicationInfo) {
-    const { publicationInfo } = articleInfo;
-    componentProps.publication = publicationInfo.publication;
-  }
-  return componentProps;
 }
 export default connect(mapStateToProps)(ArticlePoster);
 export { ArticlePoster };

@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { IconButton, OutlinedButton } from '../../../components/Button';
 import OverlayTrigger from '../../../components/OverlayTrigger';
@@ -16,6 +17,7 @@ import {
   MarginWrapper,
   AutoHiddenStyledA,
 } from './Wrappers';
+import selectCurrentLoginId from '../../../selectors/selectCurrentLoginId';
 
 function Header(props) {
   const renderLogo = () => {
@@ -79,11 +81,11 @@ function Header(props) {
         </AutoHiddenStyledA>
         <MarginWrapper>
           <OverlayTrigger
-            popoverContent={<UserSettingList id="loggedIn" />}
+            popoverContent={<UserSettingList id={props.userId} />}
             trigger="click"
             placement="dropdown"
           >
-            <Avatar id="loggedIn" />
+            <Avatar id={props.userId} />
           </OverlayTrigger>
         </MarginWrapper>
       </FlexStyledWrapper>
@@ -94,6 +96,12 @@ function Header(props) {
 Header.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   logoType: PropTypes.string,
+  userId: PropTypes.string,
 };
 
-export default Header;
+function mapStateToProps(state) {
+  const userId = selectCurrentLoginId(state);
+  return { userId };
+}
+
+export default connect(mapStateToProps)(Header);

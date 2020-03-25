@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Wrapper, StyledTitle, StyledSubtitle } from './StyledWrapper';
 import * as variations from './variateTitleStyles';
+import { selectArticleAbstract } from '../../selectors';
 
 function ArticleTitle(props) {
   return (
@@ -37,11 +38,14 @@ ArticleTitle.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { id } = ownProps;
-  const { articleInfo } = state.testState[id];
+  const { link: articleLink, title, subtitle } = selectArticleAbstract(
+    state,
+    id,
+  );
   return {
-    articleLink: articleInfo.articleLink,
-    title: articleInfo.title,
-    subtitle: articleInfo.subtitle,
+    articleLink,
+    title,
+    subtitle,
   };
 }
 export default connect(mapStateToProps)(ArticleTitle);

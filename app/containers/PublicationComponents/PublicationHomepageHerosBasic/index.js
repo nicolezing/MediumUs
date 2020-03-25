@@ -32,7 +32,7 @@ const renderList = ([listType, list]) => {
       <ArticlePoster
         variation="PublicationHomepageHero"
         hoverEffect
-        id={list}
+        id={list[0]}
       />
     </MarginWrapper>
   );

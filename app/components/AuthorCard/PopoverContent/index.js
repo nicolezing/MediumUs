@@ -22,6 +22,7 @@ import {
 } from './styledListItems';
 import { UpWrapper, DownWrapper, TitleWrapper } from './styledWrappers';
 import roundToThousand from '../../../utils/roundToThousand';
+import { selectUserInfo, selectPublicationInfo } from '../../../selectors';
 
 function PopoverContent(props) {
   const { year, month } = formatDate(props.joinedDate);
@@ -65,32 +66,42 @@ PopoverContent.propTypes = {
   followersNumber: PropTypes.number.isRequired,
   imgType: PropTypes.oneOf(['avatar', 'publication']),
   id: PropTypes.string,
+  // writerId: PropTypes.string,
 };
 
 function mapStateToProps(state, ownProps) {
   const { id, imgType } = ownProps;
   let componentProps = {};
   if (imgType === 'avatar') {
-    const { userInfo } = state.testState[id];
+    // const { author: writerId } = selectArticleAbstract(state, id);
+    const {
+      link,
+      name,
+      description,
+      member = undefined,
+      memberJoinedDate = undefined,
+      followers,
+    } = selectUserInfo(state, id);
     componentProps = {
-      headerLink: userInfo.authorLink,
-      header: userInfo.name,
-      subHeader: userInfo.authorDescription,
-      member: userInfo.member,
-      followersNumber: userInfo.authorFollowers,
+      headerLink: link,
+      header: name,
+      subHeader: description,
+      member,
+      joinedDate: memberJoinedDate,
+      followersNumber: followers,
     };
-    if (componentProps.member) {
-      componentProps.joinedDate = userInfo.memberJoinedDate;
-    }
   } else if (imgType === 'publication') {
-    const { publicationInfo } = state.testState[id].articleInfo;
+    const { link, name, description, logo, followers } = selectPublicationInfo(
+      state,
+      id,
+    );
     componentProps = {
-      headerLink: publicationInfo.publicationLink,
-      header: publicationInfo.publication,
-      subHeader: publicationInfo.publicationDescription,
-      imgLink: publicationInfo.publicationLogo,
-      imgAlt: publicationInfo.publication,
-      followersNumber: publicationInfo.publicationFollowers,
+      headerLink: link,
+      header: name,
+      subHeader: description,
+      imgLink: logo,
+      imgAlt: name,
+      followersNumber: followers,
     };
   }
   return componentProps;

@@ -17,6 +17,7 @@ import {
 } from './styledListItems';
 import { UserWrapper, UsernameWrapper } from './styledWrappers';
 import Avatar from '../../../components/Avatar';
+import { selectUserInfo } from '../../../selectors';
 
 function UserSettingList(props) {
   const listItems = [
@@ -90,12 +91,15 @@ UserSettingList.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  const { id } = ownProps;
-  const { userInfo } = state.testState[id];
+  const { id: userId } = ownProps;
+  const { name: username, userLinkSuffix, link: domain } = selectUserInfo(
+    state,
+    userId,
+  );
   return {
-    username: userInfo.name,
-    userLinkSuffix: userInfo.userLinkSuffix,
-    domain: userInfo.domain,
+    username,
+    userLinkSuffix,
+    domain,
   };
 }
 export default connect(mapStateToProps)(UserSettingList);

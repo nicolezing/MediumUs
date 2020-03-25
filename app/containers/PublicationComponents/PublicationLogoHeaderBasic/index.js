@@ -6,6 +6,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Wrapper, ImgWrapper, Img, TextWrapper, H2 } from './Wrappers';
+import { selectTopicInfo } from '../../../selectors';
 
 function PublicationLogoHeaderBasic(props) {
   return (
@@ -31,9 +32,11 @@ PublicationLogoHeaderBasic.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { topic } = ownProps;
-  const { topicLogoImg, topicSlogan, topicLink } = state.testState.topicList[
-    topic
-  ];
+  const {
+    logo: topicLogoImg,
+    slogan: topicSlogan,
+    link: topicLink,
+  } = selectTopicInfo(state, topic);
   return {
     topicLogoImg,
     topicSlogan,

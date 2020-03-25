@@ -10,6 +10,7 @@ import {
 } from '../Sidebars/index';
 import { loadMoreHomelist } from '../../../store/actions';
 import unlimitedLoading from '../../../utils/unlimitedLoading';
+import { selectHomeRecommendationLists } from '../../../selectors';
 
 function HeroList(props) {
   const sectionRef = useRef();
@@ -51,43 +52,45 @@ function HeroList(props) {
     <Wrapper>
       <section ref={sectionRef}>
         {renderIdList(
-          props.articleList.slice(dividerPosition[0], dividerPosition[1]),
+          props.homeList.slice(dividerPosition[0], dividerPosition[1]),
         )}
         <SidebarWrapper>
           <NewFromNetwork />
         </SidebarWrapper>
         {renderIdList(
-          props.articleList.slice(dividerPosition[1], dividerPosition[2]),
+          props.homeList.slice(dividerPosition[1], dividerPosition[2]),
         )}
         <SidebarWrapper>
           <NewFromNetwork />
         </SidebarWrapper>
         {renderIdList(
-          props.articleList.slice(dividerPosition[2], dividerPosition[3]),
+          props.homeList.slice(dividerPosition[2], dividerPosition[3]),
         )}
         <SidebarWrapper>
           <ReadingList />
         </SidebarWrapper>
         {renderIdList(
-          props.articleList.slice(dividerPosition[3], dividerPosition[4]),
+          props.homeList.slice(dividerPosition[3], dividerPosition[4]),
         )}
         <SidebarWrapper>
           <PopularOnMedium />
         </SidebarWrapper>
-        {renderIdList(props.articleList.slice(dividerPosition[4]))}
+        {renderIdList(props.homeList.slice(dividerPosition[4]))}
       </section>
     </Wrapper>
   );
 }
 HeroList.propTypes = {
-  articleList: PropTypes.array,
+  homeList: PropTypes.array,
   loadMoreHomelist: PropTypes.func,
 };
 
 function mapStateToProps(state, ownProps) {
   const { list } = ownProps;
+  const homeList = selectHomeRecommendationLists(state, list);
+
   return {
-    articleList: state.testState[list],
+    homeList,
   };
 }
 

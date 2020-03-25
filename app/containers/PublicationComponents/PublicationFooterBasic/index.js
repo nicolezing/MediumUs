@@ -6,6 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Wrapper, A, MarginWrapper, Span } from './Wrappers';
+import { selectTopicInfo } from '../../../selectors';
 
 function PublicationFooterBasic(props) {
   const footerList = {
@@ -49,7 +50,7 @@ PublicationFooterBasic.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { topic } = ownProps;
-  const { about, latest } = state.testState.topicList[topic];
+  const { about, latest } = selectTopicInfo(state, topic);
   return { about, latest };
 }
 

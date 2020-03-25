@@ -7,6 +7,8 @@ import OverlayTrigger from '../OverlayTrigger';
 import PopoverContent from '../AuthorCard/PopoverContent';
 import { IconButton } from '../Button';
 import { Li, H2, Wrapper, NumWrapper, IconWrapper } from './ListWrappers';
+import { selectArticleAbstract, selectUserInfo } from '../../selectors';
+
 const RecommendationList = props => {
   const leftSide = () => {
     let ele;
@@ -16,11 +18,13 @@ const RecommendationList = props => {
           <OverlayTrigger
             trigger="hover"
             placement="top-bottom"
-            popoverContent={<PopoverContent id={props.id} imgType="avatar" />}
+            popoverContent={
+              <PopoverContent id={props.authorId} imgType="avatar" />
+            }
           >
             <a href={props.authorLink}>
               <div>
-                <Avatar id={props.id} size="40px" />
+                <Avatar id={props.authorId} size="40px" />
               </div>
             </a>
           </OverlayTrigger>
@@ -56,6 +60,7 @@ const RecommendationList = props => {
 };
 
 RecommendationList.propTypes = {
+  authorId: PropTypes.string,
   authorLink: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   articleLink: PropTypes.string.isRequired,
@@ -65,12 +70,17 @@ RecommendationList.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  const { id } = ownProps;
-  const { userInfo, articleInfo } = state.testState[id];
+  const { id: articleId } = ownProps;
+  const { author: authorId, title, link: articleLink } = selectArticleAbstract(
+    state,
+    articleId,
+  );
+  const { link: authorLink } = selectUserInfo(state, authorId);
   return {
-    authorLink: userInfo.authorLink,
-    title: articleInfo.title,
-    articleLink: articleInfo.articleLink,
+    authorId,
+    authorLink,
+    title,
+    articleLink,
   };
 }
 export default connect(mapStateToProps)(RecommendationList);

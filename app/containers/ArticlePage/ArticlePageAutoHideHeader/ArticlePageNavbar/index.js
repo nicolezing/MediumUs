@@ -5,6 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { selectTopicInfo } from '../../../../selectors';
 import { A } from '../../../PublicationComponents/NavbarBasic/Wrappers';
 import {
   Wrapper,
@@ -26,7 +27,7 @@ function ArticlePageNavbar(props) {
           </LinkWrapper>
         );
       }
-
+      // last list item will have a divider before
       return (
         <>
           <DividerSpan />
@@ -59,9 +60,11 @@ ArticlePageNavbar.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { topic } = ownProps;
-  const { topicLogoImgSmall, topicNav, topicLink } = state.testState.topicList[
-    topic
-  ];
+  const {
+    logoSmall: topicLogoImgSmall,
+    nav: topicNav,
+    link: topicLink,
+  } = selectTopicInfo(state, topic);
   return { topicLogoImgSmall, topicNav, topicLink };
 }
 

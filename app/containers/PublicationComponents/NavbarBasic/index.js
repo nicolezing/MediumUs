@@ -15,6 +15,7 @@ import {
   ButtonSpan,
   ButtonWrapper,
 } from './Wrappers';
+import { selectTopicInfo } from '../../../selectors';
 
 function NavbarBasic(props) {
   const { topicNav, socialMedia } = props;
@@ -76,7 +77,7 @@ NavbarBasic.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { topic } = ownProps;
-  const { topicNav, socialMedia } = state.testState.topicList[topic];
+  const { nav: topicNav, socialMedia } = selectTopicInfo(state, topic);
   return {
     topicNav,
     socialMedia,

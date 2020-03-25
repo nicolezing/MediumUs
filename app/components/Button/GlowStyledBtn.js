@@ -69,7 +69,10 @@ const GlowStyledBtn = styled.button`
 `;
 
 const Wrapper = styled.div`
-  width: 70px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  margin-right: 16px;
 `;
 
 export { GlowStyledBtn, Wrapper };

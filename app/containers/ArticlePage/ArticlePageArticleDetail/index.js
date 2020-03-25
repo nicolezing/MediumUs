@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
+import { selectArticleCover } from '../../../selectors';
 import unified from 'unified';
 import parse from 'remark-parse';
 import remark2react from 'remark-react';
@@ -62,9 +63,8 @@ function ArticlePageArticleDetail() {
 
 function mapStateToProps(state, ownProps) {
   const { id } = ownProps;
-  const { articleInfo } = state.testState[id];
-  const { articleCover } = articleInfo;
-  return { id, articleCover };
+  const { coverLarge } = selectArticleCover(state, id);
+  return { id, coverLarge };
 }
 
 export default connect(mapStateToProps)(ArticlePageArticleDetail);

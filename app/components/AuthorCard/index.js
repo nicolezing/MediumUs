@@ -18,6 +18,11 @@ import requiredIfAllPresent from '../../utils/requiredIfAllPresent';
 import formatDate from './formatDate';
 import UpdatedDateStyledSpan from './UpdatedDateStyledSpan';
 import calcReadingTime from '../../utils/calcReadingTime';
+import {
+  selectArticleAuthorInfo,
+  selectArticleAllInfo,
+  selectArticlePublicationInfo,
+} from '../../selectors';
 
 function AuthorCard(props) {
   const {
@@ -37,11 +42,12 @@ function AuthorCard(props) {
 
   const {
     hoverEffect,
-    id,
+    authorId,
     authorLink,
     authorName,
+    publicationId,
     publicationLink,
-    publication,
+    publicationName,
     creationDate,
     wordCount,
     isPremium,
@@ -54,7 +60,7 @@ function AuthorCard(props) {
         <Avatar
           alt={`Go to the profile of ${authorName}`}
           size={avatarSize}
-          id={id}
+          id={authorId}
         />
       </div>
     </a>
@@ -68,7 +74,7 @@ function AuthorCard(props) {
 
   function renderAuthor(element) {
     if (hoverEffect) {
-      const popoverContent = <PopoverContent imgType="avatar" id={id} />;
+      const popoverContent = <PopoverContent imgType="avatar" id={authorId} />;
       return (
         <OverlayTrigger
           popoverContent={popoverContent}
@@ -85,13 +91,13 @@ function AuthorCard(props) {
   const renderPublication = () => {
     const element = (
       <StyledA href={publicationLink} key="publication">
-        {publication}
+        {publicationName}
       </StyledA>
     );
 
     if (hoverEffect) {
       const popoverContent = (
-        <PopoverContent imgType="publication" id={props.id} />
+        <PopoverContent imgType="publication" id={publicationId} />
       );
       return (
         <OverlayTrigger
@@ -150,7 +156,7 @@ function AuthorCard(props) {
       <StyledInfoWrapper>
         <AuthorInfoWrapper>
           {renderAuthor(authorElement)}
-          {props.publication && props.variation !== 'PublicationHome' && (
+          {props.publicationId && props.variation !== 'PublicationHome' && (
             <> in {renderPublication()}</>
           )}
           {hasFollowButton && (
@@ -169,6 +175,7 @@ AuthorCard.propTypes = {
   // *
   // author profile related props
   // *
+  authorId: PropTypes.string,
   authorLink: PropTypes.string.isRequired,
   authorName: PropTypes.string.isRequired,
 
@@ -182,7 +189,8 @@ AuthorCard.propTypes = {
   // *
   // publication related props
   // *
-  publication: PropTypes.string,
+  publicationId: PropTypes.string,
+  publicationName: PropTypes.string,
   publicationLink: requiredIfAllPresent(['publication'], 'string'),
 
   variation: PropTypes.oneOf([
@@ -192,29 +200,49 @@ AuthorCard.propTypes = {
     'ArticleTitle',
   ]).isRequired,
   hoverEffect: PropTypes.bool,
+  // eslint-disable-next-line react/no-unused-prop-types
   id: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   const { id } = ownProps;
-  const { userInfo, articleInfo } = state.testState[id];
-  const componentProps = {
-    authorName: userInfo.name,
-    authorLink: userInfo.authorLink,
-    articleLink: articleInfo.articleLink,
-    creationDate: articleInfo.creationDate,
-    lastModified: articleInfo.lastModified,
-    wordCount: articleInfo.wordCount,
-    isPremium: articleInfo.premium,
-  };
+  // const { userInfo, articleInfo } = state.testState[id];
+  const { name: authorName, link: authorLink } = selectArticleAuthorInfo(
+    state,
+    id,
+  );
+  const {
+    author: authorId,
+    publication: publicationId,
+    link: articleLink,
+    creationDate,
+    lastModified,
+    wordCount,
+    premium: isPremium,
+  } = selectArticleAllInfo(state, id);
 
-  if (articleInfo.publicationInfo) {
-    const { publicationInfo } = articleInfo;
-    componentProps.publication = publicationInfo.publication;
-    componentProps.publicationLink = publicationInfo.publicationLink;
+  let publicationName;
+  let publicationLink;
+  if (publicationId) {
+    ({
+      name: publicationName,
+      link: publicationLink,
+    } = selectArticlePublicationInfo(state, id));
   }
 
-  return componentProps;
+  return {
+    authorId,
+    authorName,
+    authorLink,
+    articleLink,
+    creationDate,
+    lastModified,
+    wordCount,
+    isPremium,
+    publicationId,
+    publicationName,
+    publicationLink,
+  };
 }
 
 export default connect(mapStateToProps)(AuthorCard);

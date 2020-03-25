@@ -3,7 +3,9 @@
  */
 
 import React, { useRef, useEffect } from 'react';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { selectCurrentLoginId } from '../../../selectors';
 import { IconButton } from '../../../components/Button';
 import OverlayTrigger from '../../../components/OverlayTrigger';
 import Avatar from '../../../components/Avatar';
@@ -21,7 +23,7 @@ import {
 
 let lastPosition = 0;
 
-function PublicationHeader() {
+function PublicationHeader(props) {
   const navbarRef = useRef();
   const placeholderRef = useRef();
 
@@ -105,11 +107,11 @@ function PublicationHeader() {
 
             <MarginWrapper>
               <OverlayTrigger
-                popoverContent={<UserSettingList id="loggedIn" />}
+                popoverContent={<UserSettingList id={props.userId} />}
                 trigger="click"
                 placement="dropdown"
               >
-                <Avatar id="loggedIn" />
+                <Avatar id={props.userId} />
               </OverlayTrigger>
             </MarginWrapper>
           </FlexStyledWrapper>
@@ -120,4 +122,13 @@ function PublicationHeader() {
   );
 }
 
-export default PublicationHeader;
+PublicationHeader.propTypes = {
+  userId: PropTypes.string.isRequired,
+};
+
+function mapStateToProps(state) {
+  const userId = selectCurrentLoginId(state);
+  return { userId };
+}
+
+export default connect(mapStateToProps)(PublicationHeader);
