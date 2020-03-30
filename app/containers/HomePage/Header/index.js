@@ -25,7 +25,7 @@ function Header(props) {
       return (
         <div>
           <a href="./">
-            <IconButton iconName="logoIcon" colorSet="pureBlack" />
+            <IconButton iconName="logoIcon" theme="pureBlack" />
           </a>
         </div>
       );
@@ -33,10 +33,10 @@ function Header(props) {
     return (
       <div>
         <MainIconStyledA href="./">
-          <IconButton iconName="mainIcon" colorSet="pureBlack" />
+          <IconButton iconName="mainIcon" theme="pureBlack" />
         </MainIconStyledA>
         <LogoIconStyledA href="./">
-          <IconButton iconName="logoIcon" colorSet="pureBlack" />
+          <IconButton iconName="logoIcon" theme="pureBlack" />
         </LogoIconStyledA>
       </div>
     );
@@ -48,25 +48,21 @@ function Header(props) {
       <FlexStyledWrapper>
         {/* placeholder, should be the input component */}
         <MarginWrapper>
-          <IconButton iconName="searchIcon" colorSet="gray" title="Search" />
+          <IconButton iconName="searchIcon" theme="gray" title="Search" />
         </MarginWrapper>
 
         <AutoHiddenStyledA href="./">
           <MarginWrapper>
             <IconButton
               iconName="bookmarkList"
-              colorSet="gray"
+              theme="gray"
               title="Bookmarks"
             />
           </MarginWrapper>
         </AutoHiddenStyledA>
 
         <MarginWrapper>
-          <IconButton
-            iconName="bellIcon"
-            colorSet="gray"
-            title="Notifications"
-          />
+          <IconButton iconName="bellIcon" theme="gray" title="Notifications" />
         </MarginWrapper>
 
         <AutoHiddenStyledA href="./">
@@ -75,7 +71,7 @@ function Header(props) {
               text="Upgrade"
               type="outlined"
               size="middle"
-              colorSet="black"
+              theme="black"
             />
           </MarginWrapper>
         </AutoHiddenStyledA>

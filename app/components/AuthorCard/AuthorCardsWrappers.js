@@ -66,6 +66,7 @@ function conditionallyStyledComponents(variation) {
           @media only screen and (max-width: 768px) {
             font-size: 15px;
           }
+          color: ${props => getColor(props.theme).color};
         `,
         StyledSpan: styled.span`
           ${spanBaseStyle}

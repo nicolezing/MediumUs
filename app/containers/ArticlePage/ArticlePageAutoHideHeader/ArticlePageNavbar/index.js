@@ -27,7 +27,7 @@ function ArticlePageNavbar(props) {
           </LinkWrapper>
         );
       }
-      // last list item will have a divider before
+      // last list item will have a divider in front
       return (
         <>
           <DividerSpan />

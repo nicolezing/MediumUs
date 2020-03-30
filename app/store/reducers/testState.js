@@ -18,6 +18,7 @@ export const testState = () => ({
       facebook: './',
       linkedIn: './',
       bookmarked: ['ID001'],
+      following: ['user003'],
     },
     user002: {
       link: './',
@@ -32,6 +33,7 @@ export const testState = () => ({
       // facebook: './',
       linkedIn: './',
       bookmarked: ['ID002'],
+      following: ['user001'],
     },
     user003: {
       avatar: N,
@@ -40,9 +42,12 @@ export const testState = () => ({
       link: './',
       member: true,
       bookmarked: ['ID002'],
+      authorFollowing: [],
+      publicationFollowing: [],
     },
   },
   loggedIn: 'user003',
+  theme: 'purple',
   articles: {
     ID001: {
       author: 'user001',
@@ -79,7 +84,7 @@ export const testState = () => ({
         { name: 'Humor', link: '' },
       ],
 
-      response: [],
+      responses: [''],
     },
     ID002: {
       author: 'user002',

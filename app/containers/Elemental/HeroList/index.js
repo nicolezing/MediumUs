@@ -21,15 +21,15 @@ function HeroList(props) {
   return (
     <div>
       <section>
-        <PaddingWrapper>{renderSection('default')}</PaddingWrapper>
-        {renderSection('Latest')}
+        <PaddingWrapper>{renderSection('default', props.theme)}</PaddingWrapper>
+        {renderSection('Latest', props.theme)}
       </section>
 
-      <section>{renderSection('Exercise is Medicine')}</section>
+      <section>{renderSection('Exercise is Medicine', props.theme)}</section>
 
-      <section>{renderSection('The Nuance')}</section>
+      <section>{renderSection('The Nuance', props.theme)}</section>
 
-      <section>{renderSection('MORE')}</section>
+      <section>{renderSection('MORE', props.theme)}</section>
     </div>
   );
 }
@@ -39,6 +39,7 @@ HeroList.propTypes = {
   topic: PropTypes.string.isRequired,
   heroList: PropTypes.array,
   pageArrangement: PropTypes.object,
+  theme: PropTypes.string,
 };
 
 function mapStateToProps(state, ownProps) {

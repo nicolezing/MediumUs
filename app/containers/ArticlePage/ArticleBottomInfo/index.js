@@ -18,28 +18,18 @@ import {
 import { GlowIconButton, IconButton } from '../../../components/Button';
 import roundToThousand from '../../../utils/roundToThousand';
 import InfoAvatarPoster from './InfoAvatarPoster';
+import ArticleResponse from './ArticleResponse';
 import {
   selectUserInfo,
-  selectPublicationInfo,
   selectArticleTags,
   selectArticleReadingInfo,
   selectArticleAbstract,
-  selectArticleResponse,
+  selectIfBookmarked,
+  selectTheme,
 } from '../../../selectors';
-import hasBookmarked from '../../../selectors/hasBookmarked';
 
 function ArticleBottomInfo(props) {
-  const {
-    tags,
-    claps,
-    twitter,
-    facebook,
-    linkedIn,
-    bookmarked,
-    more,
-    publicationInfo,
-    response,
-  } = props;
+  const { tags, claps, twitter, facebook, linkedIn, bookmarked, more } = props;
 
   const Tags = tags.map(val => (
     <Li key={val.name}>
@@ -52,21 +42,30 @@ function ArticleBottomInfo(props) {
     { twitter },
     { linkedIn },
     { facebookSquare: facebook },
-    { [bookmarkIconName]: true },
-    { moreHollow: more },
   ].map(val => {
     const key = Object.keys(val)[0];
     if (val[key] !== undefined) {
       return (
         <IconLi key={key}>
           <a href={val[key]}>
-            <IconButton iconName={`${key}Icon`} colorSet="black" />
+            <IconButton iconName={`${key}Icon`} theme="black" />
           </a>
         </IconLi>
       );
     }
     return '';
   });
+
+  const renderButton = [{ [bookmarkIconName]: true }, { moreHollow: more }].map(
+    val => {
+      const key = Object.keys(val)[0];
+      return (
+        <IconLi key={key}>
+          <IconButton iconName={`${key}Icon`} theme="black" />
+        </IconLi>
+      );
+    },
+  );
 
   return (
     <OuterWrapper>
@@ -76,22 +75,27 @@ function ArticleBottomInfo(props) {
         </TagsWrapper>
         <MediaWrapper>
           <ClapsWrapper>
-            <GlowIconButton iconName="clapIcon" colorSet="blue" />
+            <GlowIconButton iconName="clapIcon" theme={props.theme} />
             <ClapTextWrapper>
               <ClapText>
                 {claps !== 0 ? `${roundToThousand(claps)} claps` : ''}
               </ClapText>
             </ClapTextWrapper>
           </ClapsWrapper>
-          <MediaListWrapper>{renderMedia}</MediaListWrapper>
+          <MediaListWrapper>
+            {renderMedia}
+            {renderButton}
+          </MediaListWrapper>
         </MediaWrapper>
-        <InfoAvatarPoster id={props.id} />
+        <InfoAvatarPoster id={props.id} theme={props.theme} />
+        <ArticleResponse id={props.id} theme={props.theme} />
       </WidthWrapper>
     </OuterWrapper>
   );
 }
 
 ArticleBottomInfo.propTypes = {
+  theme: PropTypes.string,
   id: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.object),
   claps: PropTypes.number,
@@ -109,11 +113,11 @@ function mapStateToProps(state, ownProps) {
   const { author: authorId } = selectArticleAbstract(state, id);
   const tags = selectArticleTags(state, id);
   const { twitter, facebook, linkedIn } = selectUserInfo(state, authorId);
-  const publicationInfo = selectPublicationInfo(state, id);
   const { claps } = selectArticleReadingInfo(state, id);
-  console.log('!!!!!!!!!11', hasBookmarked);
-  const bookmarked = hasBookmarked(state, id);
-  console.log('???????', bookmarked);
+
+  const bookmarked = selectIfBookmarked(state, id);
+  const theme = selectTheme(state);
+
   return {
     tags,
     claps,
@@ -122,7 +126,7 @@ function mapStateToProps(state, ownProps) {
     linkedIn,
     bookmarked,
     more,
-    publicationInfo,
+    theme,
   };
 }
 

@@ -2,21 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { IconButton } from '.';
-import hasBookmarked from '../../selectors/hasBookmarked';
+import { selectIfBookmarked } from '../../selectors';
 
 function BookmarkButton(props) {
   return props.bookmarked ? (
     <IconButton
       title="Bookmark this story to read later"
       iconName="bookmarkFilledIcon"
-      colorSet="pureBlack"
+      theme="pureBlack"
       // onClick={onRemoveBookmark}
     />
   ) : (
     <IconButton
       title="Bookmark this story to read later"
       iconName="bookmarkIcon"
-      colorSet="gray"
+      theme="gray"
       // onClick={onAddBookmark}
     />
   );
@@ -30,7 +30,7 @@ BookmarkButton.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { id } = ownProps;
-  const bookmarked = hasBookmarked(state, id);
+  const bookmarked = selectIfBookmarked(state, id);
   return { bookmarked };
 }
 

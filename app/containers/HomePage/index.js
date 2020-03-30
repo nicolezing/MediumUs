@@ -17,6 +17,7 @@ import Sidebars from './Sidebars';
 import Navbar from './Navbar';
 
 function HomePage() {
+  const theme = 'blue';
   return (
     <>
       <WidthConstrainWrapper>
@@ -27,10 +28,10 @@ function HomePage() {
       </WidthConstrainWrapper>
       <Navbar />
       <WidthConstrainWrapper>
-        <MainHero />
+        <MainHero theme={theme} />
         <SideWrapper>
-          <HeroList list="homeList" />
-          <Sidebars />
+          <HeroList list="homeList" theme={theme} />
+          <Sidebars theme={theme} />
         </SideWrapper>
       </WidthConstrainWrapper>
     </>

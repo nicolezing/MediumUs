@@ -155,7 +155,7 @@ function Navbar() {
       <InnerWrapper>
         <IconButton
           iconName="arrowLeft"
-          colorSet="gray"
+          theme="gray"
           onBtnClick={scrollToLeft}
           disabled={arrowDisableHandler[0]}
         />
@@ -164,7 +164,7 @@ function Navbar() {
         </ListContainer>
         <IconButton
           iconName="arrowRight"
-          colorSet="pureGray"
+          theme="pureGray"
           onBtnClick={scrollToRight}
           disabled={arrowDisableHandler[1]}
         />

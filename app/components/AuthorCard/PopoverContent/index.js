@@ -49,7 +49,12 @@ function PopoverContent(props) {
           Followed by{' '}
           <NumSpan>{roundToThousand(props.followersNumber)}</NumSpan> people
         </FollowerSpan>
-        <OutlinedButton text="Follow" type="outlined" size="middle" />
+        <OutlinedButton
+          text="Follow"
+          type="outlined"
+          size="middle"
+          theme={props.theme}
+        />
       </DownWrapper>
     </UnorderedList>
   );
@@ -66,6 +71,8 @@ PopoverContent.propTypes = {
   followersNumber: PropTypes.number.isRequired,
   imgType: PropTypes.oneOf(['avatar', 'publication']),
   id: PropTypes.string,
+  theme: PropTypes.string,
+
   // writerId: PropTypes.string,
 };
 

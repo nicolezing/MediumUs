@@ -6,8 +6,14 @@ export function selectArticleAllInfo(state, id) {
 }
 
 export function selectArticleAbstract(state, id) {
-  const { author, title, subtitle, link } = state.testState.articles[id];
-  return { author, title, subtitle, link };
+  const {
+    author,
+    title,
+    subtitle,
+    link,
+    publication,
+  } = state.testState.articles[id];
+  return { author, title, subtitle, link, publication };
 }
 
 export function selectArticleReadingInfo(state, id) {
@@ -45,8 +51,3 @@ export function selectArticlePublicationInfo(state, id) {
   }
   return {};
 }
-// export const selectArticleInfo = {
-//   selectArticleReadingInfo,
-//   selectArticleResponse,
-//   selectArticleTags,
-// };

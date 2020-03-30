@@ -74,24 +74,20 @@ function PublicationHeader(props) {
         <WidthConstrainWrapper>
           <div>
             <a href="./">
-              <IconButton iconName="logoIcon" colorSet="pureBlack" />
+              <IconButton iconName="logoIcon" theme="pureBlack" />
             </a>
           </div>
           <FlexStyledWrapper>
             {/* placeholder, should be the input component */}
             <MarginWrapper>
-              <IconButton
-                iconName="searchIcon"
-                colorSet="gray"
-                title="Search"
-              />
+              <IconButton iconName="searchIcon" theme="gray" title="Search" />
             </MarginWrapper>
 
             <AutoHiddenStyledA href="./">
               <MarginWrapper>
                 <IconButton
                   iconName="bookmarkList"
-                  colorSet="gray"
+                  theme="gray"
                   title="Bookmarks"
                 />
               </MarginWrapper>
@@ -100,7 +96,7 @@ function PublicationHeader(props) {
             <MarginWrapper>
               <IconButton
                 iconName="bellIcon"
-                colorSet="gray"
+                theme="gray"
                 title="Notifications"
               />
             </MarginWrapper>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
-import { selectArticleCover } from '../../../selectors';
 import unified from 'unified';
 import parse from 'remark-parse';
 import remark2react from 'remark-react';
 import _ from 'lodash';
+import { selectArticleCover } from '../../../selectors';
 // import remarkIframe from 'remark-iframes';
 import tokenizers from './remarkConverter/addTokenizer';
 import imageHandler from './remarkConverter/imageHandler';
@@ -21,27 +21,6 @@ function ArticlePageArticleDetail() {
 
   const articleDetailComponents = unified()
     .use(parse, { commonmark: true, footnotes: true })
-    // .use(remarkIframe, {
-    //   'www.youtube.com': {
-    //     tag: 'iframe',
-    //     width: 560,
-    //     height: 315,
-    //     disabled: false,
-    //     replace: [['watch?v=', 'embed/'], ['http://', 'https://']],
-    //     thumbnail: {
-    //       format: 'http://img.youtube.com/vi/{id}/0.jpg',
-    //       id: '.+/(.+)$',
-    //     },
-    //     removeAfter: '&',
-    //   },
-    //   // Youtube oEmbed example
-    //   'youtu.be': {
-    //     width: 560,
-    //     height: 315,
-    //     disabled: false,
-    //     oembed: 'https://www.youtube.com/oembed',
-    //   },
-    // })
     .use(tokenizers)
     .use(remark2react, {
       toHast: { handlers: { image: imageHandler, iframe: iframeHandler } },

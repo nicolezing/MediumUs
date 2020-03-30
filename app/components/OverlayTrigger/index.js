@@ -160,6 +160,7 @@ OverlayTrigger.propTypes = {
   popoverContent: PropTypes.element.isRequired,
   popoverColor: PropTypes.string,
   children: PropTypes.element.isRequired,
+  // theme: PropTypes.string,
 };
 
 export default OverlayTrigger;

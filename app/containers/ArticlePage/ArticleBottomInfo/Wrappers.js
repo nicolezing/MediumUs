@@ -11,6 +11,9 @@ export const WidthWrapper = styled.div`
   max-width: 680px;
   width: 100%;
   min-width: 0;
+  @media screen and (max-width: 728px) {
+    margin: 0 24px;
+  }
 `;
 
 export const TagsWrapper = styled.div`

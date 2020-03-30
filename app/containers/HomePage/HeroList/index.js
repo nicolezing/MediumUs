@@ -23,6 +23,7 @@ function HeroList(props) {
         hoverEffect
         id={id}
         key={`articleID${id}`}
+        theme={props.theme}
       />
     ));
 
@@ -54,33 +55,27 @@ function HeroList(props) {
         {renderIdList(
           props.homeList.slice(dividerPosition[0], dividerPosition[1]),
         )}
-        <SidebarWrapper>
-          <NewFromNetwork />
-        </SidebarWrapper>
+        <SidebarWrapper>{NewFromNetwork(props.theme)}</SidebarWrapper>
         {renderIdList(
           props.homeList.slice(dividerPosition[1], dividerPosition[2]),
         )}
-        <SidebarWrapper>
-          <NewFromNetwork />
-        </SidebarWrapper>
+        <SidebarWrapper>{NewFromNetwork(props.theme)}</SidebarWrapper>
         {renderIdList(
           props.homeList.slice(dividerPosition[2], dividerPosition[3]),
         )}
-        <SidebarWrapper>
-          <ReadingList />
-        </SidebarWrapper>
+        <SidebarWrapper>{ReadingList(props.theme)}</SidebarWrapper>
         {renderIdList(
           props.homeList.slice(dividerPosition[3], dividerPosition[4]),
         )}
-        <SidebarWrapper>
-          <PopularOnMedium />
-        </SidebarWrapper>
+        <SidebarWrapper>{PopularOnMedium(props.theme)}</SidebarWrapper>
         {renderIdList(props.homeList.slice(dividerPosition[4]))}
       </section>
     </Wrapper>
   );
 }
 HeroList.propTypes = {
+  theme: PropTypes.string,
+
   homeList: PropTypes.array,
   loadMoreHomelist: PropTypes.func,
 };

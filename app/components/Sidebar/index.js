@@ -22,17 +22,23 @@ import {
 import { selectHomeRecommendationLists } from '../../selectors';
 
 function Sidebar(props) {
+  const {
+    header,
+    recommendationSource,
+    headerImg,
+    sourceLink,
+    articleList,
+    theme,
+  } = props;
+
   const StyledAside =
-    props.recommendationSource === 'popularOnMedium'
-      ? NoChangeStyledAside
-      : Aside;
+    recommendationSource === 'popularOnMedium' ? NoChangeStyledAside : Aside;
 
   const StyledImageHeaderWrapper =
-    props.recommendationSource === 'readingList'
+    recommendationSource === 'readingList'
       ? ReadingListImageHeaderWrapper
       : NetworkImageHeaderWrapper;
 
-  const { header, recommendationSource, headerImg } = props;
   const renderHeader = () => {
     if (recommendationSource === 'popularOnMedium') {
       return (
@@ -52,14 +58,15 @@ function Sidebar(props) {
   return (
     <div>
       <StyledAside>
-        <a href={props.sourceLink}>{renderHeader()}</a>
-        <Ol source={props.recommendationSource}>
-          {props.articleList.map((id, index) => (
+        <a href={sourceLink}>{renderHeader()}</a>
+        <Ol source={recommendationSource}>
+          {articleList.map((id, index) => (
             <RecommendationList
               id={id}
               index={index}
-              type={props.recommendationSource}
+              type={recommendationSource}
               key={`${id}`}
+              theme={theme}
             />
           ))}
         </Ol>
@@ -69,6 +76,7 @@ function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
+  theme: PropTypes.string,
   header: PropTypes.string.isRequired,
   sourceLink: PropTypes.string.isRequired,
   headerImg: PropTypes.string,

@@ -19,7 +19,11 @@ const RecommendationList = props => {
             trigger="hover"
             placement="top-bottom"
             popoverContent={
-              <PopoverContent id={props.authorId} imgType="avatar" />
+              <PopoverContent
+                id={props.authorId}
+                imgType="avatar"
+                theme={props.theme}
+              />
             }
           >
             <a href={props.authorLink}>
@@ -37,7 +41,7 @@ const RecommendationList = props => {
         <IconWrapper>
           <IconButton
             iconName="bookmarkSmallFilledIcon"
-            colorSet="gray"
+            theme="gray"
             title="Bookmark this story to read later"
           />
         </IconWrapper>
@@ -53,13 +57,19 @@ const RecommendationList = props => {
         <a href={props.articleLink}>
           <H2>{props.title}</H2>
         </a>
-        <AuthorCard id={props.id} variation="Home" hoverEffect />
+        <AuthorCard
+          id={props.id}
+          variation="Home"
+          hoverEffect
+          theme={props.theme}
+        />
       </Wrapper>
     </Li>
   );
 };
 
 RecommendationList.propTypes = {
+  theme: PropTypes.string,
   authorId: PropTypes.string,
   authorLink: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

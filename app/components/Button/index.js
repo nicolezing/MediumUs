@@ -22,6 +22,7 @@ function OutlinedButton(props) {
     </OutlinedStyleButton>
   );
 }
+// <OutlinedButton type={} size={} theme={}>{text}</OutlinedButton>
 
 function IconButton(props) {
   return (
@@ -45,19 +46,19 @@ OutlinedButton.propTypes = {
   text: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['outlined', 'filled']).isRequired,
   size: PropTypes.oneOf(['small', 'middle', 'large']).isRequired,
-  colorSet: PropTypes.string,
+  theme: PropTypes.string.isRequired,
   onBtnClick: PropTypes.func,
 };
 
 IconButton.propTypes = {
   iconName: PropTypes.oneOf([..._.keys(Icons)]).isRequired,
-  colorSet: PropTypes.string,
+  theme: PropTypes.string,
   onBtnClick: PropTypes.func,
 };
 
 GlowIconButton.propTypes = {
   iconName: PropTypes.oneOf([..._.keys(Icons)]).isRequired,
-  colorSet: PropTypes.string,
+  theme: PropTypes.string,
   onBtnClick: PropTypes.func,
 };
 

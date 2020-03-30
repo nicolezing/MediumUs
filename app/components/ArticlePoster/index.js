@@ -56,7 +56,7 @@ function ArticlePoster(props) {
               }
               key="moreIcon"
             >
-              <IconButton iconName="moreIcon" colorSet="gray" />
+              <IconButton iconName="moreIcon" theme="gray" />
             </OverlayTrigger>
           </div>,
         ];
@@ -64,17 +64,17 @@ function ArticlePoster(props) {
         return [
           props.twitter && (
             <a href={props.twitter} key="twitter">
-              <IconButton iconName="twitterIcon" colorSet="black" />
+              <IconButton iconName="twitterIcon" theme="black" />
             </a>
           ),
           props.linkedIn && (
             <a href={props.linkedIn} key="linkedIn">
-              <IconButton iconName="linkedInIcon" colorSet="black" />
+              <IconButton iconName="linkedInIcon" theme="black" />
             </a>
           ),
           props.facebook && (
             <a href={props.facebook} key="facebook">
-              <IconButton iconName="facebookSquareIcon" colorSet="black" />
+              <IconButton iconName="facebookSquareIcon" theme="black" />
             </a>
           ),
           <BookmarkButton id={props.id} key={props.id} />,
@@ -83,7 +83,7 @@ function ArticlePoster(props) {
         return [
           <IconButton
             iconName="clapSmallIcon"
-            colorSet="black"
+            theme="black"
             key="clapSmallIcon"
           />,
           <ClapText key="claps">{roundToThousand(props.claps)}</ClapText>,
@@ -121,6 +121,7 @@ function ArticlePoster(props) {
             id={props.id}
             variation={authorCardVariation}
             hoverEffect={props.hoverEffect}
+            theme={props.theme}
           />
           <IconWrapper variation={props.variation}>{renderIcons()}</IconWrapper>
         </AuthorWrapper>
@@ -130,6 +131,8 @@ function ArticlePoster(props) {
 }
 
 ArticlePoster.propTypes = {
+  theme: PropTypes.string,
+
   publicationName: PropTypes.string,
   // authorID: PropTypes.string,
   authorName: PropTypes.string,
@@ -168,7 +171,8 @@ function mapStateToProps(state, ownProps) {
   if (publicationId) {
     ({ name: publicationName } = selectPublicationInfo(state, publicationId));
   }
-  let source;
+  // TODO add source in state
+  const source = 'source test';
   return {
     publicationName,
     authorName,
@@ -180,6 +184,7 @@ function mapStateToProps(state, ownProps) {
     linkedIn,
     claps,
     focusPosition,
+    source,
   };
 }
 export default connect(mapStateToProps)(ArticlePoster);

@@ -28,6 +28,7 @@ export function ArticlePage() {
 
 ArticlePage.propTypes = {
   // dispatch: PropTypes.func.isRequired,
+  // theme: PropTypes.string,
 };
 
 // function mapDispatchToProps(dispatch) {

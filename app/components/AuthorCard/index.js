@@ -67,14 +67,16 @@ function AuthorCard(props) {
   );
 
   const authorElement = (
-    <StyledA href={authorLink} key="name">
+    <StyledA href={authorLink} key="name" theme={props.theme}>
       {authorName}
     </StyledA>
   );
 
   function renderAuthor(element) {
     if (hoverEffect) {
-      const popoverContent = <PopoverContent imgType="avatar" id={authorId} />;
+      const popoverContent = (
+        <PopoverContent imgType="avatar" id={authorId} theme={props.theme} />
+      );
       return (
         <OverlayTrigger
           popoverContent={popoverContent}
@@ -90,14 +92,18 @@ function AuthorCard(props) {
 
   const renderPublication = () => {
     const element = (
-      <StyledA href={publicationLink} key="publication">
+      <StyledA href={publicationLink} key="publication" theme={props.theme}>
         {publicationName}
       </StyledA>
     );
 
     if (hoverEffect) {
       const popoverContent = (
-        <PopoverContent imgType="publication" id={publicationId} />
+        <PopoverContent
+          imgType="publication"
+          id={publicationId}
+          theme={props.theme}
+        />
       );
       return (
         <OverlayTrigger
@@ -161,7 +167,12 @@ function AuthorCard(props) {
           )}
           {hasFollowButton && (
             <StyledButtonWrapper>
-              <OutlinedButton text="Follow" size="small" type="outlined" />
+              <OutlinedButton
+                text="Follow"
+                size="small"
+                type="outlined"
+                theme={props.theme}
+              />
             </StyledButtonWrapper>
           )}
         </AuthorInfoWrapper>
@@ -202,6 +213,7 @@ AuthorCard.propTypes = {
   hoverEffect: PropTypes.bool,
   // eslint-disable-next-line react/no-unused-prop-types
   id: PropTypes.string.isRequired,
+  theme: PropTypes.string,
 };
 
 function mapStateToProps(state, ownProps) {

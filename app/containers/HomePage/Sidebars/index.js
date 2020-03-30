@@ -1,24 +1,26 @@
 /* eslint-disable no-param-reassign */
 import React, { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import Sidebar from '../../../components/Sidebar';
 import { SidebarWrapper, MidWrapper, StickyWrapper } from './Wrappers';
 import Footer from '../Footer';
 
-export const NewFromNetwork = () => (
+export const NewFromNetwork = theme => (
   <MidWrapper>
-    <Sidebar recommendationSource="newFromNetwork" />
+    <Sidebar recommendationSource="newFromNetwork" theme={theme} />
   </MidWrapper>
 );
 
-export const PopularOnMedium = () => (
+export const PopularOnMedium = theme => (
   <MidWrapper>
-    <Sidebar recommendationSource="popularOnMedium" />
+    <Sidebar recommendationSource="popularOnMedium" theme={theme} />
   </MidWrapper>
 );
 
-export const ReadingList = () => (
+export const ReadingList = theme => (
   <MidWrapper>
-    <Sidebar recommendationSource="readingList" />
+    <Sidebar recommendationSource="readingList" theme={theme} />
   </MidWrapper>
 );
 
@@ -108,7 +110,7 @@ function ScrollListenerMaker() {
 }
 const makeScrollListener = ScrollListenerMaker();
 
-function Sidebars() {
+function Sidebars(props) {
   const sidebarRef = useRef();
   const stickyContentRef = useRef();
 
@@ -130,13 +132,17 @@ function Sidebars() {
   return (
     <SidebarWrapper ref={sidebarRef}>
       <StickyWrapper ref={stickyContentRef}>
-        <NewFromNetwork />
-        <PopularOnMedium />
-        <ReadingList />
+        {NewFromNetwork(props.theme)}
+        {PopularOnMedium(props.theme)}
+        {ReadingList(props.theme)}
         <Footer />
       </StickyWrapper>
     </SidebarWrapper>
   );
 }
+
+Sidebars.propTypes = {
+  theme: PropTypes.string,
+};
 
 export default Sidebars;

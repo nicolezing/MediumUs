@@ -47,7 +47,7 @@ function NavbarBasic(props) {
     Object.keys(socialMedia).map(key => (
       <ButtonSpan>
         <a href={socialMedia[key]} key={key}>
-          <IconButton iconName={`${key}Icon`} colorSet="gray" />
+          <IconButton iconName={`${key}Icon`} theme="gray" />
         </a>
       </ButtonSpan>
     ));
@@ -61,7 +61,7 @@ function NavbarBasic(props) {
           text="Follow"
           type="outlined"
           size="small"
-          colorSet="green"
+          theme="green"
         />
       </ButtonWrapper>
     </Wrapper>

@@ -45,19 +45,19 @@ const large = css`
 `;
 const filled = css`
   color: white;
-  border-color: ${props => getColor(props.colorSet).borderColor};
-  background: ${props => getColor(props.colorSet).borderColor};
+  border-color: ${props => getColor(props.theme).borderColor};
+  background: ${props => getColor(props.theme).borderColor};
   :hover {
-    border-color: ${props => getColor(props.colorSet).color};
-    background: ${props => getColor(props.colorSet).hoverColor};
+    border-color: ${props => getColor(props.theme).color};
+    background: ${props => getColor(props.theme).hoverColor};
   }
 `;
 const outlined = css`
-  color: ${props => getColor(props.colorSet).color};
-  border-color: ${props => getColor(props.colorSet).borderColor};
+  color: ${props => getColor(props.theme).color};
+  border-color: ${props => getColor(props.theme).borderColor};
   :hover {
-    color: ${props => getColor(props.colorSet).hoverColor};
-    border-color: ${props => getColor(props.colorSet).hoverColor};
+    color: ${props => getColor(props.theme).hoverColor};
+    border-color: ${props => getColor(props.theme).hoverColor};
   }
 `;
 
