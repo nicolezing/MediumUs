@@ -44,6 +44,7 @@ export const testState = () => ({
       bookmarked: ['ID002'],
       authorFollowing: [],
       publicationFollowing: [],
+      // TODO add free viewed article list
     },
   },
   loggedIn: 'user003',
@@ -241,6 +242,36 @@ export const testState = () => ({
         'The Nuance': [[3, 3], [2, 2]],
         MORE: [[1, 1], [3, 18]],
       },
+    },
+  },
+  articlePageFooter: {
+    footerList: [
+      {
+        header: 'Discover Medium',
+        link: './',
+        detail:
+          'Welcome to a place where words matter. On Medium, smart voices and original ideas take center stage - with no ads in sight.',
+        mark: 'Watch',
+      },
+      {
+        header: 'Make Medium yours',
+        link: './',
+        detail:
+          'Follow all the topics you care about, and we’ll deliver the best stories for you to your homepage and inbox.',
+        mark: 'Explore',
+      },
+      {
+        header: 'Become a member',
+        link: './',
+        detail:
+          'Get unlimited access to the best stories on Medium — and support writers while you’re at it. Just $5/month.',
+        mark: 'Upgrade',
+      },
+    ],
+    footerNav: {
+      About: './',
+      Help: './',
+      Legal: './',
     },
   },
 });

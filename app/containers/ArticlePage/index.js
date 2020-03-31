@@ -11,6 +11,7 @@ import ArticlePageAutoHideHeader from './ArticlePageAutoHideHeader';
 import ArticlePageArticleDetail from './ArticlePageArticleDetail';
 import ArticlePageUpgradeMask from './ArticlePageUpgradeMask';
 import ArticleBottomInfo from './ArticleBottomInfo';
+import ArticlePageFooter from './ArticlePageFooter';
 // import { compose } from 'redux';
 
 export function ArticlePage() {
@@ -22,6 +23,7 @@ export function ArticlePage() {
       {/* if signed in */}
       <ArticlePageUpgradeMask />
       <ArticleBottomInfo id={id} />
+      <ArticlePageFooter />
     </>
   );
 }

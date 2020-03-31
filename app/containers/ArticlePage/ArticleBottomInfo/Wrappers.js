@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const OuterWrapper = styled.div`
-  margin-top: 40px;
+  margin: 40px auto;
   display: flex;
   justify-content: center;
 `;
