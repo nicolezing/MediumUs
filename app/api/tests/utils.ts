@@ -154,3 +154,18 @@ export async function listClappedArticles(
   const snapshot = await db.collection(COLLECTION_CLAPPING).get();
   return snapshot.docs.map(doc => doc.id);
 }
+
+export async function insertArticleClapping(
+  db: FirebaseFirestore,
+  articleId: ArticleId,
+  clappings: Record<UserId, ClappingData>,
+) {
+  for (const uid in clappings) {
+    await db
+      .collection(COLLECTION_CLAPPING)
+      .doc(articleId)
+      .collection(COLLECTION_USER_CLAPPING)
+      .doc(uid)
+      .set(clappings[uid]);
+  }
+}

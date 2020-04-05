@@ -31,7 +31,15 @@ export async function increaseForArticle(articleId: ArticleId) {
     });
 }
 
-export function clearForArticle() {}
+export async function clearForArticle(articleId: ArticleId) {
+  const uid = assertLoggedIn();
+  return getDb()
+    .collection(COLLECTION_CLAPPING)
+    .doc(articleId)
+    .collection(COLLECTION_USER_CLAPPING)
+    .doc(uid)
+    .delete();
+}
 
 export function readByArticle() {}
 
