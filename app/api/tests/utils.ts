@@ -1,8 +1,9 @@
 import 'mocha';
-import { mapValues, omit } from 'lodash';
+import * as firebase from 'firebase';
+import { mapValues, omit, fromPairs } from 'lodash';
 import { clearFirestoreData, initializeTestApp } from '@firebase/testing';
 import { FirebaseFirestore } from '@firebase/firestore-types';
-import { setDb, setAuth } from '../index';
+import { setDb, setAuth, clearAuth } from '../index';
 import { setTimesource, DEFAULT_TIMESOURCE } from '../utils';
 import { ArticleId, Article, COLLECTION_ARTICLE } from '../articles';
 import { UserId, COLLECTION_USER, User } from '../users';
@@ -12,6 +13,11 @@ import * as chaiDatetime from 'chai-datetime';
 import * as chaiAsPromised from 'chai-as-promised';
 import { TopicId, COLLECTION_TOPIC } from '../topics';
 import { TagId } from '../tags';
+import {
+  COLLECTION_CLAPPING,
+  COLLECTION_USER_CLAPPING,
+  ClappingData,
+} from '../clapping';
 use(chaiDatetime);
 use(chaiAsPromised);
 
@@ -20,12 +26,14 @@ const PROJECT_ID = 'medium-us-test-firestore';
 beforeEach(async () => {
   // Clear the database between tests
   await clearFirestoreData({ projectId: PROJECT_ID });
+  await Promise.all(firebase.apps.map(app => app.delete()));
+  clearAuth();
 });
 
 export function authedApp(auth: { uid: string }) {
   const app = initializeTestApp({ projectId: PROJECT_ID, auth });
   setAuth(({
-    currentUser: auth ? { uid: auth.uid } : null,
+    currentUser: auth,
   } as unknown) as firebase.auth.Auth);
   setDb(app.firestore());
   return app.firestore();
@@ -124,4 +132,25 @@ export function insertTopicTags(
     .set({
       tags: tagIds,
     });
+}
+
+export async function getArticleClapping(
+  db: FirebaseFirestore,
+  articleId: ArticleId,
+): Promise<Record<UserId, ClappingData>> {
+  const snapshot = await db
+    .collection(COLLECTION_CLAPPING)
+    .doc(articleId)
+    .collection(COLLECTION_USER_CLAPPING)
+    .get();
+  return fromPairs(
+    snapshot.docs.map(doc => [doc.id, ts2Date(doc.data()) as ClappingData]),
+  );
+}
+
+export async function listClappedArticles(
+  db: FirebaseFirestore,
+): Promise<Array<ArticleId>> {
+  const snapshot = await db.collection(COLLECTION_CLAPPING).get();
+  return snapshot.docs.map(doc => doc.id);
 }

@@ -8,6 +8,7 @@ module.exports = {
     '!app/firebase.js',
     '!app/*/*/Loadable.{js,jsx}',
   ],
+  watchPathIgnorePatterns: ['node_modules'],
   coverageThreshold: {
     global: {
       statements: 98,

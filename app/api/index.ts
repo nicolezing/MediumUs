@@ -25,11 +25,15 @@ export function setDb(db: FirebaseFirestore) {
 
 let currentAuth: firebase.auth.Auth;
 export function getAuth(): firebase.auth.Auth {
-  return currentAuth;
+  return currentAuth!;
 }
 
 export function setAuth(auth: firebase.auth.Auth) {
   currentAuth = auth;
+}
+
+export function clearAuth() {
+  currentAuth = { currentUser: null } as firebase.auth.Auth;
 }
 
 export default async function() {
@@ -37,7 +41,7 @@ export default async function() {
     return;
   }
 
-  console.log('initializing firebase')
+  console.log('initializing firebase');
   firebase.initializeApp(firebaseConfig);
   setDb(firebase.firestore());
   setAuth(firebase.auth());
@@ -45,4 +49,3 @@ export default async function() {
   await firebase.auth().signInWithEmailAndPassword('test@test.com', 'testpass');
   console.log('signed in!', firebase.auth().currentUser);
 }
-
