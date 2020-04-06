@@ -1,5 +1,9 @@
-import { selectUserInfo } from './selectUserInfo';
-import selectPublicationInfo from './selectPublicationInfo';
+import {
+  selectUserInfo,
+  selectPublicationInfo,
+  selectIfFollowingPublication,
+  selectIfFollowingAuthor,
+} from './index';
 
 export function selectArticleAllInfo(state, id) {
   return state.testState.articles[id];
@@ -40,14 +44,28 @@ export function selectArticleCover(state, id) {
   return state.testState.articles[id].cover;
 }
 
-export function selectArticleAuthorInfo(state, id) {
-  return selectUserInfo(state, state.testState.articles[id].author);
+export function selectArticleAuthorInfo(state, articleId) {
+  const { author: id } = selectArticleAbstract(state, articleId);
+  const authorInfo = selectUserInfo(state, id);
+  const followed = selectIfFollowingAuthor(state, id);
+
+  return { ...authorInfo, id, followed };
 }
 
-export function selectArticlePublicationInfo(state, id) {
-  const publicationId = state.testState.articles[id].publication;
-  if (publicationId) {
-    return selectPublicationInfo(state, publicationId);
+export function selectArticlePublicationInfo(state, articleId) {
+  const { publication: id } = selectArticleAbstract(state, articleId);
+  let publicationInfo = {};
+  let followedPublication = {};
+  if (id) {
+    publicationInfo = selectPublicationInfo(state, id);
+    followedPublication = selectIfFollowingPublication(state, id);
   }
-  return {};
+
+  return { ...publicationInfo, id, followed: followedPublication };
+}
+
+export function selectArticleSideInfoVisibility(state) {
+  const { topAvatarOffView, bottomAvatarOffView } = state.testState.articlePage;
+
+  return topAvatarOffView && bottomAvatarOffView;
 }

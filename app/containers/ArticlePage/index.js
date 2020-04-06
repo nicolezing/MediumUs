@@ -12,6 +12,7 @@ import ArticlePageArticleDetail from './ArticlePageArticleDetail';
 import ArticlePageUpgradeMask from './ArticlePageUpgradeMask';
 import ArticleBottomInfo from './ArticleBottomInfo';
 import ArticlePageFooter from './ArticlePageFooter';
+import ArticleSideInfo from './ArticleSideInfo';
 // import { compose } from 'redux';
 
 export function ArticlePage() {
@@ -22,6 +23,7 @@ export function ArticlePage() {
       <ArticlePageArticleDetail id={id} />
       {/* if signed in */}
       <ArticlePageUpgradeMask />
+      <ArticleSideInfo id={id} />
       <ArticleBottomInfo id={id} />
       <ArticlePageFooter />
     </>

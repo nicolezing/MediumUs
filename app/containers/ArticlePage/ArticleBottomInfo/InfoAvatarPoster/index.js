@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { OutlinedButton } from '../../../../components/Button';
 import Avatar from '../../../../components/Avatar';
 import {
-  selectArticleAbstract,
   selectArticlePublicationInfo,
   selectArticleAuthorInfo,
-  selectIfFollowingAuthor,
-  selectIfFollowingPublication,
 } from '../../../../selectors';
+import {
+  articleBottomAvatarInView,
+  articleBottomAvatarOffView,
+} from '../../../../store/actions';
 import {
   OuterWrapper,
   PosterWrapper,
@@ -28,8 +29,29 @@ import {
 } from './Wrapper';
 
 function InfoAvatarPoster(props) {
+  const authorRef = useRef();
+
+  const sideInfoToggler = () => {
+    const { bottom } = authorRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const bottomPosition = windowHeight - bottom;
+
+    if (bottomPosition <= 0) {
+      props.articleBottomAvatarOffView();
+    } else {
+      props.articleBottomAvatarInView();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', sideInfoToggler);
+    return () => {
+      window.removeEventListener('scroll', sideInfoToggler);
+    };
+  });
+
   const renderAuthorAvatar = () => (
-    <Avatar size="80px" id={props.writerInfo.authorId} />
+    <Avatar size="80px" id={props.writerInfo.id} />
   );
 
   const renderPublicationAvatar = () => {
@@ -47,7 +69,7 @@ function InfoAvatarPoster(props) {
     return (
       <PosterWrapper>
         <HeaderInfoWrapper>
-          <ImageWrapper>
+          <ImageWrapper ref={authorRef}>
             {avatarType === 'author'
               ? renderAuthorAvatar()
               : renderPublicationAvatar()}
@@ -105,7 +127,7 @@ InfoAvatarPoster.propTypes = {
     link: PropTypes.string,
     description: PropTypes.string,
     followed: PropTypes.bool,
-    authorId: PropTypes.string,
+    id: PropTypes.string,
   }),
   publicationInfo: PropTypes.shape({
     name: PropTypes.string,
@@ -114,27 +136,23 @@ InfoAvatarPoster.propTypes = {
     description: PropTypes.string,
     followed: PropTypes.bool,
   }),
+  articleBottomAvatarInView: PropTypes.func,
+  articleBottomAvatarOffView: PropTypes.func,
   // response: PropTypes.string,
 };
 
 function mapStateToProps(state, ownProps) {
   const { id } = ownProps;
   const writerInfo = selectArticleAuthorInfo(state, id);
-  const {
-    author: authorId,
-    publication: publicationId,
-  } = selectArticleAbstract(state, id);
   const publicationInfo = selectArticlePublicationInfo(state, id);
-  const followedAuthor = selectIfFollowingAuthor(state, authorId);
-  const followedPublication = selectIfFollowingPublication(
-    state,
-    publicationId,
-  );
-  return {
-    writerInfo: { ...writerInfo, followed: followedAuthor, authorId },
 
-    publicationInfo: { ...publicationInfo, followed: followedPublication },
+  return {
+    writerInfo,
+    publicationInfo,
   };
 }
 
-export default connect(mapStateToProps)(InfoAvatarPoster);
+export default connect(
+  mapStateToProps,
+  { articleBottomAvatarInView, articleBottomAvatarOffView },
+)(InfoAvatarPoster);

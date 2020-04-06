@@ -3,11 +3,10 @@ import styled from 'styled-components';
 export const GradientMask = styled.div`
   background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
   height: 150px;
-  margin-top: -140px;
-  margin-bottom: 10px;
+  margin: -140px auto 10px auto;
   position: relative;
-  width: 100%;
   display: block;
+  max-width: 760px;
 `;
 
 export const WidthWrapper = styled.div`

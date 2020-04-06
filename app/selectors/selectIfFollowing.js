@@ -1,5 +1,4 @@
-import { selectUserInfo } from './selectUserInfo';
-import selectCurrentLoginId from './selectCurrentLoginId';
+import { selectUserInfo, selectCurrentLoginId } from './index';
 
 export function selectIfFollowingAuthor(state, authorId) {
   const currentUser = selectCurrentLoginId(state);

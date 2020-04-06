@@ -159,6 +159,7 @@ function mapStateToProps(state, ownProps) {
     claps,
     publication: publicationId,
   } = selectArticleAllInfo(state, id);
+
   const { authorName, twitter, facebook, linkedIn } = selectUserInfo(
     state,
     authorID,

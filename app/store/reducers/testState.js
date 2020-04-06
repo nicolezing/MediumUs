@@ -48,6 +48,10 @@ export const testState = () => ({
     },
   },
   loggedIn: 'user003',
+  articlePage: {
+    topAvatarOffView: false,
+    bottomAvatarOffView: false,
+  },
   theme: 'purple',
   articles: {
     ID001: {
@@ -121,54 +125,6 @@ export const testState = () => ({
       followers: 1432,
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     },
-  },
-  Homepage: {
-    newFromNetwork: {
-      header: 'New from your network',
-      sourceLink: './',
-      headerImg:
-        'https://cdn-images-1.medium.com/proxy/1*K3oqw1Ed_6VMaql4HojuDg.png',
-      articleList: ['ID001', 'ID001', 'ID002', 'ID001'],
-    },
-    popularOnMedium: {
-      header: 'Popular On Medium',
-      sourceLink: './',
-      articleList: ['ID001', 'ID001', 'ID002', 'ID001'],
-    },
-    readingList: {
-      header: 'Reading list',
-      sourceLink: './',
-      headerImg:
-        'https://cdn-images-1.medium.com/proxy/1*NECcaIHz7dKuAGfrlWYp5A.png',
-      articleList: ['ID001', 'ID001', 'ID002', 'ID001'],
-    },
-
-    homeList: [
-      'ID001',
-      'ID001',
-      'ID002',
-      'ID001',
-      'ID001',
-      'ID001',
-      'ID002',
-      'ID001',
-      'ID001',
-      'ID001',
-      'ID002',
-      'ID001',
-      'ID001',
-      'ID001',
-      'ID002',
-      'ID001',
-      'ID001',
-      'ID001',
-      'ID002',
-      'ID001',
-      'ID001',
-      'ID001',
-      'ID002',
-      'ID001',
-    ],
   },
 
   topicList: {

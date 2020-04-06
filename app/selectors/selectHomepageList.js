@@ -1,5 +1,5 @@
 export function selectHomeList(state) {
-  return state.testState.Homepage.homeList;
+  return state.homePage.homeList;
 }
 
 // export function selectNewFromNetwork(state) {
@@ -15,5 +15,5 @@ export function selectHomeList(state) {
 // }
 
 export function selectHomeRecommendationLists(state, listName) {
-  return state.testState.Homepage[listName];
+  return state.homePage[listName];
 }

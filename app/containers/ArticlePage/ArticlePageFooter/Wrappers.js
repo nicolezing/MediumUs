@@ -5,6 +5,7 @@ export const Container = styled.div`
   padding: 60px 0;
 `;
 export const SectionWrapper = styled.section`
+  margin: auto;
   @media screen and (min-width: 1080px) {
     padding: 0 64px;
     max-width: 1320px;

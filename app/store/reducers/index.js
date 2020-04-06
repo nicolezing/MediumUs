@@ -1,7 +1,8 @@
 import createReducer from '../../reducers';
-// import { testState } from './testState';
-import testState from './Homepage';
+import homePage from './Homepage';
+import articlePage from './ArticlePage';
 
 export default createReducer({
-  testState,
+  homePage,
+  testState: articlePage,
 });
