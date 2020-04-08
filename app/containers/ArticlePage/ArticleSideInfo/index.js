@@ -1,7 +1,8 @@
+/* eslint-disable react/no-find-dom-node */
 // *
 // ArticleSideInfo
 // *
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -9,7 +10,7 @@ import {
   selectArticleReadingInfo,
   selectIfBookmarked,
   selectArticlePublicationInfo,
-  selectArticleSideInfoVisibility,
+  selectArticleSideInfoToggleRefs,
 } from '../../../selectors';
 import roundToThousand from '../../../utils/roundToThousand';
 import { OutlinedButton, IconButton } from '../../../components/Button';
@@ -26,6 +27,60 @@ import {
 } from './Wrappers';
 
 function ArticleSideInfo(props) {
+  const sideInfoRef = useRef();
+  const [visibility, setVisibility] = useState(false);
+
+  const getVisibilityFromAvatarRefs = () => {
+    const windowHeight = window.innerHeight;
+    const { avatarRefContainer: refObj } = props;
+    if (Object.keys(refObj).length !== 2) {
+      // filter to prevent default visibility = true for the first render
+      return false;
+    }
+    return Object.keys(refObj).reduce((result, key) => {
+      const { bottom } = refObj[key].getBoundingClientRect();
+      if (bottom - windowHeight >= 0 || bottom <= 0) {
+        // avatar not in screen, side info will show, return true && result
+        return result;
+      }
+      // avatar in screen, side info will hide, return false
+      return false;
+    }, true);
+  };
+
+  const getVisibilityFromImageRefs = () => {
+    const { top, bottom } = sideInfoRef.current.getBoundingClientRect();
+    const { imageRefContainer: refObj } = props;
+    return Object.keys(refObj).reduce((result, key) => {
+      if (!refObj[key]) {
+        return result;
+      }
+      // if node != null, get element ClientRect
+      const { top: imageElementTop, bottom: imageElementBottom } = refObj[
+        key
+      ].getBoundingClientRect();
+      if (imageElementBottom + 20 < top || imageElementTop - 20 > bottom) {
+        // image far from side info, side info will show, return true && result
+        return result;
+      }
+      // side info will hide, return false
+      return false;
+    }, true);
+  };
+
+  const getVisibilityFromRefs = () =>
+    setVisibility(
+      getVisibilityFromAvatarRefs() && getVisibilityFromImageRefs(),
+    );
+
+  useEffect(() => {
+    getVisibilityFromRefs();
+    window.addEventListener('scroll', getVisibilityFromRefs);
+    return () => {
+      window.removeEventListener('scroll', getVisibilityFromRefs);
+    };
+  });
+
   const renderPublication = () => {
     const { name, link, description, followed } = props.publicationInfo;
     return (
@@ -47,7 +102,7 @@ function ArticleSideInfo(props) {
   const bookmarkIconName = props.bookmarked ? 'bookmarkFilled' : 'bookmark';
 
   return (
-    <Container visible={props.articleSideInfoVisibility}>
+    <Container visible={visibility} ref={sideInfoRef}>
       <WidthConstrainWrapper>
         <InfoWrapper>
           {props.publicationInfo.id ? renderPublication() : ''}
@@ -79,7 +134,8 @@ ArticleSideInfo.propTypes = {
     description: PropTypes.string,
     followed: PropTypes.bool,
   }),
-  articleSideInfoVisibility: PropTypes.bool,
+  avatarRefContainer: PropTypes.object,
+  imageRefContainer: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -88,14 +144,17 @@ function mapStateToProps(state, ownProps) {
   const { claps } = selectArticleReadingInfo(state, id);
   const bookmarked = selectIfBookmarked(state, id);
   const publicationInfo = selectArticlePublicationInfo(state, id);
-  const articleSideInfoVisibility = selectArticleSideInfoVisibility(state);
-
+  const {
+    avatarRefContainer,
+    imageRefContainer,
+  } = selectArticleSideInfoToggleRefs(state);
   return {
     theme,
     claps,
     bookmarked,
     publicationInfo,
-    articleSideInfoVisibility,
+    avatarRefContainer,
+    imageRefContainer,
   };
 }
 

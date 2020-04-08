@@ -9,7 +9,8 @@ export const Container = styled.div`
   position: fixed;
   //TODO will change:
   top: 200px;
-  display: ${props => (props.visible ? 'flex' : 'none')};
+  display: flex;
+  opacity: ${props => (props.visible ? 1 : 0)};
 
   @media screen and (max-width: 1199px) {
     display: none;

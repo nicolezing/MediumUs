@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { OutlinedButton } from '../../../../components/Button';
@@ -7,10 +7,7 @@ import {
   selectArticlePublicationInfo,
   selectArticleAuthorInfo,
 } from '../../../../selectors';
-import {
-  articleBottomAvatarInView,
-  articleBottomAvatarOffView,
-} from '../../../../store/actions';
+import RefContainer from '../../refContainer';
 import {
   OuterWrapper,
   PosterWrapper,
@@ -29,38 +26,11 @@ import {
 } from './Wrapper';
 
 function InfoAvatarPoster(props) {
-  const authorRef = useRef();
+  const AuthorAvatar = () => <Avatar size="80px" id={props.writerInfo.id} />;
 
-  const sideInfoToggler = () => {
-    const { bottom } = authorRef.current.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const bottomPosition = windowHeight - bottom;
-
-    if (bottomPosition <= 0) {
-      props.articleBottomAvatarOffView();
-    } else {
-      props.articleBottomAvatarInView();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', sideInfoToggler);
-    return () => {
-      window.removeEventListener('scroll', sideInfoToggler);
-    };
-  });
-
-  const renderAuthorAvatar = () => (
-    <Avatar size="80px" id={props.writerInfo.id} />
-  );
-
-  const renderPublicationAvatar = () => {
-    const { name, link, logo } = props.publicationInfo;
-    return (
-      <a href={link}>
-        <PublicationLogo src={logo} alt={name} />
-      </a>
-    );
+  const PublicationAvatar = () => {
+    const { name, logo } = props.publicationInfo;
+    return <PublicationLogo src={logo} alt={name} />;
   };
 
   const { theme } = props;
@@ -69,10 +39,10 @@ function InfoAvatarPoster(props) {
     return (
       <PosterWrapper>
         <HeaderInfoWrapper>
-          <ImageWrapper ref={authorRef}>
-            {avatarType === 'author'
-              ? renderAuthorAvatar()
-              : renderPublicationAvatar()}
+          <ImageWrapper>
+            <a href={link}>
+              {avatarType === 'author' ? AuthorAvatar() : PublicationAvatar()}
+            </a>
           </ImageWrapper>
           <WriterInfoWrapper>
             {avatarType === 'author' ? <P>WRITTEN BY</P> : ''}
@@ -109,12 +79,14 @@ function InfoAvatarPoster(props) {
   };
 
   return (
-    <OuterWrapper>
-      {renderPoster(props.writerInfo, 'author')}
-      {props.publicationInfo.name
-        ? renderPoster(props.publicationInfo, 'publication')
-        : ''}
-    </OuterWrapper>
+    <RefContainer refType="avatarRef" uuid="bottomAvatarRef">
+      <OuterWrapper>
+        {renderPoster(props.writerInfo, 'author')}
+        {props.publicationInfo.name
+          ? renderPoster(props.publicationInfo, 'publication')
+          : ''}
+      </OuterWrapper>
+    </RefContainer>
   );
 }
 
@@ -136,8 +108,6 @@ InfoAvatarPoster.propTypes = {
     description: PropTypes.string,
     followed: PropTypes.bool,
   }),
-  articleBottomAvatarInView: PropTypes.func,
-  articleBottomAvatarOffView: PropTypes.func,
   // response: PropTypes.string,
 };
 
@@ -152,7 +122,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { articleBottomAvatarInView, articleBottomAvatarOffView },
-)(InfoAvatarPoster);
+export default connect(mapStateToProps)(InfoAvatarPoster);

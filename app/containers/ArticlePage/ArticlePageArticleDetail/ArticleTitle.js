@@ -1,46 +1,29 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { TitleWrapper } from './Wrappers';
 import ArticlePoster from '../../../components/ArticlePoster';
 import { selectTheme } from '../../../selectors';
-import {
-  articleTopAvatarInView,
-  articleTopAvatarOffView,
-} from '../../../store/actions';
+import RefContainer from '../refContainer';
 
 function ArticleTitle(props) {
-  const titleRef = useRef();
-
-  const sideInfoToggler = () => {
-    const { bottom } = titleRef.current.getBoundingClientRect();
-    if (bottom <= 0) {
-      props.articleTopAvatarOffView();
-    } else {
-      props.articleTopAvatarInView();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', sideInfoToggler);
-    return () => {
-      window.removeEventListener('scroll', sideInfoToggler);
-    };
-  });
-
   const id = props.children[0];
   return (
-    <TitleWrapper ref={titleRef}>
-      <ArticlePoster id={id} variation="ArticlePageTitle" theme={props.theme} />
-    </TitleWrapper>
+    <RefContainer refType="avatarRef" uuid="topAvatarRef">
+      <TitleWrapper>
+        <ArticlePoster
+          id={id}
+          variation="ArticlePageTitle"
+          theme={props.theme}
+        />
+      </TitleWrapper>
+    </RefContainer>
   );
 }
 
 ArticleTitle.propTypes = {
   theme: PropTypes.string,
   children: PropTypes.array.isRequired,
-  articleTopAvatarInView: PropTypes.func,
-  articleTopAvatarOffView: PropTypes.func,
 };
 
 function mapStateToProps(state) {
@@ -49,7 +32,4 @@ function mapStateToProps(state) {
   return { theme };
 }
 
-export default connect(
-  mapStateToProps,
-  { articleTopAvatarInView, articleTopAvatarOffView },
-)(ArticleTitle);
+export default connect(mapStateToProps)(ArticleTitle);

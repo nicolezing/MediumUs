@@ -64,8 +64,6 @@ export function selectArticlePublicationInfo(state, articleId) {
   return { ...publicationInfo, id, followed: followedPublication };
 }
 
-export function selectArticleSideInfoVisibility(state) {
-  const { topAvatarOffView, bottomAvatarOffView } = state.testState.articlePage;
-
-  return topAvatarOffView && bottomAvatarOffView;
+export function selectArticleSideInfoToggleRefs(state) {
+  return state.testState.articlePage;
 }

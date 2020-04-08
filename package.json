@@ -93,6 +93,7 @@
     "react": "^16.12.0",
     "react-dom": "16.8.6",
     "react-helmet": "6.0.0-beta",
+    "react-id-generator": "^3.0.0",
     "react-intl": "2.8.0",
     "react-redux": "^7.1.3",
     "react-router-dom": "5.0.0",

@@ -5,22 +5,20 @@ export function loadMoreHomelist() {
 }
 
 /** ArtcilePage actions */
-/** ArtcilePage sideinfo top controller */
-export const ARTICLE_TOP_AVATAR_IN_VIEW = 'ARTICLE_TOP_AVATAR_IN_VIEW';
-export const ARTICLE_TOP_AVATAR_OFF_VIEW = 'ARTICLE_TOP_AVATAR_OFF_VIEW';
-export function articleTopAvatarInView() {
-  return { type: ARTICLE_TOP_AVATAR_IN_VIEW };
+/** ArticlePage side info avatar refs */
+export const ARTICLE_AVATAR_REF = 'ARTICLE_AVATAR_REF';
+export function passArticleAvatarRef(node, uuid) {
+  return {
+    type: ARTICLE_AVATAR_REF,
+    node,
+    uuid,
+  };
 }
-export function articleTopAvatarOffView() {
-  return { type: ARTICLE_TOP_AVATAR_OFF_VIEW };
-}
-
-/** ArtcilePage sideinfo bottom controller */
-export const ARTICLE_BOTTOM_AVATAR_IN_VIEW = 'ARTICLE_BOTTOM_AVATAR_IN_VIEW';
-export const ARTICLE_BOTTOM_AVATAR_OFF_VIEW = 'ARTICLE_BOTTOM_AVATAR_OFF_VIEW';
-export function articleBottomAvatarInView() {
-  return { type: ARTICLE_BOTTOM_AVATAR_IN_VIEW };
-}
-export function articleBottomAvatarOffView() {
-  return { type: ARTICLE_BOTTOM_AVATAR_OFF_VIEW };
+export const ARTICLE_IMAGE_REF = 'ARTICLE_IMAGE_REF';
+export function passArticleImageRef(node, uuid) {
+  return {
+    type: ARTICLE_IMAGE_REF,
+    node,
+    uuid,
+  };
 }

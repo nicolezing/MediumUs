@@ -49,8 +49,8 @@ export const testState = () => ({
   },
   loggedIn: 'user003',
   articlePage: {
-    topAvatarOffView: false,
-    bottomAvatarOffView: false,
+    avatarRefContainer: {},
+    imageRefContainer: {},
   },
   theme: 'purple',
   articles: {

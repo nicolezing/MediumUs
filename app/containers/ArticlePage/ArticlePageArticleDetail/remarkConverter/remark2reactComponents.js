@@ -1,4 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
+import nextId from 'react-id-generator';
 import ArticleTitle from '../ArticleTitle';
 import PositionedImage from '../imageComponents/PositionedImage';
 
@@ -51,7 +53,7 @@ const components = {
   h3: H3,
   p: P,
   blockquote: Blockquote,
-  img: PositionedImage,
+  img: props => <PositionedImage {...props} uuid={nextId()} />,
 };
 
 export default components;

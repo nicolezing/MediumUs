@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Image from './Image';
 import {
@@ -8,6 +9,7 @@ import {
   WideWrapper,
   FullScreenWrapper,
 } from './positionWrappers';
+import RefContainer from '../../refContainer';
 
 function PositionedImage(props) {
   const position = props['data-position'];
@@ -16,9 +18,11 @@ function PositionedImage(props) {
     <>
       {position === 'around' && (
         <div>
-          <AroundFigure>
-            <Image {...props} />
-          </AroundFigure>
+          <RefContainer refType="imageRef" uuid={props.uuid}>
+            <AroundFigure>
+              <Image {...props} />
+            </AroundFigure>
+          </RefContainer>
         </div>
       )}
       {position === 'normal' && (
@@ -29,18 +33,22 @@ function PositionedImage(props) {
         </NormalWrapper>
       )}
       {position === 'wide' && (
-        <WideWrapper>
-          <Figure>
-            <Image {...props} />
-          </Figure>
-        </WideWrapper>
+        <RefContainer refType="imageRef" uuid={props.uuid}>
+          <WideWrapper>
+            <Figure>
+              <Image {...props} />
+            </Figure>
+          </WideWrapper>
+        </RefContainer>
       )}
       {position === 'fullWidth' && (
-        <FullScreenWrapper>
-          <Figure>
-            <Image {...props} />
-          </Figure>
-        </FullScreenWrapper>
+        <RefContainer refType="imageRef" uuid={props.uuid}>
+          <FullScreenWrapper>
+            <Figure>
+              <Image {...props} />
+            </Figure>
+          </FullScreenWrapper>
+        </RefContainer>
       )}
     </>
   );
@@ -52,6 +60,7 @@ PositionedImage.propTypes = {
   children: PropTypes.array,
   'data-preLoad': PropTypes.string,
   'data-position': PropTypes.oneOf(['around', 'normal', 'wide', 'fullWidth']),
+  uuid: PropTypes.string.isRequired,
 };
 
-export default PositionedImage;
+export default connect(null)(PositionedImage);
