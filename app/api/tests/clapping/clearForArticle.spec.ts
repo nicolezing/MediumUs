@@ -2,12 +2,7 @@ import { expect } from 'chai';
 import { omit } from 'lodash';
 import { clearForArticle } from '../../clapping';
 import { ERROR_NOT_SIGNED_IN } from '../../users';
-import {
-  authedApp,
-  listClappedArticles,
-  getArticleClapping,
-  insertArticleClapping,
-} from '../utils';
+import { authedApp, getArticleClapping, insertArticleClapping } from '../utils';
 import { getTime } from '../../utils';
 
 const ARTICLE_ID = 'article 1';
