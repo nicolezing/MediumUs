@@ -16,7 +16,7 @@ before_install:
   - export DISPLAY=:99.0
 
 before_script:
-  - npm rebuild
+  - npm rebuild grpc --build-from-source
 
 notifications:
   email:
