@@ -8,19 +8,17 @@ services:
   - xvfb
 
 script:
-  - node ./internals/scripts/generate-templates-for-linting
   - npm run test:api
 
 before_install:
   - curl -sL https://firebase.tools | bash
+  - npm rebuild
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
 
 notifications:
   email:
     on_failure: change
-
-after_success: 'npm run coveralls'
 
 cache:
   directories:
