@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "mediumus-69aeb"
+    "default": "mediumus-69aeb",
+    "dev": "mediumus-dev"
   }
 }

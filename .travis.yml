@@ -35,15 +35,11 @@ deploy:
     keep_history: true
     on:
       branch: master
-  - provider: firebase
-    project: mediumus-69aeb
-    token:
-      secure: $FIREBASE_TOKEN
+  - provider: script
+    script: firebase deploy -P "mediumus-69aeb" --token "$FIREBASE_TOKEN"
     on:
       branch: master
-  - provider: firebase
-    project: mediumus-dev
-    token:
-      secure: $FIREBASE_TOKEN
+  - provider: script
+    script: firebase deploy -P "mediumus-dev" --token "$FIREBASE_TOKEN"
     on:
       branch: api-dev
