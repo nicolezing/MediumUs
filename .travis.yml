@@ -27,11 +27,23 @@ cache:
     - node_modules
 
 deploy:
-  provider: pages
-  local_dir: build
-  target_branch: gh-pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  on:
-    branch: master
+  - provider: pages
+    local_dir: build
+    target_branch: gh-pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: true
+    on:
+      branch: master
+  - provider: firebase
+    project: mediumus-69aeb
+    token:
+      secure: $FIREBASE_TOKEN
+    on:
+      branch: master
+  - provider: firebase
+    project: mediumus-dev
+    token:
+      secure: $FIREBASE_TOKEN
+    on:
+      branch: api-dev
