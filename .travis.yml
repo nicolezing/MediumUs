@@ -12,6 +12,7 @@ script:
   - npm run test:api
 
 before_install:
+  - curl -sL https://firebase.tools | bash
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
 
