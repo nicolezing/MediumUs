@@ -12,9 +12,11 @@ script:
 
 before_install:
   - curl -sL https://firebase.tools | bash
-  - npm rebuild
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
+
+before_script:
+  - npm rebuild
 
 notifications:
   email:
