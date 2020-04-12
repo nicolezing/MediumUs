@@ -40,11 +40,6 @@ describe('claps.readByArticle', () => {
     await insertArticleClapping(db, ARTICLE_ID, clappings);
 
     const actual = await readByArticle(ARTICLE_ID);
-    console.log('actual', actual);
-    console.log(
-      'expected',
-      toPairs(clappings).map(([uid, data]) => ({ ...data, uid })),
-    );
 
     expect(actual).to.have.deep.members(
       toPairs(clappings).map(([uid, data]) => ({ ...data, uid })),
