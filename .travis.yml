@@ -43,3 +43,6 @@ deploy:
     script: firebase deploy -P "mediumus-dev" --token "$FIREBASE_TOKEN"
     on:
       branch: api-dev
+
+after_deploy:
+  - npm run test:api:integration

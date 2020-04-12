@@ -43,6 +43,7 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "test:api": "cross-env NODE_ENV=test firebase emulators:exec --only firestore 'mocha --exit -r ts-node/register app/api/tests/**/*.spec.ts'",
     "test:api:watch": "cross-env NODE_ENV=test firebase emulators:exec --only firestore 'mocha --watch --watch-extensions ts -r ts-node/register app/api/tests/**/*.spec.ts'",
+    "test:api:integration": "cross-env NODE_ENV=test 'app/api/tests/integration/run.sh'",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
     "storybook": "start-storybook -p 6006",

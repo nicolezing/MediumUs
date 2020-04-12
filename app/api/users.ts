@@ -82,6 +82,15 @@ export async function updateProfile(update: Partial<UserProfile>) {
 }
 
 /**
+ * Returns all user IDs.
+ */
+export async function listUserIds(): Promise<UserId[]> {
+  return (await getDb()
+    .collection(COLLECTION_USER)
+    .get()).docs.map(doc => doc.id);
+}
+
+/**
  * Creates a new email-password-based account. Returns the uid of the new account.
  */
 export async function createAccount(
@@ -241,6 +250,10 @@ function userFromDoc(doc: DocumentSnapshot<DocumentData>): User {
 }
 
 function defaultAvatar(name: string) {
+  if (process.env.NODE_ENV === 'test' && typeof document === 'undefined') {
+    return 'http://avatar.com/fake.png';
+  }
+
   const avatarSize = 256;
   const colours = [
     '#1abc9c',
