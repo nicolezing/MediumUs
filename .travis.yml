@@ -16,7 +16,7 @@ before_install:
   - export DISPLAY=:99.0
 
 before_script:
-  - npm rebuild grpc --build-from-source
+  - npm rebuild grpc --build-from-source --target=12.4.0
 
 notifications:
   email:
