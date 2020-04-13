@@ -10,7 +10,7 @@ import {
 } from 'lodash';
 import { getDb } from './index';
 import { UserId, COLLECTION_USER, assertLoggedIn } from './users';
-import { getTime } from './utils';
+import { getTime, runTransaction } from './utils';
 import { DocumentData, DocumentSnapshot } from '@firebase/firestore-types';
 import { TagId } from './tags';
 import { TopicId, COLLECTION_TOPIC } from './topics';
@@ -98,14 +98,14 @@ export function publishDraft(id: ArticleId) {
     .collection(COLLECTION_ARTICLE)
     .doc(id);
   const now = getTime();
-  return getDb().runTransaction(async transaction => {
-    const doc = await transaction.get(docRef);
+  return runTransaction(async (txn, abort) => {
+    const doc = await txn.get(docRef);
     if (!doc.exists) throw new Error(ERROR_ARTICLE_NOT_FOUND);
     if (doc.data()!.state === ArticleState.PUBLISHED) {
-      return transaction.update(docRef, {});
+      return abort();
     }
 
-    transaction.update(docRef, {
+    txn.update(docRef, {
       state: ArticleState.PUBLISHED,
       updatedAt: now,
       publishedAt: now,
@@ -137,11 +137,11 @@ export async function update(id: ArticleId, update: Partial<ArticleData>) {
     .collection(COLLECTION_ARTICLE)
     .doc(id);
   const now = getTime();
-  return getDb().runTransaction(async transaction => {
-    const doc = await transaction.get(docRef);
+  return runTransaction(async txn => {
+    const doc = await txn.get(docRef);
     if (!doc.exists) throw new Error(ERROR_ARTICLE_NOT_FOUND);
 
-    transaction.update(docRef, { ...articleToDoc(update), updatedAt: now });
+    txn.update(docRef, { ...articleToDoc(update), updatedAt: now });
   });
 }
 
@@ -153,14 +153,14 @@ export async function unpublish(id: ArticleId) {
     .collection(COLLECTION_ARTICLE)
     .doc(id);
   const now = getTime();
-  return getDb().runTransaction(async transaction => {
-    const doc = await transaction.get(docRef);
+  return runTransaction(async (txn, abort) => {
+    const doc = await txn.get(docRef);
     if (!doc.exists) throw new Error(ERROR_ARTICLE_NOT_FOUND);
     if (doc.data()!.state === ArticleState.DRAFT) {
-      return transaction.update(docRef, {});
+      return abort();
     }
 
-    transaction.update(docRef, {
+    txn.update(docRef, {
       state: ArticleState.DRAFT,
       updatedAt: now,
     });
@@ -181,10 +181,10 @@ export async function editTags(
     .doc(articleId);
 
   const now = getTime();
-  return getDb().runTransaction(async transaction => {
-    const doc = await transaction.get(docRef);
+  return runTransaction(async (txn, abort) => {
+    const doc = await txn.get(docRef);
     if (!doc.exists) {
-      return;
+      return abort();
     }
 
     const newTags = union(
@@ -192,11 +192,10 @@ export async function editTags(
       tagsToAdd,
     );
     if (isEqual(newTags, doc.data()!.tags)) {
-      transaction.update(docRef, {});
-      return;
+      return abort();
     }
 
-    transaction.update(docRef, {
+    txn.update(docRef, {
       tags: newTags,
       updatedAt: now,
     });
@@ -207,30 +206,11 @@ export async function editTags(
  * Removes the specified article. Removing a non-existent article is a legal operation.
  */
 export async function remove(id: ArticleId) {
-  const docRef = getDb()
+  // TODO: cleanup article relations
+  return getDb()
     .collection(COLLECTION_ARTICLE)
-    .doc(id);
-  const bookmarkingUsers = await getDb()
-    .collection(COLLECTION_USER)
-    .where('bookmarkedArticles', 'array-contains', id)
-    .get();
-  const userRefs = bookmarkingUsers.docs.map(user =>
-    getDb()
-      .collection(COLLECTION_USER)
-      .doc(user.id),
-  );
-
-  const now = getTime();
-  return getDb().runTransaction(async transaction => {
-    transaction.delete(docRef);
-    // TODO: clean up bookmarks added between user-listing and this transaction.
-    userRefs.forEach(userRef =>
-      transaction.update(userRef, {
-        bookmarkedArticles: firestore.FieldValue.arrayRemove(id),
-        updatedAt: now,
-      }),
-    );
-  });
+    .doc(id)
+    .delete();
 }
 
 export function bookmark(articleId: ArticleId) {
@@ -243,23 +223,23 @@ export function bookmark(articleId: ArticleId) {
     .doc(articleId);
 
   const now = getTime();
-  return getDb().runTransaction(async transaction => {
-    const article = await transaction.get(articleRef);
-    const user = await transaction.get(userRef);
+  return runTransaction(async (txn, abort) => {
+    const article = await txn.get(articleRef);
+    const user = await txn.get(userRef);
 
-    if (article.exists) {
-      transaction.update(articleRef, {});
+    if (!article.exists) {
+      return abort();
     }
 
     if (!user.exists) {
-      return;
+      return abort();
     }
 
     if (user.data()!.bookmarkedArticles.includes(articleId)) {
-      return transaction.update(userRef, {});
+      return abort();
     }
 
-    transaction.update(userRef, {
+    txn.update(userRef, {
       bookmarkedArticles: [...user.data()!.bookmarkedArticles, articleId],
       updatedAt: now,
     });
@@ -273,18 +253,18 @@ export function unbookmark(articleId: ArticleId) {
     .doc(uid);
 
   const now = getTime();
-  return getDb().runTransaction(async transaction => {
-    const user = await transaction.get(userRef);
+  return runTransaction(async (txn, abort) => {
+    const user = await txn.get(userRef);
 
     if (!user.exists) {
-      return;
+      return abort();
     }
 
     if (!user.data()!.bookmarkedArticles.includes(articleId)) {
-      return transaction.update(userRef, {});
+      return abort();
     }
 
-    transaction.update(userRef, {
+    txn.update(userRef, {
       bookmarkedArticles: without(user.data()!.bookmarkedArticles, articleId),
       updatedAt: now,
     });

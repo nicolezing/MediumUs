@@ -36,7 +36,7 @@ const ARTICLE_3 = {
   title: 'title 3',
   content: 'content 3',
   tags: [],
-  state: ArticleState.DRAFT,
+  state: ArticleState.PUBLISHED,
   createdAt: new Date(),
   updatedAt: new Date(),
 };
@@ -74,7 +74,6 @@ describe('articles.bookmark', () => {
   });
 
   it('should do nothing if the article is deleted', async () => {
-    /* not supported by the emulator
     const db = authedApp({ uid: USER });
     await insertUser(db, { id: USER });
     await insertArticles(db, [ARTICLE_1]);
@@ -83,16 +82,13 @@ describe('articles.bookmark', () => {
     await bookmark(ARTICLE_2.id);
     const user = await getUser(db, USER);
     expect(user.bookmarkedArticles).to.include.members([ARTICLE_1.id]);
-    */
   });
 
   it('should do nothing if the user is deleted', async () => {
-    /* not supported by the emulator
     const db = authedApp({ uid: USER });
     await insertArticles(db, [ARTICLE_1]);
 
     await bookmark(ARTICLE_1.id);
     expect(await listUserIds(db)).to.not.include(USER);
-    */
   });
 });

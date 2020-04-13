@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { authedApp, freezeTime, getArticle, listArticleIds } from '../utils';
-import { createDraft, ArticleState } from '../../articles';
+import { authedApp, freezeTime, getArticle } from '../utils';
+import { createDraft, ArticleState, listUserDrafts } from '../../articles';
 
 const ARTICLE_TITLE = 'title';
 const ARTICLE_SUBTITLE = 'subtitle';
@@ -22,7 +22,7 @@ describe('articles.createDraft', () => {
       }),
     ]);
 
-    const articleIds = await listArticleIds(db);
+    const articleIds = await listUserDrafts();
     expect(articleIds).to.have.members([articleId1, articleId2]);
   });
 

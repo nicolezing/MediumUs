@@ -83,12 +83,10 @@ describe('articles.unbookmark', () => {
   });
 
   it('should do nothing if the user is deleted', async () => {
-    /* not supported by the emulator
     const db = authedApp({ uid: USER });
     await insertArticles(db, [ARTICLE_1]);
 
     await unbookmark(ARTICLE_1.id);
     expect(await listUserIds(db)).to.not.include(USER);
-    */
   });
 });

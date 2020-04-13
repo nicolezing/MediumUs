@@ -1,7 +1,7 @@
 import { firestore } from 'firebase';
 import { mapValues, without } from 'lodash';
 import { ArticleId } from './articles';
-import { getTime } from './utils';
+import { getTime, runTransaction } from './utils';
 import { getDb, getAuth } from './index';
 import { DocumentData, DocumentSnapshot } from '@firebase/firestore-types';
 
@@ -160,18 +160,17 @@ export async function follow(uidToFollow: UserId) {
     .collection(COLLECTION_USER)
     .doc(uid);
   const now = getTime();
-  return getDb().runTransaction(async transaction => {
-    const user = await transaction.get(userRef);
+  return runTransaction(async (txn, abort) => {
+    const user = await txn.get(userRef);
     if (!user.exists) {
-      return;
+      return abort();
     }
 
     if (user.data()!.followedUsers.includes(uidToFollow)) {
-      transaction.update(userRef, {});
-      return;
+      return abort();
     }
 
-    transaction.update(userRef, {
+    txn.update(userRef, {
       followedUsers: [...user.data()!.followedUsers, uidToFollow],
       updatedAt: now,
     });
@@ -184,18 +183,17 @@ export async function unfollow(uidToUnfollow: UserId) {
     .collection(COLLECTION_USER)
     .doc(uid);
   const now = getTime();
-  return getDb().runTransaction(async transaction => {
-    const user = await transaction.get(userRef);
+  return runTransaction(async (txn, abort) => {
+    const user = await txn.get(userRef);
     if (!user.exists) {
-      return;
+      return abort();
     }
 
     if (!user.data()!.followedUsers.includes(uidToUnfollow)) {
-      transaction.update(userRef, {});
-      return;
+      return abort();
     }
 
-    transaction.update(userRef, {
+    txn.update(userRef, {
       followedUsers: without(user.data()!.followedUsers, uidToUnfollow),
       updatedAt: now,
     });

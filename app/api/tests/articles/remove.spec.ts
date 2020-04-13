@@ -2,12 +2,16 @@ import { expect } from 'chai';
 import {
   authedApp,
   insertArticles,
-  listArticleIds,
   insertUser,
   freezeTime,
   getUser,
 } from '../utils';
-import { remove, ArticleState, ERROR_ARTICLE_NOT_FOUND } from '../../articles';
+import {
+  remove,
+  ArticleState,
+  ERROR_ARTICLE_NOT_FOUND,
+  listByAuthor,
+} from '../../articles';
 
 const USER = 'tester';
 const USER_2 = 'tester2';
@@ -39,7 +43,7 @@ describe('articles.remove', () => {
     await insertArticles(db, [ARTICLE_1, ARTICLE_2]);
 
     await remove(ARTICLE_1.id);
-    const articleIds = await listArticleIds(db);
+    const articleIds = await listByAuthor(USER);
     expect(articleIds).to.have.members([ARTICLE_2.id]);
   });
 
@@ -48,12 +52,12 @@ describe('articles.remove', () => {
     await insertArticles(db, [ARTICLE_1, ARTICLE_2]);
 
     await remove('ID absent');
-    const articleIds = await listArticleIds(db);
+    const articleIds = await listByAuthor(USER);
     expect(articleIds).to.have.members([ARTICLE_1.id, ARTICLE_2.id]);
   });
 
+  /* TODO: implement
   it('should clean up user bookmarks', async () => {
-    /* firestore.FieldValues.arrayRemove isn't supported by the emulator.
     const db = authedApp({ uid: USER });
     await insertArticles(db, [ARTICLE_1, ARTICLE_2]);
     await insertUser(db, {
@@ -76,6 +80,6 @@ describe('articles.remove', () => {
     const user3 = await getUser(db, USER_3);
     expect(user3.bookmarkedArticles).to.have.members([ARTICLE_2.id]);
     expect(user3.updatedAt).to.equalDate(now);
-    */
   });
+  */
 });

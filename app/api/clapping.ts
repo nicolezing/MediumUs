@@ -3,8 +3,8 @@ import { ArticleId } from './articles';
 import { assertLoggedIn, UserId } from './users';
 import { getDb } from '.';
 import { firestore } from 'firebase';
-import { getTime } from './utils';
-import { DocumentSnapshot, DocumentData } from '@firebase/firestore-types';
+import { getTime, runTransaction } from './utils';
+import { DocumentData } from '@firebase/firestore-types';
 
 export const COLLECTION_CLAPPING = 'clapping';
 export const COLLECTION_USER_CLAPPING = 'userClapping';
@@ -39,7 +39,7 @@ export async function increaseForArticle(
     .collection(COLLECTION_USER_CLAPPING)
     .doc(uid);
 
-  return getDb().runTransaction(async txn => {
+  return runTransaction(async (txn, abort) => {
     const doc = await txn.get(docRef);
 
     if (!doc.exists) {
@@ -52,8 +52,7 @@ export async function increaseForArticle(
 
     const currentClappingNumber = doc.data()!['clappingNumber'] || 0;
     if (currentClappingNumber >= MAX_CLAPPING_PER_USER) {
-      txn.update(docRef, {});
-      return currentClappingNumber;
+      return abort(currentClappingNumber);
     }
 
     txn.update(docRef, {

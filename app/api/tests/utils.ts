@@ -106,13 +106,6 @@ export async function insertArticles(
   return batch.commit();
 }
 
-export async function listArticleIds(
-  db: FirebaseFirestore,
-): Promise<Array<ArticleId>> {
-  const snapshot = await db.collection(COLLECTION_ARTICLE).get();
-  return snapshot.docs.map(doc => doc.id);
-}
-
 function ts2Date(obj: object | undefined) {
   if (obj) {
     return mapValues(obj, (v: any) =>
