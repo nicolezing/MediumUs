@@ -22,18 +22,46 @@ export type UserClapping = {
   articleId: ArticleId;
 } & ClappingData;
 
-export async function increaseForArticle(articleId: ArticleId): Promise<void> {
+export const MAX_CLAPPING_PER_USER = 50;
+
+/**
+ * Increases clapping by one for the specified article.
+ * Returns the updated clapping number from the current user.
+ */
+export async function increaseForArticle(
+  articleId: ArticleId,
+): Promise<number> {
   const uid = assertLoggedIn();
   const now = getTime();
-  return getDb()
+  const docRef = getDb()
     .collection(COLLECTION_CLAPPING)
     .doc(articleId)
     .collection(COLLECTION_USER_CLAPPING)
-    .doc(uid)
-    .set({
+    .doc(uid);
+
+  return getDb().runTransaction(async txn => {
+    const doc = await txn.get(docRef);
+
+    if (!doc.exists) {
+      txn.set(docRef, {
+        lastClappedAt: now,
+        clappingNumber: 1,
+      });
+      return 1;
+    }
+
+    const currentClappingNumber = doc.data()!['clappingNumber'] || 0;
+    if (currentClappingNumber >= MAX_CLAPPING_PER_USER) {
+      txn.update(docRef, {});
+      return currentClappingNumber;
+    }
+
+    txn.update(docRef, {
       lastClappedAt: now,
-      clappingNumber: firestore.FieldValue.increment(1),
+      clappingNumber: currentClappingNumber + 1,
     });
+    return currentClappingNumber + 1;
+  });
 }
 
 export async function clearForArticle(articleId: ArticleId): Promise<void> {
