@@ -48,9 +48,10 @@ export type User = { id: UserId } & UserProfile & UserMeta & UserRelations;
 
 export const ERROR_NOT_SIGNED_IN = 'No account signed in.';
 export const ERROR_USER_NOT_FOUND = 'User not found.';
+export const ERROR_SELF_FOLLOWING = 'Self-following is not allowed.';
 
 export function assertLoggedIn() {
-  if (!getAuth().currentUser) throw ERROR_NOT_SIGNED_IN;
+  if (!getAuth().currentUser) throw new Error(ERROR_NOT_SIGNED_IN);
   return getAuth().currentUser!.uid;
 }
 
@@ -129,13 +130,18 @@ export async function readProfile(uid: UserId): Promise<User> {
     .collection(COLLECTION_USER)
     .doc(uid)
     .get();
-  if (!doc.exists) throw ERROR_USER_NOT_FOUND;
+  if (!doc.exists) throw new Error(ERROR_USER_NOT_FOUND);
 
   return userFromDoc(doc);
 }
 
-export function follow(uidToFollow: UserId) {
+export async function follow(uidToFollow: UserId) {
   const uid = assertLoggedIn();
+
+  if (uidToFollow == uid) {
+    throw new Error(ERROR_SELF_FOLLOWING);
+  }
+
   const userRef = getDb()
     .collection(COLLECTION_USER)
     .doc(uid);
@@ -158,7 +164,7 @@ export function follow(uidToFollow: UserId) {
   });
 }
 
-export function unfollow(uidToUnfollow: UserId) {
+export async function unfollow(uidToUnfollow: UserId) {
   const uid = assertLoggedIn();
   const userRef = getDb()
     .collection(COLLECTION_USER)

@@ -45,7 +45,7 @@ describe('articles.editTags', () => {
     restore();
 
     const article = await getArticle(db, ARTICLE.id);
-    expect(article.tags).to.include.members([TAG_1, TAG_2]);
+    expect(article.tags).to.have.members([TAG_1, TAG_2]);
     expect(article.updatedAt).to.lessThan(now);
   });
 

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { authedApp, insertArticles } from '../utils';
-import { read, ArticleState } from '../../articles';
+import { read, ArticleState, ERROR_ARTICLE_NOT_FOUND } from '../../articles';
 
 const USER = 'tester';
 const ARTICLE_PUBLISHED = {
@@ -36,6 +36,8 @@ describe('articles.read', () => {
   it('should throw if ID is not found', async () => {
     authedApp({ uid: USER });
 
-    expect(async () => await read(ARTICLE_DRAFT.id)).to.throw;
+    await expect(read(ARTICLE_DRAFT.id)).to.be.rejectedWith(
+      ERROR_ARTICLE_NOT_FOUND,
+    );
   });
 });

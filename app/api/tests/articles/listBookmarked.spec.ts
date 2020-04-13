@@ -49,10 +49,7 @@ describe('articles.listBookmarked', () => {
     });
 
     const bookmarkedArticleIds = await listBookmarked(USER_2);
-    expect(bookmarkedArticleIds).to.include.members([
-      ARTICLE_2.id,
-      ARTICLE_3.id,
-    ]);
+    expect(bookmarkedArticleIds).to.have.members([ARTICLE_2.id, ARTICLE_3.id]);
   });
 
   it('should return empty list if user is not found', async () => {

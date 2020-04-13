@@ -43,7 +43,7 @@ describe('articles.listByTag', () => {
     await insertArticles(db, [ARTICLE_1, ARTICLE_2, ARTICLE_3]);
 
     const articleIds = await listByTag(TAG_1);
-    expect(articleIds).to.include.members([ARTICLE_1.id, ARTICLE_2.id]);
+    expect(articleIds).to.have.members([ARTICLE_1.id, ARTICLE_2.id]);
   });
 
   it('should return empty list if the tag has no articles', async () => {

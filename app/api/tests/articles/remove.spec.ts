@@ -40,7 +40,7 @@ describe('articles.remove', () => {
 
     await remove(ARTICLE_1.id);
     const articleIds = await listArticleIds(db);
-    expect(articleIds).to.include.members([ARTICLE_2.id]);
+    expect(articleIds).to.have.members([ARTICLE_2.id]);
   });
 
   it('should succeed if article not found', async () => {
@@ -49,7 +49,7 @@ describe('articles.remove', () => {
 
     await remove('ID absent');
     const articleIds = await listArticleIds(db);
-    expect(articleIds).to.include.members([ARTICLE_1.id, ARTICLE_2.id]);
+    expect(articleIds).to.have.members([ARTICLE_1.id, ARTICLE_2.id]);
   });
 
   it('should clean up user bookmarks', async () => {
@@ -70,11 +70,11 @@ describe('articles.remove', () => {
     restore();
 
     const user2 = await getUser(db, USER_2);
-    expect(user2.bookmarkedArticles).to.include.members([ARTICLE_2.id]);
+    expect(user2.bookmarkedArticles).to.have.members([ARTICLE_2.id]);
     expect(user2.updatedAt).to.equalDate(now);
 
     const user3 = await getUser(db, USER_3);
-    expect(user3.bookmarkedArticles).to.include.members([ARTICLE_2.id]);
+    expect(user3.bookmarkedArticles).to.have.members([ARTICLE_2.id]);
     expect(user3.updatedAt).to.equalDate(now);
     */
   });

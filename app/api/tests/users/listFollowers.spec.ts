@@ -14,7 +14,7 @@ describe('users.listFollowers', () => {
     await insertUser(db, { id: USER_3, followedUsers: [USER_1] });
 
     const followers = await listFollowers(USER_1);
-    expect(followers).to.include.members([USER_2, USER_3]);
+    expect(followers).to.have.members([USER_2, USER_3]);
   });
 
   it('should an empty list if no follower', async () => {

@@ -12,7 +12,7 @@ describe('users.listFollowings', () => {
     await insertUser(db, { id: USER_1, followedUsers: [USER_2, USER_3] });
 
     const followings = await listFollowings(USER_1);
-    expect(followings).to.include.members([USER_2, USER_3]);
+    expect(followings).to.have.members([USER_2, USER_3]);
   });
 
   it("should return empty list if hasn't followed anyone", async () => {

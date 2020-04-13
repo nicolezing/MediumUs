@@ -48,6 +48,6 @@ describe('articles.listUserDrafts', () => {
     await insertArticles(db, [ARTICLE_DRAFT, ARTICLE_DRAFT_OTHERS]);
 
     const draftIds = await listUserDrafts();
-    expect(draftIds).to.include.members([ARTICLE_DRAFT.id]);
+    expect(draftIds).to.have.members([ARTICLE_DRAFT.id]);
   });
 });
