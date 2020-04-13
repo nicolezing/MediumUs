@@ -41,7 +41,7 @@ describe('articles.listByAuthor', () => {
     await insertArticles(db, [ARTICLE_1, ARTICLE_2, ARTICLE_3]);
 
     const authoredArticleIds = await listByAuthor(USER_1);
-    expect(authoredArticleIds).to.have.members([ARTICLE_1.id, ARTICLE_3.id]);
+    expect(authoredArticleIds).to.have.members([ARTICLE_1.id]);
   });
 
   it('should return empty list if the user has no articles', async () => {

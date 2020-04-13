@@ -314,6 +314,7 @@ export async function listByAuthor(uid: UserId): Promise<Array<ArticleId>> {
   const articleRefs = await getDb()
     .collection(COLLECTION_ARTICLE)
     .where('author', '==', uid)
+    .where('state', '==', ArticleState.PUBLISHED)
     .get();
   return articleRefs.docs.map(doc => doc.id);
 }
@@ -322,6 +323,7 @@ export async function listByTag(tag: TagId): Promise<ArticleId[]> {
   const articleDocs = await getDb()
     .collection(COLLECTION_ARTICLE)
     .where('tags', 'array-contains', tag)
+    .where('state', '==', ArticleState.PUBLISHED)
     .get();
   return articleDocs.docs.map(doc => doc.id);
 }
@@ -339,6 +341,7 @@ export async function listByTopic(topicId: TopicId): Promise<ArticleId[]> {
   const articleDocs = await getDb()
     .collection(COLLECTION_ARTICLE)
     .where('tags', 'array-contains-any', topicTagIds)
+    .where('state', '==', ArticleState.PUBLISHED)
     .get();
   return articleDocs.docs.map(doc => doc.id);
 }
