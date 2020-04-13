@@ -23,7 +23,7 @@ describe('articles.createDraft', () => {
     ]);
 
     const articleIds = await listArticleIds(db);
-    expect(articleIds).to.include.members([articleId1, articleId2]);
+    expect(articleIds).to.have.members([articleId1, articleId2]);
   });
 
   it('should forward article data', async () => {

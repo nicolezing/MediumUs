@@ -55,7 +55,7 @@ describe('articles.unbookmark', () => {
     restore();
 
     const user = await getUser(db, USER);
-    expect(user.bookmarkedArticles).to.include.members([
+    expect(user.bookmarkedArticles).to.have.members([
       ARTICLE_1.id,
       ARTICLE_3.id,
     ]);
@@ -75,10 +75,10 @@ describe('articles.unbookmark', () => {
     restore();
     await unbookmark(ARTICLE_2.id);
     const user = await getUser(db, USER);
-    expect(user.bookmarkedArticles).to.include.members(
-      [ARTICLE_1.id],
+    expect(user.bookmarkedArticles).to.have.members([
+      ARTICLE_1.id,
       ARTICLE_3.id,
-    );
+    ]);
     expect(user.updatedAt).to.equalDate(t1);
   });
 

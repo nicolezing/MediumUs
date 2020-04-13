@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { authedApp, insertUser, getUser, freezeTime } from '../utils';
-import { follow } from '../../users';
+import { follow, ERROR_SELF_FOLLOWING } from '../../users';
 
 const USER_1 = 'tester1';
 const USER_2 = 'tester2';
@@ -31,5 +31,12 @@ describe('users.follow', () => {
     const user = await getUser(db, USER_1);
     expect(user.followedUsers).to.include.members([USER_2]);
     expect(user.updatedAt).to.equalDate(t1);
+  });
+
+  it('should throw on self-following', async () => {
+    const db = authedApp({ uid: USER_1 });
+    await insertUser(db, { id: USER_1, followedUsers: [] });
+
+    await expect(follow(USER_1)).to.be.rejectedWith(ERROR_SELF_FOLLOWING);
   });
 });

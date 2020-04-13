@@ -100,7 +100,7 @@ export function publishDraft(id: ArticleId) {
   const now = getTime();
   return getDb().runTransaction(async transaction => {
     const doc = await transaction.get(docRef);
-    if (!doc.exists) throw ERROR_ARTICLE_NOT_FOUND;
+    if (!doc.exists) throw new Error(ERROR_ARTICLE_NOT_FOUND);
     if (doc.data()!.state === ArticleState.PUBLISHED) {
       return transaction.update(docRef, {});
     }
@@ -119,12 +119,12 @@ export function publishDraft(id: ArticleId) {
  * Returns the full Article doc for the given ArticleId.
  */
 export async function read(id: ArticleId): Promise<Article> {
-  return articleFromDoc(
-    await getDb()
-      .collection(COLLECTION_ARTICLE)
-      .doc(id)
-      .get(),
-  );
+  const doc = await getDb()
+    .collection(COLLECTION_ARTICLE)
+    .doc(id)
+    .get();
+  if (!doc.exists) throw new Error(ERROR_ARTICLE_NOT_FOUND);
+  return articleFromDoc(doc);
 }
 
 /**
@@ -139,7 +139,7 @@ export async function update(id: ArticleId, update: Partial<ArticleData>) {
   const now = getTime();
   return getDb().runTransaction(async transaction => {
     const doc = await transaction.get(docRef);
-    if (!doc.exists) throw ERROR_ARTICLE_NOT_FOUND;
+    if (!doc.exists) throw new Error(ERROR_ARTICLE_NOT_FOUND);
 
     transaction.update(docRef, { ...articleToDoc(update), updatedAt: now });
   });
@@ -155,7 +155,7 @@ export async function unpublish(id: ArticleId) {
   const now = getTime();
   return getDb().runTransaction(async transaction => {
     const doc = await transaction.get(docRef);
-    if (!doc.exists) throw ERROR_ARTICLE_NOT_FOUND;
+    if (!doc.exists) throw new Error(ERROR_ARTICLE_NOT_FOUND);
     if (doc.data()!.state === ArticleState.DRAFT) {
       return transaction.update(docRef, {});
     }
@@ -173,7 +173,7 @@ export async function editTags(
   tagsToRemove: TagId[],
 ) {
   if (intersection(tagsToAdd, tagsToRemove).length > 0) {
-    throw ERROR_EDITING_CONFLICT;
+    throw new Error(ERROR_EDITING_CONFLICT);
   }
 
   const docRef = getDb()
