@@ -47,6 +47,8 @@ export type UserRelations = {
 export type User = { id: UserId } & UserProfile & UserMeta & UserRelations;
 
 export const ERROR_NOT_SIGNED_IN = 'No account signed in.';
+export const ERROR_NOT_SIGNED_OUT =
+  'Must sign out before performing this operation.';
 export const ERROR_USER_NOT_FOUND = 'User not found.';
 export const ERROR_SELF_FOLLOWING = 'Self-following is not allowed.';
 
@@ -55,12 +57,20 @@ export function assertLoggedIn() {
   return getAuth().currentUser!.uid;
 }
 
+export function isLoggedOut() {
+  return !getAuth().currentUser;
+}
+
 // Current user operations
 
 /**
  * Signs in with email and password.
  */
 export async function signIn(email: string, password: string) {
+  if (!isLoggedOut()) {
+    throw new Error(ERROR_NOT_SIGNED_OUT);
+  }
+
   return getAuth().signInWithEmailAndPassword(email, password);
 }
 
@@ -89,6 +99,10 @@ export async function createAccount(
   email: string,
   password: string,
 ): Promise<UserId> {
+  if (!isLoggedOut()) {
+    throw new Error(ERROR_NOT_SIGNED_OUT);
+  }
+
   const { user } = await getAuth().createUserWithEmailAndPassword(
     email,
     password,
