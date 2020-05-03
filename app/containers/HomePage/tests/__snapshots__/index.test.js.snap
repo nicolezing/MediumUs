@@ -2,10 +2,10 @@
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
 <div>
-  <h1>
+  <h2>
     <span>
       This is the HomePage container!
     </span>
-  </h1>
+  </h2>
 </div>
 `;

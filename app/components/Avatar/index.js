@@ -5,14 +5,13 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-import avatarHaloIcon from '../../staticData/images/avatarHaloIcon';
-import { haloCompnents, avatarImg } from './avatarStyle';
+import avatarHaloIcon from '../../staticData/svgIcons/avatarHaloIcon';
+import { haloComponents, avatarImg } from './avatarStyle';
 
 function Avatar(props) {
   const { AvtStyledImg } = avatarImg(props.size);
   if (props.member) {
-    const { Halo, HaloWrapper } = haloCompnents(props.size);
+    const { Halo, HaloWrapper } = haloComponents(props.size);
     return (
       <HaloWrapper>
         <Halo>{avatarHaloIcon}</Halo>

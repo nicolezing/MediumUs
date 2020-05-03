@@ -45,3 +45,5 @@ deploy:
 
 after_deploy:
   - npm run test:api:integration
+
+os: linux

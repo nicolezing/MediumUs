@@ -7,56 +7,24 @@ const base = css`
   margin: 0;
   background: #fff;
   text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  vertical-align: bottom;
-  white-space: nowrap;
-  text-rendering: auto;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  font-family: medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-    sans-serif;
-  letter-spacing: 0;
-  font-weight: 400;
-  font-style: normal;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -moz-font-feature-settings: 'liga' on;
   vertical-align: middle;
+  white-space: nowrap;
+  // user-select: none;
+  box-sizing: border-box;
 
-  // border: 1px solid rgba(0, 0, 0, 0.15);
   border-width: 1px;
   border-style: solid;
-
-  -webkit-border-radius: 4px;
   border-radius: 4px;
 
   // -webkit-transition: 0.1s background-color, 0.1s border-color, 0.1s color,
   //   0.1s fill;
-  // transition: 0.1s background-color, 0.1s border-color, 0.1s color, 0.1s fill;
+  transition: 0.1s background-color, 0.1s border-color, 0.1s color, 0.1s fill;
 
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  -webkit-tap-highlight-color: transparent !important;
+  // -webkit-tap-highlight-color: transparent ;
 
   line-height: 19px;
   padding: 0 10px;
   font-size: 15px;
-
-  &:focus {
-    outline: none;
-  }
-  // &:last-child {
-  //   margin-right: 0;
-  // }
 `;
 
 const small = css`
@@ -67,9 +35,10 @@ const small = css`
 `;
 
 const middle = css`
-  font-size: 15.8px;
-  line-height: 20px;
-  padding: 4px 12px;
+  font-size: 15px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0px 14px;
 `;
 
 const large = css`

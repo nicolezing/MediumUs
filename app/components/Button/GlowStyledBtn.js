@@ -68,4 +68,8 @@ const GlowStyledBtn = styled.button`
   }
 `;
 
-export default GlowStyledBtn;
+const Wrapper = styled.div`
+  width: 70px;
+`;
+
+export { GlowStyledBtn, Wrapper };
