@@ -8,27 +8,47 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Wrapper, StyledTitle, StyledSubtitle } from './StyledWrapper';
+import {
+  Wrapper,
+  StyledTitle,
+  StyledSubtitle,
+  PublicationColumn,
+} from './StyledWrapper';
 import * as variations from './variateTitleStyles';
-import { selectArticleAbstract } from '../../selectors';
+import { selectArticleAllInfo } from '../../selectors';
 
 function ArticleTitle(props) {
+  const styledTitles = (
+    <>
+      <StyledTitle variation={props.variation}>{props.title}</StyledTitle>
+      <StyledSubtitle variation={props.variation}>
+        {props.subtitle}
+      </StyledSubtitle>
+    </>
+  );
+
   return (
     <Wrapper variation={props.variation}>
-      <a href={props.articleLink}>
-        <StyledTitle variation={props.variation}>{props.title} </StyledTitle>
-      </a>
-      <a href={props.articleLink}>
-        <StyledSubtitle variation={props.variation}>
-          {props.subtitle}
-        </StyledSubtitle>
-      </a>
+      {props.variation === 'ArticlePageTitle' ? (
+        <>
+          {props.publicationColumn && (
+            <a href="./" key={props.publicationColumn}>
+              <PublicationColumn>{props.publicationColumn}</PublicationColumn>
+            </a>
+          )}
+          {styledTitles}
+        </>
+      ) : (
+        <a href={props.articleLink}>{styledTitles}</a>
+      )}
     </Wrapper>
   );
 }
 
 ArticleTitle.propTypes = {
   articleLink: PropTypes.string.isRequired,
+  publicationColumn: PropTypes.string,
+  // TODO (not critical): add publication column link and page
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
   variation: PropTypes.oneOf([..._.keys(variations)]).isRequired,
@@ -38,14 +58,17 @@ ArticleTitle.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { id } = ownProps;
-  const { link: articleLink, title, subtitle } = selectArticleAbstract(
-    state,
-    id,
-  );
+  const {
+    link: articleLink,
+    title,
+    subtitle,
+    column: publicationColumn,
+  } = selectArticleAllInfo(state, id);
   return {
     articleLink,
     title,
     subtitle,
+    publicationColumn,
   };
 }
 export default connect(mapStateToProps)(ArticleTitle);

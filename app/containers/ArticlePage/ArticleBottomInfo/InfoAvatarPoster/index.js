@@ -82,9 +82,8 @@ function InfoAvatarPoster(props) {
     <RefContainer refType="avatarRef" uuid="bottomAvatarRef">
       <OuterWrapper>
         {renderPoster(props.writerInfo, 'author')}
-        {props.publicationInfo.name
-          ? renderPoster(props.publicationInfo, 'publication')
-          : ''}
+        {props.publicationInfo.name &&
+          renderPoster(props.publicationInfo, 'publication')}
       </OuterWrapper>
     </RefContainer>
   );

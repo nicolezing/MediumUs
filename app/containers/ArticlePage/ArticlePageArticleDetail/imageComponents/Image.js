@@ -27,16 +27,14 @@ function Image(props) {
     }
   };
 
-  const deEnlarge = evt => {
+  const deEnlarge = () => {
     if (cursorClassName === 'zoom-out') {
-      // delay this state change to avoid conflict when two renders onclick
+      // delay this state change to avoid {zoom} triggered at same time when click PreImgWrapper
       setTimeout(() => {
         setEnlargeState(false);
         setCursorClassName('zoom-in');
       }, 0);
     }
-
-    evt.preventDefault();
   };
 
   useEffect(() => {

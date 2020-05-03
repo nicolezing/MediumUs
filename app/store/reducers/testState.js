@@ -74,7 +74,7 @@ export const testState = () => ({
       },
 
       publication: 'publication001',
-
+      column: 'test',
       creationDate: '11/08/2019 05:23:31',
       lastModified: '12/09/2019 15:45:01',
       wordCount: 1342,
@@ -104,8 +104,8 @@ export const testState = () => ({
           'https://cdn-images-1.medium.com/max/800/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg',
         coverSmall:
           'https://miro.medium.com/max/60/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg?q=20',
-        figcaption: 'Photo: Cavan Images/Getty Images',
-        description: 'Female doctors examining petri dish in laboratory',
+        // figcaption: 'Photo: Cavan Images/Getty Images',
+        // description: 'Female doctors examining petri dish in laboratory',
         // focusPosition: [30, 50],
       },
       premium: false,

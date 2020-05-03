@@ -27,4 +27,14 @@ const StyledSubtitle = styled.div`
   ${props => variateTitleStyles[props.variation].sub}
 `;
 
+export const PublicationColumn = styled.h2`
+  margin-top: 30px;
+  margin-bottom: -20px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.54);
+`;
+
 export { Wrapper, StyledTitle, StyledSubtitle };

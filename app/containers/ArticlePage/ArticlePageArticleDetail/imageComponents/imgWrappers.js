@@ -21,10 +21,6 @@ export const Figcaption = styled.figcaption`
   margin: 10px auto 0 auto;
   line-height: 1.4;
   max-width: 728px;
-
-  & a {
-    text-decoration: underline;
-  }
 `;
 
 const dialogCss = css`

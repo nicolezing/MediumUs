@@ -28,7 +28,10 @@ function RefContainer(props) {
   };
 
   useEffect(() => {
-    dispatchRef(refType, uuid, findDOMNode(childRef.current));
+    if (refCopies[uuid].ref) {
+      // only dispatch action when component mounted and ref is valid (especially after hot reload)
+      dispatchRef(refType, uuid, findDOMNode(childRef.current));
+    }
   });
 
   if (!refCopies[uuid]) {
@@ -37,7 +40,7 @@ function RefContainer(props) {
     );
     refCopies[uuid] = <ChildComponentWithRef ref={childRef} key={uuid} />;
   }
-
+  console.log('refCopies outside : ', refCopies);
   return refCopies[uuid];
 }
 

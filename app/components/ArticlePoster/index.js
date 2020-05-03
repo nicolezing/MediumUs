@@ -102,16 +102,18 @@ function ArticlePoster(props) {
       name={props.authorName}
       key={props.title}
     >
-      <Cover
-        href={props.articleLink}
-        variation={props.variation}
-        aria-label={props.title}
-        cover={props.articleCover}
-        focusPosition={props.focusPosition}
-      />
+      {props.variation === 'ArticlePageTitle' || (
+        <Cover
+          href={props.articleLink}
+          variation={props.variation}
+          aria-label={props.title}
+          cover={props.articleCover}
+          focusPosition={props.focusPosition}
+        />
+      )}
       <InfoWrapper
         variation={props.variation}
-        publication={props.publicationName}
+        publication={props.publicationName || null}
         source={props.source}
         name={props.authorName}
       >
