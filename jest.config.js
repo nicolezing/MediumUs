@@ -5,8 +5,10 @@ module.exports = {
     '!app/*/RbGenerated*/*.{js,jsx}',
     '!app/app.js',
     '!app/global-styles.js',
+    '!app/firebase.js',
     '!app/*/*/Loadable.{js,jsx}',
   ],
+  watchPathIgnorePatterns: ['node_modules'],
   coverageThreshold: {
     global: {
       statements: 98,

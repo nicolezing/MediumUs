@@ -33,6 +33,11 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
+// firebase init
+import initFirebase from './firebase';
+// TODO: redux integration
+initFirebase();
+
 // Create redux store with history
 const initialState = {};
 const store = configureStore(initialState, history);

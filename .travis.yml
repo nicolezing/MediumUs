@@ -2,38 +2,48 @@ language: node_js
 
 node_js:
   - 'node'
-  - 'lts/*'
 
 services:
   - xvfb
 
 script:
-  - node ./internals/scripts/generate-templates-for-linting
-  - npm test -- --maxWorkers=4
-  - npm run build
+  - npm run test:api
 
 before_install:
+  - curl -sL https://firebase.tools | bash
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
+
+before_script:
+  - npm rebuild grpc --build-from-source --target=12.4.0
 
 notifications:
   email:
     on_failure: change
-
-after_success: 'npm run coveralls'
 
 cache:
   directories:
     - node_modules
 
 deploy:
-  provider: pages
-  local_dir: build
-  target_branch: gh-pages
-  skip_cleanup: true
-  token: $GITHUB_TOKEN
-  keep_history: true
-  on:
-    branch: master
+  - provider: pages
+    local_dir: build
+    target_branch: gh-pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: true
+    on:
+      branch: master
+  - provider: script
+    script: firebase deploy -P "mediumus-69aeb" --token "$FIREBASE_TOKEN"
+    on:
+      branch: master
+  - provider: script
+    script: firebase deploy -P "mediumus-dev" --token "$FIREBASE_TOKEN"
+    on:
+      branch: api-dev
+
+after_deploy:
+  - npm run test:api:integration
 
 os: linux
