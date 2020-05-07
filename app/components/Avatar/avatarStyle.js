@@ -12,6 +12,8 @@ function avatarImg(size) {
   }`
       : '';
 
+  console.log('size = ', size);
+
   const AvtStyledImg = styled.img`
     width: ${size || '32px'};
     height: ${size || '32px'};
@@ -54,6 +56,7 @@ function haloComponents(size) {
     left: 50%;
     top: 50%;
     fill: ${getColor('green').color};
+    ${console.log('size for halo = ', size, sizeSet[size][1])}
     svg {
       width: ${sizeSet[size][1]}px;
       height: ${sizeSet[size][1]}px;
