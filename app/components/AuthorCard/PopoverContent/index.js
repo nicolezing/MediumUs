@@ -22,7 +22,7 @@ import {
 } from './styledListItems';
 import { UpWrapper, DownWrapper, TitleWrapper } from './styledWrappers';
 import roundToThousand from '../../../utils/roundToThousand';
-import { selectUserInfo, selectPublicationInfo } from '../../../selectors';
+import { selectUserInfo, selectPublicationAllInfo } from '../../../selectors';
 
 function PopoverContent(props) {
   const { year, month } = formatDate(props.joinedDate);
@@ -98,15 +98,18 @@ function mapStateToProps(state, ownProps) {
       followersNumber: followers,
     };
   } else if (imgType === 'publication') {
-    const { link, name, description, logo, followers } = selectPublicationInfo(
-      state,
-      id,
-    );
+    const {
+      link,
+      name,
+      description,
+      icon,
+      followers,
+    } = selectPublicationAllInfo(state, id);
     componentProps = {
       headerLink: link,
       header: name,
       subHeader: description,
-      imgLink: logo,
+      imgLink: icon,
       imgAlt: name,
       followersNumber: followers,
     };

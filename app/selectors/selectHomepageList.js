@@ -1,19 +1,14 @@
-export function selectHomeList(state) {
-  return state.homePage.homeList;
+export function selectHomepageHerosLists(state) {
+  const { mainHeros, homeList } = state.homePage;
+  return { mainHeros, homeList };
 }
 
-// export function selectNewFromNetwork(state) {
-//   return state.testState.Homepage.newFromNetwork;
-// }
+export function selectHomepageLinkList(state) {
+  const { navbarList, footerList } = state.homePage;
+  return { navbarList, footerList };
+}
 
-// export function selectReadingList(state) {
-//   return state.testState.Homepage.readingList;
-// }
-
-// export function selectPopularOnMedium(state) {
-//   return state.testState.Homepage.popularOnMedium;
-// }
-
-export function selectHomeRecommendationLists(state, listName) {
-  return state.homePage[listName];
+export function selectHomepageSidebarLists(state) {
+  const { newFromNetwork, popularOnMedium, readingList } = state.homePage;
+  return { newFromNetwork, popularOnMedium, readingList };
 }

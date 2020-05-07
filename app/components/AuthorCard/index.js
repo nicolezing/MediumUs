@@ -258,4 +258,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps)(AuthorCard);
+// example:  <AuthorCard id={articleId} variation="Home" hoverEffect theme="green" />
+
 export { AuthorCard };

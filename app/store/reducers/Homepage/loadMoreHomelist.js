@@ -1,14 +1,14 @@
 export function loadMoreHomelist() {
   return [
-    'ID002',
-    'ID001',
-    'ID001',
-    'ID001',
-    'ID002',
-    'ID001',
-    'ID001',
-    'ID001',
-    'ID002',
-    'ID001',
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'based on your reading history', id: 'id002' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'popular on medium', id: 'id002' },
+    { source: 'based on your reading history', id: 'id002' },
+    { source: 'popular on medium', id: 'id001' },
   ];
 }

@@ -29,13 +29,12 @@ export const HomeHeroMid = {
     margin-bottom: 16px;
   `,
   h1: css`
-    font-size: 18px;
+    font-size: 20px;
     -webkit-line-clamp: 2;
     letter-spacing: -0.42px;
     margin-bottom: 4px;
     @media screen and (max-width: 680px) {
       margin-bottom: 2px;
-      -webkit-line-clamp: 2;
     }
   `,
   sub: css`

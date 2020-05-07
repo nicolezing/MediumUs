@@ -73,7 +73,7 @@ function PublicationHeader(props) {
       <OuterWrapper ref={navbarRef}>
         <WidthConstrainWrapper>
           <div>
-            <a href="./">
+            <a href="/">
               <IconButton iconName="logoIcon" theme="pureBlack" />
             </a>
           </div>

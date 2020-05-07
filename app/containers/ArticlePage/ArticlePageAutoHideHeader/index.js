@@ -67,7 +67,9 @@ function ArticlePageAutoHideHeader(props) {
         </WidthConstrainWrapper>
         <MiddleDivider>
           <WidthConstrainWrapper>
-            <ArticlePageNavbar topic={props.topic} />
+            {props.publicationId && (
+              <ArticlePageNavbar publicationId={props.publicationId} />
+            )}
           </WidthConstrainWrapper>
         </MiddleDivider>
       </OuterWrapper>
@@ -77,7 +79,7 @@ function ArticlePageAutoHideHeader(props) {
 }
 
 ArticlePageAutoHideHeader.propTypes = {
-  topic: PropTypes.string.isRequired,
+  publicationId: PropTypes.string.isRequired,
 };
 
 export default ArticlePageAutoHideHeader;

@@ -1,6 +1,6 @@
 import {
   selectUserInfo,
-  selectPublicationInfo,
+  selectPublicationAllInfo,
   selectIfFollowingPublication,
   selectIfFollowingAuthor,
 } from './index';
@@ -18,6 +18,10 @@ export function selectArticleAbstract(state, id) {
     publication,
   } = state.testState.articles[id];
   return { author, title, subtitle, link, publication };
+}
+
+export function selectArticleContent(state, id) {
+  return state.testState.articles[id].content;
 }
 
 export function selectArticleReadingInfo(state, id) {
@@ -41,23 +45,24 @@ export function selectArticleTags(state, id) {
 }
 
 export function selectArticleCover(state, id) {
-  return state.testState.articles[id].cover;
+  const { cover, focusPosition = undefined } = state.testState.articles[id];
+  return { cover, focusPosition };
 }
 
 export function selectArticleAuthorInfo(state, articleId) {
-  const { author: id } = selectArticleAbstract(state, articleId);
+  const { author: id } = selectArticleAllInfo(state, articleId);
+
   const authorInfo = selectUserInfo(state, id);
   const followed = selectIfFollowingAuthor(state, id);
-
   return { ...authorInfo, id, followed };
 }
 
 export function selectArticlePublicationInfo(state, articleId) {
-  const { publication: id } = selectArticleAbstract(state, articleId);
+  const { publication: id } = selectArticleAllInfo(state, articleId);
   let publicationInfo = {};
   let followedPublication = {};
   if (id) {
-    publicationInfo = selectPublicationInfo(state, id);
+    publicationInfo = selectPublicationAllInfo(state, id);
     followedPublication = selectIfFollowingPublication(state, id);
   }
 

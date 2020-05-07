@@ -31,7 +31,7 @@ export const MarginWrapper = styled.section`
   margin-bottom: 30px;
 `;
 
-export const SectionTitle = styled.h3`
+export const Title = styled.h3`
   font-weight: 400;
   color: rgba(0, 0, 0, 0.68);
   line-height: 1.2;

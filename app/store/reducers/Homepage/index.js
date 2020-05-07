@@ -4,66 +4,81 @@ import { LOAD_MORE_HOMELIST } from '../../actions';
 import { loadMoreHomelist } from './loadMoreHomelist';
 
 const initialState = {
+  mainHeros: ['id001', 'id001', 'id002', 'id001', 'id001'],
   newFromNetwork: {
     header: 'New from your network',
     sourceLink: './',
     headerImg:
       'https://cdn-images-1.medium.com/proxy/1*K3oqw1Ed_6VMaql4HojuDg.png',
-    articleList: ['ID001', 'ID001', 'ID002', 'ID001'],
+    articleList: ['id001', 'id001', 'id002', 'id001'],
   },
   popularOnMedium: {
     header: 'Popular On Medium',
     sourceLink: './',
-    articleList: ['ID001', 'ID001', 'ID002', 'ID001'],
+    articleList: ['id001', 'id001', 'id002', 'id001'],
   },
   readingList: {
     header: 'Reading list',
     sourceLink: './',
     headerImg:
       'https://cdn-images-1.medium.com/proxy/1*NECcaIHz7dKuAGfrlWYp5A.png',
-    articleList: ['ID001', 'ID001', 'ID002', 'ID001'],
+    articleList: ['id001', 'id001', 'id002', 'id001'],
   },
 
   homeList: [
-    'ID001',
-    'ID001',
-    'ID002',
-    'ID001',
-    'ID001',
-    'ID001',
-    'ID002',
-    'ID001',
-    'ID001',
-    'ID001',
-    'ID002',
-    'ID001',
-    'ID001',
-    'ID001',
-    'ID002',
-    'ID001',
-    'ID001',
-    'ID001',
-    'ID002',
-    'ID001',
-    'ID001',
-    'ID001',
-    'ID002',
-    'ID001',
+    { source: '', id: 'id001' },
+    { source: 'popular on medium', id: 'id002' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'based on your reading history', id: 'id002' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'popular on medium', id: 'id002' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'based on your reading history', id: 'id002' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'popular on medium', id: 'id002' },
+    { source: 'based on your reading history', id: 'id002' },
+    { source: '', id: 'id001' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'based on your reading history', id: 'id001' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'popular on medium', id: 'id001' },
+    { source: 'popular on medium', id: 'id002' },
+  ],
+
+  navbarList: [
+    'HOME',
+    'ONEZERO',
+    'ELEMENTAL',
+    'GEN',
+    'ZORA',
+    'FORGE',
+    'HUMAN PARTS',
+    'MARKER',
+    'LEVEL',
+    'HEATED',
+    'MODUS',
+    'MORE',
+  ],
+  footerList: [
+    { title: 'Help', link: './' },
+    { title: 'Status', link: './' },
+    { title: 'Writers', link: './' },
+    { title: 'Blog', link: './' },
+    { title: 'Careers', link: './' },
+    { title: 'Privacy', link: './' },
+    { title: 'Terms', link: './' },
+    { title: 'About', link: './' },
   ],
 };
-
-// export default (state = initialState, action) => {
-//   let { homeList } = state;
-
-//   switch (action.type) {
-//     case LOAD_MORE_HOMELIST:
-//       homeList = homeList.concat(loadMoreHomelist());
-//       break;
-//     default:
-//       return state;
-//   }
-//   return { ...state, homeList };
-// };
 
 export default produce((draft, action) => {
   switch (action.type) {

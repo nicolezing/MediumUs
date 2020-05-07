@@ -9,13 +9,6 @@ export const SidebarWrapper = styled.div`
   }
 `;
 
-export const MidWrapper = styled.section`
-  margin-bottom: 40px;
-  @media screen and (max-width: 855px) {
-    margin-bottom: 48px;
-  }
-`;
-
 export const StickyWrapper = styled.div`
   width: inherit;
   overscroll-behavior: none;

@@ -30,7 +30,7 @@ import {
   selectUserInfo,
   selectArticleCover,
   selectArticleAllInfo,
-  selectPublicationInfo,
+  selectPublicationMetaInfo,
 } from '../../selectors';
 
 function ArticlePoster(props) {
@@ -114,7 +114,7 @@ function ArticlePoster(props) {
       <InfoWrapper
         variation={props.variation}
         publication={props.publicationName || null}
-        source={props.source}
+        source={props.source || null}
         name={props.authorName}
       >
         <ArticleTitle id={props.id} variation={props.variation} />
@@ -166,16 +166,14 @@ function mapStateToProps(state, ownProps) {
     state,
     authorID,
   );
-  const {
-    coverMiddle: articleCover,
-    focusPosition = undefined,
-  } = selectArticleCover(state, id);
+  const { cover: articleCover, focusPosition } = selectArticleCover(state, id);
   let publicationName;
   if (publicationId) {
-    ({ name: publicationName } = selectPublicationInfo(state, publicationId));
+    ({ name: publicationName } = selectPublicationMetaInfo(
+      state,
+      publicationId,
+    ));
   }
-  // TODO add source in state
-  const source = 'source test';
   return {
     publicationName,
     authorName,
@@ -187,7 +185,6 @@ function mapStateToProps(state, ownProps) {
     linkedIn,
     claps,
     focusPosition,
-    source,
   };
 }
 export default connect(mapStateToProps)(ArticlePoster);

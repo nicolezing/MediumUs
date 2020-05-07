@@ -15,17 +15,17 @@ import {
   ButtonSpan,
   ButtonWrapper,
 } from './Wrappers';
-import { selectTopicInfo } from '../../../selectors';
+import { selectPublicationNavbarInfo } from '../../../selectors';
 
-function NavbarBasic(props) {
-  const { topicNav, socialMedia } = props;
+function Navbar(props) {
+  const { navbar, socialMedia, theme } = props;
   const renderNavbar = () =>
-    topicNav.map((cur, index) => {
-      if (index !== topicNav.length - 1) {
+    navbar.map(({ title, link }, index) => {
+      if (index !== navbar.length - 1) {
         return (
           <LinkWrapper>
-            <A to={cur.itemLink} key={cur.navItem}>
-              {cur.navItem}
+            <A to={link} key={title}>
+              {title}
             </A>
           </LinkWrapper>
         );
@@ -35,8 +35,8 @@ function NavbarBasic(props) {
         <>
           <DividerSpan />
           <LinkWrapper>
-            <A to={cur.itemLink} key={cur.navItem}>
-              {cur.navItem}
+            <A to={link} key={title}>
+              {title}
             </A>
           </LinkWrapper>
         </>
@@ -44,10 +44,10 @@ function NavbarBasic(props) {
     });
 
   const renderSocialMedia = () =>
-    Object.keys(socialMedia).map(key => (
+    socialMedia.map(({ media, link }) => (
       <ButtonSpan>
-        <a href={socialMedia[key]} key={key}>
-          <IconButton iconName={`${key}Icon`} theme="gray" />
+        <a href={link} key={media}>
+          <IconButton iconName={`${media}Icon`} theme="gray" />
         </a>
       </ButtonSpan>
     ));
@@ -61,27 +61,32 @@ function NavbarBasic(props) {
           text="Follow"
           type="outlined"
           size="small"
-          theme="green"
+          theme={theme}
         />
       </ButtonWrapper>
     </Wrapper>
   );
 }
 
-NavbarBasic.propTypes = {
+Navbar.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
-  topic: PropTypes.string.isRequired,
-  topicNav: PropTypes.array,
-  socialMedia: PropTypes.object,
+  publicationId: PropTypes.string.isRequired,
+  navbar: PropTypes.array,
+  socialMedia: PropTypes.array,
+  theme: PropTypes.string,
 };
 
 function mapStateToProps(state, ownProps) {
-  const { topic } = ownProps;
-  const { nav: topicNav, socialMedia } = selectTopicInfo(state, topic);
+  const { publicationId } = ownProps;
+  const { navbar, socialMedia, theme } = selectPublicationNavbarInfo(
+    state,
+    publicationId,
+  );
   return {
-    topicNav,
+    navbar,
     socialMedia,
+    theme,
   };
 }
 
-export default connect(mapStateToProps)(NavbarBasic);
+export default connect(mapStateToProps)(Navbar);

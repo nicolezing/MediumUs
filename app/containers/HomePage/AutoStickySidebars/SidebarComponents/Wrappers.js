@@ -1,22 +1,28 @@
 import styled, { css } from 'styled-components';
 
-export const NoChangeStyledAside = styled.aside`
+export const Aside = styled.aside`
   display: flex;
   flex-direction: column;
 `;
 
-export const Aside = styled(NoChangeStyledAside)`
+export const AsideSpecial = styled(Aside)`
   @media screen and (min-width: 503px) and (max-width: 855px) {
     flex-direction: row;
   }
 `;
 export const Ol = styled.ol`
   padding: 32px 32px 8px 32px;
-  background: ${({ source }) =>
-    source === 'popularOnMedium' ? 'white' : '#fafafa'};
+  background: '#fafafa';
   margin: 0;
   @media screen and (max-width: 855px) {
-    padding: ${({ source }) => (source === 'popularOnMedium' ? '0' : '')}};
+    padding: auto;
+  }
+`;
+
+export const OlSpecial = styled(Ol)`
+  background: 'white';
+  @media screen and (max-width: 855px) {
+    padding: 0;
   }
 `;
 
@@ -58,12 +64,11 @@ export const baseImageHeaderStyle = css`
   height: 100%;
   min-height: 100px;
   justify-content: space-around;
-  background-color: ${({ source }) =>
-    source === 'newFromNetwork' ? '#d7efee' : '#FBF9E0'};
 `;
 
 export const NetworkImageHeaderWrapper = styled.div`
   ${baseImageHeaderStyle};
+  background-color: #d7efee;
   @media screen and (min-width: 503px) and (max-width: 855px) {
     flex-direction: column;
     justify-content: space-between;
@@ -75,10 +80,18 @@ export const NetworkImageHeaderWrapper = styled.div`
 
 export const ReadingListImageHeaderWrapper = styled.div`
   ${baseImageHeaderStyle};
+  background-color: #fbf9e0;
   @media screen and (min-width: 503px) and (max-width: 855px) {
     flex-direction: column;
     justify-content: space-between;
     align-items: end;
     padding: 24px;
+  }
+`;
+
+export const MidWrapper = styled.section`
+  margin-bottom: 40px;
+  @media screen and (max-width: 855px) {
+    margin-bottom: 48px;
   }
 `;

@@ -29,8 +29,8 @@ function InfoAvatarPoster(props) {
   const AuthorAvatar = () => <Avatar size="80px" id={props.writerInfo.id} />;
 
   const PublicationAvatar = () => {
-    const { name, logo } = props.publicationInfo;
-    return <PublicationLogo src={logo} alt={name} />;
+    const { name, icon } = props.publicationInfo;
+    return <PublicationLogo src={icon} alt={name} />;
   };
 
   const { theme } = props;
@@ -103,7 +103,7 @@ InfoAvatarPoster.propTypes = {
   publicationInfo: PropTypes.shape({
     name: PropTypes.string,
     link: PropTypes.string,
-    logo: PropTypes.string,
+    icon: PropTypes.string,
     description: PropTypes.string,
     followed: PropTypes.bool,
   }),

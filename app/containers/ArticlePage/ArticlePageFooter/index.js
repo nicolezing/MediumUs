@@ -2,9 +2,6 @@
 // ArticlePageFooter
 // *
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { selectArticleFooters } from '../../../selectors';
 import {
   Container,
   SectionWrapper,
@@ -24,10 +21,11 @@ import {
   mainLogoIcon,
   logoIcon,
 } from '../../../staticData/svgIcons/IconButton_Icons';
+import { footerList, footerNav } from './articleFooterContent';
 
-function ArticlePageFooter(props) {
+function ArticlePageFooter() {
   const renderList = () =>
-    props.footerList.map(itemObj => (
+    footerList.map(itemObj => (
       <ItemWrapper key={itemObj.header}>
         <HeaderWrapper>
           <a href={itemObj.link}>
@@ -41,9 +39,9 @@ function ArticlePageFooter(props) {
     ));
 
   const renderNav = () =>
-    Object.keys(props.nav).map(key => (
-      <a href={props.nav.key} key={key}>
-        {key}
+    footerNav.map(({ title, link }) => (
+      <a href={link} key={title}>
+        {title}
       </a>
     ));
 
@@ -54,7 +52,7 @@ function ArticlePageFooter(props) {
           <ListWrapper>{renderList()}</ListWrapper>
         </ListContainer>
         <FooterWrapper>
-          <a href={props.footerList[0].link}>
+          <a href={footerList[0].link}>
             <MainLogoWrapper>{mainLogoIcon}</MainLogoWrapper>
             <LogoWrapper>{logoIcon}</LogoWrapper>
           </a>
@@ -65,21 +63,4 @@ function ArticlePageFooter(props) {
   );
 }
 
-ArticlePageFooter.propTypes = {
-  footerList: PropTypes.arrayOf(
-    PropTypes.exact({
-      header: PropTypes.string,
-      link: PropTypes.string,
-      detail: PropTypes.string,
-      mark: PropTypes.string,
-    }),
-  ),
-  nav: PropTypes.object,
-};
-
-function mapStateToProps(state) {
-  const { footerList, footerNav: nav } = selectArticleFooters(state);
-  return { footerList, nav };
-}
-
-export default connect(mapStateToProps)(ArticlePageFooter);
+export default ArticlePageFooter;

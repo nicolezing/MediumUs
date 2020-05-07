@@ -5,8 +5,11 @@
  */
 
 import React, { useRef, useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { selectHomepageLinkList } from '../../../selectors';
 import { IconButton } from '../../../components/Button';
+import convertToUrlString from '../../../utils/convertToUrl';
 import {
   OuterWrapper,
   InnerWrapper,
@@ -17,74 +20,24 @@ import {
   LinkWrapper,
 } from './Wrappers';
 
-function Navbar() {
+function Navbar(props) {
   const containerRef = useRef();
   const [firstRender, setFirstRender] = useState(true);
   const [arrowDisableHandler, setArrowDisableHandler] = useState([true, true]);
 
-  const navbarList = [
-    {
-      menuItem: 'HOME',
-      link: './',
-    },
-    {
-      menuItem: 'ONEZERO',
-      link: './',
-    },
-    {
-      menuItem: 'ELEMENTAL',
-      link: './elemental',
-    },
-    {
-      menuItem: 'GEN',
-      link: './',
-    },
-    {
-      menuItem: 'ZORA',
-      link: './',
-    },
-    {
-      menuItem: 'FORGE',
-      link: './',
-    },
-    {
-      menuItem: 'HUMAN PARTS',
-      link: './',
-    },
-    {
-      menuItem: 'MARKER',
-      link: './',
-    },
-    {
-      menuItem: 'LEVEL',
-      link: './',
-    },
-    {
-      menuItem: 'HEATED',
-      link: './',
-    },
-    {
-      menuItem: 'MODUS',
-      link: './',
-    },
-    {
-      menuItem: 'MORE',
-      link: './',
-    },
-  ];
-
+  const { navbarList } = props;
   const renderMenu = () =>
-    navbarList.map((itemSet, index) => {
+    navbarList.map((title, index) => {
       if (index > 0) {
         return (
-          <LinkWrapper key={itemSet.menuItem}>
-            <A href={itemSet.link}>{itemSet.menuItem}</A>
+          <LinkWrapper key={title}>
+            <A href={convertToUrlString(title)}>{title}</A>
           </LinkWrapper>
         );
       }
       return (
-        <FirstLinkWrapper key={itemSet.menuItem}>
-          <FirstA href={itemSet.link}>{itemSet.menuItem}</FirstA>
+        <FirstLinkWrapper key={title}>
+          <FirstA href={convertToUrlString(title)}>{title}</FirstA>
         </FirstLinkWrapper>
       );
     });
@@ -173,6 +126,14 @@ function Navbar() {
   );
 }
 
-// Navbar.propTypes = {};
+Navbar.propTypes = {
+  navbarList: PropTypes.array,
+};
 
-export default Navbar;
+function mapStateToProps(state) {
+  const { navbarList } = selectHomepageLinkList(state);
+
+  return { navbarList };
+}
+
+export default connect(mapStateToProps)(Navbar);

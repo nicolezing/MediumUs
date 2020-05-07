@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import nextId from 'react-id-generator';
+import * as uuid from 'uuid/v4';
 import ArticleTitle from '../ArticleTitle';
 import PositionedImage from '../imageComponents/PositionedImage';
 
@@ -114,7 +114,7 @@ const components = {
   blockquote: Blockquote,
   a: A,
   hr: HR,
-  img: props => <PositionedImage {...props} uuid={nextId()} />,
+  img: props => <PositionedImage {...props} uuid={uuid()} />,
 };
 
 // TODO: add double quote style and divider section

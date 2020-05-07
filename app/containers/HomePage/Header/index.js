@@ -33,7 +33,7 @@ function Header(props) {
     return (
       <div>
         <MainIconStyledA href="./">
-          <IconButton iconName="mainIcon" theme="pureBlack" />
+          <IconButton iconName="mainLogoIcon" theme="pureBlack" />
         </MainIconStyledA>
         <LogoIconStyledA href="./">
           <IconButton iconName="logoIcon" theme="pureBlack" />

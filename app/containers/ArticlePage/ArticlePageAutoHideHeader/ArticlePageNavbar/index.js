@@ -5,8 +5,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { selectTopicInfo } from '../../../../selectors';
-import { A } from '../../../PublicationComponents/NavbarBasic/Wrappers';
+import { selectPublicationNavbarInfo } from '../../../../selectors';
+import { A } from '../../../PublicationComponents_StyleA/Navbar/Wrappers';
 import {
   Wrapper,
   ImgWrapper,
@@ -17,13 +17,13 @@ import {
 } from './Wrappers';
 
 function ArticlePageNavbar(props) {
-  const { topicNav } = props;
+  const { name, logoSmall, navbar, link } = props;
   const renderNavbar = () =>
-    topicNav.map((cur, index) => {
-      if (index !== topicNav.length - 1) {
+    navbar.map(({ title, link: navLink }, index) => {
+      if (index !== navbar.length - 1) {
         return (
-          <LinkWrapper key={cur.navItem}>
-            <A to={cur.itemLink}>{cur.navItem}</A>
+          <LinkWrapper key={title}>
+            <A to={navLink}>{title}</A>
           </LinkWrapper>
         );
       }
@@ -31,8 +31,8 @@ function ArticlePageNavbar(props) {
       return (
         <>
           <DividerSpan />
-          <LinkWrapper key={cur.navItem}>
-            <A to={cur.itemLink}>{cur.navItem}</A>
+          <LinkWrapper key={title}>
+            <A to={navLink}>{title}</A>
           </LinkWrapper>
         </>
       );
@@ -41,8 +41,8 @@ function ArticlePageNavbar(props) {
   return (
     <Wrapper>
       <ImgWrapper>
-        <a href={props.topicLink}>
-          <Img src={props.topicLogoImgSmall} alt={props.topic} />
+        <a href={link}>
+          <Img src={logoSmall} alt={name} />
         </a>
       </ImgWrapper>
       <ListWrapper>{renderNavbar()}</ListWrapper>
@@ -52,20 +52,20 @@ function ArticlePageNavbar(props) {
 
 ArticlePageNavbar.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
-  topic: PropTypes.string.isRequired,
-  topicLogoImgSmall: PropTypes.string,
-  topicLink: PropTypes.string,
-  topicNav: PropTypes.array,
+  publicationId: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  logoSmall: PropTypes.string,
+  link: PropTypes.string,
+  navbar: PropTypes.array,
 };
 
 function mapStateToProps(state, ownProps) {
-  const { topic } = ownProps;
-  const {
-    logoSmall: topicLogoImgSmall,
-    nav: topicNav,
-    link: topicLink,
-  } = selectTopicInfo(state, topic);
-  return { topicLogoImgSmall, topicNav, topicLink };
+  const { publicationId } = ownProps;
+  const { name, logoSmall, navbar, link } = selectPublicationNavbarInfo(
+    state,
+    publicationId,
+  );
+  return { name, logoSmall, navbar, link };
 }
 
 export default connect(mapStateToProps)(ArticlePageNavbar);

@@ -1,29 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { selectHomepageLinkList } from '../../../selectors';
+
 import { Wrapper, A } from './Wrappers';
 
-function Footer() {
-  const footerList = {
-    Help: './',
-    Status: './',
-    Writers: './',
-    Blog: './',
-    Careers: './',
-    Privacy: './',
-    Terms: './',
-    About: './',
-  };
-
-  const renderFooterListItem = key => (
-    <A href={footerList.key} key={key}>
-      {key}
-    </A>
-  );
+function Footer(props) {
+  const { footerList } = props;
 
   return (
     <Wrapper>
-      {Object.keys(footerList).map(key => renderFooterListItem(key))}
+      {footerList.map(({ title, link }) => (
+        <A href={link} key={title}>
+          {title}
+        </A>
+      ))}
     </Wrapper>
   );
 }
 
-export default Footer;
+Footer.propTypes = {
+  footerList: PropTypes.array,
+};
+
+function mapStateToProps(state) {
+  const { footerList } = selectHomepageLinkList(state);
+
+  return {
+    footerList,
+  };
+}
+
+export default connect(mapStateToProps)(Footer);

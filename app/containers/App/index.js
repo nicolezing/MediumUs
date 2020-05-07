@@ -10,8 +10,8 @@
 import React from 'react';
 import { Switch, Route, Router } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
-import { Elemental } from 'containers/Elemental';
-import { ArticlePage } from 'containers/ArticlePage';
+import ElementalPage from 'containers/ElementalPage';
+import ArticlePage from 'containers/ArticlePage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -19,16 +19,16 @@ import GlobalStyle from '../../global-styles';
 export default function App() {
   let homeRoute = <Route exact path="/" component={HomePage} />;
   const elementalRoute = (
-    <Route exact path="/elemental" component={Elemental} />
+    <Route exact path="/:publicationId" component={ElementalPage} />
   );
   const articlePageRoute = (
-    <Route exact path="/article" component={ArticlePage} />
+    <Route exact path="/:publicationId/:articleId" component={ArticlePage} />
   );
   // const NotFoundPage = <Route component={NotFoundPage} />;
 
   if (process.env.NODE_ENV === 'production') {
     homeRoute = (
-      <Route exact path="/MediumUs">
+      <Route exact path="/">
         <Route path="/" component={HomePage} />
       </Route>
     );
@@ -37,11 +37,10 @@ export default function App() {
   return (
     <div>
       <Switch>
-        <>
-          {homeRoute}
-          {elementalRoute}
-          {articlePageRoute}
-        </>
+        {homeRoute}
+        {elementalRoute}
+        {articlePageRoute}
+        <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
     </div>
