@@ -1,25 +1,28 @@
 import styled, { css } from 'styled-components';
 import getColor from '../../staticData/colorSets';
 
-const StyledContainer = styled.div`
+const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
   min-width: 0;
 `;
 
-const textContainerBaseStyle = css`
-  text-rendering: auto;
-  flex: 1 1 auto;
-  overflow: hidden;
-  white-space: nowrap;
+const AuthorInfoWrapper = styled.div`
+  display: initial;
 `;
 
-const UpTextWrapper = styled.div`
+export const StyledButtonWrapper = styled.span`
+  margin-left: 8px;
+`;
+
+const infoWrapperBaseStyle = css`
+  flex: auto;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 `;
 
-const downTextWrapperBaseStyle = css`
+const redingInfoWrapperBaseStyle = css`
   color: #0000008a;
   fill: #0000008a;
   overflow: hidden;
@@ -28,14 +31,18 @@ const downTextWrapperBaseStyle = css`
 
 const aBaseStyle = css`
   color: ${getColor('black').color};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   :active,
   :hover {
     color: ${getColor('black').hoverColor};
+    text-decoration: underline;
     outline: 0;
   }
 `;
 
-const spanSpecialBaseStyle = css`
+const spanBaseStyle = css`
   vertical-align: 1px;
 `;
 
@@ -43,15 +50,15 @@ function conditionallyStyledComponents(variation) {
   switch (variation) {
     case 'PublicationHome':
       return {
-        StyledTextContainer: styled.div`
-          ${textContainerBaseStyle}
+        StyledInfoWrapper: styled.div`
+          ${infoWrapperBaseStyle}
           font-size: 15px;
           margin: 0 0 0 10px;
           line-height: 1.4;
-          margin-top: -3px;
+          vertical-align: center;
         `,
-        DownTextWrapper: styled.div`
-          ${downTextWrapperBaseStyle}
+        ReadingInfoWrapper: styled.div`
+          ${redingInfoWrapperBaseStyle}
         `,
         StyledA: styled.a`
           ${aBaseStyle}
@@ -59,68 +66,69 @@ function conditionallyStyledComponents(variation) {
           @media only screen and (max-width: 768px) {
             font-size: 15px;
           }
+          color: ${props => getColor(props.theme).color};
         `,
-        StyledSpanSpecial: styled.span`
-          ${spanSpecialBaseStyle}
+        StyledSpan: styled.span`
+          ${spanBaseStyle}
           padding: 0 4.5px;
         `,
       };
     case 'TopicHome':
       return {
-        StyledTextContainer: styled.div`
-          ${textContainerBaseStyle}
+        StyledInfoWrapper: styled.div`
+          ${infoWrapperBaseStyle}
           font-size: 15.8px;
           margin-left: 16px;
           line-height: 20px;
           margin-top: -1px;
         `,
-        DownTextWrapper: styled.div`
-          ${downTextWrapperBaseStyle}
+        ReadingInfoWrapper: styled.div`
+          ${redingInfoWrapperBaseStyle}
           line-height: 20px;
         `,
         StyledA: styled.a`
           ${aBaseStyle}
         `,
-        StyledSpanSpecial: styled.span`
-          ${spanSpecialBaseStyle}
+        StyledSpan: styled.span`
+          ${spanBaseStyle}
           padding: 0 4px;
         `,
       };
     case 'Home':
       return {
-        StyledTextContainer: styled.div`
-          ${textContainerBaseStyle}
+        StyledInfoWrapper: styled.div`
+          ${infoWrapperBaseStyle}
           font-size: 15px;
           line-height: 1.4;
         `,
-        DownTextWrapper: styled.div`
-          ${downTextWrapperBaseStyle}
+        ReadingInfoWrapper: styled.div`
+          ${redingInfoWrapperBaseStyle}
         `,
         StyledA: styled.a`
           ${aBaseStyle}
         `,
-        StyledSpanSpecial: styled.span`
-          ${spanSpecialBaseStyle}
+        StyledSpan: styled.span`
+          ${spanBaseStyle}
           padding: 0 4.8px;
         `,
       };
     case 'ArticleTitle':
       return {
-        StyledTextContainer: styled.div`
-          ${textContainerBaseStyle}
+        StyledInfoWrapper: styled.div`
+          ${infoWrapperBaseStyle}
           font-size: 16px;
           margin-left: 12px;
           line-height: 20px;
         `,
-        DownTextWrapper: styled.div`
-          ${downTextWrapperBaseStyle}
+        ReadingInfoWrapper: styled.div`
+          ${redingInfoWrapperBaseStyle}
           margin-top: 4px;
         `,
         StyledA: styled.a`
           ${aBaseStyle}
         `,
-        StyledSpanSpecial: styled.span`
-          ${spanSpecialBaseStyle}
+        StyledSpan: styled.span`
+          ${spanBaseStyle}
           padding: 0 4px;
         `,
       };
@@ -131,8 +139,8 @@ function conditionallyStyledComponents(variation) {
 
 export function styledComponents(variation) {
   return {
-    StyledContainer,
-    UpTextWrapper,
+    StyledWrapper,
+    AuthorInfoWrapper,
     ...conditionallyStyledComponents(variation),
   };
 }

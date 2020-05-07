@@ -5,8 +5,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
-import createReducer from './reducers';
-
+// import createReducer from './reducers';
+import createReducer from './store/reducers';
 export default function configureStore(initialState = {}, history) {
   let composeEnhancers = compose;
   const reduxSagaMonitorOptions = {};
@@ -37,7 +37,7 @@ export default function configureStore(initialState = {}, history) {
   const enhancers = [applyMiddleware(...middlewares)];
 
   const store = createStore(
-    createReducer(),
+    createReducer,
     initialState,
     composeEnhancers(...enhancers),
   );

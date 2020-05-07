@@ -5,7 +5,7 @@ const GlowStyledBtn = styled.button`
   font-size: 0px;
   cursor: pointer;
 
-  fill: ${props => getColor(props.colorSet).color};
+  fill: ${props => getColor(props.theme).color};
 
   transition: border-color 150ms ease;
   outline: 0;
@@ -24,7 +24,7 @@ const GlowStyledBtn = styled.button`
   height: 58px;
 
   :hover {
-    border-color: ${props => getColor(props.colorSet).color};
+    border-color: ${props => getColor(props.theme).color};
   }
 
   ::before {
@@ -39,7 +39,7 @@ const GlowStyledBtn = styled.button`
     border-radius: inherit;
     background: radial-gradient(
       circle,
-      ${props => getColor(props.colorSet).color} 50%,
+      ${props => getColor(props.theme).color} 50%,
       transparent 70%
     );
     opacity: 0;
@@ -69,7 +69,10 @@ const GlowStyledBtn = styled.button`
 `;
 
 const Wrapper = styled.div`
-  width: 70px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  margin-right: 16px;
 `;
 
 export { GlowStyledBtn, Wrapper };

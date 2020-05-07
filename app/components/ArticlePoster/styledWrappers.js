@@ -9,11 +9,17 @@ const coverBaseStyle = css`
   background-origin: border-box;
 `;
 
+const coverBlankImg = css`
+  background-color: white;
+  background-size: cover;
+  background-origin: border-box;
+`;
+
 export const Wrapper = styled.div`
   ${props => wrapperStyle[props.variation].wrapperStyle || ``}
 `;
 export const Cover = styled.a`
-  ${coverBaseStyle};
+  ${props => (props.cover.length > 0 ? coverBaseStyle : coverBlankImg)};
   ${props => wrapperStyle[props.variation].coverStyle || ``}
 `;
 export const InfoWrapper = styled.div`

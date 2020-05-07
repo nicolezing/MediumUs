@@ -1,13 +1,12 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import Avatar from '..';
-import N from '../../../staticData/images/N.png';
-import user001 from '../../../staticData/images/user-profile001.png';
+import { Avatar as avatarProp } from '..';
 
 <Meta title="Components|Avatar" component={Avatar} />
 
 # Avatar Images
 
-<Props of={Avatar} />
+<Props of={avatarProp} />
 
 ## UserAvatar
 
@@ -16,7 +15,7 @@ import user001 from '../../../staticData/images/user-profile001.png';
 <Preview>
   <div />
   <Story name="userAvatar">
-    <Avatar src={N} alt="username" />
+    <Avatar id="loggedIn" />
   </Story>
 </Preview>
 
@@ -26,9 +25,9 @@ import user001 from '../../../staticData/images/user-profile001.png';
 
 <Preview>
   <Story name="writerAvatar">
-    <Avatar src={user001} alt="username001" size="80px" member />
+    <Avatar id="ID001" size="80px" />
   </Story>
   <Story name="writerAvatar-nonmember">
-    <Avatar src={user001} alt="username001" size="80px" />
+    <Avatar id="ID001" size="80px" />
   </Story>
 </Preview>

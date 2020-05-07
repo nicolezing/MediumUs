@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import { IconButton } from '..';
+import { IconButton, GlowIconButton } from '..';
 import * as Icons from '../../../staticData/svgIcons/IconButton_Icons';
 
 <Meta title="Components|Button/icon" component={IconButton} />
@@ -17,7 +17,7 @@ import * as Icons from '../../../staticData/svgIcons/IconButton_Icons';
       <div>
         <span>{icon}</span>
         <br />
-        <IconButton type={icon} colorSet="pureBlack" />
+        <IconButton iconName={icon} theme="pureBlack" />
         <br />
       </div>
     ))}
@@ -30,16 +30,16 @@ import * as Icons from '../../../staticData/svgIcons/IconButton_Icons';
 
 <Preview>
   <Story name="glow">
-    <IconButton type="clapIcon" colorSet="pureBlack" effect="glow" />
+    <GlowIconButton iconName="clapIcon" theme="pureBlack" effect="glow" />
   </Story>
 </Preview>
 
 ## Examples
 
 <Preview>
-  <IconButton type="logoIcon" colorSet="pureBlack" />
-  <IconButton type="twIcon" colorSet="gray" />
-  <IconButton type="moreIcon" colorSet="gray" />
-  <IconButton type="moreHollowIcon" colorSet="pureBlack" />
-  <IconButton type="clapIcon" colorSet="purple" effect="glow" />
+  <IconButton iconName="logoIcon" theme="pureBlack" />
+  <IconButton iconName="twIcon" theme="gray" />
+  <IconButton iconName="moreIcon" theme="gray" />
+  <IconButton iconName="moreHollowIcon" theme="pureBlack" />
+  <IconButton iconName="clapIcon" theme="purple" effect="glow" />
 </Preview>

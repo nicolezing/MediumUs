@@ -16,6 +16,8 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: "liga" on;
+    overflow-x: hidden;
+    width:100%;
   }
 
   a, 
@@ -25,6 +27,13 @@ const GlobalStyle = createGlobalStyle`
     // &:focus {
     //   outline: none;
     // }
+  }
+
+  a{
+    color:rgba(0,0,0,.84);
+    text-decoration: none;
+    cursor: pointer;
+ 
   }
 
   // html,

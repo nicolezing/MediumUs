@@ -9,7 +9,7 @@ const GenreCardContainer = styled.div`
   margin-right: 15px;
   box-sizing: border-box;
   -webkit-box-flex: 0;
-  flex: 0 0 auto;
+  flex: none;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -21,8 +21,7 @@ const GenreCardContainer = styled.div`
 const GenreCardHeader = styled.div`
   padding-right: 20px;
   padding-left: 20px;
-  flex: 1 1 auto;
-  -webkit-box-flex: 1;
+  flex: auto;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -53,7 +52,7 @@ const GenreCardImg = styled.div`
   height: 180px;
   width: 100%;
   -webkit-box-flex: 0;
-  flex: 0 0 auto;
+  flex: none;
   -webkit-tap-highlight-color: transparent;
   color: inherit;
   background-color: transparent;

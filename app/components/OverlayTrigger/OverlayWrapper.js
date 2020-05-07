@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
-const OverlayWrapper = styled.div`
-  display: inline-block;
+export const OverlayWrapper = styled.div`
+  display: inline-grid;
+  vertical-align: middle;
 `;
 
-export default OverlayWrapper;
+export const PopoverWrapper = styled.div`
+  position: absolute;
+`;

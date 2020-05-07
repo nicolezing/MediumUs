@@ -1,12 +1,12 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import AuthorCard from '..';
-import authorInfo from './exampleData';
+import { AuthorCard as AuthorCardProps } from '..';
 
 <Meta title="Components|AuhtorCard" component={AuthorCard} />
 
 # AuhtorCard
 
-<Props of={AuthorCard} />
+<Props of={AuthorCardProps} />
 
 (the star at the end was controlled by props.premium, which was not correctly positioned in storybook)
 
@@ -14,7 +14,7 @@ import authorInfo from './exampleData';
 
 <Preview>
   <Story name="Home page AuthorCard">
-    <AuthorCard {...authorInfo} variation="Home" />
+    <AuthorCard id="ID001" variation="Home" />
   </Story>
 </Preview>
 
@@ -22,7 +22,7 @@ import authorInfo from './exampleData';
 
 <Preview>
   <Story name="Publication page AuthorCard">
-    <AuthorCard {...authorInfo} variation="PublicationHome" />
+    <AuthorCard id="ID001" variation="PublicationHome" />
   </Story>
 </Preview>
 
@@ -30,7 +30,7 @@ import authorInfo from './exampleData';
 
 <Preview>
   <Story name="Topic page AuthorCard">
-    <AuthorCard {...authorInfo} variation="TopicHome" />
+    <AuthorCard id="ID001" variation="TopicHome" />
   </Story>
 </Preview>
 
@@ -38,6 +38,6 @@ import authorInfo from './exampleData';
 
 <Preview>
   <Story name="Article page AuthorCard">
-    <AuthorCard {...authorInfo} variation="ArticleTitle" />
+    <AuthorCard id="ID001" variation="ArticleTitle" />
   </Story>
 </Preview>

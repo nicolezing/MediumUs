@@ -1,11 +1,8 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
-import N from '../../../staticData/images/N.png';
-import user001 from '../../../staticData/images/user-profile001.png';
 import Avatar from '../../Avatar';
 import OverlayTrigger from '../';
 import UserSettingList from '../../../containers/HomePage/UserSettingList';
 import ArticlePoster from '../../ArticlePoster';
-import { dropdownInfo, authorCardInfo, articleInfo } from './exampleData';
 
 <Meta title="Components|Popover" component={OverlayTrigger} />
 
@@ -148,9 +145,9 @@ import { dropdownInfo, authorCardInfo, articleInfo } from './exampleData';
     <OverlayTrigger
       placement="dropdown"
       trigger="click"
-      popoverContent={<UserSettingList {...dropdownInfo} />}
+      popoverContent={<UserSettingList id="loggedIn" />}
     >
-      <Avatar src={dropdownInfo.userAvatar} alt={dropdownInfo.username} />
+      <Avatar id="loggedIn" />
     </OverlayTrigger>
   </Story>
 </Preview>
@@ -161,12 +158,7 @@ import { dropdownInfo, authorCardInfo, articleInfo } from './exampleData';
 
 <Preview>
   <Story name="Example Homepage Hero Left with hoverEffct">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="HomeHeroLeft"
-      hoverEffect
-    />
+    <ArticlePoster id="ID001" variation="HomeHeroLeft" hoverEffect />
   </Story>
 </Preview>
 
@@ -176,11 +168,6 @@ import { dropdownInfo, authorCardInfo, articleInfo } from './exampleData';
 
 <Preview>
   <Story name="Example Homepage List with hoverEffct">
-    <ArticlePoster
-      authorCardInfo={authorCardInfo}
-      articleInfo={articleInfo}
-      variation="HomeList"
-      hoverEffect
-    />
+    <ArticlePoster id="ID001" variation="HomeList" hoverEffect />
   </Story>
 </Preview>

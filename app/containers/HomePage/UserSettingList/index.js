@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   UnorderedList,
@@ -16,6 +17,7 @@ import {
 } from './styledListItems';
 import { UserWrapper, UsernameWrapper } from './styledWrappers';
 import Avatar from '../../../components/Avatar';
+import { selectUserInfo } from '../../../selectors';
 
 function UserSettingList(props) {
   const listItems = [
@@ -58,7 +60,7 @@ function UserSettingList(props) {
     <UnorderedList>
       <li key="username">
         <UserWrapper>
-          <Avatar size="50px" src={props.userAvatar} alt={props.username} />
+          <Avatar size="50px" id={props.id} />
           <UsernameWrapper>
             <UserDarkStyledA
               href={`${props.domain}/${props.userLinkSuffix}`}
@@ -81,11 +83,23 @@ function UserSettingList(props) {
 }
 
 UserSettingList.propTypes = {
-  userAvatar: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   userLinkSuffix: PropTypes.string.isRequired,
   domain: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   // #TODO: will add other links as props
 };
 
-export default UserSettingList;
+function mapStateToProps(state, ownProps) {
+  const { id: userId } = ownProps;
+  const { name: username, userLinkSuffix, link: domain } = selectUserInfo(
+    state,
+    userId,
+  );
+  return {
+    username,
+    userLinkSuffix,
+    domain,
+  };
+}
+export default connect(mapStateToProps)(UserSettingList);

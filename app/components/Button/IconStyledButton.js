@@ -11,13 +11,16 @@ const btnBaseStyle = css`
     outline: none;
   }
   vertical-align: middle;
+  :disabled {
+    cursor: default;
+  }
 `;
 
 const IconStyledButton = styled.button`
     ${btnBaseStyle}
-    fill: ${props => getColor(props.colorSet).color};
+    fill: ${props => getColor(props.theme).color};
     :hover {
-      fill: ${props => getColor(props.colorSet).hoverColor};
+      fill: ${props => getColor(props.theme).hoverColor};
     }
   `;
 

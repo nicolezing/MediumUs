@@ -1,5 +1,5 @@
 function getEventHandler(trigger, showFn, hideFn, delayFn) {
-  // onfocus is default for all cases for better accessibility
+  // onFocus event is default for all cases for better accessibility
   let actions = {
     onFocus: delayFn(showFn),
     onBlur: delayFn(hideFn),

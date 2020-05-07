@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as outlinedStyles from './outlineStyle';
+import * as outlinedStyles from './outlineStyles';
 
 export default styled.button`
   ${outlinedStyles.base};

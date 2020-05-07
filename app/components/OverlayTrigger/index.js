@@ -9,8 +9,8 @@ import React, { useRef, useState, useEffect, cloneElement } from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import setPosition from './setPopoverPosition';
-import PopoverBox from '../PopoverBox';
-import OverlayWrapper from './OverlayWrapper';
+import PopoverBox from './PopoverBox';
+import { OverlayWrapper, PopoverWrapper } from './OverlayWrapper';
 import RefHolder from './RefHolder';
 import { getEventHandler } from './getEventHandler';
 
@@ -27,7 +27,8 @@ function OverlayTrigger(props) {
     const { aX, aY, pX, pY, place } = setPosition(
       findDOMNode(trigger.current).getBoundingClientRect(),
       findDOMNode(popover.current).getBoundingClientRect(),
-      window.innerWidth,
+      document.documentElement.clientWidth,
+      document.documentElement.clientHeight,
       props.placement,
     );
     setArrowPosition([aX, aY]);
@@ -50,9 +51,22 @@ function OverlayTrigger(props) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutsideTrigger);
     };
-    // #TODO not sure about the skip is working or not
-  }, [isVisible]);
+  });
 
+  const handleResize = () => {
+    if (isVisible) {
+      setPositionStates();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleResize);
+    };
+  });
   // declare public timer
   let timer = null;
 
@@ -117,32 +131,36 @@ function OverlayTrigger(props) {
           ),
         )}
       </RefHolder>
-      <RefHolder ref={popover}>
-        <PopoverBox
-          popoverContent={props.popoverContent}
-          popoverColor={props.popoverColor}
-          renderPlace={popoverPlacement}
-          arrowPosition={arrowPosition}
-          popoverPosition={popoverPosition}
-          isVisible={isVisible}
-          // if onTriggerShow && mouse on popover, stay visible
-          onMouseOver={onPopoverHover}
-          onFocus={onPopoverHover}
-          // if onTriggerHide && mouse off popover, change to invisible
-          onMouseOut={offPopoverHover}
-          onBlur={offPopoverHover}
-        />
-      </RefHolder>
+      <PopoverWrapper>
+        <RefHolder ref={popover}>
+          <PopoverBox
+            popoverContent={props.popoverContent}
+            popoverColor={props.popoverColor}
+            renderPlace={popoverPlacement}
+            arrowPosition={arrowPosition}
+            popoverPosition={popoverPosition}
+            isVisible={isVisible}
+            // if onTriggerShow && mouse on popover, stay visible
+            onMouseOver={onPopoverHover}
+            onFocus={onPopoverHover}
+            // if onTriggerHide && mouse off popover, change to invisible
+            onMouseOut={offPopoverHover}
+            onBlur={offPopoverHover}
+          />
+        </RefHolder>
+      </PopoverWrapper>
     </OverlayWrapper>
   );
 }
 
 OverlayTrigger.propTypes = {
   trigger: PropTypes.oneOf(['click', 'hover', 'focus']).isRequired,
-  placement: PropTypes.oneOf(['dropdown', 'top-bottom']).isRequired,
+  placement: PropTypes.oneOf(['dropdown', 'top-bottom', 'bottom-top'])
+    .isRequired,
   popoverContent: PropTypes.element.isRequired,
   popoverColor: PropTypes.string,
   children: PropTypes.element.isRequired,
+  // theme: PropTypes.string,
 };
 
 export default OverlayTrigger;

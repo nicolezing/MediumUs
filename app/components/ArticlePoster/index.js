@@ -1,10 +1,11 @@
 /**
  *
- * ArticleCard
+ * ArticlePoster
  *
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import AuthorCard from '../AuthorCard';
@@ -21,82 +22,73 @@ import {
 import Divider from './styledDivider';
 import getAuthorCardType from './getAuthorCardType';
 import { IconButton } from '../Button';
+import BookmarkButton from '../Button/BookmarkedButton';
 import roundToThousand from '../../utils/roundToThousand';
 import OverlayTrigger from '../OverlayTrigger';
 import MoreIconPopoverContent from './MoreIconPopoverContent';
-import requiredIfAllPresent from '../../utils/requiredIfAllPresent';
+import {
+  selectUserInfo,
+  selectArticleCover,
+  selectArticleAllInfo,
+  selectPublicationMetaInfo,
+} from '../../selectors';
 
 function ArticlePoster(props) {
   const { authorCardVariation } = getAuthorCardType(props.variation);
-  function BookmarkButton() {
-    return props.articleInfo.bookmarked ? (
-      <IconButton
-        type="bookmarkFilledIcon"
-        colorSet="pureBlack"
-        onClick={props.onRemoveBookmark}
-      />
-    ) : (
-      <IconButton
-        type="bookmarkIcon"
-        colorSet="black"
-        onClick={props.onAddBookmark}
-      />
-    );
-  }
 
   function renderIcons() {
     switch (props.variation) {
       case 'HomeHeroLeft':
       case 'HomeHeroMid':
       case 'TopicHomepageList':
-        return [<BookmarkButton key={props.variation} />];
+        return <BookmarkButton id={props.id} key={props.id} />;
       case 'HomeList':
         return [
-          <BookmarkButton key={props.variation} />,
-          <OverlayTrigger
-            trigger="click"
-            placement="dropdown"
-            popoverContent={
-              <MoreIconPopoverContent>
-                Dismiss this story
-              </MoreIconPopoverContent>
-            }
-            key="moreIcon"
-          >
-            <IconButton type="moreIcon" colorSet="black" />
-          </OverlayTrigger>,
+          <BookmarkButton id={props.id} key={props.id} />,
+          <div>
+            <OverlayTrigger
+              trigger="click"
+              placement="bottom-top"
+              popoverContent={
+                <MoreIconPopoverContent title="Dismiss this story">
+                  Dismiss this story
+                </MoreIconPopoverContent>
+              }
+              key="moreIcon"
+            >
+              <IconButton iconName="moreIcon" theme="gray" />
+            </OverlayTrigger>
+          </div>,
         ];
       case 'ArticlePageTitle':
         return [
-          props.articleInfo.twitter && (
-            <a href={props.articleInfo.twitter} key="twitter">
-              <IconButton type="twitterIcon" colorSet="black" />
+          props.twitter && (
+            <a href={props.twitter} key="twitter">
+              <IconButton iconName="twitterIcon" theme="black" />
             </a>
           ),
-          props.articleInfo.linkedIn && (
-            <a href={props.articleInfo.linkedIn} key="linkedIn">
-              <IconButton type="linkedInIcon" colorSet="black" />
+          props.linkedIn && (
+            <a href={props.linkedIn} key="linkedIn">
+              <IconButton iconName="linkedInIcon" theme="black" />
             </a>
           ),
-          props.articleInfo.facebook && (
-            <a href={props.articleInfo.facebook} key="facebook">
-              <IconButton type="facebookSquareIcon" colorSet="black" />
+          props.facebook && (
+            <a href={props.facebook} key="facebook">
+              <IconButton iconName="facebookSquareIcon" theme="black" />
             </a>
           ),
-          <BookmarkButton key={props.variation} />,
+          <BookmarkButton id={props.id} key={props.id} />,
         ];
       case 'ArticlePageRecommendation':
         return [
           <IconButton
-            type="clapSmallIcon"
-            colorSet="black"
+            iconName="clapSmallIcon"
+            theme="black"
             key="clapSmallIcon"
           />,
-          <ClapText key="claps">
-            {roundToThousand(props.articleInfo.claps)}
-          </ClapText>,
+          <ClapText key="claps">{roundToThousand(props.claps)}</ClapText>,
           <Divider key="divider" />,
-          <BookmarkButton key={props.variation} />,
+          <BookmarkButton id={props.id} key={props.id} />,
         ];
       default:
         return [];
@@ -106,32 +98,32 @@ function ArticlePoster(props) {
   return (
     <Wrapper
       variation={props.variation}
-      publication={props.authorCardInfo.publication}
-      name={props.authorCardInfo.authorName}
+      publication={props.publicationName}
+      name={props.authorName}
+      key={props.title}
     >
-      <Cover
-        href={props.articleInfo.articleLink}
-        variation={props.variation}
-        aria-label={props.articleInfo.title}
-        cover={props.articleInfo.articleCover}
-        focusPosition={props.articleInfo.focusPosition}
-      />
+      {props.variation === 'ArticlePageTitle' || (
+        <Cover
+          href={props.articleLink}
+          variation={props.variation}
+          aria-label={props.title}
+          cover={props.articleCover}
+          focusPosition={props.focusPosition}
+        />
+      )}
       <InfoWrapper
         variation={props.variation}
-        publication={props.authorCardInfo.publication}
-        name={props.authorCardInfo.authorName}
+        publication={props.publicationName || null}
+        source={props.source || null}
+        name={props.authorName}
       >
-        <ArticleTitle
-          articleLink={props.articleInfo.articleLink}
-          title={props.articleInfo.title}
-          subtitle={props.articleInfo.subtitle}
-          variation={props.variation}
-        />
+        <ArticleTitle id={props.id} variation={props.variation} />
         <AuthorWrapper variation={props.variation}>
           <AuthorCard
-            {...props.authorCardInfo}
+            id={props.id}
             variation={authorCardVariation}
             hoverEffect={props.hoverEffect}
+            theme={props.theme}
           />
           <IconWrapper variation={props.variation}>{renderIcons()}</IconWrapper>
         </AuthorWrapper>
@@ -141,51 +133,59 @@ function ArticlePoster(props) {
 }
 
 ArticlePoster.propTypes = {
-  // same as AuthorCard.propTypes
-  authorCardInfo: PropTypes.shape({
-    authorLink: PropTypes.string.isRequired,
-    authorName: PropTypes.string.isRequired,
-    authorFollowers: requiredIfAllPresent(['hoverEffect'], 'number'),
-    authorDescription: requiredIfAllPresent(['hoverEffect'], 'string'),
-    avatarImg: PropTypes.string.isRequired,
-    member: PropTypes.bool.isRequired,
-    memberJoinedDate: requiredIfAllPresent(['member', 'hoverEffect'], 'string'),
-    creationDate: PropTypes.string.isRequired,
-    lastModified: PropTypes.string,
-    readingTime: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    publication: PropTypes.string,
-    publicationLink: requiredIfAllPresent(['publication'], 'string'),
-    publicationFollowers: requiredIfAllPresent(
-      ['publication', 'hoverEffect'],
-      'number',
-    ),
-    publicationLogo: requiredIfAllPresent(
-      ['publication', 'hoverEffect'],
-      'string',
-    ),
-    publicationDescription: requiredIfAllPresent(
-      ['publication', 'hoverEffect'],
-      'string',
-    ),
-  }).isRequired,
-  articleInfo: PropTypes.shape({
-    articleLink: PropTypes.string.isRequired,
-    articleCover: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    bookmarked: PropTypes.bool,
-    twitter: PropTypes.string,
-    facebook: PropTypes.string,
-    linkedIn: PropTypes.string,
-    claps: PropTypes.number,
-    focusPosition: PropTypes.array,
-  }).isRequired,
+  theme: PropTypes.string,
 
-  onAddBookmark: PropTypes.func,
-  onRemoveBookmark: PropTypes.func,
+  publicationName: PropTypes.string,
+  // authorID: PropTypes.string,
+  authorName: PropTypes.string,
+  articleLink: PropTypes.string,
+  articleCover: PropTypes.string,
+  title: PropTypes.string,
+  twitter: PropTypes.string,
+  facebook: PropTypes.string,
+  linkedIn: PropTypes.string,
+  claps: PropTypes.number,
+  focusPosition: PropTypes.array,
+  source: PropTypes.string,
   variation: PropTypes.oneOf([..._.keys(wrapperStyles)]).isRequired,
   hoverEffect: PropTypes.bool,
+  id: PropTypes.string.isRequired,
 };
 
-export default ArticlePoster;
+function mapStateToProps(state, ownProps) {
+  const { id } = ownProps;
+  const {
+    title,
+    author: authorID,
+    link: articleLink,
+    claps,
+    publication: publicationId,
+  } = selectArticleAllInfo(state, id);
+
+  const { authorName, twitter, facebook, linkedIn } = selectUserInfo(
+    state,
+    authorID,
+  );
+  const { cover: articleCover, focusPosition } = selectArticleCover(state, id);
+  let publicationName;
+  if (publicationId) {
+    ({ name: publicationName } = selectPublicationMetaInfo(
+      state,
+      publicationId,
+    ));
+  }
+  return {
+    publicationName,
+    authorName,
+    articleLink,
+    articleCover,
+    title,
+    twitter,
+    facebook,
+    linkedIn,
+    claps,
+    focusPosition,
+  };
+}
+export default connect(mapStateToProps)(ArticlePoster);
+export { ArticlePoster };
