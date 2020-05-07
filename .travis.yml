@@ -7,7 +7,9 @@ services:
   - xvfb
 
 script:
-  - npm run test:api
+  - node ./internals/scripts/generate-templates-for-linting
+  - npm test -- --maxWorkers=4
+  - npm run build
 
 before_install:
   - curl -sL https://firebase.tools | bash
