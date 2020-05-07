@@ -31,13 +31,15 @@ function Navbar(props) {
       if (index > 0) {
         return (
           <LinkWrapper key={title}>
-            <A href={convertToUrlString(title)}>{title}</A>
+            <A href={`/MediumUs${convertToUrlString(title)}`}>{title}</A>
           </LinkWrapper>
         );
       }
       return (
         <FirstLinkWrapper key={title}>
-          <FirstA href={convertToUrlString(title)}>{title}</FirstA>
+          <FirstA href={`/MediumUs${convertToUrlString(title)}`}>
+            {title}
+          </FirstA>
         </FirstLinkWrapper>
       );
     });

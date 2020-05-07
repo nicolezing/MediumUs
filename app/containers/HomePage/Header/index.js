@@ -24,7 +24,7 @@ function Header(props) {
     if (props.logoType === 'icon') {
       return (
         <div>
-          <a href="./">
+          <a href="/MediumUs">
             <IconButton iconName="logoIcon" theme="pureBlack" />
           </a>
         </div>
@@ -32,10 +32,10 @@ function Header(props) {
     }
     return (
       <div>
-        <MainIconStyledA href="./">
+        <MainIconStyledA href="/MediumUs">
           <IconButton iconName="mainLogoIcon" theme="pureBlack" />
         </MainIconStyledA>
-        <LogoIconStyledA href="./">
+        <LogoIconStyledA href="/MediumUs">
           <IconButton iconName="logoIcon" theme="pureBlack" />
         </LogoIconStyledA>
       </div>

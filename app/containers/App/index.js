@@ -24,7 +24,7 @@ export default function App() {
   const articlePageRoute = (
     <Route exact path="/:publicationId/:articleId" component={ArticlePage} />
   );
-  // const NotFoundPage = <Route component={NotFoundPage} />;
+  const notFoundRoute = <Route component={NotFoundPage} />;
 
   if (process.env.NODE_ENV === 'production') {
     homeRoute = (
@@ -40,7 +40,7 @@ export default function App() {
         {homeRoute}
         {elementalRoute}
         {articlePageRoute}
-        <Route component={NotFoundPage} />
+        {notFoundRoute}
       </Switch>
       <GlobalStyle />
     </div>

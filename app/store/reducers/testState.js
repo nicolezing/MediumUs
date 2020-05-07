@@ -60,7 +60,7 @@ export const testState = () => ({
         'Face Filters for Instagram and Snapshot Are the New Frontier of Surrealist Art',
       subtitle:
         'And one last warning about their stupidly popular little brother',
-      link: '/elemental/id001',
+      link: '/MediumUs/elemental/id001',
       focusPosition: [50, 50],
       cover:
         'https://cdn-images-1.medium.com/max/2000/1*mmwGCGBxhypOOOKa98XjKQ.jpeg',
@@ -114,7 +114,7 @@ export const testState = () => ({
       title: 'A New Drug Could Change Food Allergy Treatment for Good',
       subtitle:
         'Palforzia, a new drug for peanut allergies, may open the door to a new era of food allergy treatments',
-      link: '/elemental/id002',
+      link: '/MediumUs/elemental/id002',
       // coverLarge:
       //   'https://miro.medium.com/max/4800/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg',
       cover:
@@ -135,7 +135,7 @@ export const testState = () => ({
 
   publications: {
     'one-zero': {
-      link: '/one-zero',
+      link: '/MediumUs/one-zero',
       name: 'OneZero',
       logo:
         'https://cdn-images-1.medium.com/fit/c/120/120/1*88Z0O0wD4KOrk6Y5EceZog.png',
@@ -150,11 +150,11 @@ export const testState = () => ({
       logoSmall: ElementalSmall,
       slogan: 'by Medium',
       description: 'Health Articles and News to Live a Healthy Lifestyle',
-      link: '/elemental',
+      link: '/MediumUs/elemental',
       followers: 5324,
       theme: 'pink',
       navbar: [
-        { title: 'body', link: '/elemental/body' },
+        { title: 'body', link: '/MediumUs/elemental/body' },
         { title: 'brain', link: './' },
         { title: 'food', link: './' },
         { title: 'life', link: './' },
