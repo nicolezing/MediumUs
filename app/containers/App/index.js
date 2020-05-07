@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { Switch, Route, Router } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import ElementalPage from 'containers/ElementalPage';
 import ArticlePage from 'containers/ArticlePage';

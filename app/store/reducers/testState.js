@@ -90,13 +90,13 @@ export const testState = () => ({
   
  !(https://www.youtube.com/watch?v=8TQIvdFl4aU)
   `,
+      column: 'test',
 
       publication: 'elemental',
-      column: 'test',
+      premium: true,
       creationDate: '11/08/2019 05:23:31',
       lastModified: '12/09/2019 15:45:01',
       wordCount: 1342,
-      premium: true,
       claps: 4230,
 
       tags: [
