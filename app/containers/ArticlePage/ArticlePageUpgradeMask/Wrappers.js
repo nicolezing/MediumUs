@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const GradientMask = styled.div`
   background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
@@ -49,7 +50,7 @@ export const H4 = styled.h4`
   margin-bottom: 28px;
 `;
 
-export const A = styled.a`
+export const A = styled(Link)`
   display: inline-block;
   width: 182px;
   line-height: 20px;

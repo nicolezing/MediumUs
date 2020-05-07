@@ -5,6 +5,7 @@
 import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { selectCurrentLoginId } from '../../../selectors';
 import { IconButton } from '../../../components/Button';
 import OverlayTrigger from '../../../components/OverlayTrigger';
@@ -73,9 +74,9 @@ function PublicationHeader(props) {
       <OuterWrapper ref={navbarRef}>
         <WidthConstrainWrapper>
           <div>
-            <a href="/MediumUs">
+            <Link to="/">
               <IconButton iconName="logoIcon" theme="pureBlack" />
-            </a>
+            </Link>
           </div>
           <FlexStyledWrapper>
             {/* placeholder, should be the input component */}
@@ -83,7 +84,7 @@ function PublicationHeader(props) {
               <IconButton iconName="searchIcon" theme="gray" title="Search" />
             </MarginWrapper>
 
-            <AutoHiddenStyledA href="./">
+            <AutoHiddenStyledA to="./">
               <MarginWrapper>
                 <IconButton
                   iconName="bookmarkList"

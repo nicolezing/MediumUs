@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const UnorderedList = styled.ul`
   margin: 0;
@@ -14,7 +15,7 @@ export const Divider = styled.li`
   margin: 10px 0px;
 `;
 
-export const TitleA = styled.a`
+export const TitleA = styled(Link)`
   color: rgba(0, 0, 0, 0.84);
   font-size: 20px;
   font-weight: 700;

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const OuterWrapper = styled.div`
   width: 100%;
@@ -35,11 +36,11 @@ export const ListContainer = styled.div`
   transition: all 200ms ease 0s;
 `;
 
-export const A = styled.a`
+export const A = styled(Link)`
   color: rgba(0, 0, 0, 0.54);
 `;
 
-export const FirstA = styled.a`
+export const FirstA = styled(Link)`
   color: rgba(0, 0, 0, 0.84);
 `;
 const baseLinkWrapper = css`

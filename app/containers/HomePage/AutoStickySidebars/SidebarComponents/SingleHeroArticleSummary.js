@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import AuthorCard from '../../../../components/AuthorCard';
 import { H2, Wrapper } from './ArticleSummaryWrappers';
 
@@ -7,9 +8,9 @@ const SingleHeroArticleSummary = props => {
   const { articleLink, title, id: articleId } = props;
   return (
     <Wrapper>
-      <a href={articleLink}>
+      <Link to={articleLink}>
         <H2>{title}</H2>
-      </a>
+      </Link>
       <AuthorCard id={articleId} variation="Home" hoverEffect theme="green" />
     </Wrapper>
   );

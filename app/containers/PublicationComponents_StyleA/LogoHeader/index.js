@@ -5,6 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Wrapper, ImgWrapper, Img, TextWrapper, H2 } from './Wrappers';
 import { selectPublicationHeader } from '../../../selectors';
 
@@ -12,9 +13,9 @@ function PublicationLogoHeader(props) {
   return (
     <Wrapper>
       <ImgWrapper>
-        <a href={props.link}>
+        <Link to={props.link}>
           <Img src={props.logo} alt={props.name} />
-        </a>
+        </Link>
       </ImgWrapper>
       <TextWrapper>
         <H2>{props.slogan}</H2>

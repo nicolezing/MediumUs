@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { selectArticleResponse } from '../../../../selectors';
 import { Wrapper, Div, Span } from './Wrappers';
 
@@ -13,11 +14,11 @@ function ArticleResponse(props) {
   }
   return (
     <Wrapper>
-      <a href={responsePage}>
+      <Link to={responsePage}>
         <Div theme={props.theme}>
           <Span theme={props.theme}> {text}</Span>
         </Div>
-      </a>
+      </Link>
     </Wrapper>
   );
 }

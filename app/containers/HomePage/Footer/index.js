@@ -11,7 +11,7 @@ function Footer(props) {
   return (
     <Wrapper>
       {footerList.map(({ title, link }) => (
-        <A href={link} key={title}>
+        <A to={link} key={title}>
           {title}
         </A>
       ))}

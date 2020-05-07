@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -10,14 +11,14 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const MainIconStyledA = styled.a`
+export const MainIconStyledA = styled(Link)`
   display: initial;
   @media screen and (max-width: 767px) {
     display: none;
   }
 `;
 
-export const LogoIconStyledA = styled.a`
+export const LogoIconStyledA = styled(Link)`
   display: none;
   @media screen and (max-width: 767px) {
     display: initial;
@@ -36,7 +37,7 @@ export const MarginWrapper = styled.div`
   }
 `;
 
-export const AutoHiddenStyledA = styled.a`
+export const AutoHiddenStyledA = styled(Link)`
   transition: 0.1s background-color, 0.1s border-color, 0.1s color, 0.1s fill;
   @media screen and (max-width: 767px) {
     display: none;

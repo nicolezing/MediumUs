@@ -36,7 +36,7 @@ export default function ArticlePageUpgradeMask() {
           </H4> */}
 
           <div>
-            <A href="">Upgrade</A>
+            <A to="">Upgrade</A>
           </div>
         </TextWrapper>
       </WidthWrapper>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
   OuterWrapper,
   WidthWrapper,
@@ -47,9 +48,9 @@ function ArticleBottomInfo(props) {
     if (val[key] !== undefined) {
       return (
         <IconLi key={key}>
-          <a href={val[key]}>
+          <Link to={val[key]}>
             <IconButton iconName={`${key}Icon`} theme="black" />
-          </a>
+          </Link>
         </IconLi>
       );
     }

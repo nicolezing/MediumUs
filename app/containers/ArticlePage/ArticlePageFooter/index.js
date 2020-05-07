@@ -2,6 +2,7 @@
 // ArticlePageFooter
 // *
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Container,
   SectionWrapper,
@@ -28,21 +29,21 @@ function ArticlePageFooter() {
     footerList.map(itemObj => (
       <ItemWrapper key={itemObj.header}>
         <HeaderWrapper>
-          <a href={itemObj.link}>
+          <Link to={itemObj.link}>
             <Header>{itemObj.header}</Header>
-          </a>
+          </Link>
         </HeaderWrapper>
         <Detail>
-          {itemObj.detail} <Mark href={itemObj.link}>{itemObj.mark}</Mark>
+          {itemObj.detail} <Mark to={itemObj.link}>{itemObj.mark}</Mark>
         </Detail>
       </ItemWrapper>
     ));
 
   const renderNav = () =>
     footerNav.map(({ title, link }) => (
-      <a href={link} key={title}>
+      <Link to={link} key={title}>
         {title}
-      </a>
+      </Link>
     ));
 
   return (
@@ -52,10 +53,10 @@ function ArticlePageFooter() {
           <ListWrapper>{renderList()}</ListWrapper>
         </ListContainer>
         <FooterWrapper>
-          <a href={footerList[0].link}>
+          <Link to={footerList[0].link}>
             <MainLogoWrapper>{mainLogoIcon}</MainLogoWrapper>
             <LogoWrapper>{logoIcon}</LogoWrapper>
-          </a>
+          </Link>
           <NavWrapper>{renderNav()}</NavWrapper>
         </FooterWrapper>
       </SectionWrapper>

@@ -18,7 +18,7 @@ function PublicationFooterBasic(props) {
         if (index === 0) {
           return (
             <MarginWrapper>
-              <A href={link} key={title}>
+              <A to={link} key={title}>
                 {title}
               </A>
             </MarginWrapper>
@@ -27,7 +27,7 @@ function PublicationFooterBasic(props) {
         return (
           <MarginWrapper>
             <Span>&middot;</Span>
-            <A href={link} key={title}>
+            <A to={link} key={title}>
               {title}
             </A>
           </MarginWrapper>

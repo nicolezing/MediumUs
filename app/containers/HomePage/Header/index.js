@@ -5,6 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { IconButton, OutlinedButton } from '../../../components/Button';
 import OverlayTrigger from '../../../components/OverlayTrigger';
 import Avatar from '../../../components/Avatar';
@@ -24,18 +25,18 @@ function Header(props) {
     if (props.logoType === 'icon') {
       return (
         <div>
-          <a href="/MediumUs">
+          <Link to="/">
             <IconButton iconName="logoIcon" theme="pureBlack" />
-          </a>
+          </Link>
         </div>
       );
     }
     return (
       <div>
-        <MainIconStyledA href="/MediumUs">
+        <MainIconStyledA to="/">
           <IconButton iconName="mainLogoIcon" theme="pureBlack" />
         </MainIconStyledA>
-        <LogoIconStyledA href="/MediumUs">
+        <LogoIconStyledA to="/">
           <IconButton iconName="logoIcon" theme="pureBlack" />
         </LogoIconStyledA>
       </div>
@@ -51,7 +52,7 @@ function Header(props) {
           <IconButton iconName="searchIcon" theme="gray" title="Search" />
         </MarginWrapper>
 
-        <AutoHiddenStyledA href="./">
+        <AutoHiddenStyledA to="./">
           <MarginWrapper>
             <IconButton
               iconName="bookmarkList"
@@ -65,7 +66,7 @@ function Header(props) {
           <IconButton iconName="bellIcon" theme="gray" title="Notifications" />
         </MarginWrapper>
 
-        <AutoHiddenStyledA href="./">
+        <AutoHiddenStyledA to="./">
           <MarginWrapper>
             <OutlinedButton
               text="Upgrade"

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const GenreCardContainer = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -29,7 +30,7 @@ const GenreCardHeader = styled.div`
   justify-content: space-between;
 `;
 
-const GenreCardTitle = styled.a`
+const GenreCardTitle = styled(Link)`
   font-weight: 600;
   text-decoration: none;
   color: inherit;

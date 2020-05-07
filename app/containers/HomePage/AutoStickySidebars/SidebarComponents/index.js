@@ -7,6 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import SingleSidebarHeroGroup from './SingleSidebarHero';
 import {
   Aside,
@@ -34,12 +35,12 @@ const NewFromNetwork = props => {
   return (
     <MidWrapper>
       <AsideSpecial>
-        <a href={sourceLink}>
+        <Link to={sourceLink}>
           <NetworkImageHeaderWrapper>
             <H2>{header}</H2>
             <Img src={headerImg} alt="background" />
           </NetworkImageHeaderWrapper>
-        </a>
+        </Link>
         <Ol>
           {articleList.map(id => (
             <NewFromNetworkHero id={id} keu={id} />
@@ -55,11 +56,11 @@ const PopularOnMedium = props => {
   return (
     <MidWrapper>
       <Aside>
-        <a href={sourceLink}>
+        <Link to={sourceLink}>
           <HeaderWrapper>
             <H3>{header}</H3>
           </HeaderWrapper>
-        </a>
+        </Link>
         <OlSpecial>
           {articleList.map((id, index) => (
             <PopularOnMediumHero id={id} index={index} key={id} />
@@ -75,12 +76,12 @@ const ReadingList = props => {
   return (
     <MidWrapper>
       <AsideSpecial>
-        <a href={sourceLink}>
+        <Link to={sourceLink}>
           <ReadingListImageHeaderWrapper>
             <H2>{header}</H2>
             <Img src={headerImg} alt="background" />
           </ReadingListImageHeaderWrapper>
-        </a>
+        </Link>
         <Ol>
           {articleList.map(id => (
             <ReadingListHero id={id} key={id} />

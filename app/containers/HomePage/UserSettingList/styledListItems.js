@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const UnorderedList = styled.ul`
   max-width: 240px;
@@ -14,7 +15,7 @@ export const DividedList = styled.li`
   margin: 10px 0px;
 `;
 
-export const A = styled.a`
+export const A = styled(Link)`
   width: 100%;
   color: rgba(0, 0, 0, 0.6);
   padding: 7px 25px;
@@ -31,7 +32,7 @@ export const GreenA = styled(A)`
   }
 `;
 
-export const UserDarkStyledA = styled.a`
+export const UserDarkStyledA = styled(Link)`
   white-space: normal;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.8);
@@ -39,7 +40,7 @@ export const UserDarkStyledA = styled.a`
     color: rgba(0, 0, 0, 0.5);
   }
 `;
-export const UserColorStyledA = styled.a`
+export const UserColorStyledA = styled(Link)`
   white-space: nowrap;
   color: rgba(0, 0, 0, 0.5);
   :hover {

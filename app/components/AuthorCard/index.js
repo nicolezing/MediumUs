@@ -7,6 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Avatar from '../Avatar';
 import { styledComponents, StyledButtonWrapper } from './AuthorCardsWrappers';
 import { OutlinedButton } from '../Button';
@@ -55,7 +56,7 @@ function AuthorCard(props) {
   } = props;
 
   const avatarElement = (
-    <a href={authorLink}>
+    <Link to={authorLink}>
       <div>
         <Avatar
           alt={`Go to the profile of ${authorName}`}
@@ -63,11 +64,11 @@ function AuthorCard(props) {
           id={authorId}
         />
       </div>
-    </a>
+    </Link>
   );
 
   const authorElement = (
-    <StyledA href={authorLink} key="name" theme={props.theme}>
+    <StyledA to={authorLink} key="name" theme={props.theme}>
       {authorName}
     </StyledA>
   );
@@ -92,7 +93,7 @@ function AuthorCard(props) {
 
   const renderPublication = () => {
     const element = (
-      <StyledA href={publicationLink} key="publication" theme={props.theme}>
+      <StyledA to={publicationLink} key="publication" theme={props.theme}>
         {publicationName}
       </StyledA>
     );

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -57,7 +58,7 @@ export const RightHero = styled.div`
   max-width: 323px;
 `;
 
-export const A = styled.a`
+export const A = styled(Link)`
   color: #03a87c;
   font-size: 15px;
   margin-top: 8px;

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import * as wrapperStyle from './variationWrapperStyles';
 
 const coverBaseStyle = css`
@@ -18,7 +19,7 @@ const coverBlankImg = css`
 export const Wrapper = styled.div`
   ${props => wrapperStyle[props.variation].wrapperStyle || ``}
 `;
-export const Cover = styled.a`
+export const Cover = styled(Link)`
   ${props => (props.cover.length > 0 ? coverBaseStyle : coverBlankImg)};
   ${props => wrapperStyle[props.variation].coverStyle || ``}
 `;

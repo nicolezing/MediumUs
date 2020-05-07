@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ export const Wrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-export const A = styled.a`
+export const A = styled(Link)`
   font-size: 16px;
   font-weight: 400;
   line-height: 35px;

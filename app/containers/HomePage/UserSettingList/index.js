@@ -48,7 +48,7 @@ function UserSettingList(props) {
       if (item.href) {
         return (
           <li key={item.key}>
-            <A href={item.href}>{item.text}</A>
+            <A to={item.href}>{item.text}</A>
           </li>
         );
       }
@@ -63,19 +63,19 @@ function UserSettingList(props) {
           <Avatar size="50px" id={props.id} />
           <UsernameWrapper>
             <UserDarkStyledA
-              href={`${props.domain}/${props.userLinkSuffix}`}
+              to={`${props.domain}/${props.userLinkSuffix}`}
               aria-label={`Go to the profile of ${props.username}`}
             >
               {props.username}
             </UserDarkStyledA>
-            <UserColorStyledA href={`${props.domain}/${props.userLinkSuffix}`}>
+            <UserColorStyledA to={`${props.domain}/${props.userLinkSuffix}`}>
               {props.userLinkSuffix}
             </UserColorStyledA>
           </UsernameWrapper>
         </UserWrapper>
       </li>
       <li key="becomeAMember">
-        <GreenA href="./">Become a member</GreenA>
+        <GreenA to="./">Become a member</GreenA>
       </li>
       {renderList(listItems)}
     </UnorderedList>

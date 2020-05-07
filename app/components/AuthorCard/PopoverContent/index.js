@@ -30,7 +30,7 @@ function PopoverContent(props) {
     <UnorderedList>
       <UpWrapper>
         <TitleWrapper>
-          <TitleA href={props.headerLink}>{props.header}</TitleA>
+          <TitleA to={props.headerLink}>{props.header}</TitleA>
           {props.member && (
             <MemberSince>{`Medium member since ${month} ${year}`}</MemberSince>
           )}

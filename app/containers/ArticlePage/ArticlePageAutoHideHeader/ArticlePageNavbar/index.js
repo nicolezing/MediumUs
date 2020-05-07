@@ -5,6 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { selectPublicationNavbarInfo } from '../../../../selectors';
 import { A } from '../../../PublicationComponents_StyleA/Navbar/Wrappers';
 import {
@@ -41,9 +42,9 @@ function ArticlePageNavbar(props) {
   return (
     <Wrapper>
       <ImgWrapper>
-        <a href={link}>
+        <Link to={link}>
           <Img src={logoSmall} alt={name} />
-        </a>
+        </Link>
       </ImgWrapper>
       <ListWrapper>{renderNavbar()}</ListWrapper>
     </Wrapper>

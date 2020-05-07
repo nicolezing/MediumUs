@@ -19,10 +19,14 @@ import GlobalStyle from '../../global-styles';
 export default function App() {
   let homeRoute = <Route exact path="/" component={HomePage} />;
   const elementalRoute = (
-    <Route exact path="/:publicationId" component={ElementalPage} />
+    <Route exact path="/publication/:publicationId" component={ElementalPage} />
   );
   const articlePageRoute = (
-    <Route exact path="/:publicationId/:articleId" component={ArticlePage} />
+    <Route
+      exact
+      path="/publication/:publicationId/:articleId"
+      component={ArticlePage}
+    />
   );
   const notFoundRoute = <Route component={NotFoundPage} />;
 

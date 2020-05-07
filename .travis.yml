@@ -10,12 +10,8 @@ script:
   - npm run build
 
 before_install:
-  - curl -sL https://firebase.tools | bash
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
-
-before_script:
-  - npm rebuild grpc --build-from-source --target=12.4.0
 
 notifications:
   email:
@@ -34,16 +30,5 @@ deploy:
     keep_history: true
     on:
       branch: master
-  - provider: script
-    script: firebase deploy -P "mediumus-69aeb" --token "$FIREBASE_TOKEN"
-    on:
-      branch: master
-  - provider: script
-    script: firebase deploy -P "mediumus-dev" --token "$FIREBASE_TOKEN"
-    on:
-      branch: api-dev
-
-after_deploy:
-  - npm run test:api:integration
 
 os: linux

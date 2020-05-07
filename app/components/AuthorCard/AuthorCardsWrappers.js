@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import getColor from '../../staticData/colorSets';
 
 const StyledWrapper = styled.div`
@@ -60,7 +61,7 @@ function conditionallyStyledComponents(variation) {
         ReadingInfoWrapper: styled.div`
           ${redingInfoWrapperBaseStyle}
         `,
-        StyledA: styled.a`
+        StyledA: styled(Link)`
           ${aBaseStyle}
           font-size: 16px;
           @media only screen and (max-width: 768px) {
@@ -86,7 +87,7 @@ function conditionallyStyledComponents(variation) {
           ${redingInfoWrapperBaseStyle}
           line-height: 20px;
         `,
-        StyledA: styled.a`
+        StyledA: styled(Link)`
           ${aBaseStyle}
         `,
         StyledSpan: styled.span`
@@ -104,7 +105,7 @@ function conditionallyStyledComponents(variation) {
         ReadingInfoWrapper: styled.div`
           ${redingInfoWrapperBaseStyle}
         `,
-        StyledA: styled.a`
+        StyledA: styled(Link)`
           ${aBaseStyle}
         `,
         StyledSpan: styled.span`
@@ -124,7 +125,7 @@ function conditionallyStyledComponents(variation) {
           ${redingInfoWrapperBaseStyle}
           margin-top: 4px;
         `,
-        StyledA: styled.a`
+        StyledA: styled(Link)`
           ${aBaseStyle}
         `,
         StyledSpan: styled.span`

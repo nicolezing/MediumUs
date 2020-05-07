@@ -62,7 +62,7 @@ function MainHero(props) {
           />
         </RightHero>
       </HeroWrapper>
-      <A href="./">
+      <A to="./">
         <Span>
           SEE EDITOR&apos;S PICKS
           {ArrowIcon}

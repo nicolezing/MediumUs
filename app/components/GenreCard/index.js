@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
   GenreCardContainer,
   GenreCardHeader,
@@ -16,7 +17,7 @@ import {
 const GenreCard = props => (
   <GenreCardContainer>
     <GenreCardHeader>
-      <GenreCardTitle href={props.genreLink}>{props.genre}</GenreCardTitle>
+      <GenreCardTitle to={props.genreLink}>{props.genre}</GenreCardTitle>
       {props.genreState === 'defaultState' ? (
         <Default onClick={props.onActiveStateChange}>
           <DefaultState />
@@ -27,13 +28,13 @@ const GenreCard = props => (
         </Active>
       )}
     </GenreCardHeader>
-    <a href={props.genreLink}>
+    <Link to={props.genreLink}>
       <GenreCardImg
         genreImg={props.genreImg}
         aria-label={props.genre}
         alt={props.genre}
       />
-    </a>
+    </Link>
   </GenreCardContainer>
 );
 

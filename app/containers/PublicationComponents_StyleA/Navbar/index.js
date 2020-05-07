@@ -5,6 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { IconButton, OutlinedButton } from '../../../components/Button';
 import {
   Wrapper,
@@ -46,9 +47,9 @@ function Navbar(props) {
   const renderSocialMedia = () =>
     socialMedia.map(({ media, link }) => (
       <ButtonSpan>
-        <a href={link} key={media}>
+        <Link to={link} key={media}>
           <IconButton iconName={`${media}Icon`} theme="gray" />
-        </a>
+        </Link>
       </ButtonSpan>
     ));
 

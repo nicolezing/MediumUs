@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Avatar from '../../../../components/Avatar';
 import OverlayTrigger from '../../../../components/OverlayTrigger';
 import PopoverContent from '../../../../components/AuthorCard/PopoverContent';
@@ -21,11 +22,11 @@ const NewFromNetworkHero = props => {
             <PopoverContent id={authorId} imgType="avatar" theme="green" />
           }
         >
-          <a href={authorLink}>
+          <Link to={authorLink}>
             <div>
               <Avatar id={authorId} size="40px" />
             </div>
-          </a>
+          </Link>
         </OverlayTrigger>
       </div>
       <SingleHeroArticleSummary {...props} />

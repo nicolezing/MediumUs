@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { OutlinedButton } from '../../../../components/Button';
 import Avatar from '../../../../components/Avatar';
@@ -40,15 +41,15 @@ function InfoAvatarPoster(props) {
       <PosterWrapper>
         <HeaderInfoWrapper>
           <ImageWrapper>
-            <a href={link}>
+            <Link to={link}>
               {avatarType === 'author' ? AuthorAvatar() : PublicationAvatar()}
-            </a>
+            </Link>
           </ImageWrapper>
           <WriterInfoWrapper>
             {avatarType === 'author' ? <P>WRITTEN BY</P> : ''}
             <NameWrapper>
               <NameHeader>
-                <a href={link}>{name}</a>
+                <Link to={link}>{name}</Link>
               </NameHeader>
               <RowButtonWrapper>
                 <OutlinedButton

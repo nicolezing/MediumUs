@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import AuthorCard from '../AuthorCard';
@@ -63,19 +64,19 @@ function ArticlePoster(props) {
       case 'ArticlePageTitle':
         return [
           props.twitter && (
-            <a href={props.twitter} key="twitter">
+            <Link to={props.twitter} key="twitter">
               <IconButton iconName="twitterIcon" theme="black" />
-            </a>
+            </Link>
           ),
           props.linkedIn && (
-            <a href={props.linkedIn} key="linkedIn">
+            <Link to={props.linkedIn} key="linkedIn">
               <IconButton iconName="linkedInIcon" theme="black" />
-            </a>
+            </Link>
           ),
           props.facebook && (
-            <a href={props.facebook} key="facebook">
+            <Link to={props.facebook} key="facebook">
               <IconButton iconName="facebookSquareIcon" theme="black" />
-            </a>
+            </Link>
           ),
           <BookmarkButton id={props.id} key={props.id} />,
         ];
@@ -104,7 +105,7 @@ function ArticlePoster(props) {
     >
       {props.variation === 'ArticlePageTitle' || (
         <Cover
-          href={props.articleLink}
+          to={props.articleLink}
           variation={props.variation}
           aria-label={props.title}
           cover={props.articleCover}

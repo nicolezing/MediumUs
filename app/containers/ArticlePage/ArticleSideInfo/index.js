@@ -5,6 +5,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
   selectTheme,
   selectArticleReadingInfo,
@@ -88,9 +89,9 @@ function ArticleSideInfo(props) {
     const { name, link, description, followed } = props.publicationInfo;
     return (
       <PublicationWrapper>
-        <a href={link}>
+        <Link to={link}>
           <PublicationHeader>{name}</PublicationHeader>
-        </a>
+        </Link>
         <DescriptionWrapper>{description}</DescriptionWrapper>
         <OutlinedButton
           type={followed ? 'filled' : 'outlined'}

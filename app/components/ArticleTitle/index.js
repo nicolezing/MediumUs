@@ -8,6 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 import {
   Wrapper,
   StyledTitle,
@@ -32,14 +33,15 @@ function ArticleTitle(props) {
       {props.variation === 'ArticlePageTitle' ? (
         <>
           {props.publicationColumn && (
-            <a href="./" key={props.publicationColumn}>
+            // TODO
+            <Link to="./" key={props.publicationColumn}>
               <PublicationColumn>{props.publicationColumn}</PublicationColumn>
-            </a>
+            </Link>
           )}
           {styledTitles}
         </>
       ) : (
-        <a href={props.articleLink}>{styledTitles}</a>
+        <Link to={props.articleLink}>{styledTitles}</Link>
       )}
     </Wrapper>
   );

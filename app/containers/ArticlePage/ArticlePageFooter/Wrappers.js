@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
@@ -100,7 +101,7 @@ export const Detail = styled.p`
   line-height: 20px;
 `;
 
-export const Mark = styled.a`
+export const Mark = styled(Link)`
   text-decoration: underline;
   color: inherit;
 `;
