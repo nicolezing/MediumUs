@@ -8,14 +8,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import avatarHaloIcon from '../../staticData/svgIcons/avatarHaloIcon';
-import { haloComponents, avatarImg } from './avatarStyle';
+import { AvatarImg, Halo, HaloWrapper } from './avatarStyle';
 import avatarHaloSizeSets from './avatarHaloSizeSets';
 import { selectUserInfo } from '../../selectors';
 
 function Avatar(props) {
-  const { AvtStyledImg } = avatarImg(props.size);
   const element = (
-    <AvtStyledImg
+    <AvatarImg
       src={props.avatar}
       alt={props.alt || props.name}
       size={props.size}
@@ -24,10 +23,9 @@ function Avatar(props) {
     />
   );
   if (_.has(avatarHaloSizeSets, props.size) && props.member) {
-    const { Halo, HaloWrapper } = haloComponents(props.size);
     return (
-      <HaloWrapper>
-        <Halo>{avatarHaloIcon}</Halo>
+      <HaloWrapper size={props.size}>
+        <Halo size={props.size}>{avatarHaloIcon}</Halo>
         {element}
       </HaloWrapper>
     );

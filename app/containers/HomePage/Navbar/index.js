@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { selectHomepageLinkList } from '../../../selectors';
 import { IconButton } from '../../../components/Button';
-import convertToUrlString from '../../../utils/convertToUrl';
+// import convertToUrlString from '../../../utils/convertToUrl';
 import {
   OuterWrapper,
   InnerWrapper,
@@ -31,15 +31,14 @@ function Navbar(props) {
       if (index > 0) {
         return (
           <LinkWrapper key={title}>
-            <A to={`/publication${convertToUrlString(title)}`}>{title}</A>
+            {/* <A to={`/publication${convertToUrlString(title)}`}>{title}</A> */}
+            <A to="/publication/elemental">{title}</A>
           </LinkWrapper>
         );
       }
       return (
         <FirstLinkWrapper key={title}>
-          <FirstA to={`/publication${convertToUrlString(title)}`}>
-            {title}
-          </FirstA>
+          <FirstA to="/">{title}</FirstA>
         </FirstLinkWrapper>
       );
     });

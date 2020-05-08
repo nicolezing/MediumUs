@@ -1,76 +1,53 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import getColor from '../../staticData/colorSets';
 import sizeSet from './avatarHaloSizeSets';
 
-function avatarImg(size) {
-  const narrowStyle =
-    size === '36px'
-      ? `
+const narrowScreen = css`
   @media only screen and (max-width: 768px) {
     width: 32px;
     height: 32px;
-  }`
-      : '';
+  }
+`;
 
-  console.log('size = ', size);
+const AvatarImg = styled.img`
+  width: ${props => props.size || '32px'};
+  height: ${props => props.size || '32px'};
+  border-radius: 50%;
+  display: inline-block;
+  ${props => props.size === `36px` && narrowScreen}
+`;
 
-  const AvtStyledImg = styled.img`
-    width: ${size || '32px'};
-    height: ${size || '32px'};
-    border-radius: 50%;
-    display: inline-block;
-    ${narrowStyle}
-  `;
+const narrowScreenHaloWrapper = css`
+  @media only screen and (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+  }
+`;
 
-  return { AvtStyledImg };
-}
+const Halo = styled.div`
+  width: calc(100% + 25px);
+  height: calc(100% + 25px);
+  justify-content: center;
+  align-items: center;
+  display: flex;
 
-function haloComponents(size) {
-  const narrowHaloStyle =
-    size === '36px'
-      ? `
-    @media only screen and (max-width: 768px) {
-      width: 36px;
-      height: 36px;
-    }`
-      : '';
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  fill: ${getColor('green').color};
+  svg {
+    width: ${props => sizeSet[props.size][1]}px;
+    height: ${props => sizeSet[props.size][1]}px;
+  }
+  ${props => props.size === `36px` && narrowScreen}
+`;
 
-  const narrowStyle =
-    size === '36px'
-      ? `
-    @media only screen and (max-width: 768px) {
-      width: 32px;
-      height: 32px;
-    }`
-      : '';
+const HaloWrapper = styled.div`
+  width: ${props => props.size};
+  height: ${props => props.size};
+  position: relative;
+  ${props => props.size === `36px` && narrowScreenHaloWrapper}
+`;
 
-  const Halo = styled.div`
-    width: calc(100% + 25px);
-    height: calc(100% + 25px);
-    justify-content: center;
-    align-items: center;
-    display: flex;
-
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    fill: ${getColor('green').color};
-    ${console.log('size for halo = ', size, sizeSet[size][1])}
-    svg {
-      width: ${sizeSet[size][1]}px;
-      height: ${sizeSet[size][1]}px;
-    }
-    ${narrowHaloStyle}
-  `;
-
-  const HaloWrapper = styled.div`
-    width: ${size};
-    height: ${size};
-    position: relative;
-    ${narrowStyle}
-  `;
-  return { Halo, HaloWrapper };
-}
-
-export { haloComponents, avatarImg };
+export { AvatarImg, Halo, HaloWrapper };

@@ -36,7 +36,6 @@ function PopoverContent(props) {
           )}
           <Subtitle>{props.subHeader}</Subtitle>
         </TitleWrapper>
-
         {props.imgType === 'avatar' ? (
           <Avatar size="60px" id={props.id} />
         ) : (

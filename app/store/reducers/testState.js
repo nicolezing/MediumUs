@@ -115,21 +115,49 @@ export const testState = () => ({
       subtitle:
         'Palforzia, a new drug for peanut allergies, may open the door to a new era of food allergy treatments',
       link: '/publication/elemental/id002',
-      // coverLarge:
-      //   'https://miro.medium.com/max/4800/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg',
       cover:
         'https://cdn-images-1.medium.com/max/800/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg',
-      // coverSmall:
-      //   'https://miro.medium.com/max/60/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg?q=20',
-      // figcaption: 'Photo: Cavan Images/Getty Images',
-      // description: 'Female doctors examining petri dish in laboratory',
-      // focusPosition: [30, 50],
+      focusPosition: [30, 50],
+      content: `
+![Female doctors examining petri dish in laboratory](https://miro.medium.com/max/4800/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg {"caption": "Photo: [Cavan Images/Getty Images](./)", "data-position": "fullWidth", "data-preLoad":"https://miro.medium.com/max/60/1*s5o0ZXrtq6cs6LQQFFyqlQ.jpeg?q=20"}) 
 
+# id002
+
+When I was young, I always hated being named Dale. This is mostly because my primary image of what Dales looked like was shaped by Dale Gribble from King of the Hill, and also *Dale Earnhardt Jr.*, the **NASCAR driver**.
+
+##  header two
+
+### header three
+
+
+Vix posse percipit in. His at illum soleat verear, at eos molestie comprehensam. Duo quem iusto sanctus ne, consetetur intellegam ne vis. 
+
+> blockquote
+
+***
+
+Lorem ipsum dolor sit amet, iuvaret sensibus percipitur eu mel. Voluptua dissentiunt eos cu. Sit mandamus incorrupte appellantur ad, elit eloquentiam cu mei, ancillae democritum in sit. 
+
+>> double blockquote 
+
+Probo dolor putant ei his.Lorem ipsum dolor sit amet, iuvaret sensibus percipitur eu mel. Voluptua dissentiunt eos cu. Sit mandamus incorrupte appellantur ad, elit eloquentiam cu mei, ancillae democritum in sit. Vix posse percipit in. His at illum soleat verear, at eos molestie comprehensam. Duo quem iusto sanctus ne, consetetur intellegam ne vis. Probo dolor putant ei his.
+
+      `,
+
+      publication: 'elemental',
       premium: false,
       creationDate: '11/08/2019 05:23:31',
       lastModified: '11/08/2019 05:23:31',
       wordCount: 1342,
       claps: 4230,
+
+      tags: [
+        { name: 'Test1', link: '' },
+        { name: 'Gwjbrwe', link: '' },
+        { name: 'Wwertrw Dfgeger', link: '' },
+      ],
+
+      responses: ['', ''],
     },
   },
 
