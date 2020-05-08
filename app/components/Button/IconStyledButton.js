@@ -17,11 +17,12 @@ const btnBaseStyle = css`
 `;
 
 const IconStyledButton = styled.button`
-    ${btnBaseStyle}
-    fill: ${props => getColor(props.theme).color};
-    :hover {
-      fill: ${props => getColor(props.theme).hoverColor};
-    }
-  `;
+  ${btnBaseStyle}
+  background: #fff;
+  fill: ${props => getColor(props.theme).color};
+  :hover {
+    fill: ${props => getColor(props.theme).hoverColor};
+  }
+`;
 
 export default IconStyledButton;
