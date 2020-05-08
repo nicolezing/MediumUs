@@ -10,12 +10,9 @@ export default produce((draft, action) => {
   switch (action.type) {
     case ARTICLE_AVATAR_REF:
       draft.articlePage.avatarRefContainer[action.uuid] = action.node;
-      console.log('avatar action');
       break;
     case ARTICLE_IMAGE_REF:
       draft.articlePage.imageRefContainer[action.uuid] = action.node;
-      console.log('image action');
       break;
   }
-  console.log('reducer state: ', draft.articlePage);
 }, initialState);

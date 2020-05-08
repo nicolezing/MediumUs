@@ -8,6 +8,7 @@ import RefContainer from '../refContainer';
 
 function ArticleTitle(props) {
   const id = props.children[0];
+  console.log('top avatar render');
   return (
     <RefContainer refType="avatarRef" uuid="topAvatarRef">
       <TitleWrapper>

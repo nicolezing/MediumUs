@@ -34,7 +34,6 @@ function ArticleSideInfo(props) {
   const getVisibilityFromAvatarRefs = () => {
     const windowHeight = window.innerHeight;
     const { avatarRefContainer: refObj } = props;
-    console.log('refObj of avatar ref ', refObj);
     if (Object.keys(refObj).length !== 2) {
       // filter to prevent default visibility = true for the first render
       return false;
@@ -53,7 +52,6 @@ function ArticleSideInfo(props) {
   const getVisibilityFromImageRefs = () => {
     const { top, bottom } = sideInfoRef.current.getBoundingClientRect();
     const { imageRefContainer: refObj } = props;
-    console.log('refObj of image ref ', refObj);
 
     return Object.keys(refObj).reduce((result, key) => {
       if (!refObj[key]) {
