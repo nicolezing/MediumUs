@@ -13,7 +13,6 @@ import HomePage from 'containers/HomePage/Loadable';
 import ElementalPage from 'containers/ElementalPage';
 import ArticlePage from 'containers/ArticlePage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
