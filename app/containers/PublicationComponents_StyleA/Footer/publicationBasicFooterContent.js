@@ -1,6 +1,6 @@
 export const basicFooter = [
-  { 'About Medium': './' },
-  { Terms: './' },
-  { Privacy: './' },
+  { title: 'About Medium', link: './' },
+  { title: 'Terms', link: './' },
+  { title: 'Privacy', link: './' },
 ];
 // TODO add links
