@@ -2,7 +2,7 @@
  * ArticlePageAutoHideHeader
  */
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../HomePage/Header';
 import ArticlePageNavbar from './ArticlePageNavbar';
@@ -18,37 +18,31 @@ let lastPosition = 0;
 function ArticlePageAutoHideHeader(props) {
   const navbarRef = useRef();
   const placeholderRef = useRef();
+  const [height, setHeight] = useState(0);
+  const [className, setClassName] = useState('');
 
   const autoShowNavbar = () => {
     const { scrollY } = window;
-    const { height } = navbarRef.current.getBoundingClientRect();
-
-    placeholderRef.current.style.height = `${height}px`;
+    setHeight(navbarRef.current.getBoundingClientRect().height);
 
     if (scrollY === 0) {
       lastPosition = scrollY;
       // back to top
-      placeholderRef.current.style.display = 'none';
-      navbarRef.current.style.position = 'relative';
-      navbarRef.current.style.transform = 'translateY(0)';
+      setClassName('to_top');
       return;
     }
 
     if (lastPosition - scrollY > 40) {
       lastPosition = scrollY;
       // show navbar
-      navbarRef.current.style.position = 'fixed';
-      navbarRef.current.style.transform = 'translateY(0)';
-      navbarRef.current.style.transition = 'transform 0.3s';
-      placeholderRef.current.style.display = 'block';
+      setClassName('show_nav');
       return;
     }
 
     if (lastPosition - scrollY <= 0 && scrollY > 24) {
       lastPosition = scrollY;
       // hide navbar
-      navbarRef.current.style.transform = `translateY(-${height}px)`;
-      navbarRef.current.style.transition = 'transform 0.3s';
+      setClassName('hide_nav');
     }
   };
 
@@ -61,7 +55,7 @@ function ArticlePageAutoHideHeader(props) {
 
   return (
     <>
-      <OuterWrapper ref={navbarRef}>
+      <OuterWrapper ref={navbarRef} className={className} height={height}>
         <WidthConstrainWrapper>
           <Header logoType="icon" />
         </WidthConstrainWrapper>
@@ -73,7 +67,11 @@ function ArticlePageAutoHideHeader(props) {
           </WidthConstrainWrapper>
         </MiddleDivider>
       </OuterWrapper>
-      <PlaceholderWrapper ref={placeholderRef} />
+      <PlaceholderWrapper
+        ref={placeholderRef}
+        height={height}
+        className={className}
+      />
     </>
   );
 }

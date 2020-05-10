@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
-
 import SidebarComponents from './SidebarComponents';
 import { SidebarWrapper, StickyWrapper } from './Wrappers';
 import Footer from '../Footer';
@@ -11,7 +10,7 @@ function ScrollListenerMaker() {
   let scrollDirection = 1;
   let newFixedAt = 0;
 
-  return (sidebarRef, stickyContentRef) => () => {
+  return (sidebarRef, stickyContentRef, setClassName, setCssData) => () => {
     const { scrollY } = window;
     const display = window
       .getComputedStyle(sidebarRef.current)
@@ -33,9 +32,7 @@ function ScrollListenerMaker() {
         if (newFixedAt === 'top') {
           if (scrollY <= offsetTop - navbarHeight) {
             // console.log('will end position adjusting');
-            stickyContentRef.current.style.position = 'relative';
-            stickyContentRef.current.style.transform = 'translateY(0)';
-            stickyContentRef.current.style.top = 0;
+            setClassName('initial');
             newFixedAt = 'default';
             return;
           }
@@ -44,20 +41,15 @@ function ScrollListenerMaker() {
         // console.log('going up');
         if (newFixedAt === 'bottom') {
           // console.log('will relative');
-          stickyContentRef.current.style.position = 'relative';
-          stickyContentRef.current.style.transform = `translateY(${scrollY -
-            offsetTop -
-            height +
-            windowHeight}px)`;
-          stickyContentRef.current.style.top = 'auto';
+          setCssData(scrollY - offsetTop - height + windowHeight);
+          setClassName('moving');
           newFixedAt = '';
           return;
         }
         if (top > navbarHeight && newFixedAt !== 'default') {
           // console.log('will fix at top');
-          stickyContentRef.current.style.position = 'fixed';
-          stickyContentRef.current.style.transform = 'translateY(0)';
-          stickyContentRef.current.style.top = `${navbarHeight}px`;
+          setCssData(navbarHeight);
+          setClassName('fix_at_top');
           newFixedAt = 'top';
           return;
         }
@@ -70,20 +62,15 @@ function ScrollListenerMaker() {
         // console.log('going down');
         if (newFixedAt === 'top') {
           // console.log('will relative');
-          stickyContentRef.current.style.position = 'relative';
-          stickyContentRef.current.style.transform = `translateY(${scrollY -
-            offsetTop}px)`;
-          stickyContentRef.current.style.top = 'auto';
+          setCssData(scrollY - offsetTop);
+          setClassName('moving');
           newFixedAt = '';
           return;
         }
 
         if (bottom <= windowHeight) {
           // console.log('will fix at bottom');
-          stickyContentRef.current.style.position = 'fixed';
-          stickyContentRef.current.style.transform = 'translateY(0)';
-          stickyContentRef.current.style.top = 'auto';
-          stickyContentRef.current.style.bottom = 0;
+          setClassName('fix_at_bottom');
           newFixedAt = 'bottom';
         }
       }
@@ -95,10 +82,14 @@ const makeScrollListener = ScrollListenerMaker();
 function AutoStickySidebars() {
   const sidebarRef = useRef();
   const stickyContentRef = useRef();
+  const [className, setClassName] = useState('');
+  const [cssData, setCssData] = useState(0);
 
   const adjustSidebarPosition = makeScrollListener(
     sidebarRef,
     stickyContentRef,
+    setClassName,
+    setCssData,
   );
 
   useEffect(() => {
@@ -115,7 +106,11 @@ function AutoStickySidebars() {
 
   return (
     <SidebarWrapper ref={sidebarRef}>
-      <StickyWrapper ref={stickyContentRef}>
+      <StickyWrapper
+        ref={stickyContentRef}
+        className={className}
+        cssData={cssData}
+      >
         <NewFromNetwork />
         <PopularOnMedium />
         <ReadingList />

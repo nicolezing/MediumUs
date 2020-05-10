@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { OutlinedButton } from '../../Button';
 import formatDate from '../formatDate';
@@ -36,11 +37,13 @@ function PopoverContent(props) {
           )}
           <Subtitle>{props.subHeader}</Subtitle>
         </TitleWrapper>
-        {props.imgType === 'avatar' ? (
-          <Avatar size="60px" id={props.id} />
-        ) : (
-          <Img src={props.imgLink} alt={props.imgAlt} />
-        )}
+        <Link to={props.headerLink}>
+          {props.imgType === 'avatar' ? (
+            <Avatar size="60px" id={props.id} />
+          ) : (
+            <Img src={props.imgLink} alt={props.imgAlt} />
+          )}
+        </Link>
       </UpWrapper>
       <Divider />
       <DownWrapper>

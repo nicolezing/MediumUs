@@ -24,6 +24,7 @@ function Navbar(props) {
   const containerRef = useRef();
   const [firstRender, setFirstRender] = useState(true);
   const [arrowDisableHandler, setArrowDisableHandler] = useState([true, true]);
+  const [className, setClassName] = useState('');
 
   const { navbarList } = props;
   const renderMenu = () =>
@@ -81,12 +82,11 @@ function Navbar(props) {
   const setNavbarBottomBorder = () => {
     const { top } = document.getElementById('navbar').getBoundingClientRect();
     if (top <= 0) {
-      document.getElementById('navbar').style.borderBottom =
-        '1px solid rgba(0, 0, 0, 0.05)';
+      setClassName('show_border');
       return;
     }
-    if (document.getElementById('navbar').style.borderBottom) {
-      document.getElementById('navbar').style.borderBottom = 'none';
+    if (className === 'show_border') {
+      setClassName('hide_border');
     }
   };
 
@@ -105,7 +105,7 @@ function Navbar(props) {
   });
 
   return (
-    <OuterWrapper id="navbar">
+    <OuterWrapper id="navbar" className={className}>
       <InnerWrapper>
         <IconButton
           iconName="arrowLeft"

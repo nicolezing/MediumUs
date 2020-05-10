@@ -5,12 +5,30 @@ export const OuterWrapper = styled.div`
   background-color: #fff;
   z-index: 9;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  position: relative;
+  transform: translateY(0);
+
+  &.show_nav {
+    position: fixed;
+    transition: transform 0.3s;
+    display: block;
+  }
+
+  &.hide_nav {
+    transform: ${props => `translateY(-${props.height}px)`};
+    transition: transform 0.3s;
+  }
 `;
 
 export const PlaceholderWrapper = styled.div`
   position: relative;
   width: 100%;
   display: none;
+  height: ${props => props.height}px;
+
+  &.show_nav {
+    display: block;
+  }
 `;
 
 export const MiddleDivider = styled.div`

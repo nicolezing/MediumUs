@@ -11,6 +11,14 @@ export const OuterWrapper = styled.div`
   :stuck {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
+
+  &.show_border {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  &.hide_border {
+    border-bottom: none;
+  }
 `;
 
 export const InnerWrapper = styled.div`
